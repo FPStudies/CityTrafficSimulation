@@ -1,11 +1,17 @@
 print('..Building App')
 
+SConscript(['../graphic_library_facade/SConscript'])
+
 env = Environment(
     CC = 'g++',
     CCFLAGS = '-O2',
     SCONS_CXX_STANDARD='c++11'
 )
 
-env.AppendUnique(CPPPATH = ['.', '../BD_FACADE', '../graphic_library_facade', '../../libraries/SFML-2.5.1/include', '../../libraries/boost_1_72_0'])
+env.AppendUnique(
+    CPPPATH = ['.', '../BD_FACADE', '../graphic_library_facade', '../../libraries/boost_1_72_0'],
+    LIBS = ['-lsfml-graphics', '-lsfml-window', '-lsfml-system']
+)
 
-env.Program('hello', Glob('*.cpp', '*h'))
+
+env.Program('hello', ['main.cpp', '../graphic_library_facade/graphicLibraryFacade.o'])

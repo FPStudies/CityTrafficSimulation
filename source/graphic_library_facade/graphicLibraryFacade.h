@@ -3,15 +3,18 @@
 
 #include <iostream>
 
-#include "SFML/Graphics.hpp"
-#include "SFML/Window.hpp"
+#include <SFML/Graphics.hpp>
 
 class GraphicFacade {
 public:
 
-    void print(){
-        std::cout << "graphic_facade" << std::endl;
-    }
+    void print();
+
+    /**
+     * @brief A simple test to check if libraries are set properly.
+     * 
+     */
+    void test();
 };
 
 #endif
