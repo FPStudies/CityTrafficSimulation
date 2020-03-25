@@ -1,17 +1,23 @@
 print('..Building App')
 
-SConscript(['../graphic_library_facade/SConscript'])
+SConscript(['../graphic_library_facade/SConscript', 'program_events/SConscript'])
 
 env = Environment(
     CC = 'g++',
-    CCFLAGS = '-O2',
+    CCFLAGS = '-O2 -Wall',
     SCONS_CXX_STANDARD='c++11'
 )
 
 env.AppendUnique(
     CPPPATH = ['.', '../BD_FACADE', '../graphic_library_facade', '../../libraries/boost_1_72_0'],
-    LIBS = ['-lsfml-graphics', '-lsfml-window', '-lsfml-system']
+    LIBS = ['-lsfml-graphics', '-lsfml-window', '-lsfml-system', 'events'],
+    LIBPATH = 'program_events'
 )
 
+#print(Glob(['*.cpp', '../graphic_library_facade/*.o', 'program_events/*.o']))
 
-env.Program('hello', ['main.cpp', '../graphic_library_facade/graphicLibraryFacade.o'])
+#env.Program('hello', Glob(['*.cpp', '../graphic_library_facade/*.o', 'program_events/*.o']))
+#env.Program(target = 'hello', source = ['main.cpp', 'renderLoop.cpp', '../graphic_library_facade/graphicLibraryFacade.o', 'program_events/basicEvents.o', 'program_events/eventManager.o', 'program_events/eventInterface.h'])
+#['main.cpp', 'renderLoop.cpp', '../graphic_library_facade/graphicLibraryFacade.o']
+
+env.Program(target = 'hello', source = ['main.cpp', 'renderLoop.cpp', '../graphic_library_facade/graphicLibraryFacade.o'])

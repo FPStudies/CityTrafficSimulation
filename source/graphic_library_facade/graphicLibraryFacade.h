@@ -8,13 +8,14 @@
 class GraphicFacade {
 public:
 
-    void print();
-
     /**
      * @brief A simple test to check if libraries are set properly.
      * 
      */
     void test();
+
+    
+
 };
 
 #endif
