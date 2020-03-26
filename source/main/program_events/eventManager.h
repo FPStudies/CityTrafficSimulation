@@ -33,7 +33,7 @@ class EventManager{
 
     typedef std::shared_ptr<EventSetInner> Pointer;
     typedef std::map<std::string, Pointer> Map;
-    typedef std::list<std::shared_ptr<EventSetInner>> List;
+    typedef std::list<Pointer> List;
 
     /**
      * @brief A boolean to know if the sets are sorted by ACTIVE / INACTIVE.
