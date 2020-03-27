@@ -21,9 +21,9 @@ public:
 
     void addElement(std::shared_ptr<ElementObserver>& element);
 
-    virtual void run(sf::RenderWindow& window, sf::Event& event);
+    virtual void run(sf::RenderWindow& window, sf::Event& event) override;
     std::unique_ptr<UIEvents> clone() const;
-    virtual bool equals(const EventInterface& other) const;
+    virtual bool equals(const EventInterface& other) const override;
 };
 
 #endif

@@ -28,7 +28,6 @@ void UIEvents::run(sf::RenderWindow& window, sf::Event& event){
 
 std::unique_ptr<UIEvents> UIEvents::clone() const{
     return std::unique_ptr<UIEvents>(this->clone_impl());
-    //return new UIEvents(*this);
 }
 
 bool UIEvents::equals(const EventInterface& other) const{

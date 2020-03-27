@@ -19,7 +19,6 @@ void BasicEvents::run(sf::RenderWindow& window, sf::Event& event){
 
 std::unique_ptr<BasicEvents> BasicEvents::clone() const{
     return std::unique_ptr<BasicEvents>(this->clone_impl());
-    //return new BasicEvents(*this);
 }
 
 bool BasicEvents::equals(const EventInterface& other) const{

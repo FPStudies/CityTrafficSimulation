@@ -20,8 +20,12 @@ EventSet::EventSet(const EventInterface& event){
     events.push_back(std::move(std::unique_ptr<EventInterface>(event.clone())));
 }
 
-void EventSet::addEvent(const EventInterface& event){
+bool EventSet::addEvent(const EventInterface& event){
+    for(auto& it : events){
+        if(it->equals(event)) return true;
+    }
     events.push_back(std::move(std::unique_ptr<EventInterface>(event.clone())));
+    return false;
 }
 
 bool EventSet::remove(const EventInterface& eventObject){

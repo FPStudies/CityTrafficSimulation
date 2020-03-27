@@ -4,29 +4,26 @@
 #include "eventManager.h"
 #include <iostream>
 
-bool EventManager::ACTIVE = true;
-bool EventManager::INACTIVE = false;
-
 EventManager::EventSetInner::EventSetInner(const EventSet& eventSet)
-: eventSet(eventSet), active(false)
+: eventSet(eventSet), state(EventManager::State::Inactive)
 {}
 
-EventManager::EventSetInner::EventSetInner(const EventSet& eventSet, bool mode)
-: eventSet(eventSet), active(mode)
+EventManager::EventSetInner::EventSetInner(const EventSet& eventSet, EventManager::State mode)
+: eventSet(eventSet), state(mode)
 {}
 
 EventManager::EventSetInner::~EventSetInner() {}
 
 EventManager::EventSetInner::EventSetInner(const EventSetInner& events)
-: eventSet(events.eventSet), active(events.active)
+: eventSet(events.eventSet), state(events.state)
 {}
 
 EventManager::EventSetInner::EventSetInner(const EventInterface& event)
-: eventSet(EventSet(event)), active(false)
+: eventSet(EventSet(event)), state(EventManager::State::Inactive)
 {}
 
-EventManager::EventSetInner::EventSetInner(const EventInterface& event, bool mode)
-: eventSet(EventSet(event)), active(mode)
+EventManager::EventSetInner::EventSetInner(const EventInterface& event, EventManager::State mode)
+: eventSet(EventSet(event)), state(mode)
 {}
 
 EventManager::EventManager() 
@@ -36,15 +33,15 @@ EventManager::EventManager()
 EventManager::~EventManager() {}
 
 bool EventManager::EventSetInner::isActive() const{
-    return active;
+    return state == EventManager::State::Active ? true : false;
 }
 
 EventSet& EventManager::EventSetInner::getEventSet() {
     return eventSet;
 }
 
-void EventManager::EventSetInner::setMode(bool mode){
-    active = mode;
+void EventManager::EventSetInner::setMode(EventManager::State mode){
+    state = mode;
 }
 
 void EventManager::EventSetInner::addEventToSet(const EventInterface& eventObject){
@@ -80,34 +77,34 @@ void EventManager::sortListBinaryVal(){
 }
 
 
-void EventManager::changeMode(const std::string& name, bool mode){
+void EventManager::changeMode(const std::string& name, EventManager::State mode){
     auto val = eventsMapNames.at(name);
     val->setMode(mode);
     eventsSorted = false;
 }
 
-void EventManager::add(const std::string& name, bool mode, const EventSet& eventObjectSet){
+void EventManager::add(const std::string& name, EventManager::State mode, const EventSet& eventObjectSet){
     Pointer tmp = Pointer(new EventSetInner(eventObjectSet, mode));
     eventsMapNames[name] = tmp;
     eventsSortedList.push_back(tmp);
     eventsSorted = false;
 }
 
-bool EventManager::addNew(const std::string& name, bool mode, const EventSet& eventObjectSet){
+bool EventManager::addNew(const std::string& name, EventManager::State mode, const EventSet& eventObjectSet){
     if(ifElementMapExist(name)) return true;
 
     this->add(name, mode, eventObjectSet);
     return false;
 }
 
-void EventManager::addNewEventInterface(const std::string& name, bool mode, const EventInterface& eventObject){
+void EventManager::addNewEventInterface(const std::string& name, EventManager::State mode, const EventInterface& eventObject){
     Pointer tmp = Pointer(new EventSetInner(eventObject, mode));
     eventsMapNames[name] = tmp;
     eventsSortedList.push_back(tmp);
     eventsSorted = false;
 }
 
-void EventManager::add(const std::string& name, bool mode, const EventInterface& eventObject){
+void EventManager::add(const std::string& name, EventManager::State mode, const EventInterface& eventObject){
     Map::iterator it;
     if(ifElementMapExist(name, it)){
         it->second->addEventToSet(eventObject);
@@ -119,7 +116,7 @@ void EventManager::add(const std::string& name, bool mode, const EventInterface&
     }
 }
 
-bool EventManager::addNew(const std::string& name, bool mode, const EventInterface& eventObject){
+bool EventManager::addNew(const std::string& name, EventManager::State mode, const EventInterface& eventObject){
     Map::iterator it;
     if(ifElementMapExist(name, it)) return true;
     addNewEventInterface(name, mode, eventObject);

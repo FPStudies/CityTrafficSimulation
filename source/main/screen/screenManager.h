@@ -8,7 +8,6 @@ stanami programu.
 */
 
 #include <boost/multi_index_container.hpp>
-#include <boost/multi_index/hashed_index.hpp>
 #include <boost/multi_index/ordered_index.hpp>
 #include <boost/multi_index/member.hpp>
 #include <memory>
@@ -32,8 +31,10 @@ class ScreenManager{
     struct IndexByID {};
     struct IndexByString {};
 
-    //std::map<std::pair<ScreenID, std::string>, ScreenInteface> screens;
-
+    /**
+     * @brief Container used to store a Pair stuct with 2 keys.
+     * 
+     */
     using Container = boost::multi_index_container<
     Pair,
     boost::multi_index::indexed_by<
@@ -56,16 +57,26 @@ public:
     ~ScreenManager();
     ScreenManager(const ScreenManager&) = delete;
 
+    /**
+     * @brief Add screen with a name.
+     * 
+     * @param screen 
+     * @param name 
+     * @return true If operation was unsuccessful. The screen with that name already exist.
+     * @return false Otherwise.
+     */
     bool addScreen(const std::shared_ptr<ScreenInteface> screen, const std::string& name);
 
     ScreenID getScreenID(const std::string& name);
     std::string getScreenName(const ScreenID& ID);
 
 
-    bool setScreen(const ScreenID& ID);
-    bool setScreen(const std::string& name);
-
-
+    /**
+     * @brief Loop that manages which screen should be displayed.
+     * 
+     * @param window An window where the screens will be run.
+     * @param startID An ID of a starting screen.
+     */
     void mainLoop(sf::RenderWindow & window, const ScreenInteface& startID);
 };
 

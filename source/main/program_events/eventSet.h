@@ -7,6 +7,10 @@
 
 #include "eventInterface.h"
 
+/**
+ * @brief Set used to group events.
+ * 
+ */
 class EventSet{
     std::vector<std::unique_ptr<EventInterface>> events;
 
@@ -17,25 +21,31 @@ public:
     EventSet(const EventInterface& event);
 
     /**
-     * @brief Add new event object to the manager.
+     * @brief Add new event object to the set.
      * The event object is copied while adding.
      * 
-     * @details Method to not check if there is the same event in the container because
-     * it copy the object and there is no comparison operator possible (classes are not guaranteed to have
-     * any member, they exist only to implement methods).
-     * 
-     * @param event The object that have implemented run method.
+     * @param event The object that have implemented an event interface.
+     * @return true If the operation was unsuccessful. There was already the same event object in the set.
+     * @return false Otherwise.
      */
-    void addEvent(const EventInterface& event);
+    bool addEvent(const EventInterface& event);
 
+    /**
+     * @brief Remove an event from the set.
+     * 
+     * @param eventObject 
+     * @return true If the operation was unsuccessful. This object was not there.
+     * @return false Otherwise.
+     */
     bool remove(const EventInterface& eventObject);
 
     /**
      * @brief It will iterate through all event methods that were added.
-     * This method do not iterate through all existing events in program. It only
-     * checks if the event can be proceed.
+     * This method do not iterate through all existing events in program through stack. It only
+     * runs an events in set. What and when even do is up to developer.
      * 
-     * @param event Should already have fetched event on it. 
+     * @param event An event that will be proceed.
+     * @param window An window where you want to perform operations.
      */
     void checkEventsOccurence(sf::Event& event, sf::RenderWindow& window);
 
