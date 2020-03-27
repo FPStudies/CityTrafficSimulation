@@ -20,12 +20,10 @@ public:
     virtual void draw();
     Font& getFont() const;
     sf::Text& getText() const;
-    sf::Sprite& getSprite() const;
 
     void setText(const std::string& text);
     void setColor(const sf::Color& color);
-    void setFont(const Font& font);
-    void setSprite(const sf::Sprite& sprite);
+    void setFont(const Font& font)
 };
 
 #endif

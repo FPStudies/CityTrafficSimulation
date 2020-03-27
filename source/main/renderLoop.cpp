@@ -19,15 +19,15 @@ const int RenderLoop::render(){
     eventManager.add("test", EventManager::ACTIVE, ev);
 
     while(window.isOpen()){
-            sf::Event event;
+        sf::Event event;
 
-            while(window.pollEvent(event)){
-                eventManager.checkEvents(window, event);
-            }
-
-            window.clear();
-            window.display();    
+        while(window.pollEvent(event)){
+            eventManager.checkEvents(window, event);
         }
+
+        window.clear();
+        window.display();    
+    }
 
     return EXIT_SUCCESS;
 }

@@ -1,32 +1,36 @@
 #ifndef EVENT_INTERFACE_CPP
 #define EVENT_INTERFACE_CPP
 
-#include <SFML/Window.hpp>
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 class EventInterface{
+    virtual EventInterface* clone_impl() const = 0;
+
 public:
     EventInterface() {};
     virtual ~EventInterface() {};
 
     /**
-     * @brief This will run once. Checks event and perform some action.
+     * @brief Do some action based on the event.
      * 
-     * @param window where the event was fetched.
-     * @param event fetched event 
+     * @param window Where the event was fetched.
+     * @param event Fetched event.
      */
     virtual void run(sf::RenderWindow& window, sf::Event& event) = 0;
 
     /**
      * @brief Simple method to copy object.
-     * Return the same object type as your higher class
+     * Return the same object type as your higher class.
      * 
      * @return EventInterface* 
      */
-    virtual EventInterface* clone() const = 0;
+    std::unique_ptr<EventInterface> clone() const{
+        return std::unique_ptr<EventInterface>(this->clone_impl());
+    }
 
     /**
-     * @brief Method to check if the two of events are the same/
+     * @brief Method to check if the two events are the same.
      * 
      * @param other 
      * @return true 

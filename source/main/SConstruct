@@ -1,6 +1,6 @@
 print('..Building App')
 
-SConscript(['../graphic_library_facade/SConscript', 'program_events/SConscript'])
+SConscript(['../graphic_library_facade/SConscript', 'program_events/SConscript', 'screen/SConscript'])
 
 env = Environment(
     CC = 'g++',
@@ -10,8 +10,8 @@ env = Environment(
 
 env.AppendUnique(
     CPPPATH = ['.', '../BD_FACADE', '../graphic_library_facade', '../../libraries/boost_1_72_0'],
-    LIBS = ['-lsfml-graphics', '-lsfml-window', '-lsfml-system', 'events'],
-    LIBPATH = 'program_events'
+    LIBS = ['-lsfml-graphics', '-lsfml-window', '-lsfml-system', 'events', 'screenLib'],
+    LIBPATH = ['program_events', 'screen']
 )
 
 #print(Glob(['*.cpp', '../graphic_library_facade/*.o', 'program_events/*.o']))

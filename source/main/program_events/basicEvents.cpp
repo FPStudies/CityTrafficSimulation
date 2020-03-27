@@ -3,7 +3,9 @@
 
 #include "basicEvents.h"
 
-BasicEvents::BasicEvents(){}
+BasicEvents::BasicEvents()
+: EventInterface()
+{}
 
 BasicEvents::~BasicEvents(){}
 
@@ -15,13 +17,18 @@ void BasicEvents::run(sf::RenderWindow& window, sf::Event& event){
     
 }
 
-EventInterface* BasicEvents::clone() const{
-    return new BasicEvents(*this);
+std::unique_ptr<BasicEvents> BasicEvents::clone() const{
+    return std::unique_ptr<BasicEvents>(this->clone_impl());
+    //return new BasicEvents(*this);
 }
 
 bool BasicEvents::equals(const EventInterface& other) const{
     if(typeid(BasicEvents) == typeid(other)) return true;
     return false;
+}
+
+BasicEvents* BasicEvents::clone_impl() const{
+    return new BasicEvents(*this);
 }
 
 #endif
