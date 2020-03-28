@@ -6,4 +6,4 @@ env = Environment(
     CPPPATH = '.'
 )
 
-env.StaticLibrary('screenLib', ['screenID.cpp', 'screenID.h', 'screenInterface.h',  'screenManager.cpp', 'startScreen.cpp'])
+env.StaticLibrary('screenLib', ['screenID.cpp', 'screenID.h', 'screenInterface.h',  'screenManager.cpp', 'startScreen.cpp', '../utility/ID.h'])

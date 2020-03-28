@@ -21,7 +21,7 @@ public:
     virtual ScreenID run(sf::RenderWindow & window) = 0;    // it wll return the next screen that should be used
 
     ScreenInteface()
-    : ID(ScreenID::State::Valid)
+    : ID(ScreenID::newID())
     {}
 
     virtual ~ScreenInteface() {}
