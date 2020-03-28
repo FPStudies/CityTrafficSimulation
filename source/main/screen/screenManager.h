@@ -77,7 +77,7 @@ public:
      * @param window An window where the screens will be run.
      * @param startID An ID of a starting screen.
      */
-    void mainLoop(sf::RenderWindow & window, const ScreenInteface& startID);
+    void mainLoop(std::shared_ptr<sf::RenderWindow>& window, const ScreenInteface& startID);
 };
 
 

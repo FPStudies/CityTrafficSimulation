@@ -6,14 +6,23 @@
 
 #include "drawable.h"
 #include "../utility/setTemplate.h"
+#include "drawManager.h"
 
 class DrawSetFactory: public SetTemplate<Drawable>{
+    friend class DrawManagerBridgeToSets;
+
+    /**
+     * @brief Used to store all dawable objects from window.
+     * Decide, what should be rendered on a given frame.
+     * 
+     */
+    DrawManager& drawManager;
 
 public:
-    DrawSetFactory();
+    DrawSetFactory(DrawManager& manager);
     virtual ~DrawSetFactory();
-    DrawSetFactory(const DrawSetFactory& other);
-    DrawSetFactory(const std::shared_ptr<Drawable>& obj);
+    DrawSetFactory(DrawManager& manager, const DrawSetFactory& other);
+    DrawSetFactory(DrawManager& manager, const std::shared_ptr<Drawable>& obj);
 
     void drawAll();
 

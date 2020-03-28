@@ -8,13 +8,15 @@
 #include "../program_events/eventManager.h"
 #include "../program_events/basicEvents.h"
 
+#include "../drawing/drawManager.h"
+
 class StartScreen: virtual public ScreenInteface{
     
 public:
     StartScreen();
     ~StartScreen();
 
-    ScreenID run(sf::RenderWindow & window) override;
+    ScreenID run(std::shared_ptr<sf::RenderWindow> & window) override;
 };
 
 

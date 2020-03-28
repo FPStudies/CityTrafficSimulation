@@ -7,4 +7,4 @@ env = Environment(
     CPPPATH = '.'
 )
 
-env.StaticLibrary('events', ['basicEvents.cpp', 'eventSet.cpp', 'eventInterface.h', 'eventManager.cpp', 'UIEvents.cpp'])
+env.StaticLibrary('events', ['basicEvents.cpp', 'eventSet.cpp', 'eventInterface.h', 'eventManager.cpp', 'UIEvents.cpp', '../utility/setTemplate.h'])

@@ -2,42 +2,22 @@
 #define EVENT_SET_H
 
 #include <SFML/Graphics.hpp>
-#include <vector>
 #include <memory>
 
 #include "eventInterface.h"
+#include "../utility/setTemplate.h"
 
 /**
  * @brief Set used to group events.
  * 
  */
-class EventSet{
-    std::vector<std::unique_ptr<EventInterface>> events;
+class EventSet: public SetTemplate<EventInterface>{
 
 public:
     EventSet();
-    ~EventSet();
+    virtual ~EventSet();
     EventSet(const EventSet& e);
-    EventSet(const EventInterface& event);
-
-    /**
-     * @brief Add new event object to the set.
-     * The event object is copied while adding.
-     * 
-     * @param event The object that have implemented an event interface.
-     * @return true If the operation was unsuccessful. There was already the same event object in the set.
-     * @return false Otherwise.
-     */
-    bool addEvent(const EventInterface& event);
-
-    /**
-     * @brief Remove an event from the set.
-     * 
-     * @param eventObject 
-     * @return true If the operation was unsuccessful. This object was not there.
-     * @return false Otherwise.
-     */
-    bool remove(const EventInterface& eventObject);
+    EventSet(const std::shared_ptr<EventInterface>& event);
 
     /**
      * @brief It will iterate through all event methods that were added.
@@ -48,8 +28,6 @@ public:
      * @param window An window where you want to perform operations.
      */
     void checkEventsOccurence(sf::Event& event, sf::RenderWindow& window);
-
-    bool empty() const;
 
 };
 

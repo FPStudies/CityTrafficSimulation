@@ -18,11 +18,11 @@ EventManager::EventSetInner::EventSetInner(const EventSetInner& events)
 : eventSet(events.eventSet), state(events.state)
 {}
 
-EventManager::EventSetInner::EventSetInner(const EventInterface& event)
+EventManager::EventSetInner::EventSetInner(const std::shared_ptr<EventInterface>& event)
 : eventSet(EventSet(event)), state(EventManager::State::Inactive)
 {}
 
-EventManager::EventSetInner::EventSetInner(const EventInterface& event, EventManager::State mode)
+EventManager::EventSetInner::EventSetInner(const std::shared_ptr<EventInterface>& event, EventManager::State mode)
 : eventSet(EventSet(event)), state(mode)
 {}
 
@@ -44,11 +44,11 @@ void EventManager::EventSetInner::setMode(EventManager::State mode){
     state = mode;
 }
 
-void EventManager::EventSetInner::addEventToSet(const EventInterface& eventObject){
-    eventSet.addEvent(eventObject);
+void EventManager::EventSetInner::addEventToSet(const std::shared_ptr<EventInterface>& eventObject){
+    eventSet.add(eventObject);
 }
 
-bool EventManager::EventSetInner::removeEventFromSet(const EventInterface& eventObject){
+bool EventManager::EventSetInner::removeEventFromSet(const std::shared_ptr<EventInterface>& eventObject){
     return eventSet.remove(eventObject);
 }
 
@@ -97,14 +97,14 @@ bool EventManager::addNew(const std::string& name, EventManager::State mode, con
     return false;
 }
 
-void EventManager::addNewEventInterface(const std::string& name, EventManager::State mode, const EventInterface& eventObject){
+void EventManager::addNewEventInterface(const std::string& name, EventManager::State mode, const std::shared_ptr<EventInterface>& eventObject){
     Pointer tmp = Pointer(new EventSetInner(eventObject, mode));
     eventsMapNames[name] = tmp;
     eventsSortedList.push_back(tmp);
     eventsSorted = false;
 }
 
-void EventManager::add(const std::string& name, EventManager::State mode, const EventInterface& eventObject){
+void EventManager::add(const std::string& name, EventManager::State mode, const std::shared_ptr<EventInterface>& eventObject){
     Map::iterator it;
     if(ifElementMapExist(name, it)){
         it->second->addEventToSet(eventObject);
@@ -116,7 +116,7 @@ void EventManager::add(const std::string& name, EventManager::State mode, const 
     }
 }
 
-bool EventManager::addNew(const std::string& name, EventManager::State mode, const EventInterface& eventObject){
+bool EventManager::addNew(const std::string& name, EventManager::State mode, const std::shared_ptr<EventInterface>& eventObject){
     Map::iterator it;
     if(ifElementMapExist(name, it)) return true;
     addNewEventInterface(name, mode, eventObject);
@@ -149,7 +149,7 @@ bool EventManager::remove(const std::string& name){
     return false;
 }
 
-bool EventManager::remove(const std::string& name, const EventInterface& eventObject){
+bool EventManager::remove(const std::string& name, const std::shared_ptr<EventInterface>& eventObject){
     Map::iterator it;
     if(ifElementMapExist(name, it)) return true;
 

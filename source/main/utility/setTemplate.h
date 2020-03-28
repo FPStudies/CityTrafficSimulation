@@ -1,10 +1,14 @@
 #ifndef SET_TEMPLATE_H
 #define SET_TEMPLATE_H
 
+#include <list>
+#include <memory>
+
 template<typename Interface>
 class SetTemplate{
 
 protected:
+//typedef typename std::list<std::shared_ptr<Interface>> Container;
     using Container = std::list<std::shared_ptr<Interface>>;
 
     Container objects;
@@ -13,7 +17,7 @@ protected:
         objects.push_back(obj);
     }
 
-    bool findInstance(const std::shared_ptr<Interface>& obj, Container::iterator& it){
+    bool findInstance(const std::shared_ptr<Interface>& obj, typename Container::iterator& it){
         for(it = objects.begin(); it != objects.end();  ++it){
             if(*it == obj) {
                 return false;
@@ -23,24 +27,34 @@ protected:
     }
 
 public:
-    DrawSetFactory() {}
+    SetTemplate() {}
 
-    virtual ~DrawSetFactory() {}
+    virtual ~SetTemplate() {}
 
-    DrawSetFactory(const DrawSetFactory& other) 
+    SetTemplate(const SetTemplate& other) 
     : objects(other.objects)
     {}
 
-    DrawSetFactory(const std::shared_ptr<Interface>& obj){
+    SetTemplate(const std::shared_ptr<Interface>& obj){
         addFast(obj);
     }
 
-    void add(std::shared_ptr<Interface>& obj){
+
+
+
+    void add(const std::shared_ptr<Interface>& obj){
         addFast(obj);
     }
 
-    bool addNew(std::shared_ptr<Interface>& obj){
-        Container::iterator it;
+    /**
+     * @brief Add new event object to the set.
+     * 
+     * @param event The object that have implemented an event interface.
+     * @return true If the operation was unsuccessful. There was already the same event object in the set.
+     * @return false Otherwise.
+     */
+    bool addNew(const std::shared_ptr<Interface>& obj){
+        typename Container::iterator it;
         if(!findInstance(obj, it)) {
             addFast(obj);
             return false;
@@ -48,8 +62,16 @@ public:
         return true;
     }
     
-    bool remove(std::shared_ptr<Interface>& obj){
-        Container::iterator it;
+
+    /**
+     * @brief Remove an event from the set.
+     * 
+     * @param eventObject 
+     * @return true If the operation was unsuccessful. This object was not there.
+     * @return false Otherwise.
+     */
+    bool remove(const std::shared_ptr<Interface>& obj){
+        typename Container::iterator it;
         if(findInstance(obj, it)) {
             objects.erase(it);
             return false;

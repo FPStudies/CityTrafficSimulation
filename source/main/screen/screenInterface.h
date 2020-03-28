@@ -18,7 +18,7 @@ public:
      * @param window 
      * @return ScreenID The next identifier of screen that should be used.
      */
-    virtual ScreenID run(sf::RenderWindow & window) = 0;    // it wll return the next screen that should be used
+    virtual ScreenID run(std::shared_ptr<sf::RenderWindow> & window) = 0;    // it wll return the next screen that should be used
 
     ScreenInteface()
     : ID(ScreenID::newID())

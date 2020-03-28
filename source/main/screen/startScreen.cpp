@@ -1,6 +1,8 @@
 #ifndef START_SCREEN_CPP
 #define START_SCREEN_CPP
 
+#include <memory>
+
 #include "startScreen.h"
 
 StartScreen::StartScreen() 
@@ -9,9 +11,10 @@ StartScreen::StartScreen()
 
 StartScreen::~StartScreen() {}
 
-ScreenID StartScreen::run(sf::RenderWindow & window){
+ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     EventManager eventManager;
-    BasicEvents ev;
+    std::shared_ptr<BasicEvents> ev = std::make_shared<BasicEvents>();
+    //DrawManager drawManager = std::move(DrawManager::create(window));
 
     eventManager.add("test", EventManager::State::Active, ev);
 
@@ -20,20 +23,20 @@ ScreenID StartScreen::run(sf::RenderWindow & window){
     sf::RectangleShape rectangle(sf::Vector2f(200, 40));
     rectangle.setPosition(sf::Vector2f(100, 200));
 
-    window.setView(view);
+    window->setView(view);
 
-    while(window.isOpen()){
+    while(window->isOpen()){
         sf::Event event;
 
-        while(window.pollEvent(event)){
-            eventManager.checkEvents(window, event);
+        while(window->pollEvent(event)){
+            eventManager.checkEvents(*window, event);
         }
 
-        window.clear();
+        window->clear();
 
-        window.draw(rectangle);
+        window->draw(rectangle);
 
-        window.display();    
+        window->display();    
     }
 
     return ScreenID();

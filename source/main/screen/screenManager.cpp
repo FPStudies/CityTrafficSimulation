@@ -49,7 +49,7 @@ std::string ScreenManager::getScreenName(const ScreenID& ID){
     return std::string(); // empty string
 }
 
-void ScreenManager::mainLoop(sf::RenderWindow & window, const ScreenInteface& startID){
+void ScreenManager::mainLoop(std::shared_ptr<sf::RenderWindow>& window, const ScreenInteface& startID){
     ScreenID output = startID.getID();
     auto& indexByID = screens.get<IndexByID>();
 

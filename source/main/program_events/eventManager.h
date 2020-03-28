@@ -38,8 +38,8 @@ private:
     public:
         EventSetInner(const EventSet& eventSet);
         EventSetInner(const EventSet& eventSet, EventManager::State mode);
-        EventSetInner(const EventInterface& event);
-        EventSetInner(const EventInterface& event, EventManager::State mode);
+        EventSetInner(const std::shared_ptr<EventInterface>& event);
+        EventSetInner(const std::shared_ptr<EventInterface>& event, EventManager::State mode);
         ~EventSetInner();
         EventSetInner(const EventSetInner& events);
 
@@ -47,8 +47,8 @@ private:
         EventSet& getEventSet();
 
         void setMode(EventManager::State mode);
-        void addEventToSet(const EventInterface& eventObject);
-        bool removeEventFromSet(const EventInterface& eventObject);
+        void addEventToSet(const std::shared_ptr<EventInterface>& eventObject);
+        bool removeEventFromSet(const std::shared_ptr<EventInterface>& eventObject);
         bool empty() const;
     };
 
@@ -75,7 +75,7 @@ private:
     
     bool ifElementMapExist(const std::string& name, Map::iterator& it);
     bool ifElementMapExist(const std::string& name);
-    void addNewEventInterface(const std::string& name, EventManager::State mode, const EventInterface& eventObject);
+    void addNewEventInterface(const std::string& name, EventManager::State mode, const std::shared_ptr<EventInterface>& eventObject);
 
 public:
 
@@ -117,7 +117,7 @@ public:
      * @param mode Active / Inactive
      * @param eventObject Event that will be put into event set.
      */
-    void add(const std::string& name, EventManager::State mode, const EventInterface& eventObject); 
+    void add(const std::string& name, EventManager::State mode, const std::shared_ptr<EventInterface>& eventObject); 
 
     /**
      * @brief Adds a new event.
@@ -129,7 +129,7 @@ public:
      * @return true If set with that name existed before.
      * @return false Otherwise.
      */
-    bool addNew(const std::string& name, EventManager::State mode, const EventInterface& eventObject); 
+    bool addNew(const std::string& name, EventManager::State mode, const std::shared_ptr<EventInterface>& eventObject); 
 
     /**
      * @brief Change mode to Active / Inactive.
@@ -156,7 +156,7 @@ public:
      * @return true If operation was unsuccessful. It means that there is no event set with that name.
      * @return false Otherwise.
      */
-    bool remove(const std::string& name, const EventInterface& eventObject);
+    bool remove(const std::string& name, const std::shared_ptr<EventInterface>& eventObject);
 
 
     /**

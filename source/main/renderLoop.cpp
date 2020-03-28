@@ -1,6 +1,8 @@
 #ifndef RENDER_LOOP_CPP
 #define RENDER_LOOP_CPP
 
+#include <memory>
+
 #include "renderLoop.h"
 
 using namespace sf;
@@ -13,7 +15,7 @@ RenderLoop::~RenderLoop(){}
 
 const int RenderLoop::render(){
     EventManager eventManager;
-    BasicEvents ev;
+    std::shared_ptr<BasicEvents> ev = std::make_shared<BasicEvents>();
     
 
     eventManager.add("test", EventManager::State::Active, ev);

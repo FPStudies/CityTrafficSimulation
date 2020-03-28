@@ -1,0 +1,9 @@
+
+env = Environment(
+    CC = 'g++',
+    CCFLAGS = '-O2',
+    SCONS_CXX_STANDARD='c++11',
+    CPPPATH = '.'
+)
+
+env.StaticLibrary('drawing', ['drawable.h', 'drawingID.h', 'drawManager.cpp', 'drawSetFactory.h', '../utility/ID.h', '../utility/setTemplate.h'])

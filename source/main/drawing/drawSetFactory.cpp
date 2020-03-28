@@ -3,18 +3,18 @@
 
 #include "drawSetFactory.h"
 
-DrawSetFactory::DrawSetFactory() 
-: SetTemplate<Drawable>()
+DrawSetFactory::DrawSetFactory(DrawManager& manager) 
+: drawManager(manager), SetTemplate<Drawable>()
 {}
 
 DrawSetFactory::~DrawSetFactory() {}
 
-DrawSetFactory::DrawSetFactory(const DrawSetFactory& other)
-: SetTemplate<Drawable>(other)
+DrawSetFactory::DrawSetFactory(DrawManager& manager, const DrawSetFactory& other)
+: drawManager(manager), SetTemplate<Drawable>(other)
 {}
 
-DrawSetFactory::DrawSetFactory(const std::shared_ptr<Drawable>& obj)
-: SetTemplate<Drawable>(obj)
+DrawSetFactory::DrawSetFactory(DrawManager& manager, const std::shared_ptr<Drawable>& obj)
+: drawManager(manager), SetTemplate<Drawable>(obj)
 {}
 
 

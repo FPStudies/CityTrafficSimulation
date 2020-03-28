@@ -6,7 +6,7 @@
 class GameScreen: public ScreenInteface{
     // TODO
 public:
-    ScreenID run(sf::RenderWindow & window);
+    ScreenID run(std::shared_ptr<sf::RenderWindow>& window);
 };
 
 
