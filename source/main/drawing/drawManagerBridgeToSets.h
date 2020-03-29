@@ -12,6 +12,8 @@
  */
 class DrawManagerBridgeToSets{
 
+    friend class DrawSetFactory;
+
 private:
 
     static bool addEntity(const std::string& layerName, std::shared_ptr<Drawable> entity, DrawManager& drawManager);

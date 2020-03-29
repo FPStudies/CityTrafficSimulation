@@ -10,7 +10,9 @@
 #include "drawManagerBridgeToSets.h"
 
 class DrawSetFactory: public SetTemplate<Drawable>{
-    friend class DrawManagerBridgeToSets;
+    //friend class DrawManagerBridgeToSets;
+    //friend class CollisionManagerBridgeToSets;
+
     using Bridge = DrawManagerBridgeToSets;
 
     /**

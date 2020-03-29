@@ -13,7 +13,7 @@ public:
     : ID(DrawingID::newID())
     {}
 
-    virtual ~Drawable();
+    virtual ~Drawable() {}
 
 
     virtual void draw() = 0;

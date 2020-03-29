@@ -3,11 +3,11 @@
 
 #include "../utility/ID.h"
 
-class DrawingID: public ID<DrawingID>{
+class DrawingID: virtual public ID<DrawingID>{
 
     friend class Drawable;
 
-    DrawingID(ID<DrawingID> id)
+    DrawingID(const ID<DrawingID> id)
     : ID<DrawingID>(id)
     {}
 
