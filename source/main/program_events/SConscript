@@ -1,10 +1,12 @@
 
 
-env = Environment(
-    CC = 'g++',
-    CCFLAGS = '-O2',
-    SCONS_CXX_STANDARD='c++11',
-    CPPPATH = '.'
-)
+#env = Environment(
+#    CC = 'g++',
+#    CCFLAGS = '-O2',
+#    SCONS_CXX_STANDARD='c++11',
+#    CPPPATH = '.'
+#)
+
+Import('env')
 
 env.StaticLibrary('events', ['basicEvents.cpp', 'eventSet.cpp', 'eventInterface.h', 'eventManager.cpp', 'UIEvents.cpp', '../utility/setTemplate.h'])

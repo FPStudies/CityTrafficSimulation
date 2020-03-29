@@ -1,14 +1,17 @@
 
 print('Building graphic library')
 
-env = Environment(
-    CC = 'g++',
-    CCFLAGS = '-O2',
-    SCONS_CXX_STANDARD='c++11'
-)
+#env = Environment(
+#    CC = 'g++',
+#    CCFLAGS = '-O2',
+#    SCONS_CXX_STANDARD='c++11',
+#    CPPPATH = '.'
+#)
+
+Import('env')
 
 env.AppendUnique(
-    CPPPATH = ['.', '../../libraries/boost_1_72_0'],
+    CPPPATH = ['../../libraries/boost_1_72_0'],
 )
 
 env.Object(target = 'graphicLibraryFacade', source = 'graphicLibraryFacade.cpp')

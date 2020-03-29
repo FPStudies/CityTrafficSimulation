@@ -1,18 +1,30 @@
 print('..Building App')
 
-SConscript(['../graphic_library_facade/SConscript', 'program_events/SConscript', 'screen/SConscript', 'drawing/SConscript'])
-
 env = Environment(
     CC = 'g++',
-    CCFLAGS = '-O2 -Wall',
-    SCONS_CXX_STANDARD='c++11'
+    CCFLAGS = '-O2',
+    SCONS_CXX_STANDARD='c++11',
+    CPPPATH = '.'
 )
 
+
+SConscript(['../graphic_library_facade/SConscript', 'program_events/SConscript', 'screen/SConscript', 'drawing/SConscript'], exports='env')
+
+#build in separate dir
+#SConscript('../graphic_library_facade/SConscript', exports='env', variant_dir='build/graphic_library_facade')
+#SConscript('program_events/SConscript', exports='env', variant_dir='build/program_events')
+#SConscript('screen/SConscript', exports='env', variant_dir='build/screen')
+#SConscript('drawing/SConscript', exports='env', variant_dir='build/drawing')
+
+
 env.AppendUnique(
-    CPPPATH = ['.', '../BD_FACADE', '../graphic_library_facade', '../../libraries/boost_1_72_0'],
+    CCFLAGS = ' -Wall',
+    CPPPATH = ['../BD_FACADE', '../graphic_library_facade', '../../libraries/boost_1_72_0'],
     LIBS = ['-lsfml-graphics', '-lsfml-window', '-lsfml-system', 'events', 'screenLib', 'drawing'],
     LIBPATH = ['program_events', 'screen', 'drawing']
 )
+
+
 
 #print(Glob(['*.cpp', '../graphic_library_facade/*.o', 'program_events/*.o']))
 
@@ -20,4 +32,8 @@ env.AppendUnique(
 #env.Program(target = 'hello', source = ['main.cpp', 'renderLoop.cpp', '../graphic_library_facade/graphicLibraryFacade.o', 'program_events/basicEvents.o', 'program_events/eventManager.o', 'program_events/eventInterface.h'])
 #['main.cpp', 'renderLoop.cpp', '../graphic_library_facade/graphicLibraryFacade.o']
 
-env.Program(target = 'hello', source = ['main.cpp', 'renderLoop.cpp', '../graphic_library_facade/graphicLibraryFacade.o'])
+hello = env.Program(target = 'hello', source = ['main.cpp', 'renderLoop.cpp', '../graphic_library_facade/graphicLibraryFacade.o'])
+
+#the install option
+#env.Install('usr/bin/scontest', hello)
+#env.Alias('install', 'usr/bin/scontest')
