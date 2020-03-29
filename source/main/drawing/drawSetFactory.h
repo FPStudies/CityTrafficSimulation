@@ -7,9 +7,11 @@
 #include "drawable.h"
 #include "../utility/setTemplate.h"
 #include "drawManager.h"
+#include "drawManagerBridgeToSets.h"
 
 class DrawSetFactory: public SetTemplate<Drawable>{
     friend class DrawManagerBridgeToSets;
+    using Bridge = DrawManagerBridgeToSets;
 
     /**
      * @brief Used to store all dawable objects from window.

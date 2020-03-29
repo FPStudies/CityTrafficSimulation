@@ -14,7 +14,7 @@ StartScreen::~StartScreen() {}
 ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     EventManager eventManager;
     std::shared_ptr<BasicEvents> ev = std::make_shared<BasicEvents>();
-    //DrawManager drawManager = std::move(DrawManager::create(window));
+    DrawManager drawManager = std::move(DrawManager::create("First layer", window));
 
     eventManager.add("test", EventManager::State::Active, ev);
 
@@ -33,7 +33,7 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
         }
 
         window->clear();
-
+        
         window->draw(rectangle);
 
         window->display();    

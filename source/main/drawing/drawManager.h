@@ -4,6 +4,7 @@
 #include <memory>
 #include <map>
 #include <vector>
+#include <list>
 
 #include <SFML/Graphics.hpp>
 
@@ -20,32 +21,61 @@ class DrawManager{
     friend class DrawManagerBridgeToSets;
 
     // for now list but it will be better with R* algorithm.
-    using Container = std::map<DrawingID, std::shared_ptr<Drawable>>;
+    using ObjectPair = std::map<DrawingID, std::shared_ptr<Drawable>>;
     using WindowCont = std::vector<std::weak_ptr<sf::RenderWindow>>;
+    
+    class DrawLayer{
+        using ObjectPair = std::map<DrawingID, std::shared_ptr<Drawable>>;
 
-    Container toDraw;
+        std::string name;
+        ObjectPair container;
 
+    public:
+        DrawLayer(const std::string& name);
+        virtual ~DrawLayer();
+        DrawLayer(const DrawLayer&) = delete;
+
+        ObjectPair& getContainer();
+        bool remove(std::shared_ptr<Drawable>& entity);
+        void add(std::shared_ptr<Drawable>& entity);
+
+        const std::string& getName();
+        void setName(const std::string& name);
+        void draw();
+
+    };
+
+    using List = std::list<std::unique_ptr<DrawLayer>>;
+
+
+    List toDraw;
     std::shared_ptr<sf::RenderWindow> objectWindow;
 
     static WindowCont windowsStatic;
 
 
 
-    void add(std::shared_ptr<Drawable> entity);
+    bool addEntity(const std::string& layerName, std::shared_ptr<Drawable> entity);
 
-    void remove(std::shared_ptr<Drawable> entity);
+    void addFirstLayer(const std::string& layerName);
 
-    DrawManager(std::shared_ptr<sf::RenderWindow>& window);
+    bool addLayer(const std::string& previousLayerName, const std::string& layerName);
+
+    bool remove(const std::string& layerName, std::shared_ptr<Drawable> entity);
+
+    DrawManager(const std::string& layerName, std::shared_ptr<sf::RenderWindow>& window);
     
     DrawManager(const DrawManager& other) = delete;
 
 public:
-    DrawManager(const DrawManager&& other);
+    DrawManager(DrawManager&& other) noexcept;
     ~DrawManager();
     
-    static DrawManager create(std::shared_ptr<sf::RenderWindow>& window);
+    static DrawManager create(const std::string& layerName, std::shared_ptr<sf::RenderWindow>& window);
 
     void drawAll();
+
+    bool drawLayer(const std::string& layerName);
 
 };
 

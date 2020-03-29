@@ -11,9 +11,14 @@
  * 
  */
 class DrawManagerBridgeToSets{
-    void add(std::shared_ptr<Drawable>);
 
-    void remove(std::shared_ptr<Drawable>);
+private:
+
+    static bool addEntity(const std::string& layerName, std::shared_ptr<Drawable> entity, DrawManager& drawManager);
+
+    static bool addLayer(const std::string& previousLayerName, const std::string& layerName, DrawManager& drawManager);
+
+    static bool remove(const std::string& layerName, std::shared_ptr<Drawable> entity, DrawManager& drawManager);
 };
 
 #endif
