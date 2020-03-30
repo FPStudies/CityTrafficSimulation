@@ -9,4 +9,8 @@
 
 Import('env')
 
-env.StaticLibrary('events', ['basicEvents.cpp', 'eventSet.cpp', 'eventInterface.h', 'eventManager.cpp', 'UIEvents.cpp', '../utility/setTemplate.h'])
+env.AppendUnique(
+    CPPPATH = ['../../../source/main/program_events', '../../../source/main/utility']
+)
+
+env.StaticLibrary('../../../build/libs/events', ['basicEvents.cpp', 'eventSet.cpp', 'eventInterface.h', 'eventManager.cpp', 'UIEvents.cpp', '../../../source/main/utility/setTemplate.h', 'events.h'])

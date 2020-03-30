@@ -8,4 +8,8 @@
 
 Import('env')
 
-env.StaticLibrary('drawing', ['drawable.h', 'drawingID.h', 'drawManager.cpp', 'drawSetFactory.h', '../utility/ID.h', '../utility/setTemplate.h', 'drawManagerBridgeToSets.cpp'])
+env.AppendUnique(
+    CPPPATH = ['../../../source/main/drawing', '../../../source/main/utility']
+)
+
+env.StaticLibrary('../../../build/libs/drawing', ['drawable.h', 'drawingID.h', 'drawManager.cpp', 'drawSetFactory.h', '../../../source/main/utility/ID.h', '../../../source/main/utility/setTemplate.h', 'drawManagerBridgeToSets.cpp'])

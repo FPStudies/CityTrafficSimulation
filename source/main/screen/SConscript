@@ -8,4 +8,8 @@
 
 Import('env')
 
-env.StaticLibrary('screenLib', ['screenID.cpp', 'screenID.h', 'screenInterface.h',  'screenManager.cpp', 'startScreen.cpp', '../utility/ID.h'])
+env.AppendUnique(
+    CPPPATH = ['../../../source/main/screen', '../../../source/main/utility']
+)
+
+env.StaticLibrary('../../../build/libs/screenLib', ['screenID.cpp', 'screenID.h', 'screenInterface.h',  'screenManager.cpp', 'startScreen.cpp', '../../../source/main/utility/ID.h'])

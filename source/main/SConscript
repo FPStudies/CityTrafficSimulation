@@ -1,0 +1,15 @@
+
+#env = Environment(
+#    CC = 'g++',
+#    CCFLAGS = '-O2',
+#    SCONS_CXX_STANDARD='c++11',
+#    CPPPATH = '.'
+#)
+
+Import('env')
+
+env.AppendUnique(
+    CPPPATH = ['../../../source/main']
+)
+
+env.Program(target = '../../hello', source = ['main.cpp', 'renderLoop.cpp', '../../build/graphic_library_facade/graphicLibraryFacade.o'])
