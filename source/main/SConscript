@@ -2,7 +2,7 @@
 Import('env_base')
 
 env = env_base.Clone(
-    CCFLAGS = ' -Wall',
+    CCFLAGS = ' -O2 -Wall',
     CPPPATH = ['source/BD_FACADE', 'source/graphic_library_facade', 'libraries/boost_1_72_0', '../../../source/main'],
     LIBS = ['-lsfml-graphics', '-lsfml-window', '-lsfml-system', 'events', 'screenLib', 'drawing'],
     LIBPATH = '../../build/libs'
