@@ -7,7 +7,6 @@ env_base = Environment(
     CPPPATH = '.'
 )
 
-#SConscript(['source/graphic_library_facade/SConscript', 'source/main/program_events/SConscript', 'source/main/screen/SConscript', 'source/main/drawing/SConscript'], exports='env')
 
 #build in separate dir
 SConscript('source/graphic_library_facade/SConscript', exports='env_base', variant_dir='build/graphic_library_facade', duplicate=0)

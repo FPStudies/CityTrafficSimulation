@@ -1,5 +1,5 @@
-#ifndef BUTTON_H
-#define BUTTON_H
+#ifndef ZPR_TRAFFIC_SIM_BUTTON_H
+#define ZPR_TRAFFIC_SIM_BUTTON_H
 
 #include <SFML/Graphics.hpp>
 #include <memory>

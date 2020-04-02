@@ -1,5 +1,5 @@
-#ifndef SCREEN_ID_CPP
-#define SCREEN_ID_CPP
+#ifndef ZPR_TRAFFIC_SIM_SCREEN_ID_CPP
+#define ZPR_TRAFFIC_SIM_SCREEN_ID_CPP
 
 #include "screenID.h"
 

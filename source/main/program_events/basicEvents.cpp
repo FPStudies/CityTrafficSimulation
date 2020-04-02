@@ -1,5 +1,5 @@
-#ifndef BASIC_EVENTS_CPP
-#define BASIC_EVENTS_CPP
+#ifndef ZPR_TRAFFIC_SIM_BASIC_EVENTS_CPP
+#define ZPR_TRAFFIC_SIM_BASIC_EVENTS_CPP
 
 #include "basicEvents.h"
 

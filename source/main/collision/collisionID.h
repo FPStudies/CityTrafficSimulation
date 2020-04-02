@@ -1,5 +1,5 @@
-#ifndef COLLISION_ID_H
-#define COLLISION_ID_H
+#ifndef ZPR_TRAFFIC_SIM_COLLISION_ID_H
+#define ZPR_TRAFFIC_SIM_COLLISION_ID_H
 
 #include "../utility/ID.h"
 

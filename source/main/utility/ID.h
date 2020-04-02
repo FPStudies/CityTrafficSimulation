@@ -1,5 +1,5 @@
-#ifndef ID_H
-#define ID_H
+#ifndef ZPR_TRAFFIC_SIM_ID_H
+#define ZPR_TRAFFIC_SIM_ID_H
 
 #include <limits.h>
 #include <memory>

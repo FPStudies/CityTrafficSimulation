@@ -1,5 +1,5 @@
-#ifndef START_SCREEN_CPP
-#define START_SCREEN_CPP
+#ifndef ZPR_TRAFFIC_SIM_START_SCREEN_CPP
+#define ZPR_TRAFFIC_SIM_START_SCREEN_CPP
 
 #include <memory>
 

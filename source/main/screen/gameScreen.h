@@ -1,5 +1,5 @@
-#ifndef GAME_SCREEN_H
-#define GAME_SCREEN_H
+#ifndef ZPR_TRAFFIC_SIM_GAME_SCREEN_H
+#define ZPR_TRAFFIC_SIM_GAME_SCREEN_H
 
 #include "screenInterface.h"
 

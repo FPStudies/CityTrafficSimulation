@@ -1,5 +1,5 @@
-#ifndef DRAW_MANAGER_H
-#define DRAW_MANAGER_H
+#ifndef ZPR_TRAFFIC_SIM_DRAW_MANAGER_H
+#define ZPR_TRAFFIC_SIM_DRAW_MANAGER_H
 
 #include <memory>
 #include <map>

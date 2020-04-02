@@ -1,5 +1,5 @@
-#ifndef EVENT_INTERFACE_CPP
-#define EVENT_INTERFACE_CPP
+#ifndef ZPR_TRAFFIC_SIM_EVENT_INTERFACE_CPP
+#define ZPR_TRAFFIC_SIM_EVENT_INTERFACE_CPP
 
 #include <SFML/Graphics.hpp>
 #include <memory>

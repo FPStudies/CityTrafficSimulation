@@ -1,5 +1,5 @@
-#ifndef FORM_H
-#define FORM_H
+#ifndef ZPR_TRAFFIC_SIM_FORM_H
+#define ZPR_TRAFFIC_SIM_FORM_H
 
 /*
 Trzeba stworzyć własny sposób na to, aby wpisywany tekst wyswietlał się w formularzu.

@@ -1,5 +1,5 @@
-#ifndef BOX_H
-#define BOX_H
+#ifndef ZPR_TRAFFIC_SIM_BOX_H
+#define ZPR_TRAFFIC_SIM_BOX_H
 
 #include <SFML/Graphics.hpp>
 

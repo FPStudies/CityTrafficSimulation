@@ -1,5 +1,5 @@
-#ifndef FONT_H
-#define FONT_H
+#ifndef ZPR_TRAFFIC_SIM_FONT_H
+#define ZPR_TRAFFIC_SIM_FONT_H
 
 /*
 Proxy

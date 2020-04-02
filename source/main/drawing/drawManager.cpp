@@ -1,5 +1,5 @@
-#ifndef DRAW_MANAGER_CPP
-#define DRAW_MANAGER_CPP
+#ifndef ZPR_TRAFFIC_SIM_DRAW_MANAGER_CPP
+#define ZPR_TRAFFIC_SIM_DRAW_MANAGER_CPP
 
 #include "drawManager.h"
 

@@ -1,5 +1,5 @@
-#ifndef EVENT_SET_CPP
-#define EVENT_SET_CPP
+#ifndef ZPR_TRAFFIC_SIM_EVENT_SET_CPP
+#define ZPR_TRAFFIC_SIM_EVENT_SET_CPP
 
 #include "eventSet.h"
 

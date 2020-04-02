@@ -1,5 +1,5 @@
-#ifndef RENDER_LOOP_CPP
-#define RENDER_LOOP_CPP
+#ifndef ZPR_TRAFFIC_SIM_RENDER_LOOP_CPP
+#define ZPR_TRAFFIC_SIM_RENDER_LOOP_CPP
 
 #include <memory>
 

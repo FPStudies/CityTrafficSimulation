@@ -1,5 +1,5 @@
-#ifndef SET_TEMPLATE_H
-#define SET_TEMPLATE_H
+#ifndef ZPR_TRAFFIC_SIM_SET_TEMPLATE_H
+#define ZPR_TRAFFIC_SIM_SET_TEMPLATE_H
 
 #include <list>
 #include <memory>

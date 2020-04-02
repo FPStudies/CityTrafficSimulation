@@ -1,13 +1,44 @@
 
 Import('env_base')
 
+SFMLLibraries = [
+    '-lsfml-graphics', 
+    '-lsfml-window', 
+    '-lsfml-system'
+]
+
+programLibraries = [
+    'events', 
+    'screenLib', 
+    'drawing'
+]
+
+objectFiles = [
+    '../../build/graphic_library_facade/graphicLibraryFacade.o'
+]
+
+filesH = []
+
+filesCPP = [
+    'main.cpp',
+    'renderLoop.cpp'
+]
+
+
 env = env_base.Clone(
     CCFLAGS = ' -O2 -Wall',
-    CPPPATH = ['source/BD_FACADE', 'source/graphic_library_facade', 'libraries/boost_1_72_0', '../../../source/main'],
-    LIBS = ['-lsfml-graphics', '-lsfml-window', '-lsfml-system', 'events', 'screenLib', 'drawing'],
+    CPPPATH = [
+        'source/BD_FACADE', 
+        'source/graphic_library_facade', 
+        'libraries/boost_1_72_0', 
+        '../../../source/main'
+        ],
+
+    LIBS = SFMLLibraries + programLibraries,
+
     LIBPATH = '../../build/libs'
 )
 
-hello = env.Program(target = '../../hello', source = ['main.cpp', 'renderLoop.cpp', '../../build/graphic_library_facade/graphicLibraryFacade.o'])
+hello = env.Program(target = '../../hello', source = filesH + filesCPP + objectFiles)
 
 Return('hello')

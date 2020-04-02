@@ -1,5 +1,5 @@
-#ifndef DRAWING_ID_H
-#define DRAWING_ID_H
+#ifndef ZPR_TRAFFIC_SIM_DRAWING_ID_H
+#define ZPR_TRAFFIC_SIM_DRAWING_ID_H
 
 #include "../utility/ID.h"
 

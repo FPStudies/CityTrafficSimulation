@@ -1,5 +1,5 @@
-#ifndef EVENT_MANAGER_CPP
-#define EVENT_MANAGER_CPP
+#ifndef ZPR_TRAFFIC_SIM_EVENT_MANAGER_CPP
+#define ZPR_TRAFFIC_SIM_EVENT_MANAGER_CPP
 
 #include "eventManager.h"
 #include <iostream>

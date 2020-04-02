@@ -1,5 +1,5 @@
-#ifndef EVENT_SET_H
-#define EVENT_SET_H
+#ifndef ZPR_TRAFFIC_SIM_EVENT_SET_H
+#define ZPR_TRAFFIC_SIM_EVENT_SET_H
 
 #include <SFML/Graphics.hpp>
 #include <memory>

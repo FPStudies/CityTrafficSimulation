@@ -2,7 +2,25 @@
 Import('env_base')
 
 env = env_base.Clone(
-    CPPPATH = ['../../../source/main/screen', '../../../source/main/utility']
+    CPPPATH = [
+        '../../../source/main/screen', 
+        '../../../source/main/utility'
+    ]
 )
 
-env.StaticLibrary('../../../build/libs/screenLib', ['screenID.cpp', 'screenID.h', 'screenInterface.h',  'screenManager.cpp', 'startScreen.cpp', '../../../source/main/utility/ID.h'])
+filesH = [
+    'screenInterface.h',
+    'screenID.h',
+    '../../../source/main/utility/ID.h'
+]
+
+filesCPP = [
+    'screenID.cpp',
+    'screenManager.cpp',
+    'startScreen.cpp'
+]
+
+libraryName = 'screenLib'
+libraryPath = '../../../build/libs/'
+
+env.StaticLibrary(libraryPath + libraryName, filesH + filesCPP)

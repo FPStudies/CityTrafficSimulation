@@ -1,5 +1,5 @@
-#ifndef DRAW_SET_FACTORY_H
-#define DRAW_SET_FACTORY_H
+#ifndef ZPR_TRAFFIC_SIM_DRAW_SET_FACTORY_H
+#define ZPR_TRAFFIC_SIM_DRAW_SET_FACTORY_H
 
 #include <list>
 #include <memory>

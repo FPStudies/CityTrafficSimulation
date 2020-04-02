@@ -1,5 +1,5 @@
-#ifndef EVENT_MANAGER_H
-#define EVENT_MANAGER_H
+#ifndef ZPR_TRAFFIC_SIM_EVENT_MANAGER_H
+#define ZPR_TRAFFIC_SIM_EVENT_MANAGER_H
 
 #include <SFML/Graphics.hpp>
 #include <map>

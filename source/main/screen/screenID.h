@@ -1,5 +1,5 @@
-#ifndef SCREEN_ID_H
-#define SCREEN_ID_H
+#ifndef ZPR_TRAFFIC_SIM_SCREEN_ID_H
+#define ZPR_TRAFFIC_SIM_SCREEN_ID_H
 
 #include <limits.h>
 #include <memory>

@@ -1,5 +1,5 @@
-#ifndef UI_EVENTS_CPP
-#define UI_EVENTS_CPP
+#ifndef ZPR_TRAFFIC_SIM_UI_EVENTS_CPP
+#define ZPR_TRAFFIC_SIM_UI_EVENTS_CPP
 
 #include "UIEvents.h"
 

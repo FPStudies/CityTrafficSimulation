@@ -1,5 +1,5 @@
-#ifndef SCREEN_MANAGER_H
-#define SCREEN_MANAGER_H
+#ifndef ZPR_TRAFFIC_SIM_SCREEN_MANAGER_H
+#define ZPR_TRAFFIC_SIM_SCREEN_MANAGER_H
 
 /*
 Trzeba traktować tę klasę jako środek do przejścia między różnymi 

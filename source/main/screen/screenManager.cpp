@@ -1,5 +1,5 @@
-#ifndef SCREEN_MANAGER_CPP
-#define SCREEN_MANAGER_CPP
+#ifndef ZPR_TRAFFIC_SIM_SCREEN_MANAGER_CPP
+#define ZPR_TRAFFIC_SIM_SCREEN_MANAGER_CPP
 
 #include "screenManager.h"
 

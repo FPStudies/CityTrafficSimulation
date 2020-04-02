@@ -1,5 +1,5 @@
-#ifndef UI_EVENTS_H
-#define UI_EVENTS_H
+#ifndef ZPR_TRAFFIC_SIM_UI_EVENTS_H
+#define ZPR_TRAFFIC_SIM_UI_EVENTS_H
 
 #include <SFML/Graphics.hpp>
 #include <vector>

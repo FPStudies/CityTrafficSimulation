@@ -1,8 +1,30 @@
 
+
 Import('env_base')
 
 env = env_base.Clone(
-    CPPPATH = ['../../../source/main/drawing', '../../../source/main/utility']
+    CPPPATH = [
+        '../../../source/main/drawing', 
+        '../../../source/main/utility'
+        ]
 )
 
-env.StaticLibrary('../../../build/libs/drawing', ['drawable.h', 'drawingID.h', 'drawManager.cpp', 'drawSetFactory.h', '../../../source/main/utility/ID.h', '../../../source/main/utility/setTemplate.h', 'drawManagerBridgeToSets.cpp'])
+filesH = [
+    'drawable.h',
+    'drawingID.h',
+    'drawSetFactory.h',
+    '../../../source/main/utility/ID.h',
+    '../../../source/main/utility/setTemplate.h'
+]
+
+filesCPP = [
+    'drawManager.cpp',
+    'drawManagerBridgeToSets.cpp'
+]
+
+libraryName = 'drawing'
+libraryPath = '../../../build/libs/'
+
+
+
+env.StaticLibrary(libraryPath + libraryName, filesH + filesCPP)

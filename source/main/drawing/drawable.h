@@ -1,5 +1,5 @@
-#ifndef DRAWABLE_H
-#define DRAWABLE_H
+#ifndef ZPR_TRAFFIC_SIM_DRAWABLE_H
+#define ZPR_TRAFFIC_SIM_DRAWABLE_H
 
 #include <SFML/Graphics.hpp>
 

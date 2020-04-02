@@ -1,5 +1,5 @@
-#ifndef RENDER_LOOP_H
-#define RENDER_LOOP_H
+#ifndef ZPR_TRAFFIC_SIM_RENDER_LOOP_H
+#define ZPR_TRAFFIC_SIM_RENDER_LOOP_H
 
 #include <SFML/Graphics.hpp>
 #include <vector>

@@ -1,5 +1,5 @@
-#ifndef BASIC_EVENTS_H
-#define BASIC_EVENTS_H
+#ifndef ZPR_TRAFFIC_SIM_BASIC_EVENTS_H
+#define ZPR_TRAFFIC_SIM_BASIC_EVENTS_H
 
 #include <memory>
 

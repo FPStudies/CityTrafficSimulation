@@ -1,5 +1,5 @@
-#ifndef TEXT_BOX_H
-#define TEXT_BOX_H
+#ifndef ZPR_TRAFFIC_SIM_TEXT_BOX_H
+#define ZPR_TRAFFIC_SIM_TEXT_BOX_H
 
 #include "font.h"
 #include "box.h"
