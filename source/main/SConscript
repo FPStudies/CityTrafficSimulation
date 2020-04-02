@@ -1,0 +1,13 @@
+
+Import('env_base')
+
+env = env_base.Clone(
+    CCFLAGS = ' -Wall',
+    CPPPATH = ['source/BD_FACADE', 'source/graphic_library_facade', 'libraries/boost_1_72_0', '../../../source/main'],
+    LIBS = ['-lsfml-graphics', '-lsfml-window', '-lsfml-system', 'events', 'screenLib', 'drawing'],
+    LIBPATH = '../../build/libs'
+)
+
+hello = env.Program(target = '../../hello', source = ['main.cpp', 'renderLoop.cpp', '../../build/graphic_library_facade/graphicLibraryFacade.o'])
+
+Return('hello')

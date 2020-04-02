@@ -1,16 +1,8 @@
-
 print('Building graphic library')
 
-#env = Environment(
-#    CC = 'g++',
-#    CCFLAGS = '-O2',
-#    SCONS_CXX_STANDARD='c++11',
-#    CPPPATH = '.'
-#)
+Import('env_base')
 
-Import('env')
-
-env.AppendUnique(
+env = env_base.Clone(
     CPPPATH = ['../../libraries/boost_1_72_0'],
 )
 

@@ -53,7 +53,7 @@ void DrawManager::DrawLayer::draw(){
 
 
 
-bool DrawManager::addEntity(const std::string& layerName, std::shared_ptr<Drawable> entity){
+bool DrawManager::addEntity(const std::string& layerName, std::shared_ptr<Drawable>& entity){ //check if reference or copy
     for(List::iterator it = toDraw.begin(); it != toDraw.end(); ++it){
         if((*it)->getName() == layerName){
             (*it)->add(entity);
@@ -78,7 +78,7 @@ bool DrawManager::addLayer(const std::string& previousLayerName, const std::stri
     return true;
 }
 
-bool DrawManager::remove(const std::string& layerName, std::shared_ptr<Drawable> entity){
+bool DrawManager::remove(const std::string& layerName, std::shared_ptr<Drawable>& entity){ //check if reference or copy
     List::iterator it = toDraw.begin();
     while(it != toDraw.end()){
         if((*it)->getName() == layerName){
