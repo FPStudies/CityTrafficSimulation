@@ -4,12 +4,14 @@ Import('binFolder')
 Import('pathToUtility')
 Import('libraryPath')
 
-pathToH = '#include/main/screen/'
-libraryName = 'screenLib'
+pathToH = '#include/main/collision/'
+libraryName = 'collision'
 
 HFilesMain = [
-    'screenInterface.h',
-    'screenID.h',
+    'collisionID.h',
+    'collisionInterface.h',
+    'collisionManager.h',
+    'collisionManagerBridgeToSets.h'
 ]
 
 HFilesUtility = [
@@ -17,13 +19,8 @@ HFilesUtility = [
 ]
 
 filesCPP = [
-    'screenID.cpp',
-    'screenManager.cpp',
-    'startScreen.cpp'
+    'sensor.cpp'
 ]
-
-
-
 
 filesHMain = [pathToH + x for x in HFilesMain]
 filesHUtil = [pathToUtility + x for x in HFilesUtility]

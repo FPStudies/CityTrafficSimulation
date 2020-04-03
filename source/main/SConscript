@@ -1,9 +1,11 @@
+import copy
 
 Import('env_base')
 Import('libraryPath')
 Import('programPath')
 Import('programName')
 Import('binFolder')
+Import('pathToBox2DLibrary')
 
 pathToH = '#include'
 
@@ -17,6 +19,10 @@ programLibraries = [
     'events', 
     'screenLib', 
     'drawing'
+]
+
+externalLibraries = [
+    'libbox2d.a'
 ]
 
 objectFiles = [
@@ -34,7 +40,9 @@ filesCPP = [
 
 filesHMain = [pathToH + x for x in HFilesFolder]
 
-env = env_base.Clone(
+env = env_base.Clone()
+
+env.Append(
     CPPPATH = [
         'source/BD_FACADE', 
         'source/graphic_library_facade', 
@@ -42,11 +50,14 @@ env = env_base.Clone(
         pathToH
         ],
 
-    LIBS = SFMLLibraries + programLibraries,
+        LIBS = SFMLLibraries + programLibraries + externalLibraries,
 
-    LIBPATH = libraryPath
+        LIBPATH = [
+            libraryPath,
+            pathToBox2DLibrary
+        ]
 )
 
-programFile = env.Program(target = programName, source = filesHMain + filesCPP + objectFiles)
+programFile = env.Program(target = programPath + programName, source = filesHMain + filesCPP + objectFiles)
 
 Return('programFile')

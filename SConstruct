@@ -1,13 +1,18 @@
 print('..Building App')
 
+pathToBoostHeaders = '#libraries/boost_1_72_0/'
+pathToBox2DHeaders = '#libraries/box2d-master/include/'
+pathToBox2DLibrary = '#libraries/box2d-master/build/src/'
+
 env_base = Environment(
     CC = 'g++',
     CCFLAGS = '-O2 -Wall',
     SCONS_CXX_STANDARD='c++11',
     CPPPATH = [
         '#include',
-        '#include/main/utility/',
-        'libraries/boost_1_72_0'
+        '#include/main/utility',
+        pathToBoostHeaders,
+        pathToBox2DHeaders
         ]
 )
 
@@ -58,7 +63,7 @@ SConscript(
 
 SConscript(
     'source/main/SConscript', 
-    exports = ['env_base', 'libraryPath', 'programName', 'programPath', 'binFolder'], 
+    exports = ['env_base', 'libraryPath', 'programName', 'programPath', 'binFolder', 'pathToBox2DLibrary', 'pathToBox2DHeaders'], 
     variant_dir= binFolder + 'main', 
     duplicate=0
     )

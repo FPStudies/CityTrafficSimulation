@@ -2,20 +2,17 @@
 #define ZPR_TRAFFIC_SIM_COLLISION_INTERFACE_H
 
 #include <SFML/Graphics.hpp>
+#include <box2d/box2d.h>
 
 #include "collisionID.h"
+#include "sensor.h"
 
 class CollisionInterface{
-    using BitType = uint;
 
     CollisionID ID;
-    BitType bitMask;
-
+    
 protected:
-
-    inline void setBitMask(const BitType& mask){
-        bitMask = mask;
-    }
+    Sensor sensor;
 
 public:
     CollisionInterface()
@@ -24,20 +21,18 @@ public:
 
     virtual ~CollisionInterface() {}
 
-    virtual sf::FloatRect boundingBox() = 0;
+    //virtual sf::FloatRect boundingBox() = 0;
 
     /*
     Eventually add some other methods as checking collision pixel by pixel, using private pure virtual method.
     */
 
+    virtual void update() = 0;
+
     inline CollisionID getID() const{
         return ID;
     }
 
-    inline const BitType& getBitMask(){
-        return bitMask;
-    }
-    
 };
 
 #endif
