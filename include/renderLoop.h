@@ -4,8 +4,8 @@
 #include <SFML/Graphics.hpp>
 #include <vector>
 
-#include "program_events/eventManager.h"
-#include "program_events/basicEvents.h"
+#include "main/program_events/eventManager.h"
+#include "main/program_events/basicEvents.h"
 
 
 class RenderLoop{

@@ -1,17 +1,19 @@
 
 Import('env_base')
+Import('binFolder')
+Import('pathToUtility')
+Import('libraryPath')
 
-env = env_base.Clone(
-    CPPPATH = [
-        '../../../source/main/program_events', 
-        '../../../source/main/utility'
-        ]
-)
+pathToH = '#include/main/program_events/'
+libraryName = 'events'
 
-filesH = [
+HFilesMain = [
     'eventInterface.h',
     'events.h',
-    '../../../source/main/utility/setTemplate.h'
+]
+
+HFilesUtility = [
+    'setTemplate.h'
 ]
 
 filesCPP = [
@@ -21,8 +23,14 @@ filesCPP = [
     'UIEvents.cpp'
 ]
 
-libraryName = 'events'
-libraryPath = '../../../build/libs/'
 
 
-env.StaticLibrary(libraryPath + libraryName, filesH + filesCPP)
+filesHMain = [pathToH + x for x in HFilesMain]
+filesHUtil = [pathToUtility + x for x in HFilesUtility]
+
+env = env_base.Clone(
+    CPPPATH = pathToH
+)
+
+
+env.StaticLibrary(libraryPath + libraryName, filesHMain + filesHUtil + filesCPP)

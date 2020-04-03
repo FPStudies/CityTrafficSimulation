@@ -1,10 +1,10 @@
 
 #include <iostream>
-#include "../graphic_library_facade/graphicLibraryFacade.h"
-#include "renderLoop.h"
+#include "../../include/graphicLibraryFacade.h"
+#include "../../include/renderLoop.h"
 
-#include "screen/screenManager.h"
-#include "screen/startScreen.h"
+#include "../../include/main/screen/screenManager.h"
+#include "../../include/main/screen/startScreen.h"
 
 using namespace std;
 

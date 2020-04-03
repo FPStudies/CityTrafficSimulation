@@ -1,5 +1,11 @@
 
 Import('env_base')
+Import('libraryPath')
+Import('programPath')
+Import('programName')
+Import('binFolder')
+
+pathToH = '#include'
 
 SFMLLibraries = [
     '-lsfml-graphics', 
@@ -14,10 +20,10 @@ programLibraries = [
 ]
 
 objectFiles = [
-    '../../build/graphic_library_facade/graphicLibraryFacade.o'
+    binFolder + 'graphic_library_facade/graphicLibraryFacade.o'
 ]
 
-filesH = []
+HFilesFolder = []
 
 filesCPP = [
     'main.cpp',
@@ -25,20 +31,22 @@ filesCPP = [
 ]
 
 
+
+filesHMain = [pathToH + x for x in HFilesFolder]
+
 env = env_base.Clone(
-    CCFLAGS = ' -O2 -Wall',
     CPPPATH = [
         'source/BD_FACADE', 
         'source/graphic_library_facade', 
-        'libraries/boost_1_72_0', 
-        '../../../source/main'
+        '#source/main',
+        pathToH
         ],
 
     LIBS = SFMLLibraries + programLibraries,
 
-    LIBPATH = '../../build/libs'
+    LIBPATH = libraryPath
 )
 
-hello = env.Program(target = '../../hello', source = filesH + filesCPP + objectFiles)
+programFile = env.Program(target = programName, source = filesHMain + filesCPP + objectFiles)
 
-Return('hello')
+Return('programFile')
