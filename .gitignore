@@ -1,0 +1,6 @@
+*.o
+*.a
+hello
+/libraries
+/.sconf_temp
+config.log
