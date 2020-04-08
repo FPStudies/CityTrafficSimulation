@@ -1,17 +1,18 @@
-print('..Building App')
+print('..Building App\n')
 
 defaultLinuxPathToBoostHeaders = '/usr/include/boost/'
 #TODO: find default paths
 defaultWinPathToBoostHeaders = ''
-defaultLinuxPathToSFMLLibrary = ''
+defaultLinuxPathToSFMLHeaders = '/usr/include/SFML/'
 defaultWinPathToSFMLLibrary = ''
 defaultLinuxPathToBox2DLibrary = ''
 defaultWinPathToBox2DLibrary = ''
 
 pathToBoostHeaders = '#libraries/boost_1_72_0/boost/'
+pathToSFMLHeaders = '#libraries/SFML-2.5.1/include'
+pathToSFMLLibraries = '#libraries/SFML-2.5.1/lib/'
 pathToBox2DHeaders = '#libraries/box2d-master/include/'
 pathToBox2DLibrary = '#libraries/box2d-master/build/src/'
-
 env_base = Environment(
     CC = 'g++',
     CCFLAGS = '-O2 -Wall',
@@ -19,8 +20,12 @@ env_base = Environment(
     CPPPATH = [
         '#include',
         '#include/main/utility',
+        pathToSFMLHeaders,
         pathToBoostHeaders,
         pathToBox2DHeaders
+        ],
+    LIBPATH = [
+        pathToSFMLLibraries
         ]
 )
 
@@ -32,36 +37,50 @@ programPath = '#'
 
 
 #check for essential libraries
-import sys
-import subprocess
-conf = Configure(env_base)
+if not env_base.GetOption('clean'):
+    import sys
+    import subprocess
+    conf = Configure(env_base)
+
+    from ctypes.util import find_library
+    print(find_library('sfml-graphics'))
+
+    print '..Checking for libraries:\n'
 
 #TODO: start scripts in their own directory
-print '..Checking for libraries:'
+#TODO: exit on installation error
 
-if sys.platform.startswith('linux'):
-    if not conf.CheckCXXHeader(defaultLinuxPathToBoostHeaders + 'shared_ptr.hpp') and not conf.CheckCXXHeader('shared_ptr.hpp'):
-        print 'Boost not found'
-        subprocess.call(['scripts/BoostLinux.sh'], shell=True)
-    else:
-        print 'Boost found'
 
-    #TODO: SFML
-    #TODO: Box2D
+    if sys.platform.startswith('linux'):
+        if not conf.CheckCXXHeader(defaultLinuxPathToBoostHeaders + 'shared_ptr.hpp') and not conf.CheckCXXHeader('shared_ptr.hpp'):
+            print 'Boost not found\n'
+            subprocess.call(['scripts/BoostLinux.sh'], shell=True)
+        else:
+            print 'Boost found\n'
+
+        if not conf.CheckCXXHeader(defaultLinuxPathToSFMLHeaders + 'Graphics.hpp') and not conf.CheckCXXHeader('SFML/Graphics.hpp'):
+        #if not conf.CheckLib('sfml-graphics'):
+            print 'SFML not found\n'
+            subprocess.call(['scripts/SFMLLinux.sh'], shell=True)
+        else:
+            print 'SFML found\n'
+
+        #TODO: Box2D
 
     
-elif sys.platform.startswith('win'):
-    print 'Win placeholder'
-    #TODO: Windows checking
+    elif sys.platform.startswith('win'):
+        print 'Win placeholder'
+        #TODO: Windows checking
 
-else:
-    print 'Unsupported OS. Exiting.'
-    Exit(1)
+    else:
+        print 'Unsupported OS. Exiting.'
+        Exit(1)
+
 
 
 #Exit(1)
 
-print('..Building Targets')
+print('..Building Targets\n')
 #build in separate directories
 SConscript(
     'source/graphic_library_facade/SConscript', 
