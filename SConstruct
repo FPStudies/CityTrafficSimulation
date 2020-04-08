@@ -1,6 +1,12 @@
 print('..Building App')
 
 defaultLinuxPathToBoostHeaders = '/usr/include/boost/'
+#TODO: find default paths
+defaultWinPathToBoostHeaders = ''
+defaultLinuxPathToSFMLLibrary = ''
+defaultWinPathToSFMLLibrary = ''
+defaultLinuxPathToBox2DLibrary = ''
+defaultWinPathToBox2DLibrary = ''
 
 pathToBoostHeaders = '#libraries/boost_1_72_0/boost/'
 pathToBox2DHeaders = '#libraries/box2d-master/include/'
@@ -30,8 +36,8 @@ import sys
 import subprocess
 conf = Configure(env_base)
 
-#TODO: start scripts in their ow directory
-print 'Checking for libraries'
+#TODO: start scripts in their own directory
+print '..Checking for libraries:'
 
 if sys.platform.startswith('linux'):
     if not conf.CheckCXXHeader(defaultLinuxPathToBoostHeaders + 'shared_ptr.hpp') and not conf.CheckCXXHeader('shared_ptr.hpp'):
@@ -40,18 +46,22 @@ if sys.platform.startswith('linux'):
     else:
         print 'Boost found'
 
-    #if not 
+    #TODO: SFML
+    #TODO: Box2D
+
+    
 elif sys.platform.startswith('win'):
-    print 'Win'
+    print 'Win placeholder'
+    #TODO: Windows checking
 
 else:
     print 'Unsupported OS. Exiting.'
     Exit(1)
 
 
-Exit(1)
+#Exit(1)
 
-
+print('..Building Targets')
 #build in separate directories
 SConscript(
     'source/graphic_library_facade/SConscript', 
