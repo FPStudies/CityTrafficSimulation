@@ -5,7 +5,6 @@ Import('libraryPath')
 Import('programPath')
 Import('programName')
 Import('binFolder')
-Import('pathToBox2DLibrary')
 
 pathToH = '#include'
 
@@ -53,8 +52,7 @@ env.Append(
         LIBS = SFMLLibraries + programLibraries + externalLibraries,
 
         LIBPATH = [
-            libraryPath,
-            pathToBox2DLibrary
+            libraryPath
         ]
 )
 

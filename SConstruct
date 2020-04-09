@@ -1,12 +1,10 @@
 print('..Building App\n')
 
-defaultLinuxPathToBoostHeaders = '/usr/include/boost/'
 #TODO: find default paths
+defaultLinuxPathToBoostHeaders = '/usr/include/boost/'
 defaultWinPathToBoostHeaders = ''
 defaultLinuxPathToSFMLHeaders = '/usr/include/SFML/'
 defaultWinPathToSFMLLibrary = ''
-defaultLinuxPathToBox2DLibrary = ''
-defaultWinPathToBox2DLibrary = ''
 
 pathToBoostHeaders = '#libraries/boost_1_72_0/boost/'
 pathToSFMLHeaders = '#libraries/SFML-2.5.1/include'
@@ -25,7 +23,8 @@ env_base = Environment(
         pathToBox2DHeaders
         ],
     LIBPATH = [
-        pathToSFMLLibraries
+        pathToSFMLLibraries,
+        pathToBox2DLibrary
         ]
 )
 
@@ -41,9 +40,6 @@ if not env_base.GetOption('clean'):
     import sys
     import subprocess
     conf = Configure(env_base)
-
-    from ctypes.util import find_library
-    print(find_library('sfml-graphics'))
 
     print '..Checking for libraries:\n'
 
@@ -65,8 +61,11 @@ if not env_base.GetOption('clean'):
         else:
             print 'SFML found\n'
 
-        #TODO: Box2D
-
+        if not conf.CheckLib('box2d'):
+            print 'Box2D not found\n'
+            subprocess.call(['scripts/Box2DLinux.sh'], shell=True)
+        else:
+            print 'Box2D found\n'
     
     elif sys.platform.startswith('win'):
         print 'Win placeholder'
@@ -121,7 +120,7 @@ SConscript(
 
 SConscript(
     'source/main/SConscript', 
-    exports = ['env_base', 'libraryPath', 'programName', 'programPath', 'binFolder', 'pathToBox2DLibrary', 'pathToBox2DHeaders'], 
+    exports = ['env_base', 'libraryPath', 'programName', 'programPath', 'binFolder', 'pathToBox2DHeaders'], 
     variant_dir= binFolder + 'main', 
     duplicate=0
     )
