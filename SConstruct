@@ -11,6 +11,8 @@ pathToSFMLHeaders = '#libraries/SFML-2.5.1/include'
 pathToSFMLLibraries = '#libraries/SFML-2.5.1/lib/'
 pathToBox2DHeaders = '#libraries/box2d-master/include/'
 pathToBox2DLibrary = '#libraries/box2d-master/build/src/'
+
+#TODO: Windows showing random junk symbols "are not recognized as a command" in the Environment block
 env_base = Environment(
     CC = 'g++',
     CCFLAGS = '-O2 -Wall',
@@ -46,6 +48,7 @@ if not env_base.GetOption('clean'):
 #TODO: exit on installation error
 
     if sys.platform.startswith('linux'):
+
         if not conf.CheckCXXHeader(defaultLinuxPathToBoostHeaders + 'shared_ptr.hpp') and not conf.CheckCXXHeader('shared_ptr.hpp'):
             print 'Boost not found\n'
             subprocess.call(['./BoostLinux.sh'], shell=True, cwd = 'scripts')
@@ -66,8 +69,18 @@ if not env_base.GetOption('clean'):
             print 'Box2D found\n'
     
     elif sys.platform.startswith('win'):
-        print 'Win placeholder'
-        #TODO: Windows checking
+        
+        #TODO: Windows Boost checking
+
+        #TODO: Windows SFML checking
+
+        
+        if not conf.CheckLib('box2d'):
+            print 'Box2D not found\n'
+            subprocess.call(['powershell.exe', '.\Box2DWin.ps1'], shell=True, cwd = 'scripts') #TODO: box2d.sln error
+        else:
+            print 'Box2D found\n'
+
 
     else:
         print 'Unsupported OS. Exiting.'
@@ -75,7 +88,7 @@ if not env_base.GetOption('clean'):
 
 
 
-#Exit(1)
+Exit(1)
 
 print('..Building Targets\n')
 #build in separate directories
