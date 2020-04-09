@@ -43,27 +43,25 @@ if not env_base.GetOption('clean'):
 
     print '..Checking for libraries:\n'
 
-#TODO: start scripts in their own directory
 #TODO: exit on installation error
-
 
     if sys.platform.startswith('linux'):
         if not conf.CheckCXXHeader(defaultLinuxPathToBoostHeaders + 'shared_ptr.hpp') and not conf.CheckCXXHeader('shared_ptr.hpp'):
             print 'Boost not found\n'
-            subprocess.call(['scripts/BoostLinux.sh'], shell=True)
+            subprocess.call(['./BoostLinux.sh'], shell=True, cwd = 'scripts')
         else:
             print 'Boost found\n'
 
         if not conf.CheckCXXHeader(defaultLinuxPathToSFMLHeaders + 'Graphics.hpp') and not conf.CheckCXXHeader('SFML/Graphics.hpp'):
         #if not conf.CheckLib('sfml-graphics'):
             print 'SFML not found\n'
-            subprocess.call(['scripts/SFMLLinux.sh'], shell=True)
+            subprocess.call(['./SFMLLinux.sh'], shell=True, cwd = 'scripts')
         else:
             print 'SFML found\n'
 
         if not conf.CheckLib('box2d'):
             print 'Box2D not found\n'
-            subprocess.call(['scripts/Box2DLinux.sh'], shell=True)
+            subprocess.call(['./Box2DLinux.sh'], shell=True, cwd = 'scripts')
         else:
             print 'Box2D found\n'
     
