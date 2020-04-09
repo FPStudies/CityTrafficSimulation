@@ -88,7 +88,7 @@ if not env_base.GetOption('clean'):
 
 
 
-Exit(1)
+#Exit(1)
 
 print('..Building Targets\n')
 #build in separate directories
