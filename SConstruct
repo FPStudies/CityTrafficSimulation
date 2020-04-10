@@ -1,13 +1,7 @@
 print('..Building App\n')
 
-#TODO: find default paths
-defaultLinuxPathToBoostHeaders = '/usr/include/boost/'
-defaultWinPathToBoostHeaders = ''
-defaultLinuxPathToSFMLHeaders = '/usr/include/SFML/'
-defaultWinPathToSFMLLibrary = ''
-
 pathToBoostHeaders = '#libraries/boost_1_72_0/'
-pathToSFMLHeaders = '#libraries/SFML-2.5.1/include'
+pathToSFMLHeaders = '#libraries/SFML-2.5.1/include/'
 pathToSFMLLibraries = '#libraries/SFML-2.5.1/lib/'
 pathToBox2DHeaders = '#libraries/box2d-master/include/'
 pathToBox2DLibrary = '#libraries/box2d-master/build/src/'
@@ -49,13 +43,13 @@ if not env_base.GetOption('clean'):
 
     if sys.platform.startswith('linux'):
 
-        if not conf.CheckCXXHeader(defaultLinuxPathToBoostHeaders + 'shared_ptr.hpp') and not conf.CheckCXXHeader('boost/shared_ptr.hpp'):
+        if not conf.CheckCXXHeader('boost/shared_ptr.hpp'):
             print 'Boost not found\n'
             subprocess.call(['./BoostLinux.sh'], shell=True, cwd = 'scripts')
         else:
             print 'Boost found\n'
 
-        if not conf.CheckCXXHeader(defaultLinuxPathToSFMLHeaders + 'Graphics.hpp') and not conf.CheckCXXHeader('SFML/Graphics.hpp'):
+        if not conf.CheckCXXHeader('SFML/Graphics.hpp'):
         #if not conf.CheckLib('sfml-graphics'):
             print 'SFML not found\n'
             subprocess.call(['./SFMLLinux.sh'], shell=True, cwd = 'scripts')
