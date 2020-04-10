@@ -4,3 +4,4 @@ hello
 /libraries
 /.sconf_temp
 config.log
+.sconsign.dblite

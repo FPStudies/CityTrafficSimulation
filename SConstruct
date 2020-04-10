@@ -7,7 +7,13 @@ pathToBox2DHeaders = '#libraries/box2d-master/include/'
 pathToBox2DLibrary = '#libraries/box2d-master/build/src/'
 
 #TODO: Windows showing random junk symbols "are not recognized as a command" in the Environment block
+
 env_base = Environment(
+    tools = [
+        'gcc',
+        'g++'
+        #'gnulink'
+        ],
     CC = 'g++',
     CCFLAGS = '-O2 -Wall',
     SCONS_CXX_STANDARD='c++11',
@@ -23,6 +29,8 @@ env_base = Environment(
         pathToBox2DLibrary
         ]
 )
+import os
+env_base.PrependENVPath('PATH', os.environ['PATH'])
 
 binFolder = '#bin/'
 pathToUtility = '#include/main/utility/'
@@ -63,15 +71,29 @@ if not env_base.GetOption('clean'):
             print 'Box2D found\n'
     
     elif sys.platform.startswith('win'):
+        env_base.Append(
+            LIBPATH = [
+               pathToBox2DLibrary + 'Debug' #maybe not needed if box2d.sln workes
+            ],
+            tools = ['mslink', 'mslib']
+        )
         
-        #TODO: Windows Boost checking
+        if not conf.CheckCXXHeader('boost/shared_ptr.hpp'):
+            print 'Boost not found\n'
+            subprocess.call(['powershell.exe', '.\BoostWin.ps1'], shell=True, cwd = 'scripts')
+        else:
+            print 'Boost found\n'
 
-        #TODO: Windows SFML checking
-
+        
+        if not conf.CheckCXXHeader('SFML/Graphics.hpp'):
+            print 'SFML not found\n'
+            subprocess.call(['powershell.exe', '.\SFMLWin.ps1'], shell=True, cwd = 'scripts')
+        else:
+            print 'SFML found\n'
         
         if not conf.CheckLib('box2d'):
             print 'Box2D not found\n'
-            subprocess.call(['powershell.exe', '.\Box2DWin.ps1'], shell=True, cwd = 'scripts') #TODO: box2d.sln error
+            #subprocess.call(['powershell.exe', '.\Box2DWin.ps1'], shell=True, cwd = 'scripts') #TODO: box2d.sln error
         else:
             print 'Box2D found\n'
 
