@@ -173,7 +173,7 @@ SConscript(
 
 SConscript(
     'source/main/SConscript', 
-    exports = ['env_base', 'libraryPath', 'programName', 'programPath', 'binFolder', 'pathToBox2DHeaders'], 
+    exports = ['env_base', 'libraryPath', 'programName', 'programPath', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
     variant_dir= binFolder + 'main', 
     duplicate=0
     )

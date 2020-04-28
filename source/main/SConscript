@@ -5,6 +5,7 @@ Import('libraryPath')
 Import('programPath')
 Import('programName')
 Import('binFolder')
+Import('sys')
 
 pathToH = '#include'
 
@@ -24,9 +25,14 @@ externalLibraries = [
     'box2d'
 ]
 
-objectFiles = [
-    binFolder + 'graphic_library_facade/graphicLibraryFacade.obj' #.o for Linux
-]
+if sys.platform.startswith('linux'):
+    objectFiles = [
+        binFolder + 'graphic_library_facade/graphicLibraryFacade.o'
+    ]
+else:
+    objectFiles = [
+        binFolder + 'graphic_library_facade/graphicLibraryFacade.obj'
+    ]
 
 HFilesFolder = []
 
