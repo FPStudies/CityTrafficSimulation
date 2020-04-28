@@ -1,1 +1,0 @@
-Musimy pozmieniać później wszystkie define na górze w plikach na nazwy zaczynające się na nasz program, aby nie było później konfliktu.

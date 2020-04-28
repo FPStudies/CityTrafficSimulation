@@ -1,0 +1,12 @@
+*.o
+*.obj
+*.a
+*.so
+*.dll
+*.lib
+hello
+/libraries
+/.sconf_temp
+config.log
+.sconsign.dblite
+hello.exe

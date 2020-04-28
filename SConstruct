@@ -1,20 +1,15 @@
-print('..Building App')
+print('..Scons Environment Setup\n')
 
+import sys
+import subprocess
+import os
+
+#needed paths
 pathToBoostHeaders = '#libraries/boost_1_72_0/'
+pathToSFMLHeaders = '#libraries/SFML-2.5.1/include/'
+pathToSFMLLibraries = '#libraries/SFML-2.5.1/lib/'
 pathToBox2DHeaders = '#libraries/box2d-master/include/'
 pathToBox2DLibrary = '#libraries/box2d-master/build/src/'
-
-env_base = Environment(
-    CC = 'g++',
-    CCFLAGS = '-O2 -Wall',
-    SCONS_CXX_STANDARD='c++11',
-    CPPPATH = [
-        '#include',
-        '#include/main/utility',
-        pathToBoostHeaders,
-        pathToBox2DHeaders
-        ]
-)
 
 binFolder = '#bin/'
 pathToUtility = '#include/main/utility/'
@@ -23,7 +18,122 @@ programName = 'hello'
 programPath = '#'
 
 
-#build in separate dir
+
+#environment variable setup
+if sys.platform.startswith('linux'):
+
+    env_base = Environment(
+        CC = 'g++',
+        CCFLAGS = '-O2 -Wall',
+        SCONS_CXX_STANDARD='c++11',
+        CPPPATH = [
+            '#include',
+            '#include/main/utility',
+            pathToSFMLHeaders,
+            pathToBoostHeaders,
+            pathToBox2DHeaders
+            ],
+        LIBPATH = [
+            pathToSFMLLibraries,
+            pathToBox2DLibrary
+            ]
+    )
+    env_base.PrependENVPath('PATH', os.environ['PATH'])
+
+elif sys.platform.startswith('win'):
+
+    env_base = Environment(
+        CC = 'CL.exe',
+        CCFLAGS = '-O2 -EHsc -MD',
+        SCONS_CXX_STANDARD='c++11',
+        CPPPATH = [
+            '#include',
+            '#include/main/utility',
+            pathToSFMLHeaders,
+            pathToBoostHeaders,
+            pathToBox2DHeaders
+            ],
+        LIBPATH = [
+            pathToSFMLLibraries,
+            pathToBox2DLibrary,
+            pathToBox2DLibrary + 'Release'
+            ]
+    )
+    env_base.PrependENVPath('PATH', os.environ['PATH'])
+
+else:
+    print 'Unsupported OS. Exiting.'
+    Exit(1)
+
+
+
+if not env_base.GetOption('clean'):
+
+    print('..Building App\n')
+
+#check for essential libraries
+
+    conf = Configure(env_base)
+
+    print ('..Checking for libraries:\n')
+
+#TODO: exit on installation error
+
+    if sys.platform.startswith('linux'):
+
+        if not conf.CheckCXXHeader('boost/shared_ptr.hpp'):
+            print 'Boost not found\n'
+            subprocess.call(['./BoostLinux.sh'], shell=True, cwd = 'scripts')
+        else:
+            print 'Boost found\n'
+
+        if not conf.CheckCXXHeader('SFML/Graphics.hpp'):
+            print 'SFML not found\n'
+            subprocess.call(['./SFMLLinux.sh'], shell=True, cwd = 'scripts')
+        else:
+            print 'SFML found\n'
+
+        if not conf.CheckLib('box2d'):
+            print 'Box2D not found\n'
+            subprocess.call(['./Box2DLinux.sh'], shell=True, cwd = 'scripts')
+        else:
+            print 'Box2D found\n'
+    
+
+    elif sys.platform.startswith('win'):
+        
+        if not conf.CheckCXXHeader('boost/shared_ptr.hpp'):
+            print 'Boost not found\n'
+            subprocess.call(['powershell.exe', '.\BoostWin.ps1'], shell=True, cwd = 'scripts')
+        else:
+            print 'Boost found\n'
+
+        if not conf.CheckCXXHeader('SFML/Graphics.hpp'):
+            print 'SFML not found\n'
+            subprocess.call(['powershell.exe', '.\SFMLWin.ps1'], shell=True, cwd = 'scripts')
+        else:
+            print 'SFML found\n'
+        
+        if not conf.CheckLib('box2d'):
+            print 'Box2D not found\n'
+            subprocess.call(['powershell.exe', '.\Box2DWin.ps1'], shell=True, cwd = 'scripts') #TODO: change .bat file
+        else:
+            print 'Box2D found\n'
+
+
+    else:
+        print 'Unsupported OS. Exiting.'
+        Exit(1)
+
+else:
+    print('..Cleaning App\n')
+
+#Exit(1)
+
+if not env_base.GetOption('clean'):
+    print('..Building Targets\n')
+
+#build in separate directories
 SConscript(
     'source/graphic_library_facade/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
@@ -63,7 +173,7 @@ SConscript(
 
 SConscript(
     'source/main/SConscript', 
-    exports = ['env_base', 'libraryPath', 'programName', 'programPath', 'binFolder', 'pathToBox2DLibrary', 'pathToBox2DHeaders'], 
+    exports = ['env_base', 'libraryPath', 'programName', 'programPath', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
     variant_dir= binFolder + 'main', 
     duplicate=0
     )

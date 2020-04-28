@@ -5,14 +5,14 @@ Import('libraryPath')
 Import('programPath')
 Import('programName')
 Import('binFolder')
-Import('pathToBox2DLibrary')
+Import('sys')
 
 pathToH = '#include'
 
-SFMLLibraries = [
-    '-lsfml-graphics', 
-    '-lsfml-window', 
-    '-lsfml-system'
+SFMLLibraries = [ #with '-l' at the beggining?
+    'sfml-graphics', 
+    'sfml-window', 
+    'sfml-system'
 ]
 
 programLibraries = [
@@ -22,12 +22,17 @@ programLibraries = [
 ]
 
 externalLibraries = [
-    'libbox2d.a'
+    'box2d'
 ]
 
-objectFiles = [
-    binFolder + 'graphic_library_facade/graphicLibraryFacade.o'
-]
+if sys.platform.startswith('linux'):
+    objectFiles = [
+        binFolder + 'graphic_library_facade/graphicLibraryFacade.o'
+    ]
+else:
+    objectFiles = [
+        binFolder + 'graphic_library_facade/graphicLibraryFacade.obj'
+    ]
 
 HFilesFolder = []
 
@@ -53,8 +58,7 @@ env.Append(
         LIBS = SFMLLibraries + programLibraries + externalLibraries,
 
         LIBPATH = [
-            libraryPath,
-            pathToBox2DLibrary
+            libraryPath
         ]
 )
 

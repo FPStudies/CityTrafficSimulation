@@ -9,7 +9,7 @@
 
 using namespace sf;
 
-RenderLoop::RenderLoop(const uint& width, const uint& height, const char* name, const uint& modeBitsPerPixel)
+RenderLoop::RenderLoop(const unsigned int& width, const unsigned int& height, const char* name, const unsigned int& modeBitsPerPixel)
 : window(sf::VideoMode(width, height, modeBitsPerPixel), name)
 {}
 
@@ -22,7 +22,7 @@ const int RenderLoop::render(){
 
 
     b2World world(b2Vec2( 0.0f, -10.0f ));
-    
+
     b2BodyDef groundBodyDef;
 	groundBodyDef.position.Set(0.0f, -10.0f);
 
@@ -55,7 +55,7 @@ const int RenderLoop::render(){
 
 	// Add the shape to the body.
 	body->CreateFixture(&fixtureDef);
-    
+
 
 
     eventManager.add("test", EventManager::State::Active, ev);
@@ -74,7 +74,7 @@ const int RenderLoop::render(){
 
 
         window.clear();
-        window.display();    
+        window.display();
     }
 
     return EXIT_SUCCESS;

@@ -32,4 +32,4 @@ env = env_base.Clone()
 
 env.Append(CPPPATH = pathToH)
 
-env.StaticLibrary(libraryPath + libraryName, filesHMain + filesHUtil + filesCPP)
+env.StaticLibrary(libraryPath + libraryName, filesCPP)
