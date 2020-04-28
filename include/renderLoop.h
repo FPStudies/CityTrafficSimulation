@@ -12,7 +12,7 @@ class RenderLoop{
     sf::RenderWindow window;
     
 public:
-    RenderLoop(const uint& width, const uint& height, const char* name, const uint& modeBitsPerPixel = 32);
+    RenderLoop(const unsigned int& width, const unsigned int& height, const char* name, const unsigned int& modeBitsPerPixel = 32);
     ~RenderLoop();
 
     /**

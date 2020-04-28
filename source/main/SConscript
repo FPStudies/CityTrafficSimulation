@@ -8,10 +8,10 @@ Import('binFolder')
 
 pathToH = '#include'
 
-SFMLLibraries = [
-    '-lsfml-graphics', 
-    '-lsfml-window', 
-    '-lsfml-system'
+SFMLLibraries = [ #with '-l' at the beggining?
+    'sfml-graphics', 
+    'sfml-window', 
+    'sfml-system'
 ]
 
 programLibraries = [
@@ -21,11 +21,11 @@ programLibraries = [
 ]
 
 externalLibraries = [
-    'libbox2d.a'
+    'box2d'
 ]
 
 objectFiles = [
-    binFolder + 'graphic_library_facade/graphicLibraryFacade.o'
+    binFolder + 'graphic_library_facade/graphicLibraryFacade.obj' #.o for Linux
 ]
 
 HFilesFolder = []
