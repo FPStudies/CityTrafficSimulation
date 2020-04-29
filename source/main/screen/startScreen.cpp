@@ -10,10 +10,10 @@ StartScreen::StartScreen()
 StartScreen::~StartScreen() {}
 
 void StartScreen::setBox2D(){
-    world = std::make_unique<b2World>(b2Vec2( 0.0f, 10.0f ));
+    world = std::make_unique<b2World>(b2Vec2( 0.0f, -10.0f ));
 
     b2BodyDef groundBodyDef;
-	groundBodyDef.position.Set(0.0f, 400.0f);
+	groundBodyDef.position.Set(0.0f, 0.0f);
     groundBodyDef.type = b2_staticBody;
 
 
@@ -21,13 +21,13 @@ void StartScreen::setBox2D(){
 
 	b2PolygonShape groundBox;
 
-	groundBox.SetAsBox(1000.0f, 1.0f);
+	groundBox.SetAsBox(200.0f, 1.0f);
 
 	groundBody->CreateFixture(&groundBox, 0.0f);
 
     b2BodyDef bodyDef;
 	bodyDef.type = b2_dynamicBody;
-	bodyDef.position.Set(100.0f, 200.0f);
+	bodyDef.position.Set(0.0f, 200.0f);
 	b2Body* body = world->CreateBody(&bodyDef);
 
 	b2PolygonShape dynamicBox;
@@ -52,14 +52,24 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     setBox2D();
     setEventManager();
 
-    sf::View view(sf::FloatRect(200.f, 200.f, 300.f, 200.f));
+    auto& coordSet = CoordinateSystemSet::getInstance();
+    coordSet.addNewSystem(0.0f, 0.0f, false, true, "basic", "sfml");
+    coordSet.addNewSystem(0.0f, 0.0f, true, false, "basic", "view");
+    auto coordToBasic = coordSet.getReverse("sfml");
+    auto coordToSFML = coordSet.get("sfml");
+    auto coordFromView = coordSet.get("view");
+
+    float resX = 1920.f, resY = 1080.f;
+
+    view = std::make_unique<sf::View>(sf::FloatRect(-(resX / 2), -(resY / 2), resX, resY)); // point is in bottom left
 
     sf::RectangleShape rectangle(sf::Vector2f(200, 40));
-    rectangle.setPosition(sf::Vector2f(100, 200));
 
-    window->setView(view);
+    rectangle.setPosition(sf::Vector2f(coordToBasic.translateX(0.0f), coordToBasic.translateY(200.0f)));
 
-    FixedFramerate framerate(15.0f);
+    window->setView(*view);
+
+    FixedFramerate framerate(60.0f);
 
     while(window->isOpen()){
         sf::Event event;
@@ -69,7 +79,7 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
             eventManager->checkEvents(*window, event);
         }
         world->Step(framerate.getRealDiff(), 6, 2 );
-        rectangle.setPosition(world->GetBodyList()->GetPosition().x, world->GetBodyList()->GetPosition().y);
+        rectangle.setPosition(coordToSFML.translateX(world->GetBodyList()->GetPosition().x), coordToSFML.translateY(world->GetBodyList()->GetPosition().y));
         std::cout << world->GetBodyList()->GetPosition().x << " " << world->GetBodyList()->GetPosition().y << " " << framerate.getRealFramerate() << "\n";
 
         window->clear();

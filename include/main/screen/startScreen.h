@@ -8,15 +8,18 @@
 
 #include "screenInterface.h"
 #include "fixedFramerate.h"
+#include "coordinateSystem.h"
 
 #include "../program_events/eventManager.h"
 #include "../program_events/basicEvents.h"
+
 
 #include "../drawing/drawManager.h"
 
 class StartScreen: virtual public ScreenInteface{
     std::unique_ptr<b2World> world;
     std::unique_ptr<EventManager> eventManager;
+    std::unique_ptr<sf::View> view;
 
     void setBox2D();
     void setEventManager();

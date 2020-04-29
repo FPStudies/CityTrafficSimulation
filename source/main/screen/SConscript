@@ -19,13 +19,7 @@ HFilesUtility = [
 
 filesCPP = [
     Glob('*.cpp'),
-    'screenID.cpp',
-    'screenManager.cpp',
-    'startScreen.cpp',
-    '../program_events/basicEvents.cpp',
-    '../program_events/eventManager.cpp',
-    '../program_events/eventSet.cpp',
-    "../program_events/UIEvents.cpp"
+    Glob('../program_events/*.cpp')
 ]
 
 
