@@ -116,7 +116,7 @@ if not env_base.GetOption('clean'):
         
         if not conf.CheckLib('box2d'):
             print 'Box2D not found\n'
-            subprocess.call(['powershell.exe', '.\Box2DWin.ps1'], shell=True, cwd = 'scripts') #TODO: change .bat file
+            subprocess.call(['powershell.exe', '.\Box2DWin.ps1'], shell=True, cwd = 'scripts')
         else:
             print 'Box2D found\n'
 
