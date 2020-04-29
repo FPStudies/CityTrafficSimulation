@@ -10,3 +10,4 @@ hello
 config.log
 .sconsign.dblite
 hello.exe
+/tests/bin

@@ -1,0 +1,9 @@
+#
+#      Author: Kordowski Mateusz
+#
+Import('test_env')
+
+CPPFiles = Glob('*.cc')
+
+test_env.Program("../../bin/screenTests", CPPFiles)
+

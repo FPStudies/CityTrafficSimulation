@@ -1,2 +1,5 @@
+#
+#      Author: Kordowski Mateusz
+#
 
 Import('env_base')
