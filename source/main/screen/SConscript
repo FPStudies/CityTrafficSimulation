@@ -1,3 +1,6 @@
+#
+#      Authors: Kordowski Mateusz, Przybysz Filip
+#
 
 Import('env_base')
 Import('binFolder')
@@ -9,17 +12,17 @@ pathToH2 = '#include/main/program_events/'
 libraryName = 'screenLib'
 
 HFilesMain = [
-    'screenInterface.h',
-    'screenID.h',
+    'ScreenInterface.h',
+    'ScreenID.h',
 ]
 
 HFilesUtility = [
-    'ID.h'
+    'ID.hpp'
 ]
 
 filesCPP = [
-    Glob('*.cpp'),
-    Glob('../program_events/*.cpp')
+    Glob('*.cc'),
+    Glob('../program_events/*.cc') #TODO:causes SCons environment warnings, maybe compile object separately
 ]
 
 

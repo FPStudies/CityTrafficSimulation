@@ -1,16 +1,22 @@
-#ifndef ZPR_TRAFFIC_SIM_UI_EVENTS_H
-#define ZPR_TRAFFIC_SIM_UI_EVENTS_H
+/*
+ * UIEvents.h
+ *
+ *      Author: Kordowski Mateusz
+ */
+
+#ifndef TRAFFIC_SIM_UI_EVENTS_H
+#define TRAFFIC_SIM_UI_EVENTS_H
 
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <memory>
 
-#include "eventInterface.h"
-#include "../UI/elements/elementObserver.h"
+#include "EventInterface.h"
+#include "../UI/elements/ElementObserver.h"
 
 
 class UIEvents: virtual public EventInterface{
-    std::vector<std::shared_ptr<ElementObserver>> elements;
+    std::vector<std::shared_ptr<ElementObserver>> elements_;
 
     virtual UIEvents* clone_impl() const override;
 

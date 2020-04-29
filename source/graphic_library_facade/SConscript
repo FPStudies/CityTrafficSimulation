@@ -1,3 +1,6 @@
+#
+#      Authors: Kordowski Mateusz, Przybysz Filip
+#
 Import('env_base')
 
 env = env_base.Clone()
@@ -5,4 +8,4 @@ env = env_base.Clone()
 #) 
 
 
-env.Object(target = 'graphicLibraryFacade', source = 'graphicLibraryFacade.cpp')
+env.Object(target = 'GraphicLibraryFacade', source = 'GraphicLibraryFacade.cc')

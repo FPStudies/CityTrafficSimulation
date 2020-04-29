@@ -1,3 +1,7 @@
+#
+#      Authors: Kordowski Mateusz, Przybysz Filip
+#
+
 import copy
 
 Import('env_base')
@@ -9,7 +13,7 @@ Import('sys')
 
 pathToH = '#include/'
 
-SFMLLibraries = [ #with '-l' at the beggining?
+SFMLLibraries = [
     'sfml-graphics', 
     'sfml-window', 
     'sfml-system'
@@ -27,19 +31,19 @@ externalLibraries = [
 
 if sys.platform.startswith('linux'):
     objectFiles = [
-        binFolder + 'graphic_library_facade/graphicLibraryFacade.o'
+        binFolder + 'graphic_library_facade/GraphicLibraryFacade.o'
     ]
 else:
     objectFiles = [
-        binFolder + 'graphic_library_facade/graphicLibraryFacade.obj'
+        binFolder + 'graphic_library_facade/GraphicLibraryFacade.obj'
     ]
 
 HFilesFolder = [
 ]
 
 filesCPP = [
-    'main.cpp',
-    'programSetup.cpp'
+    'Main.cc',
+    'ProgramSetup.cc'
 ]
 
 

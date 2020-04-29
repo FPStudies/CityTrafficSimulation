@@ -1,3 +1,6 @@
+#
+#      Authors: Kordowski Mateusz, Przybysz Filip
+#
 print('..Scons Environment Setup\n')
 
 import sys

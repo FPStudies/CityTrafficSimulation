@@ -1,4 +1,4 @@
-# ZPR_CityTrafficSimulation
+# CityTrafficSimulation
 Simple simulation tool for modeling city traffic.
 
 Installation:

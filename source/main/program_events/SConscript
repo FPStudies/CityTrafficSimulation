@@ -1,3 +1,6 @@
+#
+#      Authors: Kordowski Mateusz, Przybysz Filip
+#
 
 Import('env_base')
 Import('binFolder')
@@ -8,19 +11,19 @@ pathToH = '#include/main/program_events/'
 libraryName = 'events'
 
 HFilesMain = [
-    'eventInterface.h',
-    'events.h',
+    'EventInterface.h',
+    'Events.h',
 ]
 
 HFilesUtility = [
-    'setTemplate.h'
+    'SetTemplate.hpp'
 ]
 
 filesCPP = [
-    'basicEvents.cpp',
-    'eventSet.cpp',
-    'eventManager.cpp',
-    'UIEvents.cpp'
+    'BasicEvents.cc',
+    'EventSet.cc',
+    'EventManager.cc',
+    'UIEvents.cc'
 ]
 
 
