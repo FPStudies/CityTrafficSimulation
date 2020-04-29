@@ -2,6 +2,9 @@
 #define ZPR_TRAFFIC_SIM_START_SCREEN_H
 
 #include <SFML/Graphics.hpp>
+#include <box2d/box2d.h>
+#include <iostream>
+#include <memory>
 
 #include "screenInterface.h"
 
@@ -11,7 +14,12 @@
 #include "../drawing/drawManager.h"
 
 class StartScreen: virtual public ScreenInteface{
-    
+    std::unique_ptr<b2World> world;
+    std::unique_ptr<EventManager> eventManager;
+
+    void setBox2D();
+    void setEventManager();
+
 public:
     StartScreen();
     ~StartScreen();

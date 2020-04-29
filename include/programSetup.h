@@ -3,17 +3,20 @@
 
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <memory>
 
 #include "main/program_events/eventManager.h"
 #include "main/program_events/basicEvents.h"
+#include "../include/main/screen/screenManager.h"
+#include "../include/main/screen/startScreen.h"
 
 
-class RenderLoop{
-    sf::RenderWindow window;
+class ProgramSetup{
+    std::shared_ptr<sf::RenderWindow> window;
     
 public:
-    RenderLoop(const unsigned int& width, const unsigned int& height, const char* name, const unsigned int& modeBitsPerPixel = 32);
-    ~RenderLoop();
+    ProgramSetup(const unsigned int& width, const unsigned int& height, const char* name, const unsigned int& modeBitsPerPixel = 32);
+    ~ProgramSetup();
 
     /**
      * @brief Start the main program loop.

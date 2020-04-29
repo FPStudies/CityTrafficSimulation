@@ -1,7 +1,7 @@
 
 #include <iostream>
 #include "../../include/graphicLibraryFacade.h"
-#include "../../include/renderLoop.h"
+#include "../../include/programSetup.h"
 
 #include "../../include/main/screen/screenManager.h"
 #include "../../include/main/screen/startScreen.h"
@@ -12,9 +12,9 @@ int main(int argc, char** argv, char** envp) {
 
 	cout << "Hello" << endl;
 
-	RenderLoop render(400, 300, "test");
+	ProgramSetup setup(400, 300, "test");
 
-	render.render();
+	setup.render();
 
 	/*for (int i = 0; envp[i] != NULL; ++i) {
 		cout << envp[i] << "\n";

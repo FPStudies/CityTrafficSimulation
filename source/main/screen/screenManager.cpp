@@ -61,5 +61,20 @@ void ScreenManager::mainLoop(std::shared_ptr<sf::RenderWindow>& window, const Sc
     }
 }
 
+void ScreenManager::mainLoop(std::shared_ptr<sf::RenderWindow>& window, const std::string& name){
+    auto& indexByString = screens.get<IndexByString>();
+    auto& indexByID = screens.get<IndexByID>();
+    auto test = indexByString.find(name);
+    if(test == indexByString.end()) return;
+
+    ScreenID output = test->ID;
+
+    while(output.isValid()){
+        auto tmp = indexByID.find(output);
+        if(tmp == indexByID.end()) throw std::runtime_error("Cannot find screen.");
+
+        output = (*tmp).screen->run(window);
+    }
+}
 
 #endif

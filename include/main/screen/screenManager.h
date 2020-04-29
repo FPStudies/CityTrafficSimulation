@@ -78,6 +78,7 @@ public:
      * @param startID An ID of a starting screen.
      */
     void mainLoop(std::shared_ptr<sf::RenderWindow>& window, const ScreenInteface& startID);
+    void mainLoop(std::shared_ptr<sf::RenderWindow>& window, const std::string& name);
 };
 
 

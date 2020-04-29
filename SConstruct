@@ -24,7 +24,7 @@ if sys.platform.startswith('linux'):
 
     env_base = Environment(
         CC = 'g++',
-        CCFLAGS = '-O2 -Wall',
+        CCFLAGS = '-O2 -Wall -g',
         SCONS_CXX_STANDARD='c++11',
         CPPPATH = [
             '#include',
@@ -148,17 +148,18 @@ SConscript(
     duplicate=0
     )
 
-SConscript(
-    'source/main/screen/SConscript', 
-    exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
-    variant_dir = binFolder + 'main/screen', 
-    duplicate=0
-    )
-
+ 
 SConscript(
     'source/main/drawing/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
     variant_dir = binFolder + 'main/drawing', 
+    duplicate=0
+    )   
+
+SConscript(
+    'source/main/screen/SConscript', 
+    exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
+    variant_dir = binFolder + 'main/screen', 
     duplicate=0
     )
 
