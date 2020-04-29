@@ -1,0 +1,6 @@
+
+Import('test_env')
+
+CPPFiles = Glob('*.cpp')
+
+test_env.Program("screenTests", CPPFiles)
