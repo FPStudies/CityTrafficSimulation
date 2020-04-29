@@ -10,7 +10,7 @@ StartScreen::StartScreen()
 StartScreen::~StartScreen() {}
 
 void StartScreen::setBox2D(){
-    world = std::make_unique<b2World>(b2Vec2( 0.0f, 0.02f ));
+    world = std::make_unique<b2World>(b2Vec2( 0.0f, 10.0f ));
 
     b2BodyDef groundBodyDef;
 	groundBodyDef.position.Set(0.0f, 400.0f);
@@ -59,14 +59,18 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
 
     window->setView(view);
 
+    FixedFramerate framerate(15.0f);
+
     while(window->isOpen()){
         sf::Event event;
+        framerate.checkTime();
 
         while(window->pollEvent(event)){
             eventManager->checkEvents(*window, event);
         }
-        world->Step( 1.0f / 60.0f, 6, 2 );
+        world->Step(framerate.getRealDiff(), 6, 2 );
         rectangle.setPosition(world->GetBodyList()->GetPosition().x, world->GetBodyList()->GetPosition().y);
+        std::cout << world->GetBodyList()->GetPosition().x << " " << world->GetBodyList()->GetPosition().y << " " << framerate.getRealFramerate() << "\n";
 
         window->clear();
         window->draw(rectangle);

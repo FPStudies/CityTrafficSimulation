@@ -7,6 +7,7 @@
 #include <memory>
 
 #include "screenInterface.h"
+#include "fixedFramerate.h"
 
 #include "../program_events/eventManager.h"
 #include "../program_events/basicEvents.h"

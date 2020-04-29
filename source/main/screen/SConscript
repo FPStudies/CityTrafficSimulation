@@ -18,6 +18,7 @@ HFilesUtility = [
 ]
 
 filesCPP = [
+    Glob('*.cpp'),
     'screenID.cpp',
     'screenManager.cpp',
     'startScreen.cpp',
