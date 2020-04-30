@@ -1,3 +1,3 @@
 
-tests/bin/main/screen/screenTests
+tests/bin/screenTests
 
