@@ -1,0 +1,44 @@
+#
+#      Author: Kordowski Mateusz
+#
+Import('env_base')
+Import('libraryPath')
+Import('testsFolder')
+Import('pathToBox2DHeaders')
+Import('sys')
+
+pathToH = '#include/main/program_events'
+
+#testLibraries = [
+#    'boost-system',
+#    'boost-thread',
+#    'boost_unit_test_framework'
+#]
+
+programLibraries = [
+    'events', 
+    'screenLib', 
+    'drawing'
+]
+
+env = env_base.Clone()
+
+env.Append(
+    CPPPATH = [
+        '#libraries/boost_1_72_0',
+	    pathToH
+    ],
+
+    LIBS = [
+        programLibraries
+    ],
+
+    LIBPATH = [
+        libraryPath
+    ]
+)
+
+CPPFiles = 'eventsTest.cc'
+
+
+env.Program("eventsTest", CPPFiles)

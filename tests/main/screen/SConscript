@@ -32,8 +32,7 @@ env = env_base.Clone()
 env.Append(
     CPPPATH = [
         '#libraries/boost_1_72_0',
-        '#source/main/screen',
-	pathToH
+	    pathToH
     ],
 
     LIBS = [
