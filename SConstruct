@@ -25,6 +25,7 @@ import os
 
 #needed paths
 pathToBoostHeaders = '#libraries/boost_1_72_0/'
+pathToBoostLibraries = '#libraries/boost_1_72_0/stage/lib/'
 pathToSFMLHeaders = '#libraries/SFML-2.5.1/include/'
 pathToSFMLLibraries = '#libraries/SFML-2.5.1/lib/'
 pathToBox2DHeaders = '#libraries/box2d-master/include/'
@@ -209,7 +210,7 @@ if (GetOption('build_option') == 'program'):
 elif (GetOption('build_option') == 'tests'):
     SConscript(
         '#tests/SConscript', 
-        exports = ['env_base', 'libraryPath', 'binFolder', 'sys'], 
+        exports = ['env_base', 'libraryPath', 'binFolder', 'pathToBoostLibraries', 'sys'], 
         variant_dir= testsFolder, 
         duplicate=0
         )

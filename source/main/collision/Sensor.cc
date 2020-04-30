@@ -40,14 +40,14 @@ bool Sensor::createFOV(const float& radius, const float& angle, b2World& world){
     b2PolygonShape polygon_shape;
     b2FixtureDef fixture_def;
     
-    uint number_of_vertices = VERTICES_PER_2PI * angle + 1;
+    unsigned int number_of_vertices = VERTICES_PER_2PI * angle + 1;
     b2Vec2* vertices = new b2Vec2[number_of_vertices + 1];
 
     vertices[0].Set(0, 0);
     float ratio = angle / number_of_vertices;
     float angle_set = -0.5f * angle;
 
-    for(uint i = 0; i < number_of_vertices; ++i){
+    for(unsigned int i = 0; i < number_of_vertices; ++i){
         angle_set += i * ratio;
         vertices[i + 1].Set(radius * cosf(angle_set), radius * sinf(angle_set));
     }

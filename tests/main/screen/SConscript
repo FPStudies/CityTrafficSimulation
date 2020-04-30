@@ -28,11 +28,11 @@ if sys.platform.startswith('linux'):
     ]
 else:
     objectFiles = [
-        binFolder + 'CoordinateSystem.obj',
-        binFolder + 'FixedFramerate.obj',
-        binFolder + 'ScreenID.obj',
-        binFolder + 'ScreenManager.obj',
-        binFolder + 'StartScreen.obj',
+        binFolder + 'main/screen/CoordinateSystem.obj',
+        binFolder + 'main/screen/FixedFramerate.obj',
+        binFolder + 'main/screen/ScreenID.obj',
+        binFolder + 'main/screen/ScreenManager.obj',
+        binFolder + 'main/screen/StartScreen.obj',
 	'../../bin/BoostTestInclude.obj'
     ]
 

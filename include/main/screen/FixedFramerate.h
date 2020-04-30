@@ -20,7 +20,7 @@ class FixedFramerate{
     Framerate real_diff_;
     unsigned int counted_frames_per_sec_;
     unsigned int counted_frames_per_sec_previous_;
-    std::chrono::_V2::steady_clock::time_point prevoius_time_;
+    std::chrono::steady_clock::time_point prevoius_time_; //std::chrono::_V2::steady_clock::time_point ??
     bool prev_is_set_;
 
 public:

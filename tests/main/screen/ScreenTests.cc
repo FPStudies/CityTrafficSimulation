@@ -41,7 +41,7 @@ BOOST_AUTO_TEST_CASE(coordinate_system_constructor){
     set.addNewSystem(0.0f, 0.0f, false, true, "basic", "one");
     auto base_system = set.get("one");
 
-    BOOST_REQUIRE( base_system.getNameFrom() == "basic" and base_system.getNameTo() == "one");
+    BOOST_REQUIRE( base_system.getNameFrom() == "basic" && base_system.getNameTo() == "one");
 
     CoordinateSystem copy_system(base_system);
 
@@ -49,7 +49,7 @@ BOOST_AUTO_TEST_CASE(coordinate_system_constructor){
 
     CoordinateSystem move_system(std::move(base_system));
 
-    BOOST_CHECK( move_system.getNameFrom() == copy_system.getNameFrom() and base_system.getNameTo().length() == 0);
+    BOOST_CHECK( move_system.getNameFrom() == copy_system.getNameFrom() && base_system.getNameTo().length() == 0);
 }
 
 BOOST_AUTO_TEST_CASE(coordinate_system_calculation){
