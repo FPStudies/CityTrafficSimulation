@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_EVENT_MANAGER_CPP
-#define TRAFFIC_SIM_EVENT_MANAGER_CPP
+#ifndef TRAFFIC_SIM_EVENT_MANAGER_CC
+#define TRAFFIC_SIM_EVENT_MANAGER_CC
 
 #include "EventManager.h"
 #include <iostream>

@@ -4,13 +4,12 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_BOOST_TEST_SCREEN_CPP
-#define TRAFFIC_SIM_BOOST_TEST_SCREEN_CPP
+#ifndef TRAFFIC_SIM_BOOST_TEST_SCREEN_CC
+#define TRAFFIC_SIM_BOOST_TEST_SCREEN_CC
 
 #define BOOST_TEST_MODULE Screen
 
-//#include <boost/test/included/unit_test.hpp>
-#include "../../BoostTestInclude.h"
+#include <boost/test/unit_test.hpp>
 #include <memory>
 
 #include "CoordinateSystem.h"

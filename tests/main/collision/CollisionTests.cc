@@ -4,14 +4,13 @@
  *      Author: Przybysz Filip
  */
 
-#ifndef TRAFFIC_SIM_BOOST_TEST_COLLISION_CPP
-#define TRAFFIC_SIM_BOOST_TEST_COLLISION_CPP
+#ifndef TRAFFIC_SIM_BOOST_TEST_COLLISION_CC
+#define TRAFFIC_SIM_BOOST_TEST_COLLISION_CC
 
 //#define BOOST_TEST_DYN_LINK
-#define BOOST_TEST_MODULE Screen
+#define BOOST_TEST_MODULE Colliion
 
-//#include <boost/test/included/unit_test.hpp>
-#include "../../BoostTestInclude.h"
+#include <boost/test/unit_test.hpp>
 
 #include "Sensor.h"
 #include "CollisionManagerBridgeToSets.h"

@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_SENSOR_CPP
-#define TRAFFIC_SIM_SENSOR_CPP
+#ifndef TRAFFIC_SIM_SENSOR_CC
+#define TRAFFIC_SIM_SENSOR_CC
 
 #include "CollisionInterface.h"
 #include "Sensor.h"

@@ -209,7 +209,7 @@ if (GetOption('build_option') == 'program'):
 elif (GetOption('build_option') == 'tests'):
     SConscript(
         '#tests/SConscript', 
-        exports = ['env_base', 'libraryPath', 'testsFolder', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
+        exports = ['env_base', 'libraryPath', 'binFolder', 'sys'], 
         variant_dir= testsFolder, 
         duplicate=0
         )

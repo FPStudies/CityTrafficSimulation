@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_RENDER_LOOP_CPP
-#define RAFFIC_SIM_RENDER_LOOP_CPP
+#ifndef TRAFFIC_SIM_RENDER_LOOP_CC
+#define RAFFIC_SIM_RENDER_LOOP_CC
 
 #include "ProgramSetup.h"
 

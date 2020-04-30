@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_SCREEN_ID_CPP
-#define TRAFFIC_SIM_SCREEN_ID_CPP
+#ifndef TRAFFIC_SIM_SCREEN_ID_CC
+#define TRAFFIC_SIM_SCREEN_ID_CC
 
 #include "ScreenID.h"
 

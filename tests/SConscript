@@ -4,9 +4,7 @@
 
 Import('env_base')
 Import('libraryPath')
-Import('testsFolder')
 Import('binFolder')
-Import('pathToBox2DHeaders')
 Import('sys')
 
 env_tests = env_base.Clone();
@@ -32,22 +30,24 @@ LIBPATH = [
     ]
 )
 
+env_tests.Object(target = 'BoostTestInclude', source = 'BoostTestInclude.cc')
+
 #compile tests
 SConscript(
     'main/screen/SConscript', 
-    exports = ['env_tests', 'libraryPath', 'testsFolder', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
+    exports = ['env_tests', 'binFolder', 'sys'], 
     duplicate=0
     )
 
 SConscript(
     'main/program_events/SConscript', 
-    exports = ['env_tests', 'libraryPath', 'testsFolder', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
+    exports = ['env_tests', 'binFolder', 'sys'], 
     duplicate=0
     )
 
 SConscript(
     'main/collision/SConscript', 
-    exports = ['env_tests', 'libraryPath', 'testsFolder', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
+    exports = ['env_tests', 'binFolder', 'sys'], 
     duplicate=0
     )
 

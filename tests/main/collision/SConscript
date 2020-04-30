@@ -1,5 +1,5 @@
 #
-#      Authors: Przybysz Filip
+#      Author: Przybysz Filip
 #
 Import('env_tests')
 Import('binFolder')
@@ -12,7 +12,6 @@ env = env_tests.Clone()
 env.Append(
     CPPPATH = [
         '#libraries/boost_1_72_0',
-        #'#source/main/collision',
 	pathToH
     ]
 )
@@ -20,11 +19,13 @@ env.Append(
 #static libraries "undefined" error workaround
 if sys.platform.startswith('linux'):
     objectFiles = [
-        binFolder + 'main/collision/Sensor.o'
+        binFolder + 'main/collision/Sensor.o',
+	'../../bin/BoostTestInclude.o'
     ]
 else:
     objectFiles = [
-        binFolder + 'main/collision/Sensor.obj'
+        binFolder + 'main/collision/Sensor.obj',
+	'../../bin/BoostTestInclude.obj'
     ]
 
 CPPFiles = [

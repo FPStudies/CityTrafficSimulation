@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_SCREEN_MANAGER_CPP
-#define TRAFFIC_SIM_SCREEN_MANAGER_CPP
+#ifndef TRAFFIC_SIM_SCREEN_MANAGER_CC
+#define TRAFFIC_SIM_SCREEN_MANAGER_CC
 
 #include "ScreenManager.h"
 

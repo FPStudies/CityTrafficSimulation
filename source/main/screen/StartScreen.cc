@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_START_SCREEN_CPP
-#define TRAFFIC_SIM_START_SCREEN_CPP
+#ifndef TRAFFIC_SIM_START_SCREEN_CC
+#define TRAFFIC_SIM_START_SCREEN_CC
 
 #include "StartScreen.h"
 

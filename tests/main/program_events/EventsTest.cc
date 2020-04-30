@@ -1,15 +1,15 @@
 /*
- * ScreenTests.cc
+ * EventsTest.cc
  *
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_BOOST_TEST_EVENTS_CPP
-#define TRAFFIC_SIM_BOOST_TEST_EVENTS_CPP
+#ifndef TRAFFIC_SIM_BOOST_TEST_EVENTS_CC
+#define TRAFFIC_SIM_BOOST_TEST_EVENTS_CC
 
 #define BOOST_TEST_MODULE Events
 
-#include <boost/test/included/unit_test.hpp>
+#include <boost/test/unit_test.hpp>
 
 #include "BasicEvents.h"
 #include "EventManager.h"
