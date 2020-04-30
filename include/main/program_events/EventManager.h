@@ -104,12 +104,12 @@ public:
 
     /**
      * @brief Adds a new event set.
-     * If the event set with that name existed before, it will return a value.
+     * If the event set with that name exists, it will return a value.
      * 
      * @param name Identifier
      * @param mode Active / Inactive
      * @param event_object_set Set of events
-     * @return true If set with that name existed before.
+     * @return true If set with a name that exists before.
      * @return false Otherwise.
      */
     bool addNew(const std::string& name, EventManager::State mode, const EventSet& event_object_set); // without constructing new name to the collection of sets

@@ -23,9 +23,9 @@ BOOST_AUTO_TEST_CASE(basic_events_methods){
 
     BOOST_CHECK(event.equals(*copy) == true);
 
-    auto copy2 = copy->clone();
+    auto copy_2 = copy->clone();
 
-    BOOST_CHECK(copy2->equals(event) == true);
+    BOOST_CHECK(copy_2->equals(event) == true);
 }
 
 BOOST_AUTO_TEST_CASE(UI_events_check){
@@ -34,30 +34,32 @@ BOOST_AUTO_TEST_CASE(UI_events_check){
 
     BOOST_CHECK(event.equals(*copy) == true);
 
-    auto copy2 = copy->clone();
+    auto copy_2 = copy->clone();
 
-    BOOST_CHECK(copy2->equals(event) == true);
+    BOOST_CHECK(copy_2->equals(event) == true);
 }
 
 BOOST_AUTO_TEST_CASE(event_manager_methods){
     EventManager manager;
-    std::shared_ptr<BasicEvents> bEvent = std::make_shared<BasicEvents>();
-    std::shared_ptr<UIEvents> uiEvent = std::make_shared<UIEvents>();
+    std::shared_ptr<BasicEvents> b_event = std::make_shared<BasicEvents>();
+    std::shared_ptr<UIEvents> ui_event = std::make_shared<UIEvents>();
 
-    manager.add("test1", EventManager::State::ACTIVE, bEvent);
-    manager.add("test2", EventManager::State::INACTIVE, uiEvent);
-    manager.add("test3", EventManager::State::INACTIVE, bEvent);
+    manager.add("test1", EventManager::State::ACTIVE, b_event);
+    manager.add("test2", EventManager::State::INACTIVE, ui_event);
+    manager.add("test3", EventManager::State::INACTIVE, b_event);
 
     BOOST_CHECK(manager.remove("test1") == false);
     BOOST_CHECK(manager.remove("test1") == true);
 
-    BOOST_CHECK(manager.addNew("test1", EventManager::State::ACTIVE, bEvent) == true);
+    BOOST_CHECK(manager.addNew("test1", EventManager::State::ACTIVE, b_event) == false);
 
-    manager.add("test4", EventManager::State::INACTIVE, bEvent);
-    manager.add("test4", EventManager::State::INACTIVE, uiEvent);
 
-     BOOST_CHECK(manager.remove("test4") == false);
-     BOOST_CHECK(manager.remove("test4") == true);
+    manager.add("test4", EventManager::State::INACTIVE, b_event);
+    manager.add("test4", EventManager::State::INACTIVE, ui_event);
+
+    BOOST_CHECK(manager.remove("test4") == false);
+    BOOST_CHECK(manager.remove("test4") == true);
+
 }   
 
 
