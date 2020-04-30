@@ -31,7 +31,7 @@ pathToBox2DHeaders = '#libraries/box2d-master/include/'
 pathToBox2DLibrary = '#libraries/box2d-master/build/src/'
 
 binFolder = '#bin/'
-testsFolder = '#tests/bin'
+testsFolder = '#tests/bin/'
 pathToUtility = '#include/main/utility/'
 libraryPath = binFolder + 'libs/'
 programName = 'hello'

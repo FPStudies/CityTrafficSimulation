@@ -1,7 +1,7 @@
 #
 #      Authors: Przybysz Filip
 #
-Import('env_base')
+Import('env_tests')
 Import('libraryPath')
 Import('testsFolder')
 Import('binFolder')
@@ -16,14 +16,7 @@ pathToH = '#include/main/collision'
 #    'boost_unit_test_framework'
 #]
 
-programLibraries = [
-    'events', 
-    'screenLib', 
-    'drawing',
-    #'collision'
-]
-
-env = env_base.Clone()
+env = env_tests.Clone()
 
 env.Append(
     CPPPATH = [
@@ -32,18 +25,10 @@ env.Append(
 	pathToH
     ],
 
-    LIBS = [
-    #    testLibraries,
-        programLibraries
-    ],
 
     #LINKFLAGS = [
     #    '-Wl,-Bdynamic'
     #],
-
-    LIBPATH = [
-        libraryPath
-    ]
 )
 
 if sys.platform.startswith('linux'):

@@ -1,7 +1,7 @@
 #
 #      Authors: Kordowski Mateusz, Przybysz Filip
 #
-Import('env_base')
+Import('env_tests')
 Import('libraryPath')
 Import('testsFolder')
 Import('pathToBox2DHeaders')
@@ -15,13 +15,7 @@ pathToH = '#include/main/screen'
 #    'boost_unit_test_framework'
 #]
 
-programLibraries = [
-    'events', 
-    'screenLib', 
-    'drawing'
-]
-
-env = env_base.Clone()
+env = env_tests.Clone()
 
 env.Append(
     CPPPATH = [
@@ -29,21 +23,15 @@ env.Append(
 	pathToH
     ],
 
-    LIBS = [
-    #    testLibraries,
-        programLibraries
-    ],
-
     #LINKFLAGS = [
     #    '-Wl,-Bdynamic'
     #],
 
-    LIBPATH = [
-        libraryPath
-    ]
 )
 
-CPPFiles = 'ScreenTests.cc'
+CPPFiles = [
+    'ScreenTests.cc'
+    ]
 
-env.Program("screenTests", CPPFiles)
+env.Program(target = "ScreenTests", source = CPPFiles)
 
