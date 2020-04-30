@@ -1,0 +1,63 @@
+#
+#      Authors: Przybysz Filip
+#
+Import('env_base')
+Import('libraryPath')
+Import('testsFolder')
+Import('binFolder')
+Import('pathToBox2DHeaders')
+Import('sys')
+
+pathToH = '#include/main/collision'
+
+#testLibraries = [
+#    'boost-system',
+#    'boost-thread',
+#    'boost_unit_test_framework'
+#]
+
+programLibraries = [
+    'events', 
+    'screenLib', 
+    'drawing',
+    #'collision'
+]
+
+env = env_base.Clone()
+
+env.Append(
+    CPPPATH = [
+        '#libraries/boost_1_72_0',
+        '#source/main/collision',
+	pathToH
+    ],
+
+    LIBS = [
+    #    testLibraries,
+        programLibraries
+    ],
+
+    #LINKFLAGS = [
+    #    '-Wl,-Bdynamic'
+    #],
+
+    LIBPATH = [
+        libraryPath
+    ]
+)
+
+if sys.platform.startswith('linux'):
+    objectFiles = [
+        binFolder + 'main/collision/Sensor.o'
+    ]
+else:
+    objectFiles = [
+        binFolder + 'main/collision/Sensor.obj'
+    ]
+
+CPPFiles = [
+    'CollisionTests.cc'
+]
+
+env.Program(target = "CollisionTests", source = CPPFiles + objectFiles)
+

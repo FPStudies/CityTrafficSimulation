@@ -16,6 +16,8 @@ Sensor::Sensor()
 : static_body_(nullptr), fixture_(nullptr), is_active_(true), created_(false)
 {}
 
+Sensor::~Sensor() {};
+
 void Sensor::setPropertiesAndCreate(b2BodyDef& body_def, b2FixtureDef& fixture_def, b2World& world){
     body_def.type = b2_staticBody;
     body_def.allowSleep = false;
