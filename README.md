@@ -1,4 +1,4 @@
-# ZPR_CityTrafficSimulation
+# CityTrafficSimulation
 Simple simulation tool for modeling city traffic.
 
 Installation:
@@ -9,12 +9,16 @@ sudo apt-get install scons
 sudo apt-get install cmake
 sudo apt-get install g++)
 
-To compile run 'scons' in the SConstruct file directory.
+To compile the program run 'scons' in the SConstruct file directory.
 
 Rest of the libraries will be installed by the SConstruct and provided scripts.
 
 Start the program with the runLinux.sh script on Linux.
 On Windows use runWindows.sh or open cmd and type "set PATH=%PATH%;libraries\SFML-2.5.1\bin" before starting the executable from the same cmd.
+
+Tests:
+To compile the tests run 'scons --build tests' in the SConstruct file directory.
+Start all tests with the runTests.sh.
 
 Note!
 On Windows automatic library installation with scripts works only with PowerShell.

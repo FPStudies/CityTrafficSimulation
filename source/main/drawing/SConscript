@@ -1,4 +1,6 @@
-
+#
+#      Authors: Kordowski Mateusz, Przybysz Filip
+#
 
 Import('env_base')
 Import('binFolder')
@@ -9,19 +11,19 @@ pathToH = '#include/main/drawing/'
 libraryName = 'drawing'
 
 HFilesMain = [
-    'drawable.h',
-    'drawingID.h',
-    'drawSetFactory.h',
+    'Drawable.h',
+    'DrawingID.h',
+    'DrawSetFactory.h',
 ]
 
 HFilesUtility = [
-    'ID.h',
-    'setTemplate.h'
+    'ID.hpp',
+    'DetTemplate.hpp'
 ]
 
 filesCPP = [
-    'drawManager.cpp',
-    'drawManagerBridgeToSets.cpp'
+    'DrawManager.cc',
+    'DrawManagerBridgeToSets.cc'
 ]
 
 

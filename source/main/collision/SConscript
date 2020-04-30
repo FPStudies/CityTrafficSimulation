@@ -1,3 +1,6 @@
+#
+#      Authors: Kordowski Mateusz, Przybysz Filip
+#
 
 Import('env_base')
 Import('binFolder')
@@ -8,18 +11,18 @@ pathToH = '#include/main/collision/'
 libraryName = 'collision'
 
 HFilesMain = [
-    'collisionID.h',
-    'collisionInterface.h',
-    'collisionManager.h',
-    'collisionManagerBridgeToSets.h'
+    'CollisionID.h',
+    'CollisionInterface.h',
+    'CollisionManager.h',
+    'CollisionManagerBridgeToSets.h'
 ]
 
 HFilesUtility = [
-    'ID.h'
+    'ID.hpp'
 ]
 
 filesCPP = [
-    'sensor.cpp'
+    'Sensor.cc'
 ]
 
 filesHMain = [pathToH + x for x in HFilesMain]
