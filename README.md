@@ -1,6 +1,8 @@
 # CityTrafficSimulation
 Simple simulation tool for modeling city traffic.
 
+Authors: Kordowski Mateusz, Przybysz Filip
+
 Installation:
 Program requires Python, Scons, Cmake and the g++(Liux) or CL(Windows) compiler.
 (Linux:
@@ -18,7 +20,7 @@ On Windows use runWindows.sh or open cmd and type "set PATH=%PATH%;libraries\SFM
 
 Tests:
 To compile the tests run 'scons --build tests' in the SConstruct file directory.
-Start all tests with the runTests.sh.
+Start all tests with the runTestsLinux.sh or runTestsWindows.sh.
 
 Note!
 On Windows automatic library installation with scripts works only with PowerShell.

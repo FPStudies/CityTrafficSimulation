@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_DRAW_MANAGER_BRIDGE_TO_SETS_CPP
-#define TRAFFIC_SIM_DRAW_MANAGER_BRIDGE_TO_SETS_CPP
+#ifndef TRAFFIC_SIM_DRAW_MANAGER_BRIDGE_TO_SETS_CC
+#define TRAFFIC_SIM_DRAW_MANAGER_BRIDGE_TO_SETS_CC
 
 #include "DrawManagerBridgeToSets.h"
 

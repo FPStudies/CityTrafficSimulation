@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef GRAPHIC_LIBRARY_FACADE_CPP
-#define GRAPHIC_LIBRARY_FACADE_CPP
+#ifndef GRAPHIC_LIBRARY_FACADE_CC
+#define GRAPHIC_LIBRARY_FACADE_CC
 
 #include "GraphicLibraryFacade.h"
 

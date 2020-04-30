@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_UI_EVENTS_CPP
-#define TRAFFIC_SIM_UI_EVENTS_CPP
+#ifndef TRAFFIC_SIM_UI_EVENTS_CC
+#define TRAFFIC_SIM_UI_EVENTS_CC
 
 #include "UIEvents.h"
 

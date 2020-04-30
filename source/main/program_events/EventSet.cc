@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_EVENT_SET_CPP
-#define TRAFFIC_SIM_EVENT_SET_CPP
+#ifndef TRAFFIC_SIM_EVENT_SET_CC
+#define TRAFFIC_SIM_EVENT_SET_CC
 
 #include "EventSet.h"
 

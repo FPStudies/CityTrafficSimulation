@@ -23,7 +23,8 @@ if sys.platform.startswith('linux'):
         binFolder + 'main/screen/FixedFramerate.o',
         binFolder + 'main/screen/ScreenID.o',
         binFolder + 'main/screen/ScreenManager.o',
-        binFolder + 'main/screen/StartScreen.o'
+        binFolder + 'main/screen/StartScreen.o',
+	'../../bin/BoostTestInclude.o'
     ]
 else:
     objectFiles = [
@@ -31,7 +32,8 @@ else:
         binFolder + 'FixedFramerate.obj',
         binFolder + 'ScreenID.obj',
         binFolder + 'ScreenManager.obj',
-        binFolder + 'StartScreen.obj'
+        binFolder + 'StartScreen.obj',
+	'../../bin/BoostTestInclude.obj'
     ]
 
 CPPFiles = [

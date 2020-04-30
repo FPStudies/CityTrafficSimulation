@@ -1,3 +1,7 @@
+#
+#      Author: Przybysz Filip
+#
+
 wget https://github.com/erincatto/box2d/archive/master.zip -OutFile master.zip
 move-item -path master.zip -destination ..\libraries\master.zip
 cd ..\libraries

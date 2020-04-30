@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_DRAW_SET_FACTORY_CPP
-#define TRAFFIC_SIM_DRAW_SET_FACTORY_CPP
+#ifndef TRAFFIC_SIM_DRAW_SET_FACTORY_CC
+#define TRAFFIC_SIM_DRAW_SET_FACTORY_CC
 
 #include "DrawSetFactory.h"
 

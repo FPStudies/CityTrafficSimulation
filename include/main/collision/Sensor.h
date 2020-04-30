@@ -34,7 +34,7 @@ public:
     bool createFOV(const float& radius, const float& angle, b2World& world);
     bool createSensorSphere(const float& radius, b2World& world);
 
-    bool sensorAwake();
+    const bool sensorAwake();
     void setAwake(bool mode);
 
     /**

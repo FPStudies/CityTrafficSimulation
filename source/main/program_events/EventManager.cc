@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_EVENT_MANAGER_CPP
-#define TRAFFIC_SIM_EVENT_MANAGER_CPP
+#ifndef TRAFFIC_SIM_EVENT_MANAGER_CC
+#define TRAFFIC_SIM_EVENT_MANAGER_CC
 
 #include "EventManager.h"
 #include <iostream>
@@ -142,7 +142,7 @@ bool EventManager::ifElementMapExist(const std::string& name){
 
 bool EventManager::remove(const std::string& name){
     Map::iterator it;
-    if(ifElementMapExist(name, it)) return true;
+    if(!ifElementMapExist(name, it)) return true;
 
     for(List::iterator l = events_sorted_list_.begin(); l !=events_sorted_list_.end(); ++l){
         if(*l == it->second) {
@@ -157,7 +157,7 @@ bool EventManager::remove(const std::string& name){
 
 bool EventManager::remove(const std::string& name, const std::shared_ptr<EventInterface>& event_object){
     Map::iterator it;
-    if(ifElementMapExist(name, it)) return true;
+    if(!ifElementMapExist(name, it)) return true;
 
     for(List::iterator l = events_sorted_list_.begin(); l !=events_sorted_list_.end(); ++l){
         if(*l == it->second) {
