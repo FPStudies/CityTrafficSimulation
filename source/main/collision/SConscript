@@ -30,6 +30,10 @@ filesHUtil = [pathToUtility + x for x in HFilesUtility]
 
 env = env_base.Clone()
 
-env.Append(CPPPATH = pathToH)
+env.Append(
+    CPPPATH = [
+        pathToH
+        ],
+)
 
-env.SharedLibrary(libraryPath + libraryName, filesCPP)
+env.StaticLibrary(libraryPath + libraryName, filesCPP)

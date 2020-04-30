@@ -22,7 +22,8 @@ SFMLLibraries = [
 programLibraries = [
     'events', 
     'screenLib', 
-    'drawing'
+    'drawing',
+    'collision'
 ]
 
 externalLibraries = [

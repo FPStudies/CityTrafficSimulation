@@ -162,6 +162,13 @@ SConscript(
     )
 
 SConscript(
+    'source/main/collision/SConscript', 
+    exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
+    variant_dir = binFolder + 'main/collision', 
+    duplicate=0
+    )
+
+SConscript(
     'source/main/program_events/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
     variant_dir = binFolder + 'main/program_events', 

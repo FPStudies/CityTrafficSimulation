@@ -12,7 +12,12 @@ Import('sys')
 SConscript(
     'main/screen/SConscript', 
     exports = ['env_base', 'libraryPath', 'testsFolder', 'pathToBox2DHeaders', 'sys'], 
-    #variant_dir= testsFolder,
+    duplicate=0
+    )
+
+SConscript(
+    'main/collision/SConscript', 
+    exports = ['env_base', 'libraryPath', 'testsFolder', 'pathToBox2DHeaders', 'sys'], 
     duplicate=0
     )
 

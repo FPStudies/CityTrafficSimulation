@@ -7,7 +7,7 @@
 #ifndef TRAFFIC_SIM_COLLISION_ID_H
 #define TRAFFIC_SIM_COLLISION_ID_H
 
-#include "../utility/ID.h"
+#include "../utility/ID.hpp"
 
 class CollisionID: virtual public ID<CollisionID>{
 
