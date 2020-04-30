@@ -7,7 +7,7 @@
 #ifndef TRAFFIC_SIM_SENSOR_CPP
 #define TRAFFIC_SIM_SENSOR_CPP
 
-
+#include "CollisionInterface.h"
 #include "Sensor.h"
 
 const float Sensor::VERTICES_PER_2PI = 0.1;
@@ -16,23 +16,25 @@ Sensor::Sensor()
 : static_body_(nullptr), fixture_(nullptr), is_active_(true), created_(false)
 {}
 
+Sensor::~Sensor() {};
+
 void Sensor::setPropertiesAndCreate(b2BodyDef& body_def, b2FixtureDef& fixture_def, b2World& world){
-    body_def.type_ = b2_static_body_;
-    body_def.allow_sleep_ = false;
-    body_def.awake_ = true;
-    body_def.fixed_rotation_ = true;
-    body_def.gravity_scale_ = 0.0f;
+    body_def.type = b2_staticBody;
+    body_def.allowSleep = false;
+    body_def.awake = true;
+    body_def.fixedRotation = true;
+    body_def.gravityScale = 0.0f;
     
-    fixture_def.is_sensor_ = true;
-    fixture_def.filter_.category_bits_ = 0x0001;
-    fixture_def.filter_.mask_bits_ = 0x0002;
+    fixture_def.isSensor = true;
+    fixture_def.filter.categoryBits = 0x0001;
+    fixture_def.filter.maskBits = 0x0002;
 
     static_body_ = world.CreateBody(&body_def);
     fixture_ = static_body_->CreateFixture(&fixture_def);
 }
 
 bool Sensor::createFOV(const float& radius, const float& angle, b2World& world){
-    if(created) return true;
+    if(created_) return true;
 
     b2BodyDef body_def;
     b2PolygonShape polygon_shape;
@@ -56,12 +58,12 @@ bool Sensor::createFOV(const float& radius, const float& angle, b2World& world){
 
     delete[] vertices;
 
-    created = true;
+    created_ = true;
     return false;
 }
 
 bool Sensor::createSensorSphere(const float& radius, b2World& world){
-    if(created) return true;
+    if(created_) return true;
 
     b2BodyDef body_def;
     b2CircleShape circle_shape;
@@ -71,30 +73,30 @@ bool Sensor::createSensorSphere(const float& radius, b2World& world){
     fixture_def.shape = &circle_shape;
     setPropertiesAndCreate(body_def, fixture_def, world);
 
-    created = true;
+    created_ = true;
     return false;
 }
 
 bool Sensor::setObjectInterface(CollisionInterface& interface){
-    if(!created) return true;
-    staticBody->SetUserData(&interface);
+    if(!created_) return true;
+    static_body_->SetUserData(&interface);
 
     return false;
 }
 
  bool Sensor::sensorAwake(){
-     if(!created) return false;
-     return staticBody->IsEnabled();
+     if(!created_) return false;
+     return static_body_->IsEnabled();
  }
 
  void Sensor::setAwake(bool mode){
-     if(!created) return;
-     staticBody->SetAwake(mode);
+     if(!created_) return;
+     static_body_->SetAwake(mode);
  }
 
 CollisionInterface* Sensor::getInterface(){
-    if(!created) return nullptr;
-    return static_cast<CollisionInterface*>(staticBody->GetUserData());
+    if(!created_) return nullptr;
+    return static_cast<CollisionInterface*>(static_body_->GetUserData());
 }
 
 #endif

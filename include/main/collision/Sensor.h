@@ -11,7 +11,9 @@
 #include <memory>
 #include <box2d/box2d.h>
 
-#include "CollisionInterface.h"
+//#include "CollisionInterface.h"
+
+class CollisionInterface; //circural dependency workaround 
 
 class Sensor{
     b2Body* static_body_; // world will delete body

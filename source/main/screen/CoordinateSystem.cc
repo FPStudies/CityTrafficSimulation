@@ -107,6 +107,12 @@ CoordinateSystem& CoordinateSystem::operator=(CoordinateSystem&& other) {
     return *this;
 }
 
+/*bool CoordinateSystem::operator==(const CoordinateSystem& one, const CoordinateSystem& other) {
+    return (one.relative_X_ == other.relative_X_ && one.relative_Y_ == other.relative_Y_ &&
+    one.reverse_X_ == other.reverse_X_ && one.reverse_Y_ == other.reverse_Y_ &&
+    one.name_from_ == other.name_from_ && one.name_to_ == other.name_to_);
+}*/
+
 std::string CoordinateSystem::getNameFrom() const{
     return name_from_;
 }

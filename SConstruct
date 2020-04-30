@@ -1,6 +1,22 @@
 #
 #      Authors: Kordowski Mateusz, Przybysz Filip
 #
+#add build tests option
+AddOption(
+    '--build',
+    dest='build_option',
+    type='string',
+    nargs=1,
+    action='store',
+    help='choosing to build <program> or <tests>',
+    default='program'
+    )
+#wrong --build value
+if (GetOption('build_option') != 'program') and (GetOption('build_option') != 'tests'):
+    print('Error: Unknown --build option\n')
+    Exit(1)
+
+
 print('..Scons Environment Setup\n')
 
 import sys
@@ -15,6 +31,7 @@ pathToBox2DHeaders = '#libraries/box2d-master/include/'
 pathToBox2DLibrary = '#libraries/box2d-master/build/src/'
 
 binFolder = '#bin/'
+testsFolder = '#tests/bin/'
 pathToUtility = '#include/main/utility/'
 libraryPath = binFolder + 'libs/'
 programName = 'hello'
@@ -145,6 +162,13 @@ SConscript(
     )
 
 SConscript(
+    'source/main/collision/SConscript', 
+    exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
+    variant_dir = binFolder + 'main/collision', 
+    duplicate=0
+    )
+
+SConscript(
     'source/main/program_events/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
     variant_dir = binFolder + 'main/program_events', 
@@ -175,12 +199,20 @@ SConscript(
 
 #hello = env.Program(target = 'hello', source = ['source/main/main.cpp', 'source/main/renderLoop.cpp', 'build/graphic_library_facade/graphicLibraryFacade.o'])
 
-SConscript(
-    'source/main/SConscript', 
-    exports = ['env_base', 'libraryPath', 'programName', 'programPath', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
-    variant_dir= binFolder + 'main', 
-    duplicate=0
-    )
+if (GetOption('build_option') == 'program'):
+    SConscript(
+        'source/main/SConscript', 
+        exports = ['env_base', 'libraryPath', 'programName', 'programPath', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
+        variant_dir= binFolder + 'main', 
+        duplicate=0
+        )
+elif (GetOption('build_option') == 'tests'):
+    SConscript(
+        '#tests/SConscript', 
+        exports = ['env_base', 'libraryPath', 'testsFolder', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
+        variant_dir= testsFolder, 
+        duplicate=0
+        )
 
 #the install option
 #env.Install('usr/bin/scontest', hello)

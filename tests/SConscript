@@ -1,2 +1,53 @@
+#
+#      Author: Przybysz Filip
+#
 
 Import('env_base')
+Import('libraryPath')
+Import('testsFolder')
+Import('binFolder')
+Import('pathToBox2DHeaders')
+Import('sys')
+
+env_tests = env_base.Clone();
+
+testLibraries = [
+    'box2d',
+    'sfml-graphics',
+    'sfml-window',
+    'sfml-system',
+    'events', 
+    'screenLib', 
+    'drawing',
+    'collision'
+]
+
+env_tests.Append(
+LIBS = [
+        testLibraries
+    ],
+
+LIBPATH = [
+        libraryPath
+    ]
+)
+
+#compile tests
+SConscript(
+    'main/screen/SConscript', 
+    exports = ['env_tests', 'libraryPath', 'testsFolder', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
+    duplicate=0
+    )
+
+SConscript(
+    'main/program_events/SConscript', 
+    exports = ['env_tests', 'libraryPath', 'testsFolder', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
+    duplicate=0
+    )
+
+SConscript(
+    'main/collision/SConscript', 
+    exports = ['env_tests', 'libraryPath', 'testsFolder', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
+    duplicate=0
+    )
+

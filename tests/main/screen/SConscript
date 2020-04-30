@@ -1,0 +1,43 @@
+#
+#      Authors: Kordowski Mateusz, Przybysz Filip
+#
+Import('env_tests')
+Import('binFolder')
+Import('sys')
+
+pathToH = '#include/main/screen'
+
+env = env_tests.Clone()
+
+env.Append(
+    CPPPATH = [
+        '#libraries/boost_1_72_0',
+        pathToH
+    ]
+)
+
+#static libraries "undefined" error workaround
+if sys.platform.startswith('linux'):
+    objectFiles = [
+        binFolder + 'main/screen/CoordinateSystem.o',
+        binFolder + 'main/screen/FixedFramerate.o',
+        binFolder + 'main/screen/ScreenID.o',
+        binFolder + 'main/screen/ScreenManager.o',
+        binFolder + 'main/screen/StartScreen.o'
+    ]
+else:
+    objectFiles = [
+        binFolder + 'CoordinateSystem.obj',
+        binFolder + 'FixedFramerate.obj',
+        binFolder + 'ScreenID.obj',
+        binFolder + 'ScreenManager.obj',
+        binFolder + 'StartScreen.obj'
+    ]
+
+CPPFiles = [
+    'ScreenTests.cc'
+]
+
+
+env.Program(target = "ScreenTests", source = CPPFiles + objectFiles)
+
