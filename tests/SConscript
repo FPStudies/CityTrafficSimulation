@@ -1,5 +1,18 @@
 #
-#      Author: Kordowski Mateusz
+#      Author: Przybysz Filip
 #
 
 Import('env_base')
+Import('libraryPath')
+Import('testsFolder')
+Import('pathToBox2DHeaders')
+Import('sys')
+
+#compile tests
+SConscript(
+    'main/screen/SConscript', 
+    exports = ['env_base', 'libraryPath', 'testsFolder', 'pathToBox2DHeaders', 'sys'], 
+    #variant_dir= testsFolder,
+    duplicate=0
+    )
+

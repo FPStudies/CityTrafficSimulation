@@ -4,13 +4,14 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef ZPR_TRAFFIC_SIM_BOOST_TEST_SCREEN_CPP
-#define ZPR_TRAFFIC_SIM_BOOST_TEST_SCREEN_CPP
+#ifndef TRAFFIC_SIM_BOOST_TEST_SCREEN_CPP
+#define TRAFFIC_SIM_BOOST_TEST_SCREEN_CPP
 
-#define BOOST_TEST_DYN_LINK
+//#define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE Screen
 
 #include <boost/test/unit_test.hpp>
+#include <boost/test/included/unit_test_framework.hpp>
 
 #include "CoordinateSystem.h"
 #include "FixedFramerate.h"
@@ -20,7 +21,7 @@
 #include "ScreenManager.h"
 #include "StartScreen.h"
 
-int dodaj( int i, int j )
+/*int dodaj( int i, int j )
 {
     return i + j;
 }
@@ -28,9 +29,9 @@ int dodaj( int i, int j )
 BOOST_AUTO_TEST_CASE( testDodaj )
 {
     BOOST_CHECK( dodaj( 2, 2 ) == 4 );
-}
+}*/
 
-BOOST_AUTO_TEST_CASE(CoordinateTest){
+/*BOOST_AUTO_TEST_CASE(CoordinateTest){
     auto& set = CoordinateSystemSet::getInstance();
     set.addNewSystem(0.0f, 0.0f, false, true, "basic", "one");
     set.addNewSystem(-7.0f, 5.0f, true, false, "basic", "two");
@@ -47,6 +48,22 @@ BOOST_AUTO_TEST_CASE(CoordinateTest){
     auto three_rev = set.getReverse("three");
     auto four_rev = set.getReverse("four");
 
+}*/
+
+BOOST_AUTO_TEST_CASE(coordinate_system_constructor_test){
+        auto& set = CoordinateSystemSet::getInstance();
+        set.addNewSystem(0.0f, 0.0f, false, true, "basic", "one");
+        auto base_system = set.get("one");
+
+        BOOST_REQUIRE( base_system.getNameFrom() == "basic" and base_system.getNameTo() == "one");
+
+        CoordinateSystem copy_system(base_system);
+
+        BOOST_REQUIRE( base_system.getNameFrom() == copy_system.getNameFrom());
+
+        CoordinateSystem move_system(std::move(base_system));
+
+        BOOST_CHECK( move_system.getNameFrom() == copy_system.getNameFrom() and base_system.getNameTo().length() == 0);
 }
 
 

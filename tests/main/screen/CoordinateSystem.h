@@ -82,7 +82,6 @@ public:
     CoordinateSystem(const CoordinateSystem& other);
     CoordinateSystem(CoordinateSystem&& other);
     CoordinateSystem& operator=(CoordinateSystem&& other);
-    //friend bool operator==(const CoordinateSystem& one, const CoordinateSystem& other);
 
     std::pair<CoordType, CoordType> translate(const CoordType& x, const CoordType& y) const;
     CoordType translateX(const CoordType& x) const;

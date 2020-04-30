@@ -1,9 +1,49 @@
 #
-#      Author: Kordowski Mateusz
+#      Authors: Kordowski Mateusz, Przybysz Filip
 #
-Import('test_env')
+Import('env_base')
+Import('libraryPath')
+Import('testsFolder')
+Import('pathToBox2DHeaders')
+Import('sys')
 
-CPPFiles = Glob('*.cc')
+pathToH = '#include/main/screen'
 
-test_env.Program("../../bin/screenTests", CPPFiles)
+#testLibraries = [
+#    'boost-system',
+#    'boost-thread',
+#    'boost_unit_test_framework'
+#]
+
+programLibraries = [
+    'events', 
+    'screenLib', 
+    'drawing'
+]
+
+env = env_base.Clone()
+
+env.Append(
+    CPPPATH = [
+        '#libraries/boost_1_72_0',
+	pathToH
+    ],
+
+    LIBS = [
+    #    testLibraries,
+        programLibraries
+    ],
+
+    #LINKFLAGS = [
+    #    '-Wl,-Bdynamic'
+    #],
+
+    LIBPATH = [
+        libraryPath
+    ]
+)
+
+CPPFiles = 'ScreenTests.cc'
+
+env.Program("screenTests", CPPFiles)
 
