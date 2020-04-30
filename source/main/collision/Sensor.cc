@@ -84,7 +84,7 @@ bool Sensor::setObjectInterface(CollisionInterface& interface){
     return false;
 }
 
- bool Sensor::sensorAwake(){
+ const bool Sensor::sensorAwake(){
      if(!created_) return false;
      return static_body_->IsEnabled();
  }

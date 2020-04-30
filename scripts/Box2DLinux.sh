@@ -1,3 +1,7 @@
+#
+#      Author: Przybysz Filip
+#
+
 wget -O master.zip https://github.com/erincatto/box2d/archive/master.zip
 mv master.zip ../libraries/master.zip
 cd ../libraries
