@@ -10,6 +10,7 @@
 #define BOOST_TEST_MODULE Screen
 
 #include <boost/test/included/unit_test.hpp>
+#include <memory>
 
 #include "CoordinateSystem.h"
 #include "FixedFramerate.h"
@@ -28,6 +29,10 @@ CoordinateSystemSet& createCoordinateSystem(){
     set.addNewSystem(-10.0f, 4.0f, true, false, "three", "five");
 
     return set;
+}
+
+std::unique_ptr<FixedFramerate> createFixedFramerate(const float& FPS){
+    return std::make_unique<FixedFramerate>(FPS);
 }
 
 
@@ -123,6 +128,96 @@ BOOST_AUTO_TEST_CASE(coordinate_system_calculation){
     BOOST_CHECK_CLOSE(fiveRev.translateY(-56), -52, 0.01);
 }
 
+BOOST_AUTO_TEST_CASE(fixed_framerate_constructor){
+    auto fr = createFixedFramerate(60);
+    auto fr2 = createFixedFramerate(60);
+    
+    fr->setPoint();
+    fr2->setPoint();
+
+    fr->checkTime();
+    fr2->checkTime();
+
+    FixedFramerate test1(*fr);
+    FixedFramerate test2(*fr2);
+
+    BOOST_REQUIRE_CLOSE(test1.getRealDiff(), test2.getRealDiff(), 0.001);
+    BOOST_REQUIRE_CLOSE(test1.getFramerate(), test2.getFramerate(), 0.001);
+    BOOST_REQUIRE(test1.getRealFramerate() == test2.getRealFramerate());
+
+    FixedFramerate test3 = std::move(test1);
+    FixedFramerate test4 = std::move(test2);
+
+    BOOST_REQUIRE_CLOSE(test1.getRealDiff(), test2.getRealDiff(), 0.001);
+    BOOST_REQUIRE_CLOSE(test1.getFramerate(), test2.getFramerate(), 0.001);
+    BOOST_REQUIRE(test1.getRealFramerate() == test2.getRealFramerate());
+
+    FixedFramerate test5(std::move(test3));
+    FixedFramerate test6(std::move(test4));
+
+    BOOST_REQUIRE_CLOSE(test1.getRealDiff(), test2.getRealDiff(), 0.001);
+    BOOST_REQUIRE_CLOSE(test1.getFramerate(), test2.getFramerate(), 0.001);
+    BOOST_REQUIRE(test1.getRealFramerate() == test2.getRealFramerate());
+
+}
+
+BOOST_AUTO_TEST_CASE(fixed_framerate_time){
+    auto fr = createFixedFramerate(60);
+    auto fr2 = createFixedFramerate(30);
+    fr->setFramerate(30);
+
+    BOOST_CHECK_CLOSE(fr->getFramerate(), 1.0 / 30.0, 0.01);
+    fr->setPoint();
+    fr2->setPoint();
+
+    fr->checkTime();
+    fr2->checkTime();
+
+    BOOST_CHECK_CLOSE(fr->getRealDiff(), fr2->getRealDiff(), 0.04);
+    
+    fr->reset();
+    fr2->reset();
+
+    fr->setFramerate(64);
+    fr2->setFramerate(64);
+
+    fr->checkTime();
+    fr2->checkTime();
+
+    fr->checkTime();
+    fr2->checkTime();
+
+    BOOST_CHECK(fr->getRealFramerate() == 0);
+    BOOST_CHECK(fr->getRealFramerate() == fr2->getRealFramerate());
+
+
+}
+
+BOOST_AUTO_TEST_CASE(screen_ID){
+    ScreenID id;
+    StartScreen newScreen;
+
+    BOOST_CHECK(id.isValid() == false);
+    BOOST_CHECK(newScreen.getID().isValid() == true);
+
+    ScreenID newID(newScreen.getID());
+    BOOST_CHECK(newID.isValid() == true);
+    BOOST_CHECK(*newID == *(newScreen.getID()));
+}
+
+BOOST_AUTO_TEST_CASE(screen_manager_start_screen){
+    ScreenManager manager;
+    std::shared_ptr<StartScreen> screen = std::make_shared<StartScreen>();
+
+    manager.addScreen(screen, "test");
+
+    BOOST_CHECK(manager.getScreenID("test") == screen->getID());
+
+    auto id = manager.getScreenID("test");
+
+    BOOST_CHECK(manager.getScreenName(id) == "test");
+
+}
 
 
 #endif 

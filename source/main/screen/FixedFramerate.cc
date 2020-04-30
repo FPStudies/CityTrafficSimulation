@@ -78,7 +78,7 @@ void FixedFramerate::checkTime(){
 }
 
 void FixedFramerate::setFramerate(const Framerate& framerate){
-    set_frame_ = framerate;
+    set_frame_ = 1.0 / framerate;
 }
 
 void FixedFramerate::setPoint(){
