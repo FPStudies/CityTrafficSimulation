@@ -12,9 +12,14 @@ Import('sys')
 env_tests = env_base.Clone();
 
 testLibraries = [
+    'box2d',
+    'sfml-graphics',
+    'sfml-window',
+    'sfml-system',
     'events', 
     'screenLib', 
-    'drawing'
+    'drawing',
+    'collision'
 ]
 
 env_tests.Append(
@@ -30,6 +35,12 @@ LIBPATH = [
 #compile tests
 SConscript(
     'main/screen/SConscript', 
+    exports = ['env_tests', 'libraryPath', 'testsFolder', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
+    duplicate=0
+    )
+
+SConscript(
+    'main/program_events/SConscript', 
     exports = ['env_tests', 'libraryPath', 'testsFolder', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
     duplicate=0
     )

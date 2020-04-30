@@ -2,51 +2,21 @@
 #      Authors: Kordowski Mateusz, Przybysz Filip
 #
 Import('env_tests')
-Import('libraryPath')
-Import('testsFolder')
 Import('binFolder')
-Import('pathToBox2DHeaders')
 Import('sys')
 
 pathToH = '#include/main/screen'
-
-#testLibraries = [
-#    'boost-system',
-#    'boost-thread',
-#    'boost_unit_test_framework'
-#]
-
-programLibraries = [
-    'box2d',
-    'sfml-graphics.so',
-    'sfml-window.so',
-    'sfml-system.so',
-    'events', 
-    #'screenLib', 
-    'drawing',
-    'collision'
-]
 
 env = env_tests.Clone()
 
 env.Append(
     CPPPATH = [
         '#libraries/boost_1_72_0',
-	    pathToH
-    ],
-
-    LIBS = [
-    #    testLibraries,
-        programLibraries
-    ],
-
-    LINKFLAGS = [
-    #    '-Wl,-Bdynamic',
-    #    '-static'
-    ],
-
+        pathToH
+    ]
 )
 
+#static libraries "undefined" error workaround
 if sys.platform.startswith('linux'):
     objectFiles = [
         binFolder + 'main/screen/CoordinateSystem.o',
@@ -64,8 +34,10 @@ else:
         binFolder + 'StartScreen.obj'
     ]
 
-CPPFiles = ['ScreenTests.cc']
+CPPFiles = [
+    'ScreenTests.cc'
+]
 
 
-env.Program(target = "screen/ScreenTests", source = CPPFiles + objectFiles)
+env.Program(target = "ScreenTests", source = CPPFiles + objectFiles)
 

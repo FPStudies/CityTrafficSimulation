@@ -1,44 +1,41 @@
 #
 #      Author: Kordowski Mateusz
 #
-Import('env_base')
-Import('libraryPath')
-Import('testsFolder')
-Import('pathToBox2DHeaders')
+Import('env_tests')
+Import('binFolder')
 Import('sys')
 
 pathToH = '#include/main/program_events'
 
-#testLibraries = [
-#    'boost-system',
-#    'boost-thread',
-#    'boost_unit_test_framework'
-#]
-
-programLibraries = [
-    'events', 
-    'screenLib', 
-    'drawing'
-]
-
-env = env_base.Clone()
+env = env_tests.Clone()
 
 env.Append(
     CPPPATH = [
         '#libraries/boost_1_72_0',
-	    pathToH
-    ],
-
-    LIBS = [
-        programLibraries
-    ],
-
-    LIBPATH = [
-        libraryPath
+        pathToH
     ]
 )
 
-CPPFiles = 'eventsTest.cc'
+#static libraries "undefined" error workaround
+if sys.platform.startswith('linux'):
+    objectFiles = [
+        binFolder + 'main/program_events/BasicEvents.o',
+        binFolder + 'main/program_events/EventManager.o',
+        binFolder + 'main/program_events/EventSet.o',
+        binFolder + 'main/program_events/UIEvents.o'
+    ]
+else:
+    objectFiles = [
+        binFolder + 'main/program_events/BasicEvents.obj',
+        binFolder + 'main/program_events/EventManager.obj',
+        binFolder + 'main/program_events/EventSet.obj',
+        binFolder + 'main/program_events/UIEvents.obj'
+    ]
 
 
-env.Program("events/eventsTest", CPPFiles)
+CPPFiles = [
+    'eventsTest.cc'
+]
+
+
+env.Program(target = "EventsTest", source = CPPFiles + objectFiles)
