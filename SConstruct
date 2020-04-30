@@ -56,7 +56,8 @@ if sys.platform.startswith('linux'):
             ],
         LIBPATH = [
             pathToSFMLLibraries,
-            pathToBox2DLibrary
+            pathToBox2DLibrary,
+            pathToBoostLibraries
             ]
     )
     env_base.PrependENVPath('PATH', os.environ['PATH'])
@@ -77,7 +78,8 @@ elif sys.platform.startswith('win'):
         LIBPATH = [
             pathToSFMLLibraries,
             pathToBox2DLibrary,
-            pathToBox2DLibrary + 'Release'
+            pathToBox2DLibrary + 'Release',
+            pathToBoostLibraries
             ]
     )
     env_base.PrependENVPath('PATH', os.environ['PATH'])
@@ -208,6 +210,22 @@ if (GetOption('build_option') == 'program'):
         duplicate=0
         )
 elif (GetOption('build_option') == 'tests'):
+
+    #check for libboost_test installation
+    if not env_base.GetOption('clean'):
+        if sys.platform.startswith('linux'):
+
+            if not conf.CheckLib('libboost_test_exec_monitor'):
+                print 'libboost not installed\n'
+                subprocess.call(['./BoostInstallLinux.sh'], shell=True, cwd = 'scripts')
+
+        else:
+
+            if not conf.CheckLib('libboost_test_exec_monitor-vc142-mt-x64-1_72'):
+                print 'libboost not installed\n'
+                subprocess.call(['powershell.exe', '.\BoostInstallWin.ps1'], shell=True, cwd = 'scripts')
+
+
     SConscript(
         '#tests/SConscript', 
         exports = ['env_base', 'libraryPath', 'binFolder', 'pathToBoostLibraries', 'sys'], 
