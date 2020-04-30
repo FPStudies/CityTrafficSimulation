@@ -16,15 +16,12 @@ env.Append(
     ]
 )
 
-#static libraries "undefined" error workaround
 if sys.platform.startswith('linux'):
     objectFiles = [
-        binFolder + 'main/collision/Sensor.o',
 	'../../bin/BoostTestInclude.o'
     ]
 else:
     objectFiles = [
-        binFolder + 'main/collision/Sensor.obj',
 	'../../bin/BoostTestInclude.obj'
     ]
 

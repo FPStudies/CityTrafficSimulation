@@ -10,14 +10,14 @@ Import('sys')
 env_tests = env_base.Clone();
 
 testLibraries = [
-    'box2d',
+    'screenLib',
+    'events', 
+    'drawing',
+    'collision',
     'sfml-graphics',
     'sfml-window',
     'sfml-system',
-    'events', 
-    'screenLib', 
-    'drawing',
-    'collision'
+    'box2d'
 ]
 
 env_tests.Append(
@@ -30,6 +30,7 @@ LIBPATH = [
     ]
 )
 
+#object for faster compilation
 env_tests.Object(target = 'BoostTestInclude', source = 'BoostTestInclude.cc')
 
 #compile tests

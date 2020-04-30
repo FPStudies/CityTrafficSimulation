@@ -16,21 +16,12 @@ env.Append(
     ]
 )
 
-#static libraries "undefined" error workaround
 if sys.platform.startswith('linux'):
     objectFiles = [
-        binFolder + 'main/program_events/BasicEvents.o',
-        binFolder + 'main/program_events/EventManager.o',
-        binFolder + 'main/program_events/EventSet.o',
-        binFolder + 'main/program_events/UIEvents.o',
 	'../../bin/BoostTestInclude.o'
     ]
 else:
     objectFiles = [
-        binFolder + 'main/program_events/BasicEvents.obj',
-        binFolder + 'main/program_events/EventManager.obj',
-        binFolder + 'main/program_events/EventSet.obj',
-        binFolder + 'main/program_events/UIEvents.obj',
 	'../../bin/BoostTestInclude.obj'
     ]
 

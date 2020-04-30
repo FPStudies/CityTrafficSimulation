@@ -61,7 +61,7 @@ env.Append(
         pathToH
         ],
 
-        LIBS = SFMLLibraries + programLibraries + externalLibraries,
+        LIBS = programLibraries + SFMLLibraries + externalLibraries,
 
         LIBPATH = [
             libraryPath
