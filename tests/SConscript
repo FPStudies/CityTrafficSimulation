@@ -5,19 +5,20 @@
 Import('env_base')
 Import('libraryPath')
 Import('testsFolder')
+Import('binFolder')
 Import('pathToBox2DHeaders')
 Import('sys')
 
 #compile tests
 SConscript(
     'main/screen/SConscript', 
-    exports = ['env_base', 'libraryPath', 'testsFolder', 'pathToBox2DHeaders', 'sys'], 
+    exports = ['env_base', 'libraryPath', 'testsFolder', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
     duplicate=0
     )
 
 SConscript(
     'main/collision/SConscript', 
-    exports = ['env_base', 'libraryPath', 'testsFolder', 'pathToBox2DHeaders', 'sys'], 
+    exports = ['env_base', 'libraryPath', 'testsFolder', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
     duplicate=0
     )
 
