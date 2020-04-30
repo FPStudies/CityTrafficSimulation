@@ -1,7 +1,7 @@
 #
 #      Authors: Kordowski Mateusz, Przybysz Filip
 #
-Import('env_base')
+Import('env_tests')
 Import('libraryPath')
 Import('testsFolder')
 Import('binFolder')
@@ -27,7 +27,7 @@ programLibraries = [
     'collision'
 ]
 
-env = env_base.Clone()
+env = env_tests.Clone()
 
 env.Append(
     CPPPATH = [
@@ -45,9 +45,6 @@ env.Append(
     #    '-static'
     ],
 
-    LIBPATH = [
-        libraryPath
-    ]
 )
 
 if sys.platform.startswith('linux'):
@@ -70,5 +67,5 @@ else:
 CPPFiles = ['ScreenTests.cc']
 
 
-env.Program(target = "ScreenTests", source = CPPFiles + objectFiles)
+env.Program(target = "screen/ScreenTests", source = CPPFiles + objectFiles)
 

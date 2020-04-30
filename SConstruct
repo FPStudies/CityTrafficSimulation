@@ -31,7 +31,7 @@ pathToBox2DHeaders = '#libraries/box2d-master/include/'
 pathToBox2DLibrary = '#libraries/box2d-master/build/src/'
 
 binFolder = '#bin/'
-testsFolder = '#tests/bin'
+testsFolder = '#tests/bin/'
 pathToUtility = '#include/main/utility/'
 libraryPath = binFolder + 'libs/'
 programName = 'hello'
@@ -208,7 +208,7 @@ if (GetOption('build_option') == 'program'):
         )
 elif (GetOption('build_option') == 'tests'):
     SConscript(
-        '#tests/main/screen/SConscript', 
+        '#tests/SConscript', 
         exports = ['env_base', 'libraryPath', 'testsFolder', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
         variant_dir= testsFolder, 
         duplicate=0

@@ -9,16 +9,34 @@ Import('binFolder')
 Import('pathToBox2DHeaders')
 Import('sys')
 
+env_tests = env_base.Clone();
+
+testLibraries = [
+    'events', 
+    'screenLib', 
+    'drawing'
+]
+
+env_tests.Append(
+LIBS = [
+        testLibraries
+    ],
+
+LIBPATH = [
+        libraryPath
+    ]
+)
+
 #compile tests
 SConscript(
     'main/screen/SConscript', 
-    exports = ['env_base', 'libraryPath', 'testsFolder', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
+    exports = ['env_tests', 'libraryPath', 'testsFolder', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
     duplicate=0
     )
 
 SConscript(
     'main/collision/SConscript', 
-    exports = ['env_base', 'libraryPath', 'testsFolder', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
+    exports = ['env_tests', 'libraryPath', 'testsFolder', 'binFolder', 'pathToBox2DHeaders', 'sys'], 
     duplicate=0
     )
 
