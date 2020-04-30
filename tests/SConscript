@@ -5,7 +5,6 @@
 Import('env_base')
 Import('libraryPath')
 Import('binFolder')
-Import('pathToBoostLibraries')
 Import('sys')
 
 env_tests = env_base.Clone();
@@ -27,8 +26,7 @@ LIBS = [
     ],
 
 LIBPATH = [
-        libraryPath,
-        pathToBoostLibraries
+        libraryPath
     ]
 )
 

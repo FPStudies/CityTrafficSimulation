@@ -28,7 +28,7 @@ BOOST_AUTO_TEST_CASE(basic_events_methods){
     BOOST_CHECK(copy_2->equals(event) == true);
 }
 
-BOOST_AUTO_TEST_CASE(UI_events_check){
+BOOST_AUTO_TEST_CASE(UI_events_methods){
     UIEvents event;
     auto copy = event.clone();
 
