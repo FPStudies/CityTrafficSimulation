@@ -9,5 +9,5 @@ unzip -q master.zip
 rm master.zip
 mv box2d-5ae818e95ddd09622bad4fd295311ca4706ad2b2 box2d-master
 cd box2d-master
-premake gmake
+premake5 gmake
 make -C Build

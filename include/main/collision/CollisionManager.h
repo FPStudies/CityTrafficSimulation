@@ -9,7 +9,7 @@
 
 #include <memory>
 #include <vector>
-#include <Box2d/Box2d.h>
+#include <Box2D/Box2D.h>
 
 #include "CollisionInterface.h"
 

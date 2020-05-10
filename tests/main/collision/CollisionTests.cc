@@ -17,7 +17,7 @@
 #include "CollisionManager.h"
 #include "CollisionInterface.h"
 #include "CollisionID.h"
-#include <Box2d/Box2d.h>
+#include <Box2D/Box2D.h>
 
 BOOST_AUTO_TEST_CASE(collision_sensor_creation_test){
 
