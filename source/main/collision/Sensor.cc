@@ -90,7 +90,8 @@ bool Sensor::setObjectInterface(CollisionInterface& interface){
  const bool Sensor::sensorAwake(){
     if(!created_)
         return false;
-     return static_body_->IsEnabled(); //might not work
+     //return static_body_->IsEnabled(); //does not work with earlier Box2D versions
+    return true; //TODO: placeholder - needs changing later
  }
 
  void Sensor::setAwake(bool mode){

@@ -28,8 +28,8 @@ pathToBoostHeaders = '#libraries/boost_1_72_0/'
 pathToBoostLibraries = '#libraries/boost_1_72_0/stage/lib/'
 pathToSFMLHeaders = '#libraries/SFML-2.5.1/include/'
 pathToSFMLLibraries = '#libraries/SFML-2.5.1/lib/'
-pathToBox2DHeaders = '#libraries/box2d-master/include/'
-pathToBox2DLibrary = '#libraries/box2d-master/build/src/'
+pathToBox2DHeaders = '#libraries/box2d-master/'
+pathToBox2DLibrary = '#libraries/box2d-master/Build/bin/'
 
 binFolder = '#bin/'
 testsFolder = '#tests/bin/'
@@ -78,9 +78,14 @@ elif sys.platform.startswith('win'):
         LIBPATH = [
             pathToSFMLLibraries,
             pathToBox2DLibrary,
-            pathToBox2DLibrary + 'Release',
+            pathToBox2DLibrary + 'x86/Release',
             pathToBoostLibraries
-            ]
+            ],
+        tools = [
+            'msvc',
+            'mslink',
+            'mslib'
+        ]
     )
     env_base.PrependENVPath('PATH', os.environ['PATH'])
 
@@ -116,7 +121,7 @@ if not env_base.GetOption('clean'):
         else:
             print( 'SFML found\n')
 
-        if not conf.CheckLib('Box2D'):
+        if not conf.CheckCXXHeader('Box2d/Box2D.h'):
             print( 'Box2D not found\n')
             subprocess.call(['./Box2DLinux.sh'], shell=True, cwd = 'scripts')
         else:
@@ -125,21 +130,21 @@ if not env_base.GetOption('clean'):
 
     elif sys.platform.startswith('win'):
         
-        if not conf.CheckCXXHeader('boost/shared_ptr.hpp'):
+        if not conf.CheckCXXHeader('boost\shared_ptr.hpp'):
             print('Boost not found\n')
-            subprocess.call(['powershell.exe', '.\BoostWin.ps1'], shell=True, cwd = 'scripts')
+            #subprocess.call(['powershell.exe', '.\BoostWin.ps1'], shell=True, cwd = 'scripts')
         else:
             print( 'Boost found\n')
 
         if not conf.CheckCXXHeader('SFML/Graphics.hpp'):
             print( 'SFML not found\n')
-            subprocess.call(['powershell.exe', '.\SFMLWin.ps1'], shell=True, cwd = 'scripts')
+            #subprocess.call(['powershell.exe', '.\SFMLWin.ps1'], shell=True, cwd = 'scripts')
         else:
             print( 'SFML found\n')
         
-        if not conf.CheckLib('Box2d'):
+        if not conf.CheckCXXHeader('Box2d/Box2D.h'):
             print( 'Box2D not found\n')
-            subprocess.call(['powershell.exe', '.\Box2DWin.ps1'], shell=True, cwd = 'scripts')
+            #subprocess.call(['powershell.exe', '.\Box2DWin.ps1'], shell=True, cwd = 'scripts')
         else:
             print( 'Box2D found\n')
 
