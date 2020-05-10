@@ -49,7 +49,8 @@ BOOST_AUTO_TEST_CASE(coordinate_system_constructor){
 
     CoordinateSystem move_system(std::move(base_system));
 
-    BOOST_CHECK( move_system.getNameFrom() == copy_system.getNameFrom() && base_system.getNameTo().length() == 0);
+    BOOST_CHECK_EQUAL( move_system.getNameFrom(), copy_system.getNameFrom());
+    BOOST_CHECK_EQUAL( base_system.getNameTo().length(), 0);
 }
 
 BOOST_AUTO_TEST_CASE(coordinate_system_calculation){
@@ -187,8 +188,8 @@ BOOST_AUTO_TEST_CASE(fixed_framerate_time){
     fr->checkTime();
     fr_2->checkTime();
 
-    BOOST_CHECK(fr->getRealFramerate() == 0);
-    BOOST_CHECK(fr->getRealFramerate() == fr_2->getRealFramerate());
+    BOOST_CHECK_EQUAL(fr->getRealFramerate(), 0);
+    BOOST_CHECK_EQUAL(fr->getRealFramerate(), fr_2->getRealFramerate());
 
 
 }
@@ -197,11 +198,11 @@ BOOST_AUTO_TEST_CASE(screen_ID){
     ScreenID id;
     StartScreen new_screen;
 
-    BOOST_CHECK(id.isValid() == false);
+    BOOST_CHECK_EQUAL(id.isValid(), false);
     BOOST_CHECK(new_screen.getID().isValid() == true);
 
     ScreenID new_ID(new_screen.getID());
-    BOOST_CHECK(new_ID.isValid() == true);
+    BOOST_CHECK_EQUAL(new_ID.isValid(), true);
     BOOST_CHECK(*new_ID == *(new_screen.getID()));
 }
 
@@ -215,7 +216,7 @@ BOOST_AUTO_TEST_CASE(screen_manager_start_screen){
 
     auto id = manager.getScreenID("test");
 
-    BOOST_CHECK(manager.getScreenName(id) == "test");
+    BOOST_CHECK_EQUAL(manager.getScreenName(id), "test");
 
 }
 

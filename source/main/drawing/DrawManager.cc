@@ -109,7 +109,8 @@ DrawManager::DrawManager(DrawManager&& other) noexcept
 
 DrawManager DrawManager::create(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window){
     for(WindowCont::const_iterator it = windows_static_.cbegin(); it != windows_static_.cend(); ++it){
-        if(it->lock() == window) throw std::invalid_argument("This window is already in some DrawManager instance.");
+        if(it->lock() == window) 
+            throw std::invalid_argument("This window is already in some DrawManager instance.");
     }
     return std::move(DrawManager(layer_name, window));
 }

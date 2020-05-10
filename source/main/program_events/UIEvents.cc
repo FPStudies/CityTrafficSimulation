@@ -37,7 +37,8 @@ std::unique_ptr<UIEvents> UIEvents::clone() const{
 }
 
 bool UIEvents::equals(const EventInterface& other) const{
-    if(typeid(UIEvents) == typeid(other)) return true;
+    if(typeid(UIEvents) == typeid(other))
+        return true;
     return false;
 }
 

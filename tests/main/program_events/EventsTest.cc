@@ -21,22 +21,22 @@ BOOST_AUTO_TEST_CASE(basic_events_methods){
     BasicEvents event;
     auto copy = event.clone();
 
-    BOOST_CHECK(event.equals(*copy) == true);
+    BOOST_CHECK_EQUAL(event.equals(*copy), true);
 
     auto copy_2 = copy->clone();
 
-    BOOST_CHECK(copy_2->equals(event) == true);
+    BOOST_CHECK_EQUAL(copy_2->equals(event), true);
 }
 
 BOOST_AUTO_TEST_CASE(UI_events_methods){
     UIEvents event;
     auto copy = event.clone();
 
-    BOOST_CHECK(event.equals(*copy) == true);
+    BOOST_CHECK_EQUAL(event.equals(*copy), true);
 
     auto copy_2 = copy->clone();
 
-    BOOST_CHECK(copy_2->equals(event) == true);
+    BOOST_CHECK_EQUAL(copy_2->equals(event), true);
 }
 
 BOOST_AUTO_TEST_CASE(event_manager_methods){
@@ -48,17 +48,17 @@ BOOST_AUTO_TEST_CASE(event_manager_methods){
     manager.add("test2", EventManager::State::INACTIVE, ui_event);
     manager.add("test3", EventManager::State::INACTIVE, b_event);
 
-    BOOST_CHECK(manager.remove("test1") == false);
-    BOOST_CHECK(manager.remove("test1") == true);
+    BOOST_CHECK_EQUAL(manager.remove("test1"), false);
+    BOOST_CHECK_EQUAL(manager.remove("test1"), true);
 
-    BOOST_CHECK(manager.addNew("test1", EventManager::State::ACTIVE, b_event) == false);
+    BOOST_CHECK_EQUAL(manager.addNew("test1", EventManager::State::ACTIVE, b_event), false);
 
 
     manager.add("test4", EventManager::State::INACTIVE, b_event);
     manager.add("test4", EventManager::State::INACTIVE, ui_event);
 
-    BOOST_CHECK(manager.remove("test4") == false);
-    BOOST_CHECK(manager.remove("test4") == true);
+    BOOST_CHECK_EQUAL(manager.remove("test4"), false);
+    BOOST_CHECK_EQUAL(manager.remove("test4"), true);
 
 }   
 

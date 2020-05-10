@@ -74,7 +74,8 @@ void EventManager::sortListBinaryVal(){
             --end;
         }
 
-        if(begin == end) break;
+        if(begin == end)
+            break;
         // works on pointers
         auto tmp = (*begin);
         (*begin) = (*end);
@@ -97,7 +98,8 @@ void EventManager::add(const std::string& name, EventManager::State mode, const 
 }
 
 bool EventManager::addNew(const std::string& name, EventManager::State mode, const EventSet& event_object_set){
-    if(ifElementMapExist(name)) return true;
+    if(ifElementMapExist(name))
+        return true;
 
     this->add(name, mode, event_object_set);
     return false;
@@ -124,25 +126,29 @@ void EventManager::add(const std::string& name, EventManager::State mode, const 
 
 bool EventManager::addNew(const std::string& name, EventManager::State mode, const std::shared_ptr<EventInterface>& event_object){
     Map::iterator it;
-    if(ifElementMapExist(name, it)) return true;
+    if(ifElementMapExist(name, it))
+        return true;
     addNewEventInterface(name, mode, event_object);
 
     return false;
 }
 
 bool EventManager::ifElementMapExist(const std::string& name, Map::iterator& it){
-    if((it = events_map_names_.find(name)) == events_map_names_.end()) return false;
+    if((it = events_map_names_.find(name)) == events_map_names_.end())
+        return false;
     return true;
 }
 
 bool EventManager::ifElementMapExist(const std::string& name){
-    if(events_map_names_.find(name) == events_map_names_.end()) return false;
+    if(events_map_names_.find(name) == events_map_names_.end())
+        return false;
     return true;
 }
 
 bool EventManager::remove(const std::string& name){
     Map::iterator it;
-    if(!ifElementMapExist(name, it)) return true;
+    if(!ifElementMapExist(name, it))
+        return true;
 
     for(List::iterator l = events_sorted_list_.begin(); l !=events_sorted_list_.end(); ++l){
         if(*l == it->second) {
@@ -157,11 +163,13 @@ bool EventManager::remove(const std::string& name){
 
 bool EventManager::remove(const std::string& name, const std::shared_ptr<EventInterface>& event_object){
     Map::iterator it;
-    if(!ifElementMapExist(name, it)) return true;
+    if(!ifElementMapExist(name, it))
+        return true;
 
     for(List::iterator l = events_sorted_list_.begin(); l !=events_sorted_list_.end(); ++l){
         if(*l == it->second) {
-            if((*l)->removeEventFromSet(event_object)) return true;
+            if((*l)->removeEventFromSet(event_object))
+                return true;
 
             if((*l)->empty()){
                 events_sorted_list_.erase(l);
@@ -181,7 +189,8 @@ void EventManager::checkEvents(sf::RenderWindow& window, sf::Event& event){
     }
 
     for(auto& it : events_sorted_list_){
-        if(!it->isActive()) break;
+        if(!it->isActive())
+            break;
 
         it->getEventSet().checkEventsOccurence(event, window);
     }

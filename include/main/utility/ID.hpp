@@ -74,7 +74,8 @@ public:
     }
     
     bool isValid() const{
-        if(state_ == State::VALID) return true;
+        if(state_ == State::VALID)
+            return true;
         return false;
     }
 

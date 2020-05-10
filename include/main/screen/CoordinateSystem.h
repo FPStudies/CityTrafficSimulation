@@ -10,7 +10,7 @@
 #include <string>
 #include <map>
 #include <SFML/Graphics.hpp>
-#include <box2d/box2d.h>
+#include <Box2d/Box2d.h>
 
 /**
  * @brief Provides a unified coordinate system.

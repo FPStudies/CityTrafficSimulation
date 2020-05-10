@@ -27,7 +27,7 @@ programLibraries = [
 ]
 
 externalLibraries = [
-    'box2d'
+    'Box2d'
 ]
 
 if sys.platform.startswith('linux'):

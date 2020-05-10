@@ -26,7 +26,8 @@ DrawSetFactory::DrawSetFactory(DrawManager& manager, const std::shared_ptr<Drawa
 
 void DrawSetFactory::drawAll(){
     for(auto& it : objects){
-        if(it->canBeDrawn()) it->draw();
+        if(it->canBeDrawn())
+            it->draw();
     }
 }
 

@@ -8,7 +8,7 @@
 #define TRAFFIC_SIM_START_SCREEN_H
 
 #include <SFML/Graphics.hpp>
-#include <box2d/box2d.h>
+#include <Box2d/Box2d.h>
 #include <iostream>
 #include <memory>
 
