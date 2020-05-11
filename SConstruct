@@ -78,14 +78,14 @@ elif sys.platform.startswith('win'):
         LIBPATH = [
             pathToSFMLLibraries,
             pathToBox2DLibrary,
-            pathToBox2DLibrary + 'x86/Release',
+            pathToBox2DLibrary + 'x86_64/Release',
             pathToBoostLibraries
-            ],
-        tools = [
-            'msvc',
-            'mslink',
-            'mslib'
-        ]
+            ]
+        #tools = [
+        #    'msvc',
+        #    'mslink',
+        #    'mslib'
+        #]
     )
     env_base.PrependENVPath('PATH', os.environ['PATH'])
 
@@ -121,9 +121,9 @@ if not env_base.GetOption('clean'):
         else:
             print( 'SFML found\n')
 
-        if not conf.CheckCHeader('Box2D/Box2D.h'):
+        if not conf.CheckCXXHeader('Box2D/Box2D.h'):
             print( 'Box2D not found\n')
-            #subprocess.call(['./Box2DLinux.sh'], shell=True, cwd = 'scripts')
+            subprocess.call(['./Box2DLinux.sh'], shell=True, cwd = 'scripts')
         else:
             print( 'Box2D found\n')
     
@@ -142,7 +142,7 @@ if not env_base.GetOption('clean'):
         else:
             print( 'SFML found\n')
         
-        if not conf.CheckCHeader('Box2D/Box2D.h'):
+        if not conf.CheckCXXHeader('Box2D/Box2D.h'):
             print( 'Box2D not found\n')
             subprocess.call(['powershell.exe', '.\Box2DWin.ps1'], shell=True, cwd = 'scripts')
         else:

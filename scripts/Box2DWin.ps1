@@ -11,4 +11,4 @@ Rename-Item box2d-5ae818e95ddd09622bad4fd295311ca4706ad2b2 box2d-master
 cd box2d-master
 premake5.exe vs2019
 cd Build
-MSBuild.exe Box2D.vcxproj -property:Configuration=Release
+MSBuild.exe Box2D.vcxproj -property:Configuration=Release -property:Platform=x64
