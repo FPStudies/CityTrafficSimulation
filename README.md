@@ -5,7 +5,7 @@ Authors: Kordowski Mateusz, Przybysz Filip
 
 
 Installation:
-Program requires Python, Scons, premake5, and the g++(Linux) or CL(Windows) compiler.
+Program requires Python, Scons, and the g++(Linux) or CL(Windows) compiler.
 (Linux:
 sudo apt-get install python
 sudo apt-get install scons
