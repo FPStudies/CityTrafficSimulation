@@ -35,7 +35,8 @@ bool CoordinateSystemSet::addNewSystem(
     const std::string& coord_name
     )
 {
-    if(systems_.find(coord_name) != systems_.end() || systems_.find(relative_coord) == systems_.end()) return true;
+    if(systems_.find(coord_name) != systems_.end() || systems_.find(relative_coord) == systems_.end())
+        return true;
     systems_.emplace(coord_name, CoordinateSystem(relative_X, relative_Y, reverse_X, reverse_Y, relative_coord, coord_name));
     return false;
 }
@@ -127,7 +128,8 @@ std::pair<CoordinateSystem::CoordType, CoordinateSystem::CoordType> CoordinateSy
 
 CoordinateSystem::CoordType CoordinateSystem::translateX(const CoordType& x) const {
     CoordType ret;
-    if(reverse_X_) ret = relative_X_ - x;
+    if(reverse_X_)
+        ret = relative_X_ - x;
     else ret = x - relative_X_;
 
     return ret;
@@ -135,7 +137,8 @@ CoordinateSystem::CoordType CoordinateSystem::translateX(const CoordType& x) con
 
 CoordinateSystem::CoordType CoordinateSystem::translateY(const CoordType& y) const {
     CoordType ret;
-    if(reverse_Y_) ret = relative_Y_ - y;
+    if(reverse_Y_)
+        ret = relative_Y_ - y;
     else ret = y - relative_Y_;
  
     return ret;

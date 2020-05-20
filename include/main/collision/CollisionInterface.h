@@ -8,7 +8,7 @@
 #define TRAFFIC_SIM_COLLISION_INTERFACE_H
 
 #include <SFML/Graphics.hpp>
-#include <box2d/box2d.h>
+#include "Box2D/Box2D.h"
 
 #include "CollisionID.h"
 #include "Sensor.h"

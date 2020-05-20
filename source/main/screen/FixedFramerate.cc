@@ -51,7 +51,8 @@ FixedFramerate& FixedFramerate::operator=(FixedFramerate&& other){
 }
 
 void FixedFramerate::checkTime(){
-    if(set_frame_ == 0.0f) return;
+    if(set_frame_ == 0.0f)
+        return;
     if(!prev_is_set_){
         prev_is_set_ = true;
         setPoint();

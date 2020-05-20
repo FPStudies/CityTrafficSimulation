@@ -17,7 +17,7 @@ testLibraries = [
     'sfml-graphics',
     'sfml-window',
     'sfml-system',
-    'box2d'
+    'Box2D'
 ]
 
 env_tests.Append(

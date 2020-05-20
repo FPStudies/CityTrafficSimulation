@@ -28,8 +28,8 @@ pathToBoostHeaders = '#libraries/boost_1_72_0/'
 pathToBoostLibraries = '#libraries/boost_1_72_0/stage/lib/'
 pathToSFMLHeaders = '#libraries/SFML-2.5.1/include/'
 pathToSFMLLibraries = '#libraries/SFML-2.5.1/lib/'
-pathToBox2DHeaders = '#libraries/box2d-master/include/'
-pathToBox2DLibrary = '#libraries/box2d-master/build/src/'
+pathToBox2DHeaders = '#libraries/box2d-master/'
+pathToBox2DLibrary = '#libraries/box2d-master/Build/bin/'
 
 binFolder = '#bin/'
 testsFolder = '#tests/bin/'
@@ -56,7 +56,7 @@ if sys.platform.startswith('linux'):
             ],
         LIBPATH = [
             pathToSFMLLibraries,
-            pathToBox2DLibrary,
+            pathToBox2DLibrary + 'x86_64/Debug',
             pathToBoostLibraries
             ]
     )
@@ -78,14 +78,19 @@ elif sys.platform.startswith('win'):
         LIBPATH = [
             pathToSFMLLibraries,
             pathToBox2DLibrary,
-            pathToBox2DLibrary + 'Release',
+            pathToBox2DLibrary + 'x86_64/Release',
             pathToBoostLibraries
             ]
+        #tools = [
+        #    'msvc',
+        #    'mslink',
+        #    'mslib'
+        #]
     )
     env_base.PrependENVPath('PATH', os.environ['PATH'])
 
 else:
-    print 'Unsupported OS. Exiting.'
+    print( 'Unsupported OS. Exiting.')
     Exit(1)
 
 
@@ -105,47 +110,47 @@ if not env_base.GetOption('clean'):
     if sys.platform.startswith('linux'):
 
         if not conf.CheckCXXHeader('boost/shared_ptr.hpp'):
-            print 'Boost not found\n'
+            print( 'Boost not found\n')
             subprocess.call(['./BoostLinux.sh'], shell=True, cwd = 'scripts')
         else:
-            print 'Boost found\n'
+            print( 'Boost found\n')
 
         if not conf.CheckCXXHeader('SFML/Graphics.hpp'):
-            print 'SFML not found\n'
+            print( 'SFML not found\n')
             subprocess.call(['./SFMLLinux.sh'], shell=True, cwd = 'scripts')
         else:
-            print 'SFML found\n'
+            print( 'SFML found\n')
 
-        if not conf.CheckLib('box2d'):
-            print 'Box2D not found\n'
+        if not conf.CheckCXXHeader('Box2D/Box2D.h'):
+            print( 'Box2D not found\n')
             subprocess.call(['./Box2DLinux.sh'], shell=True, cwd = 'scripts')
         else:
-            print 'Box2D found\n'
+            print( 'Box2D found\n')
     
 
     elif sys.platform.startswith('win'):
         
-        if not conf.CheckCXXHeader('boost/shared_ptr.hpp'):
-            print 'Boost not found\n'
+        if not conf.CheckCXXHeader('boost\shared_ptr.hpp'):
+            print('Boost not found\n')
             subprocess.call(['powershell.exe', '.\BoostWin.ps1'], shell=True, cwd = 'scripts')
         else:
-            print 'Boost found\n'
+            print( 'Boost found\n')
 
         if not conf.CheckCXXHeader('SFML/Graphics.hpp'):
-            print 'SFML not found\n'
+            print( 'SFML not found\n')
             subprocess.call(['powershell.exe', '.\SFMLWin.ps1'], shell=True, cwd = 'scripts')
         else:
-            print 'SFML found\n'
+            print( 'SFML found\n')
         
-        if not conf.CheckLib('box2d'):
-            print 'Box2D not found\n'
+        if not conf.CheckCXXHeader('Box2D/Box2D.h'):
+            print( 'Box2D not found\n')
             subprocess.call(['powershell.exe', '.\Box2DWin.ps1'], shell=True, cwd = 'scripts')
         else:
-            print 'Box2D found\n'
+            print( 'Box2D found\n')
 
 
     else:
-        print 'Unsupported OS. Exiting.'
+        print( 'Unsupported OS. Exiting.')
         Exit(1)
 
 else:
@@ -216,13 +221,13 @@ elif (GetOption('build_option') == 'tests'):
         if sys.platform.startswith('linux'):
 
             if not conf.CheckLib('libboost_test_exec_monitor'):
-                print 'libboost not installed\n'
+                print( 'libboost not installed\n')
                 subprocess.call(['./BoostInstallLinux.sh'], shell=True, cwd = 'scripts')
 
         else:
 
             if not conf.CheckLib('libboost_test_exec_monitor-vc142-mt-x64-1_72'):
-                print 'libboost not installed\n'
+                print( 'libboost not installed\n')
                 subprocess.call(['powershell.exe', '.\BoostInstallWin.ps1'], shell=True, cwd = 'scripts')
 
 

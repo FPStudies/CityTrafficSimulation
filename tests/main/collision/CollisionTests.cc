@@ -17,7 +17,7 @@
 #include "CollisionManager.h"
 #include "CollisionInterface.h"
 #include "CollisionID.h"
-#include <box2d/box2d.h>
+#include <Box2D/Box2D.h>
 
 BOOST_AUTO_TEST_CASE(collision_sensor_creation_test){
 
@@ -29,14 +29,16 @@ BOOST_AUTO_TEST_CASE(collision_sensor_creation_test){
         BOOST_REQUIRE( sensor_1.createSensorSphere(1.0f, world) == false);
         BOOST_REQUIRE( sensor_2.createFOV(5.0f, 60.0f, world) == false);
 
-        BOOST_CHECK( sensor_1.createSensorSphere(1.0f, world) == true && sensor_2.createFOV(1.0f, 1.0f, world) == true);
+        BOOST_CHECK_EQUAL( sensor_1.createSensorSphere(1.0f, world), true);
+        BOOST_CHECK_EQUAL( sensor_2.createFOV(1.0f, 1.0f, world), true);
 }
 
 BOOST_AUTO_TEST_CASE(collision_sensor_awake_test){
 
         Sensor sensor_1, sensor_2;
 
-        BOOST_CHECK( sensor_1.sensorAwake() == false && sensor_2.sensorAwake() == false);
+        BOOST_CHECK_EQUAL( sensor_1.sensorAwake(), false);
+        BOOST_CHECK_EQUAL( sensor_2.sensorAwake(), false);
 
         b2Vec2 vec(1,1);
         b2World world(vec);
@@ -47,7 +49,8 @@ BOOST_AUTO_TEST_CASE(collision_sensor_awake_test){
         sensor_1.setAwake(true);
         sensor_2.setAwake(true);
 
-        BOOST_CHECK( sensor_1.sensorAwake() == true && sensor_2.sensorAwake() == true);
+        BOOST_CHECK_EQUAL( sensor_1.sensorAwake(), true);
+        BOOST_CHECK_EQUAL( sensor_2.sensorAwake(), true);
 }
 
 

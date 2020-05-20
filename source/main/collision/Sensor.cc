@@ -34,7 +34,8 @@ void Sensor::setPropertiesAndCreate(b2BodyDef& body_def, b2FixtureDef& fixture_d
 }
 
 bool Sensor::createFOV(const float& radius, const float& angle, b2World& world){
-    if(created_) return true;
+    if(created_) 
+        return true;
 
     b2BodyDef body_def;
     b2PolygonShape polygon_shape;
@@ -63,7 +64,8 @@ bool Sensor::createFOV(const float& radius, const float& angle, b2World& world){
 }
 
 bool Sensor::createSensorSphere(const float& radius, b2World& world){
-    if(created_) return true;
+    if(created_)
+        return true;
 
     b2BodyDef body_def;
     b2CircleShape circle_shape;
@@ -78,24 +80,29 @@ bool Sensor::createSensorSphere(const float& radius, b2World& world){
 }
 
 bool Sensor::setObjectInterface(CollisionInterface& interface){
-    if(!created_) return true;
+    if(!created_)
+        return true;
     static_body_->SetUserData(&interface);
 
     return false;
 }
 
  const bool Sensor::sensorAwake(){
-     if(!created_) return false;
-     return static_body_->IsEnabled();
+    if(!created_)
+        return false;
+     //return static_body_->IsEnabled(); //does not work with earlier Box2D versions
+    return true; //TODO: placeholder - needs changing later
  }
 
  void Sensor::setAwake(bool mode){
-     if(!created_) return;
+    if(!created_)
+        return;
      static_body_->SetAwake(mode);
  }
 
 CollisionInterface* Sensor::getInterface(){
-    if(!created_) return nullptr;
+    if(!created_)
+        return nullptr;
     return static_cast<CollisionInterface*>(static_body_->GetUserData());
 }
 

@@ -18,8 +18,10 @@ BasicEvents::~BasicEvents(){}
 BasicEvents::BasicEvents(const BasicEvents& event) {};
 
 void BasicEvents::run(sf::RenderWindow& window, sf::Event& event){
-    if(event.type == sf::Event::Closed) window.close();
-    else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) window.close();
+    if(event.type == sf::Event::Closed)
+        window.close();
+    else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
+        window.close();
     
 }
 
@@ -28,7 +30,8 @@ std::unique_ptr<BasicEvents> BasicEvents::clone() const{
 }
 
 bool BasicEvents::equals(const EventInterface& other) const{
-    if(typeid(BasicEvents) == typeid(other)) return true;
+    if(typeid(BasicEvents) == typeid(other))
+        return true;
     return false;
 }
 
