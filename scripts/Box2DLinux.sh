@@ -3,6 +3,7 @@
 #
 
 wget -O master.zip https://github.com/erincatto/box2d/archive/5ae818e95ddd09622bad4fd295311ca4706ad2b2.zip
+mkdir -p ../libraries
 mv master.zip ../libraries/master.zip
 cd ../libraries
 unzip -q master.zip

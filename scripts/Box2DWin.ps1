@@ -3,6 +3,7 @@
 #
 
 wget https://github.com/erincatto/box2d/archive/5ae818e95ddd09622bad4fd295311ca4706ad2b2.zip -O master.zip
+New-Item -ItemType Directory -force -path ..\libraries
 move-item -path master.zip -destination ..\libraries\master.zip
 cd ..\libraries
 Expand-Archive -Path master.zip -DestinationPath .
