@@ -33,7 +33,7 @@ EventManager::EventSetInner::EventSetInner(const std::shared_ptr<EventInterface>
 {}
 
 EventManager::EventManager() 
-: events_sorted_(false)
+: events_sorted_(false), events_map_names_(), events_sorted_list_(), tmp_mode_(DEFAULT_HASH_MAP_SIZE)
 {}
 
 EventManager::~EventManager() {}
@@ -85,9 +85,16 @@ void EventManager::sortListBinaryVal(){
 
 
 void EventManager::changeMode(const std::string& name, EventManager::State mode){
-    auto val = events_map_names_.at(name);
-    val->setMode(mode);
+    tmp_mode_[name] = mode;
     events_sorted_ = false;
+}
+
+void EventManager::runChangeMode(){
+    for(auto it = tmp_mode_.cbegin(); it != tmp_mode_.cend(); ++it){
+        auto val = events_map_names_.at(it->first);
+        val->setMode(it->second);
+    }
+    tmp_mode_.clear();
 }
 
 void EventManager::add(const std::string& name, EventManager::State mode, const EventSet& event_object_set){
@@ -184,6 +191,9 @@ bool EventManager::remove(const std::string& name, const std::shared_ptr<EventIn
 
 void EventManager::checkEvents(sf::RenderWindow& window, sf::Event& event){
     if(!events_sorted_) {
+        if(!tmp_mode_.empty())
+            runChangeMode();
+            
         sortListBinaryVal();
         events_sorted_ = true;
     }

@@ -12,6 +12,7 @@
 #include <functional>
 #include <memory>
 #include <list>
+#include <unordered_map>
 
 #include "EventSet.h"
 
@@ -61,6 +62,7 @@ private:
     typedef std::shared_ptr<EventSetInner> Pointer;
     typedef std::map<std::string, Pointer> Map;
     typedef std::list<Pointer> List;
+    typedef std::unordered_map<std::string, EventManager::State> HashMap;
 
     /**
      * @brief A boolean to know if the sets are sorted by Active / Inactive.
@@ -74,6 +76,13 @@ private:
      List events_sorted_list_;
 
     /**
+     * @brief Remember to chane modes at the next checkEvents iteration.
+     */
+     HashMap tmp_mode_;
+
+     static const int DEFAULT_HASH_MAP_SIZE = 30;
+
+    /**
      * @brief Sort list only by binary value. 
      * Computational complexity O(n).
      */
@@ -83,11 +92,15 @@ private:
     bool ifElementMapExist(const std::string& name);
     void addNewEventInterface(const std::string& name, EventManager::State mode, const std::shared_ptr<EventInterface>& event_object);
 
+    void runChangeMode();
+
 public:
 
     EventManager();
     ~EventManager();
     EventManager(const EventManager&) = delete;
+    EventManager(EventManager&&) = delete;
+    EventManager& operator=(EventManager&&) = delete;
 
     /**
      * @brief Adds a new event set.
