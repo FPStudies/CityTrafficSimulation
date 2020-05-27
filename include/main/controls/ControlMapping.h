@@ -10,32 +10,69 @@
 
 #include <SFML/Graphics.hpp>
 #include "MouseMapping.h"
-#include "KeyboardMapping.h"
+#include "KeyboardMappingNormal.h"
 
-class ControlMapping{
-    KeyboardControls keyCtrl_;
-    MouseControls mouseCtrl_;
+namespace ControlSystem{
 
-    unsigned int translateEvent(const sf::Event& event);
+    class Mapping{
+    public:
+        class Controls;
+    private:
+        Keyboard::MappingNormal keyCtrl_;
+        Mouse::Mapping mouseCtrl_;
 
-public:
-    ControlMapping();
-    ~ControlMapping();
-    ControlMapping(const ControlMapping&) = delete;
-    ControlMapping(ControlMapping&& other);
-    ControlMapping& operator=(ControlMapping&& other);
+        int translateEvent(const sf::Event& event);
 
-    bool addControl(MouseControls control, const std::shared_ptr<TriggerEventInterface>& event);
-    bool removeControl(MouseControls control, const std::shared_ptr<TriggerEventInterface>& event);
-    bool removeControl(MouseControls control);
+    public:
+        Mapping();
+        ~Mapping();
+        Mapping(const Mapping&) = delete;
+        Mapping(Mapping&& other);
+        Mapping& operator=(Mapping&& other);
 
-    bool addControl(KeyboardControls control, const std::shared_ptr<TriggerEventInterface>& event);
-    bool removeControl(KeyboardControls control, const std::shared_ptr<TriggerEventInterface>& event);
-    bool removeControl(KeyboardControls control);
+        bool addControl(Mouse::Controls control, const std::shared_ptr<TriggerEventInterface>& event);
+        bool addControlFast(Mouse::Controls control, const std::shared_ptr<TriggerEventInterface>& event);
+        bool removeControl(Mouse::Controls control, const std::shared_ptr<TriggerEventInterface>& event);
+        bool removeControlFast(Mouse::Controls control, const std::shared_ptr<TriggerEventInterface>& event);
+        bool removeControl(Mouse::Controls control);
 
-    void trigger(const sf::Event& event);
-};
+        bool addControl(Keyboard::Key control, const std::shared_ptr<TriggerEventInterface>& event);
+        bool addControlFast(Keyboard::Key control, const std::shared_ptr<TriggerEventInterface>& event);
+        bool removeControl(Keyboard::Key control, const std::shared_ptr<TriggerEventInterface>& event);
+        bool removeControlFast(Keyboard::Key control, const std::shared_ptr<TriggerEventInterface>& event);
+        bool removeControl(Keyboard::Key control);
+
+        void trigger(sf::RenderWindow &window, const sf::Event& event);
+    };
 
 
+    /**
+     * @brief Storage for the all types of controls.
+     * 
+     */
+    class Controls{
+    public:
+        enum class Type: uint8_t{
+            Mouse,
+            Keyboard
+        };
+
+    private:
+        int control_;
+        Type type_;
+
+    public:
+        Controls(Mouse::Controls other);
+        Controls(Keyboard::Key other);
+        ~Controls();
+
+        void setMouseControl(Mouse::Controls control);
+        void setKeyboardControl(Keyboard::Key control);
+
+        int getControls();
+        Type getType();
+
+    };
+}
 
 #endif

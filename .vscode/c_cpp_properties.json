@@ -4,7 +4,7 @@
             "name": "Linux",
             "includePath": [
                 "${workspaceFolder}/**",
-                "libraries/box2d-master/include/"
+                "libraries/box2d-master/Box2D/"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

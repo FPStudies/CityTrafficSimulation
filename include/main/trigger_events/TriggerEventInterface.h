@@ -26,7 +26,7 @@ public:
     TriggerEventInterface(const TriggerEventInterface&) = delete;
     TriggerEventInterface(const TriggerEventInterface&&) {};
 
-    virtual void trigger(sf::RenderWindow& window, ControlMapping& control) = 0;
+    virtual void trigger(sf::RenderWindow& window, std::unique_ptr<ControlSystem::Controls>& control, const sf::Event& event) = 0;
 
     std::unique_ptr<TriggerEventInterface> clone() const{
         return std::unique_ptr<TriggerEventInterface>(this->clone_impl());
