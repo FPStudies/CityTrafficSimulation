@@ -17,7 +17,7 @@ BasicEvents::~BasicEvents(){}
 
 BasicEvents::BasicEvents(const BasicEvents& event) {};
 
-void BasicEvents::run(sf::RenderWindow& window, sf::Event& event){
+void BasicEvents::run(sf::RenderWindow& window, const sf::Event& event){
     if(event.type == sf::Event::Closed)
         window.close();
     else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)

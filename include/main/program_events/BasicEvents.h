@@ -10,7 +10,6 @@
 #include <memory>
 
 #include "EventInterface.h"
-#include "EventInterface.h"
 
 /**
  * @brief Basic functionality:
@@ -24,10 +23,10 @@ class BasicEvents: virtual public EventInterface{
 
 public:
     BasicEvents();
-    ~BasicEvents();
+    virtual ~BasicEvents();
     BasicEvents(const BasicEvents& event);
 
-    virtual void run(sf::RenderWindow& window, sf::Event& event) override;
+    virtual void run(sf::RenderWindow& window, const sf::Event& event) override;
     std::unique_ptr<BasicEvents> clone() const;
     virtual bool equals(const EventInterface& other) const override;
 

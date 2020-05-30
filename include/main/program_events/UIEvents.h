@@ -22,7 +22,7 @@ class UIEvents: virtual public EventInterface{
 
 public:
     UIEvents();
-    ~UIEvents();
+    virtual ~UIEvents();
     UIEvents(const UIEvents&);
 
     void addElement(std::shared_ptr<ElementObserver>& element);

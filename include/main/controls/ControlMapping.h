@@ -26,9 +26,11 @@ namespace ControlSystem{
     public:
         Mapping();
         ~Mapping();
-        Mapping(const Mapping&) = delete;
+        Mapping(const Mapping& other);
         Mapping(Mapping&& other);
         Mapping& operator=(Mapping&& other);
+
+        bool operator==(const Mapping& other) const;
 
         bool addControl(Mouse::Controls control, const std::shared_ptr<TriggerEventInterface>& event);
         bool addControlFast(Mouse::Controls control, const std::shared_ptr<TriggerEventInterface>& event);
@@ -64,7 +66,13 @@ namespace ControlSystem{
     public:
         Controls(Mouse::Controls other);
         Controls(Keyboard::Key other);
+        Controls(const Controls& other);
+        Controls(Controls&& other);
+        Controls& operator=(Controls&& other);
         ~Controls();
+
+        bool operator==(const Controls& other);
+        bool operator<(const Controls& other);
 
         void setMouseControl(Mouse::Controls control);
         void setKeyboardControl(Keyboard::Key control);

@@ -13,20 +13,26 @@
 #include "EventInterface.h"
 
 class ControlEvents: public EventInterface{
-
-    std::unique_ptr<ControlMapping> ctrlMapping_;
+    std::unique_ptr<ControlSystem::Mapping> ctrlMapping_;
 
     virtual ControlEvents* clone_impl() const override;
 public:
+    /**
+     * @brief Construct a new Control Events object
+     * @details It uses std::move for a unique_ptr.
+     * Mapping can be accessed via other function.
+     * 
+     * @param mapping
+     */
+    ControlEvents(std::unique_ptr<ControlSystem::Mapping>& mapping);
+    virtual ~ControlEvents();
+    ControlEvents(const ControlEvents& other);
 
-    ControlEvents();
-    ~ControlEvents();
-    ControlEvents(const ControlEvents& event);
-
-    virtual void run(sf::RenderWindow& window, sf::Event& event) override;
+    virtual void run(sf::RenderWindow& window, const sf::Event& event) override;
     std::unique_ptr<ControlEvents> clone() const;
     virtual bool equals(const EventInterface& other) const override;
 
+    ControlSystem::Mapping& getMapping();
 };
 
 #endif

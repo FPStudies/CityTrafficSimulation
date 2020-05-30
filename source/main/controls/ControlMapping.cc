@@ -13,9 +13,17 @@ Mapping::Mapping(Mapping&& other)
 : keyCtrl_(std::move(other.keyCtrl_)), mouseCtrl_(std::move(other.mouseCtrl_))
 {}
 
+Mapping::Mapping(const Mapping& other)
+: keyCtrl_(other.keyCtrl_), mouseCtrl_(other.mouseCtrl_)
+{}
+
 Mapping& Mapping::operator=(Mapping&& other){
     keyCtrl_ = std::move(other.keyCtrl_);
     mouseCtrl_ = std::move(other.mouseCtrl_);
+}
+
+bool Mapping::operator==(const Mapping& other) const{
+    return keyCtrl_ == other.keyCtrl_ && mouseCtrl_ == other.mouseCtrl_;
 }
 
 int Mapping::translateEvent(const sf::Event& event){
@@ -105,6 +113,32 @@ Controls::Controls(Keyboard::Key other)
 {}
 
 Controls::~Controls() = default;
+
+Controls::Controls(const Controls& other)
+: control_(other.control_), type_(other.type_)
+{}
+
+Controls::Controls(Controls&& other)
+: control_(other.control_), type_(other.type_)
+{}
+
+Controls& Controls::operator=(Controls&& other){
+    control_ = other.control_;
+    type_ = other.type_;
+    return *this;
+}
+
+bool Controls::operator==(const Controls& other){
+    if(type_ != other.type_ || control_ != other.control_) 
+        return false;
+    return true;
+}
+
+bool Controls::operator<(const Controls& other){
+    if(control_ < other.control_) 
+        return true;
+    return false;
+}
 
 void Controls::setMouseControl(Mouse::Controls control){
     control_ = control;

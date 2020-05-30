@@ -12,11 +12,11 @@
 #include <vector>
 #include <memory>
 
-#include "../trigger_events/TriggerEventInterface.h"
+class Trigger::EventInterface;
 
 template<typename TemplateControls, typename ChildClass>
 class MappingTemplate{
-    std::map<TemplateControls, std::vector<std::shared_ptr<TriggerEventInterface>> > mapping_;
+    std::map<TemplateControls, std::vector<std::shared_ptr<Trigger::EventInterface>> > mapping_;
 
 public:
     MappingTemplate()
@@ -26,7 +26,9 @@ public:
     ~MappingTemplate()
     {}
 
-    MappingTemplate(const MappingTemplate&) = delete;
+    MappingTemplate(const MappingTemplate& other)
+    : mapping_(other.mapping_)
+    {}
 
     MappingTemplate(MappingTemplate&& other)
     : mapping_(std::move(other.mapping_))
@@ -35,6 +37,11 @@ public:
     MappingTemplate& operator=(MappingTemplate&& other){
         mapping_ = std::move(other.mapping_);
         return *this;
+    }
+
+    bool operator==(const MappingTemplate& other) const{
+        return mapping_.size() == other.mapping_.size() &&
+            std::equal(mapping_.begin(), mapping_.end(), other.mapping_.begin());
     }
 
     /**

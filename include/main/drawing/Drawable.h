@@ -8,18 +8,20 @@
 #define TRAFFIC_SIM_DRAWABLE_H
 
 #include <SFML/Graphics.hpp>
+#include <memory>
 
 #include "DrawingID.h"
 
 class Drawable{
     DrawingID ID_;
+    std::unique_ptr<sf::RenderTarget> target; // it must be assigned later in inherit class
 
 public:
     Drawable()
-    : ID_(DrawingID::newID())
+    : ID_(DrawingID::newID()), target(nullptr)
     {}
 
-    virtual ~Drawable() {}
+    virtual ~Drawable() = default;
 
 
     virtual void draw() = 0;

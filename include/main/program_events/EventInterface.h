@@ -23,7 +23,7 @@ public:
      * @param window Where the event was fetched.
      * @param event Fetched event.
      */
-    virtual void run(sf::RenderWindow& window, sf::Event& event) = 0;
+    virtual void run(sf::RenderWindow& window, const sf::Event& event) = 0;
 
     /**
      * @brief Simple method to copy object.

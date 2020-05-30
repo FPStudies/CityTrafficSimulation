@@ -7,18 +7,26 @@
 #ifndef TRAFFIC_SIM_GAME_BUTTON_INTERFACE_H
 #define TRAFFIC_SIM_GAME_BUTTON_INTERFACE_H
 
-#include "../../program_events/EventManager.h"
+#include "../drawing/Drawable.h"
 
-class ButtonInterface{
+namespace Button{
+    class Interface{
+        std::shared_ptr<Drawable> toDrawButton_;
 
-public:
-    ButtonInterface(EventManager& manager);
+    public:
+        Interface()
+        : toDrawButton_(nullptr)
+        {}
+        virtual ~Interface() = default;
 
-    virtual void pressedButton(EventManager& manager) = 0;
-    virtual void releasedButton(EventManager& manager) = 0;
+        virtual void isButtonChoosed(const float posX, const float posY) = 0;
+
+        virtual void actionPressedButton() = 0;
+        virtual void actionReleasedButton() = 0;
+    };
+}
 
 
-};
 
 
 #endif
