@@ -23,7 +23,7 @@ filesCPP = [
 ]
 
 
-filesHMain = [pathToH + x for x in HFilesMain]
+filesHMain = [pathToH2 + x for x in HFilesMain]
 
 env = env_base.Clone()
 
@@ -31,7 +31,8 @@ env.Append(
     CPPPATH = [
         pathToH, 
         pathToH2
-        ]
+    ]
     )
 
 env.StaticLibrary(target = libraryPath + libraryName, source = filesCPP + filesHMain)
+

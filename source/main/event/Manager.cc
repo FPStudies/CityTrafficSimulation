@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-#include "event/Manager.h"
+#include "Manager.h"
 
 using namespace Event;
 
@@ -33,7 +33,7 @@ Manager::SetInner::SetInner(const std::shared_ptr<Interface>& event, Manager::St
 {}
 
 Manager::Manager() 
-: events_sorted_(false), events_map_names_(), events_sorted_list_(), tmp_mode_(DEFAULT_HASH_MAP_SIZE)
+: events_sorted_(false), events_map_names_(), events_sorted_list_(), tmp_mode_()
 {}
 
 Manager::~Manager() = default;
@@ -126,7 +126,7 @@ void Manager::runChangeMode(){
 }
 
 bool Manager::isDifferentType(const Set& event_object_set){
-    auto container = event_object_set.getAll();
+    auto container = event_object_set.getAllConst();
     auto it = container.cbegin();
     auto itEnd = container.cend();
     auto prevType = (*(it++))->getType();
@@ -142,7 +142,7 @@ bool Manager::add(const std::string& name, Manager::State mode, const Set& event
 
     Pointer tmp = Pointer(new SetInner(event_object_set, mode));
 
-    if(event_object_set.getAll().front()->getType() == Event::Interface::Type::Normal){
+    if(event_object_set.getAllConst().front()->getType() == Event::Interface::Type::Normal){
         events_map_names_[name] = tmp;
         events_sorted_list_.push_back(tmp);
     }
@@ -181,7 +181,7 @@ void Manager::addNewEventInterface(const std::string& name, Manager::State mode,
 bool Manager::add(const std::string& name, Manager::State mode, const std::shared_ptr<Interface>& event_object){
     Map::iterator it;
     if(ifElementMapExist(name, it)){
-        if(it->second->getEventSet().getAll().front()->getType() != event_object->getType())
+        if(it->second->getEventSet().getAllConst().front()->getType() != event_object->getType())
             return true;
             
         it->second->addEventToSet(event_object);

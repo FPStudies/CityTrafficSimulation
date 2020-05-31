@@ -18,6 +18,7 @@ Control::Mapping::Mapping(const Mapping& other)
 Control::Mapping& Control::Mapping::operator=(Mapping&& other){
     keyCtrl_ = std::move(other.keyCtrl_);
     mouseCtrl_ = std::move(other.mouseCtrl_);
+    return *this;
 }
 
 bool Control::Mapping::operator==(const Mapping& other) const{
@@ -47,43 +48,63 @@ int Control::Mapping::translateEvent(const sf::Event& event){
 
 bool Control::Mapping::addControl(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event){
     mouseCtrl_.addControl(control, event);
+
+    return false; //placeholder
 }
 
 bool Control::Mapping::addControlFast(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event){
     mouseCtrl_.addControlFast(control, event);
+
+    return false; //placeholder
 }
 
 bool Control::Mapping::removeControl(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event){
     mouseCtrl_.removeControl(control, event);
+
+    return false; //placeholder
 }
 
 bool Control::Mapping::removeControlFast(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event){
     mouseCtrl_.removeControlFast(control, event);
+
+    return false; //placeholder
 }
 
 bool Control::Mapping::removeControl(Mouse::Controls control){
     mouseCtrl_.removeControl(control);
+
+    return false; //placeholder
 }
 
 
 bool Control::Mapping::addControl(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event){
     keyCtrl_.addControl(control, event);
+
+    return false; //placeholder
 }
 
 bool Control::Mapping::addControlFast(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event){
     keyCtrl_.addControlFast(control, event);
+
+    return false; //placeholder
 }
 
 bool Control::Mapping::removeControl(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event){
     keyCtrl_.removeControl(control, event);
+
+    return false; //placeholder
 }
 
 bool Control::Mapping::removeControlFast(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event){
     keyCtrl_.removeControlFast(control, event);
+
+    return false; //placeholder
 }
 
 bool Control::Mapping::removeControl(Keyboard::Key control){
     keyCtrl_.removeControl(control);
+
+    return false; //placeholder
 }
 
 void Control::Mapping::trigger(sf::RenderWindow &window, const sf::Event& event){
@@ -120,19 +141,19 @@ Control::KeyContainer::KeyContainer(KeyContainer&& other)
 : control_(other.control_), type_(other.type_)
 {}
 
-Control::KeyContainer& KeyContainer::operator=(KeyContainer&& other){
+Control::KeyContainer& Control::KeyContainer::operator=(Control::KeyContainer&& other){
     control_ = other.control_;
     type_ = other.type_;
     return *this;
 }
 
-bool Control::KeyContainer::operator==(const KeyContainer& other){
+bool Control::KeyContainer::operator==(const Control::KeyContainer& other){
     if(type_ != other.type_ || control_ != other.control_) 
         return false;
     return true;
 }
 
-bool Control::KeyContainer::operator<(const KeyContainer& other){
+bool Control::KeyContainer::operator<(const Control::KeyContainer& other){
     if(control_ < other.control_) 
         return true;
     return false;
@@ -151,7 +172,7 @@ int Control::KeyContainer::getControls(){
     return control_;
 }
 
-Control::KeyContainer::Type KeyContainer::getType(){
+Control::KeyContainer::Type Control::KeyContainer::getType(){
     return type_;
 }
 
