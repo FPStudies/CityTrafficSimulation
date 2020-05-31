@@ -18,7 +18,7 @@
 
 
 BOOST_AUTO_TEST_CASE(basic_events_methods){
-    BasicEvents event;
+    Basic event;
     auto copy = event.clone();
 
     BOOST_CHECK_EQUAL(event.equals(*copy), true);
@@ -41,7 +41,7 @@ BOOST_AUTO_TEST_CASE(UI_events_methods){
 
 BOOST_AUTO_TEST_CASE(event_manager_methods){
     EventManager manager;
-    std::shared_ptr<BasicEvents> b_event = std::make_shared<BasicEvents>();
+    std::shared_ptr<Basic> b_event = std::make_shared<Basic>();
     std::shared_ptr<UIEvents> ui_event = std::make_shared<UIEvents>();
 
     manager.add("test1", EventManager::State::ACTIVE, b_event);

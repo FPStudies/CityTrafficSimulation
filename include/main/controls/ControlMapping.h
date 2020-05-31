@@ -12,7 +12,7 @@
 #include "MouseMapping.h"
 #include "KeyboardMappingNormal.h"
 
-namespace ControlSystem{
+namespace Control{
 
     class Mapping{
     public:
@@ -32,16 +32,16 @@ namespace ControlSystem{
 
         bool operator==(const Mapping& other) const;
 
-        bool addControl(Mouse::Controls control, const std::shared_ptr<TriggerEventInterface>& event);
-        bool addControlFast(Mouse::Controls control, const std::shared_ptr<TriggerEventInterface>& event);
-        bool removeControl(Mouse::Controls control, const std::shared_ptr<TriggerEventInterface>& event);
-        bool removeControlFast(Mouse::Controls control, const std::shared_ptr<TriggerEventInterface>& event);
+        bool addControl(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event);
+        bool addControlFast(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event);
+        bool removeControl(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event);
+        bool removeControlFast(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event);
         bool removeControl(Mouse::Controls control);
 
-        bool addControl(Keyboard::Key control, const std::shared_ptr<TriggerEventInterface>& event);
-        bool addControlFast(Keyboard::Key control, const std::shared_ptr<TriggerEventInterface>& event);
-        bool removeControl(Keyboard::Key control, const std::shared_ptr<TriggerEventInterface>& event);
-        bool removeControlFast(Keyboard::Key control, const std::shared_ptr<TriggerEventInterface>& event);
+        bool addControl(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event);
+        bool addControlFast(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event);
+        bool removeControl(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event);
+        bool removeControlFast(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event);
         bool removeControl(Keyboard::Key control);
 
         void trigger(sf::RenderWindow &window, const sf::Event& event);
@@ -52,7 +52,7 @@ namespace ControlSystem{
      * @brief Storage for the all types of controls.
      * 
      */
-    class Controls{
+    class KeyContainer{
     public:
         enum class Type: uint8_t{
             Mouse,
@@ -64,15 +64,15 @@ namespace ControlSystem{
         Type type_;
 
     public:
-        Controls(Mouse::Controls other);
-        Controls(Keyboard::Key other);
-        Controls(const Controls& other);
-        Controls(Controls&& other);
-        Controls& operator=(Controls&& other);
-        ~Controls();
+        KeyContainer(Mouse::Controls other);
+        KeyContainer(Keyboard::Key other);
+        KeyContainer(const KeyContainer& other);
+        KeyContainer(KeyContainer&& other);
+        KeyContainer& operator=(KeyContainer&& other);
+        ~KeyContainer();
 
-        bool operator==(const Controls& other);
-        bool operator<(const Controls& other);
+        bool operator==(const KeyContainer& other);
+        bool operator<(const KeyContainer& other);
 
         void setMouseControl(Mouse::Controls control);
         void setKeyboardControl(Keyboard::Key control);

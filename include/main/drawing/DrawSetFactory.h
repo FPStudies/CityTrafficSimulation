@@ -15,7 +15,7 @@
 #include "DrawManager.h"
 #include "DrawManagerBridgeToSets.h"
 
-class DrawSetFactory: public SetTemplate<Drawable>{
+class DrawSetFactory: public Utils::SetTemplate<Drawable>{
     //friend class DrawManagerBridgeToSets;
     //friend class CollisionManagerBridgeToSets;
 

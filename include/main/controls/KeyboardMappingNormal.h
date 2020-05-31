@@ -10,6 +10,8 @@
 
 #include "MappingTemplate.h"
 
+
+namespace Control{
 namespace Keyboard{
     typedef sf::Keyboard::Key Key;
 
@@ -18,6 +20,7 @@ namespace Keyboard{
     class MappingNormal : public MappingTemplate<Key, MappingNormal>{
 
     };
+}
 }
 
 

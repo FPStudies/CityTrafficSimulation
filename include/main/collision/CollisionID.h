@@ -9,7 +9,7 @@
 
 #include "../utility/ID.hpp"
 
-class CollisionID: virtual public ID<CollisionID>{
+class CollisionID: virtual public Utils::ID<CollisionID>{
 
     friend class CollisionInterface;
 

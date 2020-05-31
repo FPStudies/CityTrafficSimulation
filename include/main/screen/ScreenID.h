@@ -12,7 +12,7 @@
 
 #include "../utility/ID.hpp"
 
-class ScreenID : public ID<ScreenID>{
+class ScreenID : public Utils::ID<ScreenID>{
 
 /**
  * @brief This is used to prevent other derived classes to have an control over private constructor.

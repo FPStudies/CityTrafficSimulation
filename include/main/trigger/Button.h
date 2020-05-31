@@ -7,13 +7,13 @@
 #ifndef TRAFFIC_SIM_TRIGGER_BUTTON_H
 #define TRAFFIC_SIM_TRIGGER_BUTTON_H
 
-#include "EventInterface.h"
+#include "Interface.h"
 #include <memory>
 #include "../UI/buttons/ButtonInterface.h"
 
 namespace Trigger{ 
 
-    class Button: public EventInterface{
+    class Button: public Interface{
         std::unique_ptr<::Button::Interface> button_;
 
 
@@ -26,9 +26,9 @@ namespace Trigger{
         Button(Button&&);
         Button& operator=(Button&&);
 
-        void trigger(sf::RenderWindow& window, std::unique_ptr<ControlSystem::Controls>& control, const sf::Event& event) override;
+        void trigger(sf::RenderWindow& window, std::unique_ptr<Control::KeyContainer>& control, const sf::Event& event) override;
         std::unique_ptr<Button> clone() const;
-        bool equals(const EventInterface& other) const override;
+        bool equals(const Interface& other) const override;
 
 
     };

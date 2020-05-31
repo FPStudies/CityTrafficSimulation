@@ -1,5 +1,5 @@
 /*
- * BasicEvents.cc
+ * Basic.cc
  *
  *      Author: Kordowski Mateusz
  */
@@ -9,15 +9,15 @@
 
 #include "BasicEvents.h"
 
-BasicEvents::BasicEvents()
+Basic::Basic()
 : EventInterface()
 {}
 
-BasicEvents::~BasicEvents(){}
+Basic::~Basic(){}
 
-BasicEvents::BasicEvents(const BasicEvents& event) {};
+Basic::Basic(const Basic& event) {};
 
-void BasicEvents::run(sf::RenderWindow& window, const sf::Event& event){
+void Basic::run(sf::RenderWindow& window, const sf::Event& event){
     if(event.type == sf::Event::Closed)
         window.close();
     else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
@@ -25,18 +25,18 @@ void BasicEvents::run(sf::RenderWindow& window, const sf::Event& event){
     
 }
 
-std::unique_ptr<BasicEvents> BasicEvents::clone() const{
-    return std::unique_ptr<BasicEvents>(this->clone_impl());
+std::unique_ptr<Basic> Basic::clone() const{
+    return std::unique_ptr<Basic>(this->clone_impl());
 }
 
-bool BasicEvents::equals(const EventInterface& other) const{
-    if(typeid(BasicEvents) == typeid(other))
+bool Basic::equals(const EventInterface& other) const{
+    if(typeid(Basic) == typeid(other))
         return true;
     return false;
 }
 
-BasicEvents* BasicEvents::clone_impl() const{
-    return new BasicEvents(*this);
+Basic* Basic::clone_impl() const{
+    return new Basic(*this);
 }
 
 #endif

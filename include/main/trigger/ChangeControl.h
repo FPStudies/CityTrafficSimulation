@@ -10,40 +10,44 @@
 #include <vector>
 #include <memory>
 
-#include "TriggerEventInterface.h"
-#include "../program_events/EventManager.h"
-#include "TriggerChangeControlInterface.h"
+#include "Interface.h"
+#include "../event/Manager.h"
+#include "ChangeControlInterface.h"
 
-class TriggerChangeControl: public TriggerEventInterface{
-    /*
-    * Plain pointer but it should not be triggered outside of event manager.
-    */
-    EventManager* manager_;
-    std::vector<std::string> toDisable_;
-    std::vector<std::string> toEnable_;
-    std::unique_ptr<TriggerChangeControlInterface> triggerToEnable_;
-    std::unique_ptr<TriggerChangeControlInterface> triggerToDisable_;
+namespace Trigger{ 
 
-    TriggerChangeControl* clone_impl() const override;
+    class ChangeControl: public Interface{
+        /*
+        * Plain pointer but it should not be triggered outside of event manager.
+        */
+        Event::Manager* manager_;
+        std::vector<std::string> toDisable_;
+        std::vector<std::string> toEnable_;
+        std::unique_ptr<ChangeControlInterface> triggerToEnable_;
+        std::unique_ptr<ChangeControlInterface> triggerToDisable_;
 
-public:
-    /**
-     * @brief Construct a new TriggerDragControl object and get the address of the EventManager.
-     * It makes copy of TriggerChangeControlInterface.
-     * 
-     * @param manager 
-     */
-    TriggerChangeControl(EventManager manager, TriggerChangeControlInterface triggerToEnable, TriggerChangeControlInterface triggerToDisable);
-    virtual ~TriggerChangeControl();
-    TriggerChangeControl(const TriggerChangeControl& other);
-    TriggerChangeControl(TriggerChangeControl&&);
-    TriggerChangeControl& operator=(TriggerChangeControl&&);
+        ChangeControl* clone_impl() const override;
 
-    void trigger(sf::RenderWindow& window, ControlMapping& control) override;
-    std::unique_ptr<TriggerChangeControl> clone() const;
-    bool equals(const TriggerEventInterface& other) const override;
+    public:
+        /**
+         * @brief Construct a new TriggerDragControl object and get the address of the EventManager.
+         * It makes copy of TriggerChangeControlInterface.
+         * 
+         * @param manager 
+         */
+        ChangeControl(Event::Manager manager, ChangeControlInterface triggerToEnable, ChangeControlInterface triggerToDisable);
+        virtual ~ChangeControl();
+        ChangeControl(const ChangeControl& other);
+        ChangeControl(ChangeControl&&);
+        ChangeControl& operator=(ChangeControl&&);
+
+        void trigger(sf::RenderWindow& window, std::unique_ptr<Control::KeyContainer>& control, const sf::Event& event) override;
+        std::unique_ptr<ChangeControl> clone() const;
+        bool equals(const Interface& other) const override;
 
 
-};
+    };
+
+}
 
 #endif

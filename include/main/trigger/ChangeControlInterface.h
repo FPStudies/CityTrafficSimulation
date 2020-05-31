@@ -9,16 +9,20 @@
 
 #include "../controls/ControlMapping.h"
 
-class TriggerChangeControlInterface{
+namespace Trigger{ 
 
-public:
-    /**
-     * @brief Used to find if specific kind of event occurred.
-     * 
-     * @return true 
-     * @return false 
-     */
-    virtual bool isTriggered(ControlMapping& control) = 0;
-};
+    class ChangeControlInterface{
+
+    public:
+        /**
+         * @brief Used to find if specific kind of event occurred.
+         * 
+         * @return true 
+         * @return false 
+         */
+        virtual bool isTriggered(Control::Mapping& control) = 0;
+    };
+
+}
 
 #endif

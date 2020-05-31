@@ -9,6 +9,7 @@
 
 #include "MappingTemplate.h"
 
+namespace Control{
 namespace Mouse{
     const static unsigned int WHEEL_OFFSET = 5;
     const static unsigned int MOVE_OFFSET = 7;
@@ -31,6 +32,6 @@ namespace Mouse{
 
     };
 }
-
+}
 
 #endif

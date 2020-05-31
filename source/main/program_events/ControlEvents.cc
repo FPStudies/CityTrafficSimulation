@@ -3,30 +3,30 @@
 #include "ControlEvents.h"
 
 
-ControlEvents::ControlEvents(std::unique_ptr<ControlSystem::Mapping>& mapping)
+Control::Control(std::unique_ptr<ControlSystem::Mapping>& mapping)
 : ctrlMapping_(std::move(mapping))
 {}
 
-ControlEvents::~ControlEvents() = default;
+Control::~Control() = default;
 
-ControlEvents::ControlEvents(const ControlEvents& other)
+Control::Control(const Control& other)
 : ctrlMapping_(std::make_unique<ControlSystem::Mapping>(other.ctrlMapping_))
 {}
 
-void ControlEvents::run(sf::RenderWindow& window, const sf::Event& event){
+void Control::run(sf::RenderWindow& window, const sf::Event& event){
     ctrlMapping_->trigger(window, event);
 }
 
-std::unique_ptr<ControlEvents> ControlEvents::clone() const{
-    return std::make_unique<ControlEvents>(*this);
+std::unique_ptr<Control> Control::clone() const{
+    return std::make_unique<Control>(*this);
 }
 
-bool ControlEvents::equals(const EventInterface& other) const{
-    return typeid(other) == typeid(ControlEvents) &&
-        dynamic_cast<const ControlEvents&>(other).ctrlMapping_ == this->ctrlMapping_;
+bool Control::equals(const EventInterface& other) const{
+    return typeid(other) == typeid(Control) &&
+        dynamic_cast<const Control&>(other).ctrlMapping_ == this->ctrlMapping_;
 }
 
-ControlSystem::Mapping& ControlEvents::getMapping(){
+ControlSystem::Mapping& Control::getMapping(){
     return *ctrlMapping_;
 }
 

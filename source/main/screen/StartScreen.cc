@@ -49,7 +49,7 @@ void StartScreen::setBox2D(){
 
 void StartScreen::setEventManager(){
     event_manager_ = std::make_unique<EventManager>();
-    std::shared_ptr<BasicEvents> ev = std::make_shared<BasicEvents>();
+    std::shared_ptr<Basic> ev = std::make_shared<Basic>();
 
     event_manager_->add("test", EventManager::State::ACTIVE, ev);
 }

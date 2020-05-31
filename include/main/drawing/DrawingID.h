@@ -9,7 +9,7 @@
 
 #include "../utility/ID.hpp"
 
-class DrawingID: virtual public ID<DrawingID>{
+class DrawingID: virtual public Utils::ID<DrawingID>{
 
     friend class Drawable;
 
