@@ -1,11 +1,11 @@
 /*
- * UIEvents.h
+ * UI.h
  *
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_UI_EVENTS_H
-#define TRAFFIC_SIM_UI_EVENTS_H
+#ifndef TRAFFIC_SIM_MAIN_EVENT_UI_H
+#define TRAFFIC_SIM_MAIN_EVENT_UI_H
 
 #include <SFML/Graphics.hpp>
 #include <vector>

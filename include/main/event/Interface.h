@@ -1,11 +1,11 @@
 /*
- * EventInterface.h
+ * Interface.h
  *
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_EVENT_INTERFACE_CPP
-#define TRAFFIC_SIM_EVENT_INTERFACE_CPP
+#ifndef TRAFFIC_SIM_MAIN_EVENT_INTERFACE_CPP
+#define TRAFFIC_SIM_MAIN_EVENT_INTERFACE_CPP
 
 #include <SFML/Graphics.hpp>
 #include <memory>
@@ -13,11 +13,22 @@
 namespace Event{
 
     class Interface{
+    public:
+        enum class Type: uint8_t{
+            Normal,
+            Toggle
+        };
+
+    private:
         virtual Interface* clone_impl() const = 0;
 
     public:
-        Interface() {};
-        virtual ~Interface() {};
+        Interface() = default;
+        virtual ~Interface() = default;        
+
+        virtual Type getType() const{
+            return Type::Normal;
+        }
 
         /**
          * @brief Do some action based on the event.

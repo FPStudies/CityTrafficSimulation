@@ -4,13 +4,12 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_BASIC_EVENTS_CC
-#define TRAFFIC_SIM_BASIC_EVENTS_CC
+#include "Basic.h"
 
-#include "BasicEvents.h"
+using namespace Event;
 
 Basic::Basic()
-: EventInterface()
+: Interface()
 {}
 
 Basic::~Basic(){}
@@ -29,7 +28,7 @@ std::unique_ptr<Basic> Basic::clone() const{
     return std::unique_ptr<Basic>(this->clone_impl());
 }
 
-bool Basic::equals(const EventInterface& other) const{
+bool Basic::equals(const Interface& other) const{
     if(typeid(Basic) == typeid(other))
         return true;
     return false;
@@ -38,5 +37,3 @@ bool Basic::equals(const EventInterface& other) const{
 Basic* Basic::clone_impl() const{
     return new Basic(*this);
 }
-
-#endif

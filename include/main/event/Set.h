@@ -1,11 +1,11 @@
 /*
- * EventSet.h
+ * Set.h
  *
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_EVENT_SET_H
-#define TRAFFIC_SIM_EVENT_SET_H
+#ifndef TRAFFIC_SIM_MAIN_EVENT_SET_H
+#define TRAFFIC_SIM_MAIN_EVENT_SET_H
 
 #include <SFML/Graphics.hpp>
 #include <memory>

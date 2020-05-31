@@ -17,10 +17,7 @@
 namespace Trigger{ 
 
     class ChangeControl: public Interface{
-        /*
-        * Plain pointer but it should not be triggered outside of event manager.
-        */
-        Event::Manager* manager_;
+        Event::Manager& manager_;
         std::vector<std::string> toDisable_;
         std::vector<std::string> toEnable_;
         std::unique_ptr<ChangeControlInterface> triggerToEnable_;
@@ -35,7 +32,11 @@ namespace Trigger{
          * 
          * @param manager 
          */
-        ChangeControl(Event::Manager manager, ChangeControlInterface triggerToEnable, ChangeControlInterface triggerToDisable);
+        ChangeControl(
+            Event::Manager& manager, 
+            ChangeControlInterface triggerToEnable, 
+            ChangeControlInterface triggerToDisable
+            );
         virtual ~ChangeControl();
         ChangeControl(const ChangeControl& other);
         ChangeControl(ChangeControl&&);

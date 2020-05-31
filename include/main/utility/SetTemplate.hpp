@@ -92,7 +92,11 @@ namespace Utils{
             return objects_.empty();
         }
 
-        Container getAll() const{
+        Container& getAll() const{
+            return objects_;
+        }
+
+        Container getAllCopy() const{
             return objects_;
         }
 

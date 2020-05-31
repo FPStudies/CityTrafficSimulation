@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_BASIC_EVENTS_H
-#define TRAFFIC_SIM_BASIC_EVENTS_H
+#ifndef TRAFFIC_SIM_MAIN_EVENT_BASIC_H
+#define TRAFFIC_SIM_MAIN_EVENT_BASIC_H
 
 #include <memory>
 

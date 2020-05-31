@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_CONTROL_EVENTS_H
-#define TRAFFIC_SIM_CONTROL_EVENTS_H
+#ifndef TRAFFIC_SIM_MAIN_EVENT_CONTROL_H
+#define TRAFFIC_SIM_MAIN_EVENT_CONTROL_H
 
 #include <memory>
 
@@ -15,7 +15,7 @@
 namespace Event{
 
     class Control: public Interface{
-        std::unique_ptr<ControlSystem::Mapping> ctrlMapping_;
+        std::unique_ptr<::Control::Mapping> ctrlMapping_;
 
         virtual Control* clone_impl() const override;
     public:
@@ -26,7 +26,7 @@ namespace Event{
          * 
          * @param mapping
          */
-        Control(std::unique_ptr<ControlSystem::Mapping>& mapping);
+        Control(std::unique_ptr<::Control::Mapping>& mapping);
         virtual ~Control();
         Control(const Control& other);
 
@@ -34,7 +34,7 @@ namespace Event{
         std::unique_ptr<Control> clone() const;
         virtual bool equals(const Interface& other) const override;
 
-        ControlSystem::Mapping& getMapping();
+        ::Control::Mapping& getMapping();
     };
 
 
