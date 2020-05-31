@@ -34,6 +34,7 @@ pathToBox2DLibrary = '#libraries/box2d-master/Build/bin/'
 binFolder = '#bin/'
 testsFolder = '#tests/bin/'
 pathToUtility = '#include/main/utility/'
+pathToControls = '#include/main/controls/'
 libraryPath = binFolder + 'libs/'
 programName = 'hello'
 programPath = '#'
@@ -185,7 +186,7 @@ SConscript(
 
 SConscript(
     'source/main/event/SConscript', 
-    exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
+    exports=['env_base', 'binFolder', 'pathToUtility', 'pathToControls', 'libraryPath'], 
     variant_dir = binFolder + 'main/event', 
     duplicate=0
     )

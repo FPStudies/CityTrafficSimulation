@@ -16,7 +16,6 @@
 #include <functional>
 
 #include "Set.h"
-#include "ToggleInterface.h"
 
 namespace Event{
 

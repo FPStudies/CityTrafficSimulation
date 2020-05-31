@@ -5,17 +5,28 @@
 Import('env_base')
 Import('binFolder')
 Import('pathToUtility')
+Import('pathToControls')
 Import('libraryPath')
 
 pathToH = '#include/main/event/'
 libraryName = 'events'
 
 HFilesMain = [
-    'Interface.h'
+    'Interface.h',
+    'ToggleInterface.h',
+    'Basic.cc',
+    'Control.cc',
+    'Set.cc',
+    'Manager.cc',
+    'UI.cc'
 ]
 
 HFilesUtility = [
     'SetTemplate.hpp'
+]
+
+HFilesControls = [
+    'ControlMapping.h'
 ]
 
 filesCPP = [
@@ -30,6 +41,7 @@ filesCPP = [
 
 filesHMain = [pathToH + x for x in HFilesMain]
 filesHUtil = [pathToUtility + x for x in HFilesUtility]
+filesHControl = [pathToControls + x for x in HFilesControls]
 
 env = env_base.Clone()
 
