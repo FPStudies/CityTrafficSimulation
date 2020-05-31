@@ -274,6 +274,6 @@ void Manager::checkEvents(sf::RenderWindow& window, sf::Event& event){
         if(!it->isActive())
             break;
 
-        it->getEventSet().checkEventsOccurence(event, window);
+        it->getEventSet().checkToggleOccurence(event, window, *this);
     }
 }

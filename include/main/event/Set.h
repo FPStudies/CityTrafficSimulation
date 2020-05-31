@@ -11,6 +11,7 @@
 #include <memory>
 
 #include "Interface.h"
+#include "ToggleInterface.h"
 #include "../utility/SetTemplate.hpp"
 
 namespace Event{
@@ -36,7 +37,7 @@ namespace Event{
          * @param window An window where you want to perform operations.
          */
         void checkEventsOccurence(sf::Event& event, sf::RenderWindow& window);
-
+        void checkToggleOccurence(sf::Event& event, sf::RenderWindow& window, Manager& manager);
     };
 
 }

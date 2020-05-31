@@ -16,6 +16,7 @@
 #include <functional>
 
 #include "Set.h"
+#include "ToggleInterface.h"
 
 namespace Event{
 
@@ -65,7 +66,6 @@ namespace Event{
         typedef std::shared_ptr<SetInner> Pointer;
         typedef std::map<std::string, Pointer> Map;
         typedef std::list<Pointer> List;
-        //typedef std::unordered_map<std::string, Manager::State> HashMap;
         typedef std::pair<std::reference_wrapper<SetInner>, Manager::State> MyPair;
         typedef std::vector<MyPair> ToChange;
 

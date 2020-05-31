@@ -10,9 +10,11 @@
 #include <memory>
 
 #include "../controls/ControlMapping.h"
-#include "Manager.h"
+#include "Interface.h"
 
 namespace Event{
+
+    class Manager;
 
     class ToggleInterface: public Interface{
         virtual ToggleInterface* clone_impl() const = 0;
