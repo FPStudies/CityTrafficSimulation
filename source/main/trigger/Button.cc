@@ -6,8 +6,8 @@
 
 #include "trigger/Button.h"
 
-Trigger::Button::Button(std::shared_ptr<::Button::Interface>& button)
-: button_(button)
+Trigger::Button::Button()
+: button_(nullptr)
 {}
 
 Trigger::Button::~Button() = default;
@@ -28,8 +28,14 @@ Trigger::Button* Trigger::Button::clone_impl() const{
     return new Trigger::Button(*this);
 }
 
+bool Trigger::Button::connect(std::shared_ptr<::Button::Interface>& button){
+    if(button_) return true;
+    button_ = button;
+    button->setTrigger(shared_from_this());
+}
+
 void Trigger::Button::trigger(sf::RenderWindow& window, const sf::Event& event) {
-    if(button_->isButtonChoosed(sf::Mouse::getPosition(window))){
+    if(button_  && button_->isButtonChoosed(sf::Mouse::getPosition(window))){
         // trigger functions
 
         if(event.type == sf::Event::KeyPressed && event.key.code == sf::Mouse::Button::Left){

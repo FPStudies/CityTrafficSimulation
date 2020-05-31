@@ -16,18 +16,20 @@
 
 namespace Trigger{ 
 
-    class Button: public Interface{
+    class Button: public Interface, public std::enable_shared_from_this<Button>{
         std::shared_ptr<::Button::Interface> button_;
 
     private:
         Button* clone_impl() const override;
 
     public:
-        Button(std::shared_ptr<::Button::Interface>& button);
+        Button();
         virtual ~Button();
         Button(const Button& other);
         Button(Button&& other);
         Button& operator=(Button&& other);
+
+        bool connect(std::shared_ptr<::Button::Interface>& button);
 
         void trigger(sf::RenderWindow& window, const sf::Event& event) override;
         std::unique_ptr<Button> clone() const;

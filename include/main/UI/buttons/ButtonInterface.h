@@ -25,7 +25,7 @@ namespace Button{
         {}
         virtual ~Interface() = default;
 
-        void setTrigger(std::shared_ptr<Trigger::Button>& buttonTrigger){
+        void setTrigger(std::shared_ptr<Trigger::Button> buttonTrigger){
             trigger_ = buttonTrigger;
         }
 
