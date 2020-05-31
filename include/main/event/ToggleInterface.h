@@ -11,6 +11,7 @@
 
 #include "../controls/ControlMapping.h"
 #include "Interface.h"
+#include <typeinfo>
 
 namespace Event{
 

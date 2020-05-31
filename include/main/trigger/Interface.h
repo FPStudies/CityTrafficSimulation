@@ -9,6 +9,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <memory>
+#include <typeinfo>
 
 
 namespace Control{
@@ -25,6 +26,7 @@ namespace Trigger{
      * 
      */
     class Interface{
+    private:
         virtual Interface* clone_impl() const = 0;
 
     public:
