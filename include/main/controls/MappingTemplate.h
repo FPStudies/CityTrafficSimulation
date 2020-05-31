@@ -136,13 +136,13 @@ namespace Control{
          * 
          * @param control Where the triggers are.
          */
-        void trigger(sf::RenderWindow &window, TemplateControls copyControl, std::unique_ptr<Control::KeyContainer>& control, const sf::Event& event){
+        void trigger(sf::RenderWindow &window, TemplateControls copyControl, const sf::Event& event){
             auto it = mapping_.find(copyControl);
             if(it == mapping_.end()) return;
 
             auto iEnd = it->second.end();
             for(auto i = it->second.begin(); i != iEnd; ++i){
-                (*i)->trigger(window, control, event);
+                (*i)->trigger(window, event);
             }
         }
         

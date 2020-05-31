@@ -29,7 +29,7 @@ namespace Trigger{
         Button(Button&& other);
         Button& operator=(Button&& other);
 
-        void trigger(sf::RenderWindow& window, std::unique_ptr<Control::KeyContainer>& control, const sf::Event& event) override;
+        void trigger(sf::RenderWindow& window, const sf::Event& event) override;
         std::unique_ptr<Button> clone() const;
         bool equals(const Interface& other) const override;
 

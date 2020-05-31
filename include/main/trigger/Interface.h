@@ -35,7 +35,7 @@ namespace Trigger{
         Interface(const Interface&) = delete;
         Interface(const Interface&&) {};
 
-        virtual void trigger(sf::RenderWindow& window, std::unique_ptr<Control::KeyContainer>& control, const sf::Event& event) = 0;
+        virtual void trigger(sf::RenderWindow& window, const sf::Event& event) = 0;
 
         std::unique_ptr<Interface> clone() const{
             return std::unique_ptr<Interface>(this->clone_impl());

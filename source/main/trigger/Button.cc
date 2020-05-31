@@ -28,7 +28,7 @@ Trigger::Button* Trigger::Button::clone_impl() const{
     return new Trigger::Button(*this);
 }
 
-void Trigger::Button::trigger(sf::RenderWindow& window, std::unique_ptr<Control::KeyContainer>& control, const sf::Event& event) {
+void Trigger::Button::trigger(sf::RenderWindow& window, const sf::Event& event) {
     if(button_->isButtonChoosed(sf::Mouse::getPosition(window))){
         // trigger functions
 

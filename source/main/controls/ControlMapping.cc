@@ -112,12 +112,10 @@ void Control::Mapping::trigger(sf::RenderWindow &window, const sf::Event& event)
     if(ret == -1) throw std::runtime_error("Trigger cannot interpret event");
 
     if(event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased){
-        std::unique_ptr<Control::KeyContainer> newControl(std::make_unique<Control::KeyContainer>(static_cast<Keyboard::Key>(ret)));
-        keyCtrl_.trigger(window, static_cast<Keyboard::Key>(ret), newControl, event);
+        keyCtrl_.trigger(window, static_cast<Keyboard::Key>(ret), event);
     }
     else{
-        std::unique_ptr<Control::KeyContainer> newControl(std::make_unique<Control::KeyContainer>(static_cast<Mouse::Controls>(ret)));
-        mouseCtrl_.trigger(window, static_cast<Mouse::Controls>(ret), newControl, event);
+        mouseCtrl_.trigger(window, static_cast<Mouse::Controls>(ret), event);
     }
 }
 

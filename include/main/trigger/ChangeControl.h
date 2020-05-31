@@ -42,7 +42,7 @@ namespace Trigger{
         ChangeControl(ChangeControl&&);
         ChangeControl& operator=(ChangeControl&&);
 
-        void trigger(sf::RenderWindow& window, std::unique_ptr<Control::KeyContainer>& control, const sf::Event& event) override;
+        void trigger(sf::RenderWindow& window, const sf::Event& event) override;
         std::unique_ptr<ChangeControl> clone() const;
         bool equals(const Interface& other) const override;
 

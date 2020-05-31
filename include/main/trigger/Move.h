@@ -27,7 +27,7 @@ namespace Trigger{
         Move(Move&&);
         Move& operator=(Move&&);
 
-        void trigger(sf::RenderWindow& window, std::unique_ptr<Control::KeyContainer>& control, const sf::Event& event) override;
+        void trigger(sf::RenderWindow& window, const sf::Event& event) override;
         std::unique_ptr<Move> clone() const;
         bool equals(const Interface& other) const override;
 
