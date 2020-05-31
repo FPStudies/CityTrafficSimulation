@@ -171,7 +171,7 @@ SConscript(
     )
 
 SConscript(
-    'source/main/controls/SConscript', 
+    '#source/main/controls/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
     variant_dir = binFolder + 'main/controls', 
     duplicate=0

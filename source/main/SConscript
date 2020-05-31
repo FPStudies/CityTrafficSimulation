@@ -70,5 +70,3 @@ env.Append(
 )
 
 programFile = env.Program(target = programPath + programName, source = filesHMain + filesCPP + objectFiles)
-
-Return('programFile')

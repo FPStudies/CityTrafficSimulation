@@ -13,7 +13,7 @@ Event::Control::Control(std::unique_ptr<::Control::Mapping>& mapping)
 Event::Control::~Control() = default;
 
 Event::Control::Control(const Control& other)
-: ctrlMapping_(std::make_unique<::Control::Mapping>(other.ctrlMapping_))
+: ctrlMapping_(std::make_unique<::Control::Mapping>(*other.ctrlMapping_))
 {}
 
 void Event::Control::run(sf::RenderWindow& window, const sf::Event& event){

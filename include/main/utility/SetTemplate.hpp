@@ -96,6 +96,10 @@ namespace Utils{
             return objects_;
         }
 
+        const Container& getAllConst() const{
+            return objects_;
+        }
+
         Container getAllCopy() const{
             return objects_;
         }
