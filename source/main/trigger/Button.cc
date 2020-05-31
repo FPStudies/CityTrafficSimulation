@@ -28,6 +28,10 @@ Trigger::Button* Trigger::Button::clone_impl() const{
     return new Trigger::Button(*this);
 }
 
+std::shared_ptr<Trigger::Button> Trigger::Button::create(){
+    return std::make_shared<Trigger::Button>(Trigger::Button());
+}
+
 bool Trigger::Button::connect(std::shared_ptr<::Button::Interface>& button){
     if(button_) return true;
     button_ = button;

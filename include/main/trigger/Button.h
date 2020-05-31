@@ -21,9 +21,15 @@ namespace Trigger{
 
     private:
         Button* clone_impl() const override;
+        Button();
 
     public:
-        Button();
+        /**
+         * @brief Create an Trigger::Button object.
+         * 
+         * @return std::shared_ptr<Button> - returned Trigger::Button object
+         */
+        static std::shared_ptr<Button> create();
         virtual ~Button();
         Button(const Button& other);
         Button(Button&& other);
