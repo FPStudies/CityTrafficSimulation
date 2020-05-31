@@ -17,7 +17,7 @@ ScreenID::ScreenID()
 : ID()
 {}
 
-ScreenID::~ScreenID() {}
+ScreenID::~ScreenID() = default;
 
 ScreenID::ScreenID(const ScreenID& other)
 : ID(other)

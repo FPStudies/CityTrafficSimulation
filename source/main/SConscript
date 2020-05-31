@@ -23,7 +23,8 @@ programLibraries = [
     'events', 
     'screenLib', 
     'drawing',
-    'collision'
+    'collision',
+    'controls'
 ]
 
 externalLibraries = [

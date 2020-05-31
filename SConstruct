@@ -170,6 +170,13 @@ SConscript(
     )
 
 SConscript(
+    'source/main/controls/SConscript', 
+    exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
+    variant_dir = binFolder + 'main/controls', 
+    duplicate=0
+    )
+
+SConscript(
     'source/main/collision/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
     variant_dir = binFolder + 'main/collision', 
@@ -177,9 +184,9 @@ SConscript(
     )
 
 SConscript(
-    'source/main/program_events/SConscript', 
+    'source/main/event/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
-    variant_dir = binFolder + 'main/program_events', 
+    variant_dir = binFolder + 'main/event', 
     duplicate=0
     )
 
@@ -199,10 +206,10 @@ SConscript(
     )
 
 
-#print(Glob(['*.cpp', '../graphic_library_facade/*.o', 'program_events/*.o']))
+#print(Glob(['*.cpp', '../graphic_library_facade/*.o', 'event/*.o']))
 
-#env.Program('hello', Glob(['*.cpp', '../graphic_library_facade/*.o', 'program_events/*.o']))
-#env.Program(target = 'hello', source = ['main.cpp', 'renderLoop.cpp', '../graphic_library_facade/graphicLibraryFacade.o', 'program_events/basicEvents.o', 'program_events/eventManager.o', 'program_events/eventInterface.h'])
+#env.Program('hello', Glob(['*.cpp', '../graphic_library_facade/*.o', 'event/*.o']))
+#env.Program(target = 'hello', source = ['main.cpp', 'renderLoop.cpp', '../graphic_library_facade/graphicLibraryFacade.o', 'event/basicEvents.o', 'event/eventManager.o', 'event/eventInterface.h'])
 #['main.cpp', 'renderLoop.cpp', '../graphic_library_facade/graphicLibraryFacade.o']
 
 #hello = env.Program(target = 'hello', source = ['source/main/main.cpp', 'source/main/renderLoop.cpp', 'build/graphic_library_facade/graphicLibraryFacade.o'])

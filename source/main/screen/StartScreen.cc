@@ -13,7 +13,7 @@ StartScreen::StartScreen()
 : ScreenInteface()
 {}
 
-StartScreen::~StartScreen() {}
+StartScreen::~StartScreen() = default;
 
 void StartScreen::setBox2D(){
     world_ = std::make_unique<b2World>(b2Vec2( 0.0f, -10.0f ));
@@ -48,10 +48,10 @@ void StartScreen::setBox2D(){
 }
 
 void StartScreen::setEventManager(){
-    event_manager_ = std::make_unique<EventManager>();
-    std::shared_ptr<Basic> ev = std::make_shared<Basic>();
+    event_manager_ = std::make_unique<Event::Manager>();
+    std::shared_ptr<Event::Basic> ev = std::make_shared<Event::Basic>();
 
-    event_manager_->add("test", EventManager::State::ACTIVE, ev);
+    event_manager_->add("test", Event::Manager::State::ACTIVE, ev);
 }
 
 ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){

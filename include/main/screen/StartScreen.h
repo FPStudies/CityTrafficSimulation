@@ -16,15 +16,15 @@
 #include "FixedFramerate.h"
 #include "CoordinateSystem.h"
 
-#include "../program_events/EventManager.h"
-#include "../program_events/BasicEvents.h"
+#include "../event/Basic.h"
+#include "../event/Manager.h"
 
 
 #include "../drawing/DrawManager.h"
 
 class StartScreen: virtual public ScreenInteface{
     std::unique_ptr<b2World> world_;
-    std::unique_ptr<EventManager> event_manager_;
+    std::unique_ptr<Event::Manager> event_manager_;
     std::unique_ptr<sf::View> view_;
 
     void setBox2D();

@@ -5,7 +5,7 @@ Import('env_tests')
 Import('binFolder')
 Import('sys')
 
-pathToH = '#include/main/program_events'
+pathToH = '#include/main/event'
 
 env = env_tests.Clone()
 

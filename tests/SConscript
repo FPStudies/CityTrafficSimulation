@@ -41,7 +41,7 @@ SConscript(
     )
 
 SConscript(
-    'main/program_events/SConscript', 
+    'main/event/SConscript', 
     exports = ['env_tests', 'binFolder', 'sys'], 
     duplicate=0
     )

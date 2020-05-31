@@ -7,12 +7,11 @@ Import('binFolder')
 Import('pathToUtility')
 Import('libraryPath')
 
-pathToH = '#include/main/program_events/'
+pathToH = '#include/main/event/'
 libraryName = 'events'
 
 HFilesMain = [
-    'EventInterface.h',
-    'Events.h',
+    'Interface.h'
 ]
 
 HFilesUtility = [
@@ -20,10 +19,11 @@ HFilesUtility = [
 ]
 
 filesCPP = [
-    'BasicEvents.cc',
-    'EventSet.cc',
-    'EventManager.cc',
-    'UIEvents.cc'
+    'Basic.cc',
+    'Control.cc',
+    'Set.cc',
+    'Manager.cc',
+    'UI.cc'
 ]
 
 

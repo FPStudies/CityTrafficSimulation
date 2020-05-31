@@ -10,7 +10,12 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
-#include "../controls/ControlMapping.h"
+
+namespace Control{
+    class Mapping;
+    class KeyContainer;    
+}
+
 
 
 namespace Trigger{
@@ -23,8 +28,8 @@ namespace Trigger{
         virtual Interface* clone_impl() const = 0;
 
     public:
-        Interface() {};
-        virtual ~Interface() {};
+        Interface() = default;
+        virtual ~Interface() = default;
         Interface(const Interface&) = delete;
         Interface(const Interface&&) {};
 

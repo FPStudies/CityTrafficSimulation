@@ -1,32 +1,30 @@
 
 #include "ControlMapping.h"
 
-using namespace ControlSystem;
-
-Mapping::Mapping()
+Control::Mapping::Mapping()
 : keyCtrl_(), mouseCtrl_()
 {}
 
-Mapping::~Mapping() = default;
+Control::Mapping::~Mapping() = default;
 
-Mapping::Mapping(Mapping&& other)
+Control::Mapping::Mapping(Mapping&& other)
 : keyCtrl_(std::move(other.keyCtrl_)), mouseCtrl_(std::move(other.mouseCtrl_))
 {}
 
-Mapping::Mapping(const Mapping& other)
+Control::Mapping::Mapping(const Mapping& other)
 : keyCtrl_(other.keyCtrl_), mouseCtrl_(other.mouseCtrl_)
 {}
 
-Mapping& Mapping::operator=(Mapping&& other){
+Control::Mapping& Control::Mapping::operator=(Mapping&& other){
     keyCtrl_ = std::move(other.keyCtrl_);
     mouseCtrl_ = std::move(other.mouseCtrl_);
 }
 
-bool Mapping::operator==(const Mapping& other) const{
+bool Control::Mapping::operator==(const Mapping& other) const{
     return keyCtrl_ == other.keyCtrl_ && mouseCtrl_ == other.mouseCtrl_;
 }
 
-int Mapping::translateEvent(const sf::Event& event){
+int Control::Mapping::translateEvent(const sf::Event& event){
     switch(event.type){
         case sf::Event::KeyPressed :
         case sf::Event::KeyReleased :
@@ -47,113 +45,113 @@ int Mapping::translateEvent(const sf::Event& event){
     }
 }
 
-bool Mapping::addControl(Mouse::Controls control, const std::shared_ptr<TriggerEventInterface>& event){
+bool Control::Mapping::addControl(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event){
     mouseCtrl_.addControl(control, event);
 }
 
-bool Mapping::addControlFast(Mouse::Controls control, const std::shared_ptr<TriggerEventInterface>& event){
+bool Control::Mapping::addControlFast(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event){
     mouseCtrl_.addControlFast(control, event);
 }
 
-bool Mapping::removeControl(Mouse::Controls control, const std::shared_ptr<TriggerEventInterface>& event){
+bool Control::Mapping::removeControl(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event){
     mouseCtrl_.removeControl(control, event);
 }
 
-bool Mapping::removeControlFast(Mouse::Controls control, const std::shared_ptr<TriggerEventInterface>& event){
+bool Control::Mapping::removeControlFast(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event){
     mouseCtrl_.removeControlFast(control, event);
 }
 
-bool Mapping::removeControl(Mouse::Controls control){
+bool Control::Mapping::removeControl(Mouse::Controls control){
     mouseCtrl_.removeControl(control);
 }
 
 
-bool Mapping::addControl(Keyboard::Key control, const std::shared_ptr<TriggerEventInterface>& event){
+bool Control::Mapping::addControl(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event){
     keyCtrl_.addControl(control, event);
 }
 
-bool Mapping::addControlFast(Keyboard::Key control, const std::shared_ptr<TriggerEventInterface>& event){
+bool Control::Mapping::addControlFast(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event){
     keyCtrl_.addControlFast(control, event);
 }
 
-bool Mapping::removeControl(Keyboard::Key control, const std::shared_ptr<TriggerEventInterface>& event){
+bool Control::Mapping::removeControl(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event){
     keyCtrl_.removeControl(control, event);
 }
 
-bool Mapping::removeControlFast(Keyboard::Key control, const std::shared_ptr<TriggerEventInterface>& event){
+bool Control::Mapping::removeControlFast(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event){
     keyCtrl_.removeControlFast(control, event);
 }
 
-bool Mapping::removeControl(Keyboard::Key control){
+bool Control::Mapping::removeControl(Keyboard::Key control){
     keyCtrl_.removeControl(control);
 }
 
-void Mapping::trigger(sf::RenderWindow &window, const sf::Event& event){
+void Control::Mapping::trigger(sf::RenderWindow &window, const sf::Event& event){
     int ret = translateEvent(event);
     if(ret == -1) throw std::runtime_error("Trigger cannot interpret event");
 
     if(event.type == sf::Event::KeyPressed || event.type == sf::Event::KeyReleased){
-        std::unique_ptr<ControlSystem::Controls> newControl(std::make_unique<ControlSystem::Controls>(static_cast<Keyboard::Key>(ret)));
+        std::unique_ptr<Control::KeyContainer> newControl(std::make_unique<Control::KeyContainer>(static_cast<Keyboard::Key>(ret)));
         keyCtrl_.trigger(window, static_cast<Keyboard::Key>(ret), newControl, event);
     }
     else{
-        std::unique_ptr<ControlSystem::Controls> newControl(std::make_unique<ControlSystem::Controls>(static_cast<Mouse::Controls>(ret)));
+        std::unique_ptr<Control::KeyContainer> newControl(std::make_unique<Control::KeyContainer>(static_cast<Mouse::Controls>(ret)));
         mouseCtrl_.trigger(window, static_cast<Mouse::Controls>(ret), newControl, event);
     }
 }
 
 
 
-Controls::Controls(Mouse::Controls other)
+Control::KeyContainer::KeyContainer(Mouse::Controls other)
 : control_(other), type_(Type::Mouse)
 {}
 
-Controls::Controls(Keyboard::Key other)
+Control::KeyContainer::KeyContainer(Keyboard::Key other)
 : control_(other), type_(Type::Keyboard)
 {}
 
-Controls::~Controls() = default;
+Control::KeyContainer::~KeyContainer() = default;
 
-Controls::Controls(const Controls& other)
+Control::KeyContainer::KeyContainer(const KeyContainer& other)
 : control_(other.control_), type_(other.type_)
 {}
 
-Controls::Controls(Controls&& other)
+Control::KeyContainer::KeyContainer(KeyContainer&& other)
 : control_(other.control_), type_(other.type_)
 {}
 
-Controls& Controls::operator=(Controls&& other){
+Control::KeyContainer& KeyContainer::operator=(KeyContainer&& other){
     control_ = other.control_;
     type_ = other.type_;
     return *this;
 }
 
-bool Controls::operator==(const Controls& other){
+bool Control::KeyContainer::operator==(const KeyContainer& other){
     if(type_ != other.type_ || control_ != other.control_) 
         return false;
     return true;
 }
 
-bool Controls::operator<(const Controls& other){
+bool Control::KeyContainer::operator<(const KeyContainer& other){
     if(control_ < other.control_) 
         return true;
     return false;
 }
 
-void Controls::setMouseControl(Mouse::Controls control){
+void Control::KeyContainer::setMouseControl(Mouse::Controls control){
     control_ = control;
     type_ = Type::Mouse;
 }
-void Controls::setKeyboardControl(Keyboard::Key control){
+void Control::KeyContainer::setKeyboardControl(Keyboard::Key control){
     control_ = control;
     type_ = Type::Keyboard;
 }
 
-int Controls::getControls(){
+int Control::KeyContainer::getControls(){
     return control_;
 }
 
-Controls::Type Controls::getType(){
+Control::KeyContainer::Type KeyContainer::getType(){
     return type_;
 }
 
