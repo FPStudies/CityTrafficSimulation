@@ -34,6 +34,5 @@ bool Event::Control::equals(const Interface& other) const{
 }
 
 Event::Control* Event::Control::clone_impl() const{
-
-return nullptr; //TODO:
+    return new Event::Control(*this);
 }

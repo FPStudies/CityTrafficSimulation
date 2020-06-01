@@ -56,13 +56,15 @@ namespace Control{
          * @return false - event was added to provided control.
          */
         bool addControl(TemplateControls control, const std::shared_ptr<::Trigger::Event::Interface>& event){
-            auto it = mapping_[control];
+            auto& it = mapping_[control];
+
             for(auto i = it.cbegin(); i != it.cend(); ++i){
                 if((*i) == event)
                     return true;
             }
             it.push_back(event);
-            return  false;
+            
+            return false;
         }
 
         /**
@@ -142,6 +144,7 @@ namespace Control{
 
             auto iEnd = it->second.end();
             for(auto i = it->second.begin(); i != iEnd; ++i){
+                
                 (*i)->trigger(window, event);
             }
         }

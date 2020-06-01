@@ -81,13 +81,15 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     // this unique_ptr is needed only at creation time. Later this pointer is useless.
     std::unique_ptr<Control::Mapping> controls = std::make_unique<Control::Mapping>();    
     // this trigger will be triggered when the mouse will be used.
-    controls->addControl(Control::Mouse::ButtonLeft, triggerButtonEvent);
+    bool ret = controls->addControl(Control::Mouse::ButtonLeft, triggerButtonEvent);
+    if(ret) std::cout << "NIE\n";
     
     // now we connect control to the event that is used only to store the controls and call it.
     // the only thing this event control is doing is spliting the keyboard and the mouse invoking.
     std::shared_ptr<Event::Control> eventControl = std::make_shared<Event::Control>(controls);
     // this can be used to get the previous unique_ptr mapping
-    eventControl->getMapping();
+    eventControl->getMapping().addControl(Control::Mouse::ButtonLeft, triggerButtonEvent);
+    eventControl->getMapping().addControl(Control::Mouse::ButtonRight, triggerButtonEvent);
     // now add event that control the controls to the event manager
     event_manager_->addNew("test_button", Event::Manager::State::ACTIVE, eventControl);
 
@@ -127,8 +129,8 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
         }
         world_->Step(framerate.getRealDiff(), 6, 2 );
         rectangle.setPosition(coord_to_SFML.translateX(world_->GetBodyList()->GetPosition().x), coord_to_SFML.translateY(world_->GetBodyList()->GetPosition().y));
-        std::cout << world_->GetBodyList()->GetPosition().x << " " << world_->GetBodyList()->GetPosition().y << " " << framerate.getRealFramerate() << "\n";
-
+        //std::cout << world_->GetBodyList()->GetPosition().x << " " << world_->GetBodyList()->GetPosition().y << " " << framerate.getRealFramerate() << "\n";
+        std::cout << sf::Mouse::getPosition(*window).x << "  " << sf::Mouse::getPosition(*window).y << "\n";
         window->clear();
         window->draw(rectangle);
         window->display();    
