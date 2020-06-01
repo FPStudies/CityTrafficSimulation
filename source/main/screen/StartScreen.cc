@@ -63,21 +63,41 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     // but when we connect it to the Trigger::Event that will tell us how to
     // interpret the event from sfml and will call the right method from button object.
     // In short trigger will call the right method based on sfml event.
+
+    // this must be shared, because the trigger must have the button to invoke its methods
     std::shared_ptr<Button::Exit> exitButton = std::make_shared<Button::Exit>(*window);
+
+
     // create action trigger that will interpret the sfml event and will call method from button object.
-    // shared_ptr
+
+    // shared_ptr, because the button could have a need to change something in his trigger
     auto triggerButtonEvent = Trigger::Event::Button::create();
     // connect them both
     triggerButtonEvent->connect(exitButton);
+
+
     // create control mapping
+
+    // this unique_ptr is needed only at creation time. Later this pointer is useless.
     std::unique_ptr<Control::Mapping> controls = std::make_unique<Control::Mapping>();    
     // this trigger will be triggered when the mouse will be used.
     controls->addControl(Control::Mouse::ButtonLeft, triggerButtonEvent);
+    
     // now we connect control to the event that is used only to store the controls and call it.
     // the only thing this event control is doing is spliting the keyboard and the mouse invoking.
     std::shared_ptr<Event::Control> eventControl = std::make_shared<Event::Control>(controls);
+    // this can be used to get the previous unique_ptr mapping
+    eventControl->getMapping();
     // now add event that control the controls to the event manager
     event_manager_->addNew("test_button", Event::Manager::State::ACTIVE, eventControl);
+
+    /*
+    Event manager can have multiple controls that some are inactive and some are active.
+    Event control stores maping key -> trigger. One trigger can be mapped to multiple keys.
+    Trigger will tell how to manage the event.
+    Trigger can have other objects like button. I decidet that the button object will tell what to do instead of trigger but this can be different.
+    Button should know what trigger is used on him.
+    */
 
     auto& coord_set = CoordinateSystemSet::getInstance();
     coord_set.addNewSystem(0.0f, 0.0f, false, true, "basic", "sfml");
