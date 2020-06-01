@@ -33,3 +33,7 @@ bool Event::Control::equals(const Interface& other) const{
     return *ctrlMapping_;
 }
 
+Event::Control* Event::Control::clone_impl() const{
+
+return nullptr; //TODO:
+}

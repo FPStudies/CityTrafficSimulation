@@ -23,8 +23,7 @@ HFilesUtility = [
 env = env_base.Clone()
 
 filesCPP = [
-    Glob('*.cc'),
-    Glob('../event/*.cc') #TODO:causes SCons environment warnings, maybe compile object separately
+    Glob('*.cc')
 ]
 
 
@@ -38,6 +37,8 @@ env.Append(
     ]
     )
 
+libEventsName = "%sevents%s" % (env['LIBPREFIX'], env['LIBSUFFIX'])
+
 env.StaticLibrary(
     target = libraryPath + libraryName, 
-    source = filesCPP)
+    source = [filesCPP, libraryPath + libEventsName])

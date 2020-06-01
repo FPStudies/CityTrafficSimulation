@@ -20,13 +20,13 @@ SFMLLibraries = [
 ]
 
 programLibraries = [
-    'events', 
     'screenLib', 
+    'events', 
     'drawing',
     'collision',
     'controls',
-    'Triggers',
-    'Buttons'
+    'Buttons',
+    'Triggers'
 ]
 
 externalLibraries = [
