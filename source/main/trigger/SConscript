@@ -6,13 +6,13 @@ Import('env_base')
 
 Import('pathTo_drawing')
 Import('pathTo_controls')
-Import('pathTo_UI')
+Import('pathTo_UI_button')
 Import('pathTo_trigger')
 
 Import('libraryPath')
 
-pathToH = pathToTrigger + 'action/'
-pathToH2 = pathToTrigger + 'event/'
+pathToH = pathTo_trigger + 'action/'
+pathToH2 = pathTo_trigger + 'event/'
 libraryName = 'Triggers'
 
 HFilesMain = [
@@ -27,7 +27,7 @@ HFilesControls = [
 ]
 
 HFilesUI = [
-    'button/Interface.h'
+    'Interface.h'
 ]
 
 env = env_base.Clone()
@@ -40,13 +40,15 @@ filesCPP = [
 
 
 filesHMain = [pathTo_trigger + x for x in HFilesMain]
-filesHControls = [pathToControls + x for x in HFilesControls]
-filesH_UI = [pathToUI + x for x in HFilesUI]
+filesHControls = [pathTo_controls + x for x in HFilesControls]
+filesH_UI = [pathTo_UI_button + x for x in HFilesUI]
 
 env.Append(
     CPPPATH = [
         pathToH, 
-        pathToH2
+        pathToH2,
+        pathTo_controls,
+        pathTo_UI_button
         ]
     )
 

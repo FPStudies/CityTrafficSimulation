@@ -35,15 +35,17 @@ filesCPP = [
 
 
 filesHMain = [pathToH + x for x in HFilesMain]
-filesHDrawing = [pathToDrawing + x for x in HFilesDrawing]
-filesHTrigger = [pathToTrigger + x for x in HFilesTrigger]
+filesHDrawing = [pathTo_drawing + x for x in HFilesDrawing]
+filesHTrigger = [pathTo_trigger + x for x in HFilesTrigger]
 
 env = env_base.Clone()
 
 env.Append(
     CPPPATH = [
         pathToH, 
-        pathToH2
+        pathToH2,
+        pathTo_UI_button,
+        pathTo_trigger
         ]
     )
 

@@ -4,7 +4,7 @@
  *      Author: Kordowski Mateusz
  */
 
-#include "trigger/event/Button.h"
+#include "Button.h"
 
 Trigger::Event::Button::Button()
 : button_(nullptr)
@@ -22,6 +22,7 @@ Trigger::Event::Button::Button(const Button& other)
 
 Trigger::Event::Button& Trigger::Event::Button::operator=(Button&& other){
     button_ = std::move(other.button_);
+    return *this;
 }
 
 Trigger::Event::Button* Trigger::Event::Button::clone_impl() const{
@@ -36,16 +37,17 @@ bool Trigger::Event::Button::connect(const std::shared_ptr<::Button::Interface>&
     if(button_) return true;
     button_ = button;
     button->addTrigger(shared_from_this());
+    return false;
 }
 
 void Trigger::Event::Button::trigger(sf::RenderWindow& window, const sf::Event& event) {
     if(button_  && button_->isButtonChoosed(sf::Mouse::getPosition(window))){
         // trigger functions
 
-        if(event.type == sf::Event::KeyPressed && event.key.code == sf::Mouse::Button::Left){
+        if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Button::Left){
             button_->actionPressedButton();
         }
-        else if(event.type == sf::Event::KeyReleased && event.key.code == sf::Mouse::Button::Left){
+        else if(event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Button::Left){
             button_->actionReleasedButton();
         }
     }

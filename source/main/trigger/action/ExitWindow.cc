@@ -1,7 +1,7 @@
 
 
 
-#include "trigger/action/ExitWindow.h"
+#include "ExitWindow.h"
 
 using namespace Trigger::Action;
 

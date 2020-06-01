@@ -39,6 +39,11 @@ libraryPath = binFolder + 'libs/'
 programName = 'hello'
 programPath = '#'
 
+pathTo_drawing = '#include/main/drawing/'
+pathTo_trigger = "#include/main/trigger/"
+pathTo_UI_button = "#include/main/UI/button/"
+pathTo_controls = '#include/main/controls/'
+
 
 
 #environment variable setup
@@ -204,11 +209,6 @@ SConscript(
     variant_dir = binFolder + 'main/drawing', 
     duplicate=0
     )   
-
-pathTo_drawing = '#include/main/drawing/'
-pathTo_trigger = "#include/mian/trigger/"
-pathTo_UI_button = "#include/main/UI/button/"
-pathTo_controls = '#include/main/controls/'
 
 # UI / button
 SConscript(
