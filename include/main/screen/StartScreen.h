@@ -22,6 +22,11 @@
 
 #include "../drawing/DrawManager.h"
 
+#include "../UI/button/specialization/Exit.h"
+#include "../trigger/event/Button.h"
+#include "../controls/ControlMapping.h"
+#include "../event/Control.h"
+
 class StartScreen: virtual public ScreenInteface{
     std::unique_ptr<b2World> world_;
     std::unique_ptr<Event::Manager> event_manager_;

@@ -58,6 +58,27 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     setBox2D();
     setEventManager();
 
+    // how it is done
+    // create button object. this object on press will do nothing
+    // but when we connect it to the Trigger::Event that will tell us how to
+    // interpret the event from sfml and will call the right method from button object.
+    // In short trigger will call the right method based on sfml event.
+    std::shared_ptr<Button::Exit> exitButton = std::make_shared<Button::Exit>(*window);
+    // create action trigger that will interpret the sfml event and will call method from button object.
+    // shared_ptr
+    auto triggerButtonEvent = Trigger::Event::Button::create();
+    // connect them both
+    triggerButtonEvent->connect(exitButton);
+    // create control mapping
+    std::unique_ptr<Control::Mapping> controls = std::make_unique<Control::Mapping>();    
+    // this trigger will be triggered when the mouse will be used.
+    controls->addControl(Control::Mouse::ButtonLeft, triggerButtonEvent);
+    // now we connect control to the event that is used only to store the controls and call it.
+    // the only thing this event control is doing is spliting the keyboard and the mouse invoking.
+    std::shared_ptr<Event::Control> eventControl = std::make_shared<Event::Control>(controls);
+    // now add event that control the controls to the event manager
+    event_manager_->addNew("test_button", Event::Manager::State::ACTIVE, eventControl);
+
     auto& coord_set = CoordinateSystemSet::getInstance();
     coord_set.addNewSystem(0.0f, 0.0f, false, true, "basic", "sfml");
     coord_set.addNewSystem(0.0f, 0.0f, true, false, "basic", "view");

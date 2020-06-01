@@ -11,10 +11,10 @@
 #include <memory>
 
 #include "Interface.h"
-#include "../controls/ControlMapping.h"
-#include "../UI/buttons/ButtonInterface.h"
+#include "../../controls/ControlMapping.h"
+#include "../../UI/button/Interface.h"
 
-namespace Trigger{ 
+namespace Trigger::Event{ 
 
     class Button: public Interface, public std::enable_shared_from_this<Button>{
         std::shared_ptr<::Button::Interface> button_;
@@ -35,7 +35,7 @@ namespace Trigger{
         Button(Button&& other);
         Button& operator=(Button&& other);
 
-        bool connect(std::shared_ptr<::Button::Interface>& button);
+        bool connect(const std::shared_ptr<::Button::Interface>& button);
 
         void trigger(sf::RenderWindow& window, const sf::Event& event) override;
         std::unique_ptr<Button> clone() const;

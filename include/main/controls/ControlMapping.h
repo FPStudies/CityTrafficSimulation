@@ -32,16 +32,16 @@ namespace Control{
 
         bool operator==(const Mapping& other) const;
 
-        bool addControl(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event);
-        bool addControlFast(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event);
-        bool removeControl(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event);
-        bool removeControlFast(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event);
+        bool addControl(Mouse::Controls control, const std::shared_ptr<Trigger::Event::Interface>& event);
+        bool addControlFast(Mouse::Controls control, const std::shared_ptr<Trigger::Event::Interface>& event);
+        bool removeControl(Mouse::Controls control, const std::shared_ptr<Trigger::Event::Interface>& event);
+        bool removeControlFast(Mouse::Controls control, const std::shared_ptr<Trigger::Event::Interface>& event);
         bool removeControl(Mouse::Controls control);
 
-        bool addControl(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event);
-        bool addControlFast(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event);
-        bool removeControl(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event);
-        bool removeControlFast(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event);
+        bool addControl(Keyboard::Key control, const std::shared_ptr<Trigger::Event::Interface>& event);
+        bool addControlFast(Keyboard::Key control, const std::shared_ptr<Trigger::Event::Interface>& event);
+        bool removeControl(Keyboard::Key control, const std::shared_ptr<Trigger::Event::Interface>& event);
+        bool removeControlFast(Keyboard::Key control, const std::shared_ptr<Trigger::Event::Interface>& event);
         bool removeControl(Keyboard::Key control);
 
         void trigger(sf::RenderWindow &window, const sf::Event& event);

@@ -1,5 +1,5 @@
 /*
- * ButtonInterface.h
+ * Interface.h
  *
  *      Author: Kordowski Mateusz
  */
@@ -9,24 +9,30 @@
 
 
 #include <SFML/Window.hpp>
+#include <vector>
+
 #include "../drawing/Drawable.h"
 
-class Trigger::Button;
+namespace Trigger::Event{
+    class Button;
+}
+
 
 namespace Button{
     class Interface{
     protected:
-        std::shared_ptr<Drawable> to_draw_button_;
-        std::weak_ptr<Trigger::Button> trigger_;
+        std::vector<std::weak_ptr<Drawable>> to_draw_button_;
+        std::vector<std::weak_ptr<::Trigger::Event::Button>> trigger_;
 
     public:
         Interface()
-        : to_draw_button_(nullptr), trigger_()
+        : to_draw_button_(), trigger_()
         {}
+        
         virtual ~Interface() = default;
 
-        void setTrigger(std::shared_ptr<Trigger::Button> buttonTrigger){
-            trigger_ = buttonTrigger;
+        void addTrigger(std::shared_ptr<::Trigger::Event::Button> buttonTrigger){
+            trigger_.push_back(buttonTrigger);
         }
 
         virtual bool isButtonChoosed(const sf::Vector2i& position) = 0;

@@ -12,14 +12,14 @@
 #include <vector>
 #include <memory>
 
-#include "../trigger/Interface.h"
+#include "../trigger/event/Interface.h"
 
 
 namespace Control{    
 
     template<typename TemplateControls, typename ChildClass>
     class MappingTemplate{
-        std::map<TemplateControls, std::vector<std::shared_ptr<::Trigger::Interface>> > mapping_;
+        std::map<TemplateControls, std::vector<std::shared_ptr<::Trigger::Event::Interface>> > mapping_;
 
     public:
         MappingTemplate()
@@ -55,7 +55,7 @@ namespace Control{
          * @return true - this control already have this event.
          * @return false - event was added to provided control.
          */
-        bool addControl(TemplateControls control, const std::shared_ptr<::Trigger::Interface>& event){
+        bool addControl(TemplateControls control, const std::shared_ptr<::Trigger::Event::Interface>& event){
             auto it = mapping_[control];
             for(auto i = it.cbegin(); i != it.cend(); ++i){
                 if((*i) == event)
@@ -72,7 +72,7 @@ namespace Control{
          * @param control What control event should trigger other event.
          * @param event Shared resource. It can be used in different events.
          */
-        void addControlFast(TemplateControls control, const std::shared_ptr<::Trigger::Interface>& event){
+        void addControlFast(TemplateControls control, const std::shared_ptr<::Trigger::Event::Interface>& event){
             mapping_[control].push_back(event);
         }
 
@@ -84,7 +84,7 @@ namespace Control{
          * @return true - this control does not have this trigger.
          * @return false - event was deleted from provided control.
          */
-        bool removeControl(TemplateControls control, const std::shared_ptr<::Trigger::Interface>& event){
+        bool removeControl(TemplateControls control, const std::shared_ptr<::Trigger::Event::Interface>& event){
             auto it = mapping_.find(control);
             if(it == mapping_.end()) return true;
 
@@ -106,7 +106,7 @@ namespace Control{
          * @param control Where the trigger is.
          * @param event Must be the same trigger as was put.
          */
-        void removeControlFast(TemplateControls control, const std::shared_ptr<::Trigger::Interface>& event){
+        void removeControlFast(TemplateControls control, const std::shared_ptr<::Trigger::Event::Interface>& event){
             auto it = mapping_.find(control);
             auto iEnd = (*it).second.end();
             for(auto i = (*it).second.begin(); i != iEnd; ++i){

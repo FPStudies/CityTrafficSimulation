@@ -4,22 +4,14 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_TRIGGER_EVENT_INTERFACE_H
-#define TRAFFIC_SIM_TRIGGER_EVENT_INTERFACE_H
+#ifndef TRAFFIC_SIM_MAIN_TRIGGER_ACTION_INTERFACE_H
+#define TRAFFIC_SIM_MAIN_TRIGGER_ACTION_INTERFACE_H
 
-#include <SFML/Graphics.hpp>
 #include <memory>
 #include <typeinfo>
 
 
-namespace Control{
-    class Mapping;
-    class KeyContainer;    
-}
-
-
-
-namespace Trigger{
+namespace Trigger::Action{
     /**
      * @brief Events that are triggered by other means.
      * They are not present in the main loop but the main loop can trigger them.
@@ -35,7 +27,7 @@ namespace Trigger{
         Interface(const Interface&) = delete;
         Interface(const Interface&&) {};
 
-        virtual void trigger(sf::RenderWindow& window, const sf::Event& event) = 0;
+        virtual void trigger() = 0;
 
         std::unique_ptr<Interface> clone() const{
             return std::unique_ptr<Interface>(this->clone_impl());
@@ -44,7 +36,6 @@ namespace Trigger{
         virtual bool equals(const Interface& other) const = 0;
     };    
 }
-
 
 
 

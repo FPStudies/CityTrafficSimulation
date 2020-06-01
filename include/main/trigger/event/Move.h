@@ -8,11 +8,12 @@
 #define TRAFFIC_SIM_TRIGGER_MOVABLE_H
 
 #include "Interface.h"
-#include "../actions/Movable.h"
+#include "../../actions/Movable.h"
 
 #include <memory>
 
 namespace Trigger{ 
+namespace Event{
 
     class Move: public Interface{
 
@@ -34,6 +35,6 @@ namespace Trigger{
 
     };
 
-}
+}}
 
 #endif

@@ -46,25 +46,25 @@ int Control::Mapping::translateEvent(const sf::Event& event){
     }
 }
 
-bool Control::Mapping::addControl(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event){
+bool Control::Mapping::addControl(Mouse::Controls control, const std::shared_ptr<Trigger::Event::Interface>& event){
     mouseCtrl_.addControl(control, event);
 
     return false; //placeholder
 }
 
-bool Control::Mapping::addControlFast(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event){
+bool Control::Mapping::addControlFast(Mouse::Controls control, const std::shared_ptr<Trigger::Event::Interface>& event){
     mouseCtrl_.addControlFast(control, event);
 
     return false; //placeholder
 }
 
-bool Control::Mapping::removeControl(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event){
+bool Control::Mapping::removeControl(Mouse::Controls control, const std::shared_ptr<Trigger::Event::Interface>& event){
     mouseCtrl_.removeControl(control, event);
 
     return false; //placeholder
 }
 
-bool Control::Mapping::removeControlFast(Mouse::Controls control, const std::shared_ptr<Trigger::Interface>& event){
+bool Control::Mapping::removeControlFast(Mouse::Controls control, const std::shared_ptr<Trigger::Event::Interface>& event){
     mouseCtrl_.removeControlFast(control, event);
 
     return false; //placeholder
@@ -77,25 +77,25 @@ bool Control::Mapping::removeControl(Mouse::Controls control){
 }
 
 
-bool Control::Mapping::addControl(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event){
+bool Control::Mapping::addControl(Keyboard::Key control, const std::shared_ptr<Trigger::Event::Interface>& event){
     keyCtrl_.addControl(control, event);
 
     return false; //placeholder
 }
 
-bool Control::Mapping::addControlFast(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event){
+bool Control::Mapping::addControlFast(Keyboard::Key control, const std::shared_ptr<Trigger::Event::Interface>& event){
     keyCtrl_.addControlFast(control, event);
 
     return false; //placeholder
 }
 
-bool Control::Mapping::removeControl(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event){
+bool Control::Mapping::removeControl(Keyboard::Key control, const std::shared_ptr<Trigger::Event::Interface>& event){
     keyCtrl_.removeControl(control, event);
 
     return false; //placeholder
 }
 
-bool Control::Mapping::removeControlFast(Keyboard::Key control, const std::shared_ptr<Trigger::Interface>& event){
+bool Control::Mapping::removeControlFast(Keyboard::Key control, const std::shared_ptr<Trigger::Event::Interface>& event){
     keyCtrl_.removeControlFast(control, event);
 
     return false; //placeholder

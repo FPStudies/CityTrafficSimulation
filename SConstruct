@@ -163,6 +163,8 @@ if not env_base.GetOption('clean'):
     print('..Building Targets\n')
 
 #build in separate directories
+
+# library facade
 SConscript(
     'source/graphic_library_facade/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
@@ -170,6 +172,7 @@ SConscript(
     duplicate=0
     )
 
+# controls
 SConscript(
     '#source/main/controls/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
@@ -177,6 +180,7 @@ SConscript(
     duplicate=0
     )
 
+# collision
 SConscript(
     'source/main/collision/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
@@ -184,6 +188,7 @@ SConscript(
     duplicate=0
     )
 
+# event
 SConscript(
     'source/main/event/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'pathToControls', 'libraryPath'], 
@@ -192,6 +197,7 @@ SConscript(
     )
 
  
+# drawing
 SConscript(
     'source/main/drawing/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
@@ -199,6 +205,28 @@ SConscript(
     duplicate=0
     )   
 
+pathTo_drawing = '#include/main/drawing/'
+pathTo_trigger = "#include/mian/trigger/"
+pathTo_UI_button = "#include/main/UI/button/"
+pathTo_controls = '#include/main/controls/'
+
+# UI / button
+SConscript(
+    'source/main/UI/button/SConscript', 
+    exports=['env_base', 'pathTo_drawing', 'pathTo_trigger', 'pathTo_UI_button', 'libraryPath'], 
+    variant_dir = binFolder + 'main/UI/button', 
+    duplicate=0
+    )   
+
+# trigger
+SConscript(
+    'source/main/trigger/SConscript', 
+    exports=['env_base', 'pathTo_drawing', 'pathTo_trigger', 'pathTo_UI_button', 'pathTo_controls', 'libraryPath'], 
+    variant_dir = binFolder + 'main/trigger', 
+    duplicate=0
+    )   
+
+# screen
 SConscript(
     'source/main/screen/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
