@@ -4,7 +4,7 @@
  *      Author: Kordowski Mateusz
  */
 
-#include "Button.h"
+#include "event/Button.h"
 
 Trigger::Event::Button::Button()
 : button_(nullptr)

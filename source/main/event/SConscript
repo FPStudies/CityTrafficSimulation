@@ -15,11 +15,11 @@ libraryName = 'events'
 HFilesMain = [
     'Interface.h',
     'ToggleInterface.h',
-    'Basic.cc',
-    'Control.cc',
-    'Set.cc',
-    'Manager.cc',
-    'UI.cc'
+    'Basic.h',
+    'Control.h',
+    'Set.h',
+    'Manager.h',
+    'UI.h'
 ]
 
 HFilesUtility = [
@@ -29,6 +29,8 @@ HFilesUtility = [
 HFilesControls = [
     'ControlMapping.h'
 ]
+
+
 
 filesCPP = [
     'Basic.cc',
@@ -47,7 +49,11 @@ filesHControl = [pathToControls + x for x in HFilesControls]
 env = env_base.Clone()
 
 env.Append(
-    CPPPATH = pathToH
+    CPPPATH = [
+        pathToH,
+        pathToUtility,
+        pathToControls
+    ]
     )
 
 libControlsName = "%scontrols%s" % (env['LIBPREFIX'], env['LIBSUFFIX'])

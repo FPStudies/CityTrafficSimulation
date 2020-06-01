@@ -24,7 +24,9 @@ programLibraries = [
     'screenLib', 
     'drawing',
     'collision',
-    'controls'
+    'controls',
+    'Triggers',
+    'Buttons'
 ]
 
 externalLibraries = [

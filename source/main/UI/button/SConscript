@@ -42,14 +42,14 @@ env = env_base.Clone()
 
 env.Append(
     CPPPATH = [
-        pathToH, 
-        pathToH2,
-        pathTo_UI_button,
-        pathTo_trigger
+        pathTo_UI_button, 
+        pathTo_UI_button + '/specialization',
+        pathTo_trigger,
+        pathTo_drawing
         ]
     )
 
 env.StaticLibrary(
     target = libraryPath + libraryName, 
-    source = filesCPP + filesHDrawing + filesHTrigger
+    source = filesCPP
     )

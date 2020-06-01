@@ -11,8 +11,7 @@ Import('pathTo_trigger')
 
 Import('libraryPath')
 
-pathToH = pathTo_trigger + 'action/'
-pathToH2 = pathTo_trigger + 'event/'
+pathToH = pathTo_trigger
 libraryName = 'Triggers'
 
 HFilesMain = [
@@ -45,8 +44,7 @@ filesH_UI = [pathTo_UI_button + x for x in HFilesUI]
 
 env.Append(
     CPPPATH = [
-        pathToH, 
-        pathToH2,
+        pathToH,
         pathTo_controls,
         pathTo_UI_button
         ]
