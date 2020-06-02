@@ -17,14 +17,11 @@
 #include "Drawable.h"
 #include "DrawingID.h"
 
-class DrawManagerBridgeToSets;
-
 /**
  * @brief Class used to draw stored objects.
  * In the assumption, only factories will be able to add or remove certain objects.
  */
 class DrawManager{
-    friend class DrawManagerBridgeToSets;
 
     // for now list but it will be better with R* algorithm.
     using ObjectPair = std::map<DrawingID, std::shared_ptr<Drawable>>;
