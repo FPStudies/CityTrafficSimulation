@@ -4,15 +4,15 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_DRAWABLE_H
-#define TRAFFIC_SIM_DRAWABLE_H
+#ifndef TRAFFIC_SIM_MAIN_DRAWING_DRAWABLE_H
+#define TRAFFIC_SIM_MAIN_DRAWING_DRAWABLE_H
 
 #include <SFML/Graphics.hpp>
 #include <memory>
 
 #include "DrawingID.h"
 
-class Drawable{
+class Drawable: public sf::Drawable{
     DrawingID ID_;
     std::unique_ptr<sf::RenderTarget> target; // it must be assigned later in inherit class
 
@@ -24,9 +24,9 @@ public:
     virtual ~Drawable() = default;
 
 
-    virtual void draw() = 0;
-    virtual sf::FloatRect boundingBox() = 0;
-    virtual bool canBeDrawn() = 0;
+    virtual void draw() const = 0;
+    virtual sf::FloatRect boundingBox() const = 0;
+    virtual bool canBeDrawn() const = 0;
 
     DrawingID getID() const{
         return ID_;

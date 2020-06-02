@@ -88,7 +88,6 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     // the only thing this event control is doing is spliting the keyboard and the mouse invoking.
     std::shared_ptr<Event::Control> eventControl = std::make_shared<Event::Control>(controls);
     // this can be used to get the previous unique_ptr mapping
-    eventControl->getMapping().addControl(Control::Mouse::ButtonLeft, triggerButtonEvent);
     eventControl->getMapping().addControl(Control::Mouse::ButtonRight, triggerButtonEvent);
     // now add event that control the controls to the event manager
     event_manager_->addNew("test_button", Event::Manager::State::ACTIVE, eventControl);

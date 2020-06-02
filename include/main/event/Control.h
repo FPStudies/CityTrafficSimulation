@@ -27,6 +27,7 @@ namespace Event{
          * @param mapping
          */
         Control(std::unique_ptr<::Control::Mapping>& mapping);
+        Control();
         virtual ~Control();
         Control(const Control& other);
 

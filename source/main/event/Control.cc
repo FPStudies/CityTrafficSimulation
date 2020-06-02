@@ -10,6 +10,10 @@ Event::Control::Control(std::unique_ptr<::Control::Mapping>& mapping)
 : ctrlMapping_(std::move(mapping))
 {}
 
+Event::Control::Control()
+: ctrlMapping_(std::make_unique<::Control::Mapping>())
+{}
+
 Event::Control::~Control() = default;
 
 Event::Control::Control(const Control& other)
