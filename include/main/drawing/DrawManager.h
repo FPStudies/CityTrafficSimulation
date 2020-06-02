@@ -58,16 +58,7 @@ class DrawManager{
     std::shared_ptr<sf::RenderWindow> object_window_;
 
     static WindowCont windows_static_;
-
-
-
-    bool addEntity(const std::string& layer_name, std::shared_ptr<Drawable>& entity);
-
-    void addFirstLayer(const std::string& layer_name);
-
-    bool addLayer(const std::string& previous_layer_name, const std::string& layer_name);
-
-    bool remove(const std::string& layer_name, std::shared_ptr<Drawable>& entity);
+    
 
     DrawManager(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window);
     
@@ -83,6 +74,14 @@ public:
     void drawAll();
 
     bool drawLayer(const std::string& layer_name);
+
+    bool addEntity(const std::string& layer_name, std::shared_ptr<Drawable>& entity);
+
+    void addFirstLayer(const std::string& layer_name);
+
+    bool addLayer(const std::string& previous_layer_name, const std::string& layer_name);
+
+    bool remove(const std::string& layer_name, std::shared_ptr<Drawable>& entity);
 
 };
 
