@@ -75,11 +75,10 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     // In short trigger will call the right method based on sfml event.
 
     // this must be shared, because the trigger must have the button to invoke its methods
-
-    //texture_manager_->getTexture("blue_light")
-    std::shared_ptr<Button::Exit> exitButton = std::make_shared<Button::Exit>(*window, nullptr);
+    std::shared_ptr<Button::Exit> exitButton = std::make_shared<Button::Exit>(*window, texture_manager_->getTexture("blue_light"));
     exitButton->setSize(sf::Vector2f(200, 40));
     draw_manager_->addEntity(LAYER_NAME, exitButton);
+    exitButton->setTexture(&texture_manager_->getTexture("blue_light")->getTexture());
 
 
     // create action trigger that will interpret the sfml event and will call method from button object.

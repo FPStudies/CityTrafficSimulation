@@ -5,6 +5,7 @@
  */
 
 #include "DrawManager.h"
+#include <iostream>
 
 const unsigned int DrawManager::DrawLayer::DEFAULT_LIST_SIZE = 50;
 
@@ -127,9 +128,8 @@ std::unique_ptr<DrawManager> DrawManager::create(const std::string& layer_name, 
 }
 
 void DrawManager::drawAll(){
-    auto it = to_draw_.begin();
-    while(it != to_draw_.end()){
-        (*it)->draw(*object_window_);
+    for(auto& it : to_draw_){
+        it->draw(*object_window_);
     }
 }
 
@@ -140,6 +140,7 @@ bool DrawManager::drawLayer(const std::string& layer_name){
             (*it)->draw(*object_window_);
             return false;
         }
+        ++it;
     }
     return true;
 }

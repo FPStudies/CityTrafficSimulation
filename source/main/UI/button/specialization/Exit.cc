@@ -26,7 +26,7 @@ void Exit::actionReleasedButton(){
 }
 
 void Exit::draw(sf::RenderTarget& target) const{
-    target.draw(*this);
+    target.draw(*this, states_);
 }
 
 sf::FloatRect Exit::getLocalBounds() const{
