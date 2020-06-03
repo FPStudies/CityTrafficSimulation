@@ -14,21 +14,28 @@
 
 class Drawable: public sf::Drawable{
     DrawingID ID_;
-    std::unique_ptr<sf::RenderTarget> target; // it must be assigned later in inherit class
+
+    // reminding to define it
+    virtual void draw(sf::RenderTarget& target, sf::RenderStates& states) const = 0;
 
 public:
     Drawable()
-    : ID_(DrawingID::newID()), target(nullptr)
+    : ID_(DrawingID::newID())
     {}
 
     virtual ~Drawable() = default;
 
-
-    virtual void draw() const = 0;
-    virtual sf::FloatRect boundingBox() const = 0;
+    
+    virtual const sf::FloatRect& boundingBox() const = 0;
     virtual bool canBeDrawn() const = 0;
 
+    virtual sf::RenderStates& getRenderStates() const = 0;
+
     DrawingID getID() const{
+        return ID_;
+    }
+
+    const DrawingID& getID_const() const{
         return ID_;
     }
 };

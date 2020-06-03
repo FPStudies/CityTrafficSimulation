@@ -12,6 +12,7 @@
 #include <memory>
 #include <map>
 #include <vector>
+#include <iostream>
 
 
 namespace Drawing::Texture{
@@ -22,7 +23,8 @@ public:
         Removed,
         ExpectRemove,
         SetToRemove,
-        Remain
+        Remain,
+        Unknown
     };
 
 
@@ -32,14 +34,15 @@ public:
      * 
      */
     class Texture{
-        friend class ::Drawing::Texture::Manager;
+        friend class Manager;
 
         sf::Texture texture_;
         sf::IntRect portion_;
         bool request_for_deleting;
 
-        Texture(const std::string& path, const sf::IntRect& area);
-        Texture(const std::string& path);
+        Texture(const std::string& path, const sf::IntRect& area = sf::IntRect());
+        Texture(const sf::Texture& texture, const sf::IntRect& area = sf::IntRect());
+
     public:
         ~Texture();
         Texture(const Texture&) = delete;
@@ -69,8 +72,7 @@ public:
     Manager(Manager&& other);
     Manager& operator=(Manager&& other);
 
-    bool loadTexture(const std::string& path, const std::string& alias, const sf::IntRect& area);
-    bool loadTexture(const std::string& path, const std::string& alias);
+    bool loadTexture(const std::string& path, const std::string& alias, const sf::IntRect& area = sf::IntRect());
     bool loadTexture(const std::string& path);
 
     TextureState freeTexture(const std::string& name);
@@ -81,11 +83,11 @@ public:
      * 
      * @param name - what name should be given to this texture
      * @param texture
+     * @param rect
      * @return true - if saving did not succeeded
      * @return false - if saving did succeeded
      */
-    bool saveTexture(const std::string& name, const sf::Texture& texture);
-    bool saveTexture(const std::string& name, const sf::Texture& texture, const sf::IntRect& rect);
+    bool saveTexture(const std::string& name, const sf::Texture& texture, const sf::IntRect& rect = sf::IntRect());
 
     /**
      * @brief Get the Texture object. 

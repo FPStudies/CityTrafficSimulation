@@ -24,34 +24,37 @@
 class DrawManager{
 
     // for now list but it will be better with R* algorithm.
-    using ObjectPair = std::map<DrawingID, std::shared_ptr<Drawable>>;
     using WindowCont = std::vector<std::weak_ptr<sf::RenderWindow>>;
     
     class DrawLayer{
         using ObjectPair = std::map<DrawingID, std::shared_ptr<Drawable>>;
+        using ToRender = std::list<std::shared_ptr<Drawable>>;
+        static const unsigned int DEFAULT_LIST_SIZE;
 
         std::string name_;
         ObjectPair container_;
+        ToRender render_;
 
     public:
         DrawLayer(const std::string& name);
         virtual ~DrawLayer();
         DrawLayer(const DrawLayer&) = delete;
 
-        ObjectPair& getContainer();
         bool remove(std::shared_ptr<Drawable>& entity);
         void add(std::shared_ptr<Drawable>& entity);
 
         const std::string& getName();
         void setName(const std::string& name);
-        void draw();
+        void draw(sf::RenderTarget& target);
+
+        void clearNulls();
 
     };
 
-    using List = std::list<std::unique_ptr<DrawLayer>>;
+    using Layers = std::vector<std::unique_ptr<DrawLayer>>;
 
 
-    List to_draw_;
+    Layers to_draw_;
     std::shared_ptr<sf::RenderWindow> object_window_;
 
     static WindowCont windows_static_;
@@ -79,6 +82,10 @@ public:
     bool addLayer(const std::string& previous_layer_name, const std::string& layer_name);
 
     bool remove(const std::string& layer_name, std::shared_ptr<Drawable>& entity);
+
+    void clearNulls();
+
+    void clearNulls(const std::string& layer_name);
 
 };
 

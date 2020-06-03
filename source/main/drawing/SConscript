@@ -13,17 +13,18 @@ libraryName = 'drawing'
 HFilesMain = [
     'Drawable.h',
     'DrawingID.h',
-    'DrawSetFactory.h',
+    'DrawManager.h',
+    'texture/Manager.h'
 ]
 
 HFilesUtility = [
     'ID.hpp',
-    'DetTemplate.hpp'
+    'SetTemplate.hpp'
 ]
 
 filesCPP = [
     'DrawManager.cc',
-    'DrawManagerBridgeToSets.cc'
+    'texture/Manager.cc'
 ]
 
 
