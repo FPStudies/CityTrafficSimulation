@@ -26,14 +26,19 @@
 #include "../trigger/event/Button.h"
 #include "../controls/ControlMapping.h"
 #include "../event/Control.h"
+#include "../drawing/DrawManager.h"
+#include "../drawing/texture/Manager.h"
 
 class StartScreen: virtual public ScreenInteface{
     std::unique_ptr<b2World> world_;
     std::unique_ptr<Event::Manager> event_manager_;
     std::unique_ptr<sf::View> view_;
+    std::unique_ptr<Drawing::Texture::Manager> texture_manager_;
+    std::unique_ptr<DrawManager> draw_manager_;
 
     void setBox2D();
     void setEventManager();
+    void setTextureManagers(std::shared_ptr<sf::RenderWindow> & window);
 
 public:
     StartScreen();

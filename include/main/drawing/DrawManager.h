@@ -69,19 +69,19 @@ public:
     ~DrawManager();
     
     // use std::move
-    static DrawManager create(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window);
+    static std::unique_ptr<DrawManager> create(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window);
 
     void drawAll();
 
     bool drawLayer(const std::string& layer_name);
 
-    bool addEntity(const std::string& layer_name, std::shared_ptr<Drawable>& entity);
+    bool addEntity(const std::string& layer_name, std::shared_ptr<Drawable> entity);
 
     void addFirstLayer(const std::string& layer_name);
 
     bool addLayer(const std::string& previous_layer_name, const std::string& layer_name);
 
-    bool remove(const std::string& layer_name, std::shared_ptr<Drawable>& entity);
+    bool remove(const std::string& layer_name, std::shared_ptr<Drawable> entity);
 
     void clearNulls();
 

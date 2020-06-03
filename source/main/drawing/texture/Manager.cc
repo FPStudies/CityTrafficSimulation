@@ -8,50 +8,6 @@
 
 using namespace Drawing::Texture;
 
-Manager::Texture::Texture(const std::string& path, const sf::IntRect& area)
-: texture_(), portion_(area), request_for_deleting(false)
-{
-    sf::Texture text;
-    if(!text.loadFromFile(path)){
-        std::cerr << "Could not load texture file: " << path << "\n";
-    }
-
-    texture_ = std::move(text);
-}
-
-Manager::Texture::Texture(const sf::Texture& texture, const sf::IntRect& area)
-: texture_(texture), portion_(area), request_for_deleting(false)
-{}
-
-Manager::Texture::~Texture() = default;
-
-
-void Manager::Texture::requestRemove(){
-    request_for_deleting = true;
-}
-
-bool Manager::Texture::shouldBeRemoved(){
-    return request_for_deleting;
-}
-
-void Manager::Texture::resetRemoveRequest(){
-    request_for_deleting = false;
-}
-
-Manager::TextureState Manager::Texture::getState(){
-    if(request_for_deleting)
-        return TextureState::ExpectRemove;
-    return TextureState::Remain;
-}
-
-sf::Texture& Manager::Texture::getTexture(){
-    return texture_;
-}
-
-sf::IntRect& Manager::Texture::getRect(){
-    return portion_;
-}
-
 Manager::Manager() = default;
 
 Manager::~Manager() = default;
@@ -87,7 +43,7 @@ bool Manager::loadTexture(const std::string& path){
     return true;
 }
 
-Manager::TextureState Manager::freeTexture(const std::string& name){
+TextureState Manager::freeTexture(const std::string& name){
     auto it = textures_.find(name);
     if(it == textures_.end())
         return TextureState::Unknown;
@@ -118,10 +74,10 @@ bool Manager::saveTexture(const std::string& name, const sf::Texture& texture, c
     return false;
 }
 
-std::shared_ptr<Manager::Texture> Manager::getTexture(const std::string& name) const{
+std::shared_ptr<Texture> Manager::getTexture(const std::string& name) const{
     auto it = textures_.find(name);
     if(it == textures_.end())
-        return std::shared_ptr<Manager::Texture>();
+        return std::shared_ptr<Texture>();
 
     return it->second;
 }

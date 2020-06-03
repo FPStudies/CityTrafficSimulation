@@ -4,11 +4,12 @@
 
 using namespace Button;
 
-Exit::Exit(sf::Window& window)
-: exit_(window)
-{
-    std::cout << "Button created" << std::endl;
-}
+Exit::Exit(sf::Window& window, const Texture_ptr& texture)
+: exit_(window), 
+    texture_(texture), 
+    states_(&texture->getTexture()), 
+    can_be_drawn(true)
+{}
 
 Exit::~Exit() = default;
 
@@ -22,4 +23,20 @@ void Exit::actionPressedButton(){
 }
 void Exit::actionReleasedButton(){
     exit_.trigger();
+}
+
+void Exit::draw(sf::RenderTarget& target) const{
+    target.draw(*this);
+}
+
+sf::FloatRect Exit::getLocalBounds() const{
+    return this->getLocalBounds();
+}
+
+sf::FloatRect Exit::getGlobalBounds() const{
+    return this->getGlobalBounds();
+}
+
+bool Exit::canBeDrawn() const{
+    return can_be_drawn;
 }

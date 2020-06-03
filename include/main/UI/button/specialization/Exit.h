@@ -7,24 +7,37 @@
 #ifndef TRAFFIC_SIM_GAME_BUTTON_SPECIALIZATION_EXIT_H
 #define TRAFFIC_SIM_GAME_BUTTON_SPECIALIZATION_EXIT_H
 
-#include <SFML/Window.hpp>
-#include <iostream>
+#include <SFML/Graphics.hpp>
+#include <memory>
 
 #include "../Interface.h"
 #include "../../../trigger/action/ExitWindow.h"
+#include "../../../drawing/Texturing.h"
 
 namespace Button{
-    class Exit: public ::Button::Interface{
+    class Exit: public ::Button::Interface, public sf::RectangleShape, public Drawable{
+        using Texture = ::Drawing::Texture::Texture;
+        using Texture_ptr = std::shared_ptr<Texture>;
+
         Trigger::Action::ExitWindow exit_;
 
-    public:
-        Exit(sf::Window& window);
-        virtual ~Exit();
+        Texture_ptr texture_;       
+        sf::RenderStates states_;
+        bool can_be_drawn;
 
+    public:
+        Exit(sf::Window& window, const Texture_ptr& texture);
+        virtual ~Exit();
+ 
+        virtual void draw(sf::RenderTarget& target) const override;
         virtual bool isButtonChoosed(const sf::Vector2i& position) override;
 
         virtual void actionPressedButton() override;
         virtual void actionReleasedButton() override;
+
+        virtual sf::FloatRect getLocalBounds() const override;
+        virtual sf::FloatRect getGlobalBounds() const override;
+        virtual bool canBeDrawn() const override;
     };
 }
 

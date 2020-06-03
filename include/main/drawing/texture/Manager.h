@@ -5,8 +5,8 @@
  */
 
 
-#ifndef TRAFFIC_SIM_MAIN_DRAWING_TEXTURE_MANAGER_DEF_H
-#define TRAFFIC_SIM_MAIN_DRAWING_TEXTURE_MANAGER_DEF_H
+#ifndef TRAFFIC_SIM_MAIN_DRAWING_TEXTURE_MANAGER_H
+#define TRAFFIC_SIM_MAIN_DRAWING_TEXTURE_MANAGER_H
 
 #include <SFML/Graphics.hpp>
 #include <memory>
@@ -14,53 +14,14 @@
 #include <vector>
 #include <iostream>
 
+#include "Texture.h"
+
 
 namespace Drawing::Texture{
 
 class Manager{
-public:
-    enum class TextureState{
-        Removed,
-        ExpectRemove,
-        SetToRemove,
-        Remain,
-        Unknown
-    };
 
-
-    /**
-     * @brief 
-     * @details This class will be removed only when no one have it except for Texture::Manager.
-     * 
-     */
-    class Texture{
-        friend class Manager;
-
-        sf::Texture texture_;
-        sf::IntRect portion_;
-        bool request_for_deleting;
-
-        Texture(const std::string& path, const sf::IntRect& area = sf::IntRect());
-        Texture(const sf::Texture& texture, const sf::IntRect& area = sf::IntRect());
-
-    public:
-        ~Texture();
-        Texture(const Texture&) = delete;
-        Texture(Texture&&) = delete;
-        Texture& operator=(const Texture&) = delete;
-        Texture& operator=(Texture&&) = delete;
-
-        void requestRemove();
-        bool shouldBeRemoved();
-        void resetRemoveRequest();
-        TextureState getState();
-
-        sf::Texture& getTexture();
-        sf::IntRect& getRect();
-    };
-
-private:
-    typedef std::map<std::string, std::shared_ptr<Texture>> MyMap; // used for storing textures
+    typedef std::map<std::string, std::shared_ptr<::Drawing::Texture::Texture>> MyMap; // used for storing textures
 
     MyMap textures_;
 

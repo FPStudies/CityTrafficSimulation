@@ -4,9 +4,6 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_DRAW_MANAGER_CC
-#define TRAFFIC_SIM_DRAW_MANAGER_CC
-
 #include "DrawManager.h"
 
 const unsigned int DrawManager::DrawLayer::DEFAULT_LIST_SIZE = 50;
@@ -58,7 +55,7 @@ void DrawManager::DrawLayer::draw(sf::RenderTarget& target){
     for(auto it = render_.begin(); it != render_.end(); ++it){
         auto& sec = *it;
         if(sec && sec->canBeDrawn())
-            target.draw(*sec, sec->getRenderStates());
+            sec->draw(target);
     }
 }
 
@@ -72,7 +69,7 @@ void DrawManager::DrawLayer::draw(sf::RenderTarget& target){
 
 
 
-bool DrawManager::addEntity(const std::string& layer_name, std::shared_ptr<Drawable>& entity){ //check if reference or copy
+bool DrawManager::addEntity(const std::string& layer_name, std::shared_ptr<Drawable> entity){ //check if reference or copy
     for(auto it = to_draw_.begin(); it != to_draw_.end(); ++it){
         if((*it)->getName() == layer_name){
             (*it)->add(entity);
@@ -97,7 +94,7 @@ bool DrawManager::addLayer(const std::string& previous_layer_name, const std::st
     return true;
 }
 
-bool DrawManager::remove(const std::string& layer_name, std::shared_ptr<Drawable>& entity){ //check if reference or copy
+bool DrawManager::remove(const std::string& layer_name, std::shared_ptr<Drawable> entity){ //check if reference or copy
     auto it = to_draw_.begin();
     while(it != to_draw_.end()){
         if((*it)->getName() == layer_name){
@@ -120,12 +117,13 @@ DrawManager::DrawManager(DrawManager&& other) noexcept
 : to_draw_(std::move(other.to_draw_)), object_window_(std::move(other.object_window_))
 {}
 
-DrawManager DrawManager::create(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window){
+std::unique_ptr<DrawManager> DrawManager::create(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window){
     for(WindowCont::const_iterator it = windows_static_.cbegin(); it != windows_static_.cend(); ++it){
         if(it->lock() == window) 
             throw std::invalid_argument("This window is already in some DrawManager instance.");
     }
-    return std::move(DrawManager(layer_name, window));
+    DrawManager* draw_ptr = new DrawManager(layer_name, window);
+    return std::move(std::unique_ptr<DrawManager>(draw_ptr));
 }
 
 void DrawManager::drawAll(){
@@ -160,5 +158,3 @@ void DrawManager::clearNulls(const std::string& layer_name){
         }
     }
 }
-
-#endif

@@ -12,11 +12,8 @@
 
 #include "DrawingID.h"
 
-class Drawable: public sf::Drawable{
+class Drawable{
     DrawingID ID_;
-
-    // reminding to define it
-    virtual void draw(sf::RenderTarget& target, sf::RenderStates& states) const = 0;
 
 public:
     Drawable()
@@ -25,11 +22,10 @@ public:
 
     virtual ~Drawable() = default;
 
-    
-    virtual const sf::FloatRect& boundingBox() const = 0;
+    virtual void draw(sf::RenderTarget& target) const = 0;
+    virtual sf::FloatRect getLocalBounds() const = 0;
+    virtual sf::FloatRect getGlobalBounds() const = 0;
     virtual bool canBeDrawn() const = 0;
-
-    virtual sf::RenderStates& getRenderStates() const = 0;
 
     DrawingID getID() const{
         return ID_;
