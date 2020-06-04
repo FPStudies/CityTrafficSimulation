@@ -136,6 +136,42 @@ std::unique_ptr<Manager> Manager::create(const std::string& layer_name, std::sha
     return std::move(std::unique_ptr<Manager>(draw_ptr));
 }
 
+bool Manager::draw(const std::string& layer_name_first, const std::string& layer_name_last){
+    auto it = to_draw_.begin();
+    bool start = false;
+    
+    if(layer_name_first == layer_name_last){
+        while(it != to_draw_.end()){
+            if((*it)->getName() == layer_name_first){
+                (*it)->draw(*object_window_);
+                return false;
+            }
+            ++it;
+        }
+    }
+    else{
+        while(it != to_draw_.end()){
+            if((*it)->getName() == layer_name_first){
+                start = true;
+                (*it)->draw(*object_window_);
+            }
+            else if((*it)->getName() == layer_name_last){
+                if(start){
+                    (*it)->draw(*object_window_);
+                    return false;
+                }
+                return true;
+            }
+            else if(start){
+                (*it)->draw(*object_window_);
+            }
+            ++it;
+        }
+    }
+
+    return true;
+}
+
 void Manager::drawAll(){
     for(auto& it : to_draw_){
         it->draw(*object_window_);
