@@ -7,7 +7,7 @@ using namespace Button;
 Exit::Exit(sf::Window& window, const Texture_ptr& texture)
 : exit_(window), 
     texture_(texture), 
-    states_(&texture->getTexture()), 
+    states_(&texture->getResource_const()), 
     can_be_drawn(true)
 {}
 

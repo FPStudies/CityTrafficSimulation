@@ -8,76 +8,58 @@
 
 using namespace Drawing::Texture;
 
+Manager* Manager::instance_ = nullptr;
+
 Manager::Manager() = default;
 
 Manager::~Manager() = default;
 
-Manager::Manager(Manager&& other)
-: textures_(std::move(other.textures_))
-{}
-
-Manager& Manager::operator=(Manager&& other){
-    textures_ = std::move(other.textures_);
-    return *this;
+Manager& Manager::getInstance(){
+    if(!instance_){
+        const std::lock_guard<std::mutex> lock(Manager::mutex_);
+        if(!instance_)
+            instance_ = new Manager;
+    }
+    return *instance_;
 }
 
-bool Manager::loadTexture(const std::string& path, const std::string& alias, const sf::IntRect& area){
-    auto it = textures_.find(alias);
-    if(it != textures_.end()) 
+bool Manager::load(const std::string& path, const std::string& alias, const sf::IntRect& area){
+    auto it = map_.find(alias);
+    if(it != map_.end()) 
         return true;
 
     Texture* raw_ptr = new Texture(path, area);
     std::shared_ptr<Texture> texture(raw_ptr);
-    textures_[alias] = texture;
+    map_[alias] = texture;
     return false;
 }
 
-bool Manager::loadTexture(const std::string& path){
-    auto it = textures_.find(path);
-    if(it != textures_.end()) 
+bool Manager::load(const std::string& path, const std::string& alias){
+    return this->load(path, alias, sf::IntRect());
+}
+
+bool Manager::load(const std::string& path){
+    return this->load(path, path, sf::IntRect());
+}
+
+bool Manager::save(const std::string& name, const sf::Texture& object){
+    auto it = map_.find(name);
+    if(it != map_.end()) 
         return true;
 
-    Texture* raw_ptr = new Texture(path);
-    std::shared_ptr<Texture> texture(raw_ptr);
-    textures_[path] = texture;
-    return true;
+    Texture* raw_ptr = new Texture(object);
+    std::shared_ptr<Texture> text(raw_ptr);
+    map_[name] = text;
+    return false;
 }
 
-TextureState Manager::freeTexture(const std::string& name){
-    auto it = textures_.find(name);
-    if(it == textures_.end())
-        return TextureState::Unknown;
-
-    // TODO needs here synchronization
-    if(it->second.use_count() <= 1){
-        textures_.erase(it);
-        return TextureState::Removed;
-    }
-
-    if(it->second->request_for_deleting){
-        return TextureState::ExpectRemove;
-    }
-    else{
-        it->second->request_for_deleting = true;
-        return TextureState::SetToRemove;
-    }
-}
-
-bool Manager::saveTexture(const std::string& name, const sf::Texture& texture, const sf::IntRect& rect){
-    auto it = textures_.find(name);
-    if(it != textures_.end()) 
+bool Manager::save(const std::string& name, const sf::Texture& texture, const sf::IntRect& rect){
+    auto it = map_.find(name);
+    if(it != map_.end()) 
         return true;
 
     Texture* raw_ptr = new Texture(texture, rect);
     std::shared_ptr<Texture> text(raw_ptr);
-    textures_[name] = text;
+    map_[name] = text;
     return false;
-}
-
-std::shared_ptr<Texture> Manager::getTexture(const std::string& name) const{
-    auto it = textures_.find(name);
-    if(it == textures_.end())
-        return std::shared_ptr<Texture>();
-
-    return it->second;
 }

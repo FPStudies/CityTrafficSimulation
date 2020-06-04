@@ -10,7 +10,13 @@
 #include "StartScreen.h"
 
 StartScreen::StartScreen() 
-: ScreenInteface()
+: ScreenInteface(), 
+world_(),
+event_manager_(),
+view_(),
+texture_manager_(Drawing::Texture::Manager::getInstance()),
+font_manager_(Drawing::Font::Manager::getInstance()),
+draw_manager_()
 {}
 
 StartScreen::~StartScreen() = default;
@@ -57,10 +63,10 @@ void StartScreen::setEventManager(){
 }
 
 void StartScreen::setTextureManagers(std::shared_ptr<sf::RenderWindow> & window){
-    texture_manager_ = std::make_unique<Drawing::Texture::Manager>();
+    //texture_manager_ = std::make_unique<Drawing::Texture::Manager>();
     draw_manager_ = DrawManager::create(LAYER_NAME, window);
 
-    texture_manager_->loadTexture("resource/texture/blue_light.jpg", "blue_light");
+    texture_manager_.load("resource/texture/blue_light.jpg", "blue_light");
 }
 
 ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
@@ -75,10 +81,10 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     // In short trigger will call the right method based on sfml event.
 
     // this must be shared, because the trigger must have the button to invoke its methods
-    std::shared_ptr<Button::Exit> exitButton = std::make_shared<Button::Exit>(*window, texture_manager_->getTexture("blue_light"));
+    std::shared_ptr<Button::Exit> exitButton = std::make_shared<Button::Exit>(*window, texture_manager_.get("blue_light"));
     exitButton->setSize(sf::Vector2f(200, 40));
     draw_manager_->addEntity(LAYER_NAME, exitButton);
-    exitButton->setTexture(&texture_manager_->getTexture("blue_light")->getTexture());
+    exitButton->setTexture(&texture_manager_.get("blue_light")->getResource());
 
 
     // create action trigger that will interpret the sfml event and will call method from button object.
@@ -119,7 +125,7 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     auto coord_to_SFML = coord_set.get("sfml");
     auto coord_from_view = coord_set.get("view");
 
-    float res_X = 1920.f, res_Y = 1080.f;
+    float res_X = 1000.f, res_Y = 1000.f;
 
     view_ = std::make_unique<sf::View>(sf::FloatRect(-(res_X / 2), -(res_Y / 2), res_X, res_Y)); // point is in bottom left
 

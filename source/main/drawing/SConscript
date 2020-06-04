@@ -25,7 +25,9 @@ HFilesUtility = [
 filesCPP = [
     'DrawManager.cc',
     'texture/Manager.cc',
-    'texture/Texture.cc'
+    'texture/Texture.cc',
+    'font/Manager.cc',
+    'font/Font.cc'
 ]
 
 

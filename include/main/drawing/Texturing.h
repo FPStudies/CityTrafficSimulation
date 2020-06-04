@@ -10,6 +10,10 @@
 
 #include "Drawable.h"
 #include "texture/Texture.h"
+#include "texture/Manager.h"
+
+#include "font/Font.h"
+#include "font/Manager.h"
 
 
 #endif

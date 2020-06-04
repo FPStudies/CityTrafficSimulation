@@ -15,28 +15,29 @@
 #include <iostream>
 
 #include "Texture.h"
+#include "../../utility/SharedResourceManager.hpp"
 
 
 namespace Drawing::Texture{
 
-class Manager{
+class Manager: public ::SharedResource::Manager<Texture, sf::Texture>{
+    static Manager* instance_;
 
-    typedef std::map<std::string, std::shared_ptr<::Drawing::Texture::Texture>> MyMap; // used for storing textures
-
-    MyMap textures_;
+    virtual bool save(const std::string& name, const sf::Texture& object) override;
+    Manager();
 
 public:
-
-    Manager();
-    ~Manager();
+    virtual ~Manager();
     Manager(const Manager&) = delete;
-    Manager(Manager&& other);
-    Manager& operator=(Manager&& other);
+    Manager& operator=(Manager&) = delete;
+    Manager(Manager&&) = delete;
+    Manager& operator=(Manager&& other) = delete;
 
-    bool loadTexture(const std::string& path, const std::string& alias, const sf::IntRect& area = sf::IntRect());
-    bool loadTexture(const std::string& path);
+    static Manager& getInstance();
 
-    TextureState freeTexture(const std::string& name);
+    bool load(const std::string& path, const std::string& alias, const sf::IntRect& area);
+    virtual bool load(const std::string& path, const std::string& alias) override;
+    virtual bool load(const std::string& path) override;
 
     /**
      * @brief Save the texture that was created outside this object.
@@ -48,17 +49,8 @@ public:
      * @return true - if saving did not succeeded
      * @return false - if saving did succeeded
      */
-    bool saveTexture(const std::string& name, const sf::Texture& texture, const sf::IntRect& rect = sf::IntRect());
+    bool save(const std::string& name, const sf::Texture& texture, const sf::IntRect& rect = sf::IntRect());
 
-    /**
-     * @brief Get the Texture object. 
-     * @details If some object is connected with sf::Texture, then it should have an instance of shared_ptr.
-     * Otherwise the Texture::Manager could delete texture without warning. 
-     * 
-     * @param name - name of the searched texture
-     * @return std::shared_ptr<Texture>
-     */
-    std::shared_ptr<Texture> getTexture(const std::string& name) const;
 };
 }
 
