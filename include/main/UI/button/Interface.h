@@ -24,6 +24,21 @@ namespace Button{
         std::vector<std::weak_ptr<Draw::Drawable>> to_draw_button_;
         std::vector<std::weak_ptr<::Trigger::Event::Button>> trigger_;
 
+        bool isButtonChoosedDefault(sf::RenderWindow& window, const sf::FloatRect& globalBounds){
+            auto pixelCoords = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+            
+            if(
+                globalBounds.left <= pixelCoords.x && 
+                globalBounds.top <= pixelCoords.y && 
+                globalBounds.left + globalBounds.width > pixelCoords.x &&
+                globalBounds.top + globalBounds.height > pixelCoords.y
+                ){
+                return true;
+            }
+
+            return false;
+        }
+
     public:
         Interface()
         : to_draw_button_(), trigger_()

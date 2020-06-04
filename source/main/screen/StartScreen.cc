@@ -82,7 +82,7 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
 
     // this must be shared, because the trigger must have the button to invoke its methods
     std::shared_ptr<Button::Exit> exitButton = std::make_shared<Button::Exit>(*window, texture_manager_.get("blue_light"));
-    exitButton->setSize(sf::Vector2f(200, 40));
+    exitButton->setSize(sf::Vector2f(200, 200));
     draw_manager_->addEntity(LAYER_NAME, exitButton);
     exitButton->setTexture(&texture_manager_.get("blue_light")->getResource());
 
@@ -136,7 +136,7 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     window->setView(*view_);
 
     FixedFramerate framerate(15.0f);
-    exitButton->setPosition(sf::Vector2f(coord_to_basic.translateX(50.0f), coord_to_basic.translateY(200.0f)));
+    exitButton->setPosition(sf::Vector2f(coord_to_basic.translateX(-300.0f), coord_to_basic.translateY(200.0f)));
 
     while(window->isOpen()){
         sf::Event event;
