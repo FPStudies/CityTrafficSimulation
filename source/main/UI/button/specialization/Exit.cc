@@ -13,8 +13,21 @@ Exit::Exit(sf::Window& window, const Texture_ptr& texture)
 
 Exit::~Exit() = default;
 
-bool Exit::isButtonChoosed(const sf::Vector2i& position){
-    if(position.x < 20 && position.y < 20) return true;
+bool Exit::isButtonChoosed(sf::RenderWindow& window){
+    auto bounds = this->getGlobalBounds();
+    auto pixelCoords = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+    
+    if(
+        bounds.left <= pixelCoords.x && 
+        bounds.top <= pixelCoords.y && 
+        bounds.left + bounds.width > pixelCoords.x &&
+        bounds.top + bounds.height > pixelCoords.y
+        ){
+        return true;
+    }
+
+
+    //if(positionRelative.x < 20 && positionRelative.y < 20) return true;
     return false;
 }
 
@@ -30,11 +43,11 @@ void Exit::draw(sf::RenderTarget& target) const{
 }
 
 sf::FloatRect Exit::getLocalBounds() const{
-    return this->getLocalBounds();
+    return this->sf::RectangleShape::getLocalBounds();
 }
 
 sf::FloatRect Exit::getGlobalBounds() const{
-    return this->getGlobalBounds();
+    return this->sf::RectangleShape::getGlobalBounds();
 }
 
 bool Exit::canBeDrawn() const{

@@ -41,7 +41,7 @@ bool Trigger::Event::Button::connect(const std::shared_ptr<::Button::Interface>&
 }
 
 void Trigger::Event::Button::trigger(sf::RenderWindow& window, const sf::Event& event) {
-    if(button_  && button_->isButtonChoosed(sf::Mouse::getPosition(window))){
+    if(button_  && button_->isButtonChoosed(window)){
         // trigger functions
 
         if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Button::Left){

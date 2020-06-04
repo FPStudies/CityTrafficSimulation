@@ -35,7 +35,7 @@ namespace Button{
             trigger_.push_back(buttonTrigger);
         }
 
-        virtual bool isButtonChoosed(const sf::Vector2i& position) = 0;
+        virtual bool isButtonChoosed(sf::RenderWindow& window) = 0;
 
         virtual void actionPressedButton() = 0;
         virtual void actionReleasedButton() = 0;

@@ -129,8 +129,8 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
 
     window->setView(*view_);
 
-    FixedFramerate framerate(60.0f);
-    exitButton->setPosition(sf::Vector2f(coord_to_basic.translateX(0.0f), coord_to_basic.translateY(200.0f)));
+    FixedFramerate framerate(15.0f);
+    exitButton->setPosition(sf::Vector2f(coord_to_basic.translateX(50.0f), coord_to_basic.translateY(200.0f)));
 
     while(window->isOpen()){
         sf::Event event;
@@ -143,7 +143,8 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
 
         rectangle.setPosition(coord_to_SFML.translateX(world_->GetBodyList()->GetPosition().x), coord_to_SFML.translateY(world_->GetBodyList()->GetPosition().y));
         //std::cout << world_->GetBodyList()->GetPosition().x << " " << world_->GetBodyList()->GetPosition().y << " " << framerate.getRealFramerate() << "\n";
-        std::cout << sf::Mouse::getPosition(*window).x << "  " << sf::Mouse::getPosition(*window).y << "\n";
+        //std::cout << view_->getCenter().x << " " << view_->getCenter().y << "\n";
+        //std::cout << sf::Mouse::getPosition(*window).x << "  " << sf::Mouse::getPosition(*window).y << "\n";
         window->clear();
         window->draw(rectangle);
         draw_manager_->drawAll();

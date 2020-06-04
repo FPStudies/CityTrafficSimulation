@@ -30,7 +30,7 @@ namespace Button{
         virtual ~Exit();
  
         virtual void draw(sf::RenderTarget& target) const override;
-        virtual bool isButtonChoosed(const sf::Vector2i& position) override;
+        virtual bool isButtonChoosed(sf::RenderWindow& window) override;
 
         virtual void actionPressedButton() override;
         virtual void actionReleasedButton() override;
