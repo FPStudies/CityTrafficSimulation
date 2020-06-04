@@ -1,23 +1,25 @@
 /*
- * DrawManager.cc
+ * Manager.cc
  *
  *      Author: Kordowski Mateusz
  */
 
-#include "DrawManager.h"
+#include "Manager.h"
 #include <iostream>
 
-const unsigned int DrawManager::DrawLayer::DEFAULT_LIST_SIZE = 50;
+using namespace Draw;
 
-DrawManager::WindowCont DrawManager::windows_static_;
+const unsigned int Manager::DrawLayer::DEFAULT_LIST_SIZE = 50;
 
-DrawManager::DrawLayer::DrawLayer(const std::string& name) 
+Manager::WindowCont Manager::windows_static_;
+
+Manager::DrawLayer::DrawLayer(const std::string& name) 
 : name_(name), container_(), render_(DEFAULT_LIST_SIZE)
 {}
 
-DrawManager::DrawLayer::~DrawLayer() = default;
+Manager::DrawLayer::~DrawLayer() = default;
 
-bool DrawManager::DrawLayer::remove(std::shared_ptr<Drawable>& entity){
+bool Manager::DrawLayer::remove(std::shared_ptr<Drawable>& entity){
     ObjectPair::iterator it = container_.find(entity->getID());
 
     if(it != container_.end()){
@@ -28,7 +30,7 @@ bool DrawManager::DrawLayer::remove(std::shared_ptr<Drawable>& entity){
     return true;
 }
 
-void DrawManager::DrawLayer::clearNulls(){
+void Manager::DrawLayer::clearNulls(){
     for(auto it = render_.begin(); it != render_.end();){
         if(it->get() == nullptr){
             it = render_.erase(it);
@@ -39,20 +41,20 @@ void DrawManager::DrawLayer::clearNulls(){
     }
 }
 
-void DrawManager::DrawLayer::add(std::shared_ptr<Drawable>& entity){
+void Manager::DrawLayer::add(std::shared_ptr<Drawable>& entity){
     container_[entity->getID()] = entity;
     render_.push_back(entity);
 }
 
-const std::string& DrawManager::DrawLayer::getName(){
+const std::string& Manager::DrawLayer::getName(){
     return name_;
 }
 
-void DrawManager::DrawLayer::setName(const std::string& name){
+void Manager::DrawLayer::setName(const std::string& name){
     this->name_ = name;
 }
 
-void DrawManager::DrawLayer::draw(sf::RenderTarget& target){
+void Manager::DrawLayer::draw(sf::RenderTarget& target){
     for(auto it = render_.begin(); it != render_.end(); ++it){
         auto& sec = *it;
         if(sec && sec->canBeDrawn())
@@ -70,7 +72,7 @@ void DrawManager::DrawLayer::draw(sf::RenderTarget& target){
 
 
 
-bool DrawManager::addEntity(const std::string& layer_name, std::shared_ptr<Drawable> entity){ //check if reference or copy
+bool Manager::addEntity(const std::string& layer_name, std::shared_ptr<Drawable> entity){ //check if reference or copy
     for(auto it = to_draw_.begin(); it != to_draw_.end(); ++it){
         if((*it)->getName() == layer_name){
             (*it)->add(entity);
@@ -80,11 +82,11 @@ bool DrawManager::addEntity(const std::string& layer_name, std::shared_ptr<Drawa
     return true;
 }
 
-void DrawManager::addFirstLayer(const std::string& layer_name){
+void Manager::addFirstLayer(const std::string& layer_name){
     to_draw_.push_back(std::make_unique<DrawLayer>(layer_name));
 }
 
-bool DrawManager::addLayer(const std::string& previous_layer_name, const std::string& layer_name){
+bool Manager::addLayer(const std::string& previous_layer_name, const std::string& layer_name){
     for(auto it = to_draw_.begin(); it != to_draw_.end(); ++it){
         if((*it)->getName() == previous_layer_name){
             ++it;
@@ -95,7 +97,7 @@ bool DrawManager::addLayer(const std::string& previous_layer_name, const std::st
     return true;
 }
 
-bool DrawManager::remove(const std::string& layer_name, std::shared_ptr<Drawable> entity){ //check if reference or copy
+bool Manager::remove(const std::string& layer_name, std::shared_ptr<Drawable> entity){ //check if reference or copy
     auto it = to_draw_.begin();
     while(it != to_draw_.end()){
         if((*it)->getName() == layer_name){
@@ -105,35 +107,35 @@ bool DrawManager::remove(const std::string& layer_name, std::shared_ptr<Drawable
     return true;
 }
 
-DrawManager::DrawManager(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window)
+Manager::Manager(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window)
 : to_draw_(), object_window_(window)
 {
     addFirstLayer(layer_name);
 }
 
 
-DrawManager::~DrawManager() {}
+Manager::~Manager() {}
 
-DrawManager::DrawManager(DrawManager&& other) noexcept
+Manager::Manager(Manager&& other) noexcept
 : to_draw_(std::move(other.to_draw_)), object_window_(std::move(other.object_window_))
 {}
 
-std::unique_ptr<DrawManager> DrawManager::create(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window){
+std::unique_ptr<Manager> Manager::create(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window){
     for(WindowCont::const_iterator it = windows_static_.cbegin(); it != windows_static_.cend(); ++it){
         if(it->lock() == window) 
-            throw std::invalid_argument("This window is already in some DrawManager instance.");
+            throw std::invalid_argument("This window is already in some Manager instance.");
     }
-    DrawManager* draw_ptr = new DrawManager(layer_name, window);
-    return std::move(std::unique_ptr<DrawManager>(draw_ptr));
+    Manager* draw_ptr = new Manager(layer_name, window);
+    return std::move(std::unique_ptr<Manager>(draw_ptr));
 }
 
-void DrawManager::drawAll(){
+void Manager::drawAll(){
     for(auto& it : to_draw_){
         it->draw(*object_window_);
     }
 }
 
-bool DrawManager::drawLayer(const std::string& layer_name){
+bool Manager::drawLayer(const std::string& layer_name){
     auto it = to_draw_.begin();
     while(it != to_draw_.end()){
         if((*it)->getName() == layer_name){
@@ -145,13 +147,13 @@ bool DrawManager::drawLayer(const std::string& layer_name){
     return true;
 }
 
-void DrawManager::clearNulls(){
+void Manager::clearNulls(){
     for(auto& it : to_draw_){
         it->clearNulls();
     }
 }
 
-void DrawManager::clearNulls(const std::string& layer_name){
+void Manager::clearNulls(const std::string& layer_name){
     for(auto& it : to_draw_){
         if(it->getName() == layer_name){
             it->clearNulls();

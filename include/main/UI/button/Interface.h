@@ -11,7 +11,7 @@
 #include <SFML/Window.hpp>
 #include <vector>
 
-#include "../drawing/Drawable.h"
+#include "../draw/Drawable.h"
 
 namespace Trigger::Event{
     class Button;
@@ -21,7 +21,7 @@ namespace Trigger::Event{
 namespace Button{
     class Interface{
     protected:
-        std::vector<std::weak_ptr<Drawable>> to_draw_button_;
+        std::vector<std::weak_ptr<Draw::Drawable>> to_draw_button_;
         std::vector<std::weak_ptr<::Trigger::Event::Button>> trigger_;
 
     public:

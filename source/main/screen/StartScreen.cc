@@ -14,8 +14,8 @@ StartScreen::StartScreen()
 world_(),
 event_manager_(),
 view_(),
-texture_manager_(Drawing::Texture::Manager::getInstance()),
-font_manager_(Drawing::Font::Manager::getInstance()),
+texture_manager_(Draw::Texture::Manager::getInstance()),
+font_manager_(Draw::Font::Manager::getInstance()),
 draw_manager_()
 {}
 
@@ -63,8 +63,8 @@ void StartScreen::setEventManager(){
 }
 
 void StartScreen::setTextureManagers(std::shared_ptr<sf::RenderWindow> & window){
-    //texture_manager_ = std::make_unique<Drawing::Texture::Manager>();
-    draw_manager_ = DrawManager::create(LAYER_NAME, window);
+    //texture_manager_ = std::make_unique<Draw::Texture::Manager>();
+    draw_manager_ = Draw::Manager::create(LAYER_NAME, window);
 
     texture_manager_.load("resource/texture/blue_light.jpg", "blue_light");
 }

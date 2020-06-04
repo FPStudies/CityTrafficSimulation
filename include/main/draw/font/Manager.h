@@ -18,7 +18,7 @@
 #include "../../utility/SharedResourceManager.hpp"
 
 
-namespace Drawing::Font{
+namespace Draw::Font{
 
 class Manager: public ::SharedResource::Manager<Font, sf::Font>{
     static Manager* instance_;

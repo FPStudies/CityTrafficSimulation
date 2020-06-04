@@ -14,7 +14,7 @@
 
 
 
-namespace Drawing::Font{
+namespace Draw::Font{
 
 
 class Font: public ::SharedResource::Resource<sf::Font>{

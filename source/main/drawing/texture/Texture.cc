@@ -7,7 +7,7 @@
 #include "texture/Texture.h"
 
 
-using namespace Drawing::Texture;
+using namespace Draw::Texture;
 
 Texture::Texture(const std::string& path, const sf::IntRect& area)
 : ::SharedResource::Resource<sf::Texture>(), portion_(area), request_for_deleting(false)

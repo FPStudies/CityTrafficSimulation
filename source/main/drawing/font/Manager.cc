@@ -6,7 +6,7 @@
 
 #include "font/Manager.h"
 
-using namespace Drawing::Font;
+using namespace Draw::Font;
 
 Manager* Manager::instance_ = nullptr;
 

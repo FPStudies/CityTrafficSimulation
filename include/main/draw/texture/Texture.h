@@ -13,7 +13,7 @@
 
 #include "../../utility/SharedResourceManager.hpp"
 
-namespace Drawing::Texture{
+namespace Draw::Texture{
 
 class Texture: public ::SharedResource::Resource<sf::Texture>{
     friend class Manager;

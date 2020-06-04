@@ -18,7 +18,7 @@
 #include "../../utility/SharedResourceManager.hpp"
 
 
-namespace Drawing::Texture{
+namespace Draw::Texture{
 
 class Manager: public ::SharedResource::Manager<Texture, sf::Texture>{
     static Manager* instance_;

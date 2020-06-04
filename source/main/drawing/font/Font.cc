@@ -7,7 +7,7 @@
 #include "font/Font.h"
 
 
-using namespace Drawing::Font;
+using namespace Draw::Font;
 
 
 Font::Font(const std::string& path)

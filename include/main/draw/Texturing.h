@@ -9,6 +9,8 @@
 
 
 #include "Drawable.h"
+#include "Manager.h"
+
 #include "texture/Texture.h"
 #include "texture/Manager.h"
 

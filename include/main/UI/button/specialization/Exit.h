@@ -12,11 +12,11 @@
 
 #include "../Interface.h"
 #include "../../../trigger/action/ExitWindow.h"
-#include "../../../drawing/Texturing.h"
+#include "../../../draw/Texturing.h"
 
 namespace Button{
-    class Exit: public ::Button::Interface, public sf::RectangleShape, public Drawable{
-        using Texture = ::Drawing::Texture::Texture;
+    class Exit: public ::Button::Interface, public sf::RectangleShape, public Draw::Drawable{
+        using Texture = ::Draw::Texture::Texture;
         using Texture_ptr = std::shared_ptr<Texture>;
 
         Trigger::Action::ExitWindow exit_;

@@ -39,7 +39,7 @@ libraryPath = binFolder + 'libs/'
 programName = 'hello'
 programPath = '#'
 
-pathTo_drawing = '#include/main/drawing/'
+pathTo_drawing = '#include/main/draw/'
 pathTo_trigger = "#include/main/trigger/"
 pathTo_UI_button = "#include/main/UI/button/"
 pathTo_controls = '#include/main/controls/'
@@ -204,9 +204,9 @@ SConscript(
  
 # drawing
 SConscript(
-    'source/main/drawing/SConscript', 
+    'source/main/draw/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
-    variant_dir = binFolder + 'main/drawing', 
+    variant_dir = binFolder + 'main/draw', 
     duplicate=0
     )   
 

@@ -6,7 +6,7 @@
 
 #include "texture/Manager.h"
 
-using namespace Drawing::Texture;
+using namespace Draw::Texture;
 
 Manager* Manager::instance_ = nullptr;
 
