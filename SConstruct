@@ -234,6 +234,14 @@ SConscript(
     duplicate=0
     )
 
+# graph
+#SConscript(
+#    'source/main/graph/SConscript', 
+#    exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
+#    variant_dir = binFolder + 'main/graph', 
+#    duplicate=0
+#    )
+
 
 #print(Glob(['*.cpp', '../graphic_library_facade/*.o', 'event/*.o']))
 
