@@ -24,7 +24,7 @@ programLibraries = [
     'elements',
 #    'graph',
     'events', 
-    'drawing',
+    'draw',
     'collision',
     'controls',
     'Buttons',

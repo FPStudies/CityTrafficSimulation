@@ -19,27 +19,26 @@
 #include "../event/Basic.h"
 #include "../event/Manager.h"
 
-
-#include "../drawing/DrawManager.h"
-
 #include "../UI/button/specialization/Exit.h"
 #include "../trigger/event/Button.h"
 #include "../controls/ControlMapping.h"
 #include "../event/Control.h"
-#include "../drawing/DrawManager.h"
-#include "../drawing/texture/Manager.h"
-#include "../elements/StaticElement.h"
+#include "../draw/Texturing.h"
 
-class StartScreen: virtual public ScreenInteface{
+class StartScreen: public ScreenInteface{
     std::unique_ptr<b2World> world_;
     std::unique_ptr<Event::Manager> event_manager_;
-    std::unique_ptr<sf::View> view_;
-    std::unique_ptr<Drawing::Texture::Manager> texture_manager_;
-    std::unique_ptr<DrawManager> draw_manager_;
+    std::shared_ptr<sf::View> view_world;
+    std::shared_ptr<sf::View> view_UI;
+    Draw::Texture::Manager& texture_manager_;
+    Draw::Font::Manager& font_manager_;
+    std::unique_ptr<Draw::Manager> draw_manager_;
 
     void setBox2D();
     void setEventManager();
     void setTextureManagers(std::shared_ptr<sf::RenderWindow> & window);
+    void addExitButton(std::shared_ptr<Button::Exit>& exitButton, std::shared_ptr<sf::RenderWindow> & window);
+    void addTextToButton(std::shared_ptr<Button::Exit>& exitButton);
 
 public:
     StartScreen();

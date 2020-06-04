@@ -10,14 +10,16 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
-#include "DrawingID.h"
+#include "DrawID.h"
+
+namespace Draw{
 
 class Drawable{
-    DrawingID ID_;
+    DrawID ID_;
 
 public:
     Drawable()
-    : ID_(DrawingID::newID())
+    : ID_(DrawID::newID())
     {}
 
     virtual ~Drawable() = default;
@@ -27,13 +29,14 @@ public:
     virtual sf::FloatRect getGlobalBounds() const = 0;
     virtual bool canBeDrawn() const = 0;
 
-    DrawingID getID() const{
+    DrawID getID() const{
         return ID_;
     }
 
-    const DrawingID& getID_const() const{
+    const DrawID& getID_const() const{
         return ID_;
     }
 };
+}
 
 #endif

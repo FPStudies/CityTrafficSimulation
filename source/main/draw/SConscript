@@ -7,13 +7,13 @@ Import('binFolder')
 Import('pathToUtility')
 Import('libraryPath')
 
-pathToH = '#include/main/drawing/'
-libraryName = 'drawing'
+pathToH = '#include/main/draw/'
+libraryName = 'draw'
 
 HFilesMain = [
     'Drawable.h',
-    'DrawingID.h',
-    'DrawManager.h',
+    'DrawID.h',
+    'Manager.h',
     'texture/Manager.h'
 ]
 
@@ -23,9 +23,11 @@ HFilesUtility = [
 ]
 
 filesCPP = [
-    'DrawManager.cc',
+    'Manager.cc',
     'texture/Manager.cc',
-    'texture/Texture.cc'
+    'texture/Texture.cc',
+    'font/Manager.cc',
+    'font/Font.cc'
 ]
 
 

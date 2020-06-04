@@ -15,9 +15,9 @@
 
 #include "../texture/Manager.h"
 
-namespace Drawing::Shape{
+namespace Draw::Shape{
 
-using TextManager = ::Drawing::Texture::Manager;
+using TextManager = ::Draw::Texture::Manager;
 
 class Manager{
     typedef std::map<std::string, std::shared_ptr<sf::Shape>> MyMap; // used for storing shapes

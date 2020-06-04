@@ -11,7 +11,7 @@
 #include <SFML/Window.hpp>
 #include <vector>
 
-#include "../drawing/Drawable.h"
+#include "../draw/Drawable.h"
 
 namespace Trigger::Event{
     class Button;
@@ -21,8 +21,23 @@ namespace Trigger::Event{
 namespace Button{
     class Interface{
     protected:
-        std::vector<std::weak_ptr<Drawable>> to_draw_button_;
+        std::vector<std::weak_ptr<Draw::Drawable>> to_draw_button_;
         std::vector<std::weak_ptr<::Trigger::Event::Button>> trigger_;
+
+        bool isButtonChoosedDefault(sf::RenderWindow& window, const sf::FloatRect& globalBounds){
+            auto pixelCoords = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+            
+            if(
+                globalBounds.left <= pixelCoords.x && 
+                globalBounds.top <= pixelCoords.y && 
+                globalBounds.left + globalBounds.width > pixelCoords.x &&
+                globalBounds.top + globalBounds.height > pixelCoords.y
+                ){
+                return true;
+            }
+
+            return false;
+        }
 
     public:
         Interface()
@@ -35,7 +50,7 @@ namespace Button{
             trigger_.push_back(buttonTrigger);
         }
 
-        virtual bool isButtonChoosed(const sf::Vector2i& position) = 0;
+        virtual bool isButtonChoosed(sf::RenderWindow& window) = 0;
 
         virtual void actionPressedButton() = 0;
         virtual void actionReleasedButton() = 0;

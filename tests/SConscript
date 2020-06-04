@@ -12,7 +12,7 @@ env_tests = env_base.Clone();
 testLibraries = [
     'screenLib',
     'events', 
-    'drawing',
+    'draw',
     'collision',
     'controls',
     'Buttons',

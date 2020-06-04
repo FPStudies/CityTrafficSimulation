@@ -22,6 +22,7 @@ const int ProgramSetup::render(){
     ScreenManager screen_manager;
 	std::shared_ptr<StartScreen> start_screen = std::make_shared<StartScreen>();
 	screen_manager.addScreen(start_screen, "startScreen");
+    sf::Window tmp;
 
 	screen_manager.mainLoop(window_, *start_screen);
 

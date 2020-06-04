@@ -1,5 +1,5 @@
 /*
- * DrawingID.h
+ * DrawID.h
  *
  *      Author: Kordowski Mateusz
  */
@@ -9,15 +9,19 @@
 
 #include "../utility/ID.hpp"
 
-class DrawingID: virtual public Utils::ID<DrawingID>{
+namespace Draw{
+
+class DrawID: virtual public Utils::ID<DrawID>{
 
     friend class Drawable;
 
-    DrawingID(const ID<DrawingID> id)
-    : ID<DrawingID>(id)
+    DrawID(const ID<DrawID> id)
+    : ID<DrawID>(id)
     {}
 
 public:
 };
+
+}
 
 #endif

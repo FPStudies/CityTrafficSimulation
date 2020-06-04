@@ -7,7 +7,7 @@
 #include "event/Button.h"
 
 Trigger::Event::Button::Button()
-: button_(nullptr)
+: button_(nullptr), was_pressed_(false)
 {}
 
 Trigger::Event::Button::~Button() = default;
@@ -41,15 +41,20 @@ bool Trigger::Event::Button::connect(const std::shared_ptr<::Button::Interface>&
 }
 
 void Trigger::Event::Button::trigger(sf::RenderWindow& window, const sf::Event& event) {
-    if(button_  && button_->isButtonChoosed(sf::Mouse::getPosition(window))){
+    if(button_  && button_->isButtonChoosed(window)){
         // trigger functions
-
+        
         if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Button::Left){
+            was_pressed_ = true;
             button_->actionPressedButton();
         }
-        else if(event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Button::Left){
+        else if(event.type == sf::Event::MouseButtonReleased && event.mouseButton.button == sf::Mouse::Button::Left && was_pressed_){
             button_->actionReleasedButton();
+            was_pressed_ = false;
         }
+    }
+    else{
+        was_pressed_ = false;
     }
 }
 

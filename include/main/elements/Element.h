@@ -8,15 +8,15 @@
 #define TRAFFIC_SIM_ELEMENT_H
 
 #include <SFML/Graphics.hpp>
-#include "../drawing/Drawable.h"
-#include "../drawing/Texturing.h"
+#include "../draw/Drawable.h"
+#include "../draw/Texturing.h"
 
 namespace Elements {
 
-    using Texture = ::Drawing::Texture::Texture;
+    using Texture = ::Draw::Texture::Texture;
     using Texture_ptr = std::shared_ptr<Texture>;
 
-    class Element: public sf::RectangleShape, public Drawable {
+    class Element: public sf::RectangleShape, public Draw::Drawable {
         
         Texture_ptr texture_;       
         sf::RenderStates states_;

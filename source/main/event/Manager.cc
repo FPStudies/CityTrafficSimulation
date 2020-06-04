@@ -32,8 +32,8 @@ Manager::SetInner::SetInner(const std::shared_ptr<Interface>& event, Manager::St
 : event_set_(Set(event)), state_(mode)
 {}
 
-Manager::Manager() 
-: events_sorted_(false), events_map_names_(), events_sorted_list_(), tmp_mode_()
+Manager::Manager(const std::shared_ptr<sf::View>& view) 
+: events_sorted_(false), events_map_names_(), events_sorted_list_(), tmp_mode_(), view_(view)
 {}
 
 Manager::~Manager() = default;
@@ -262,6 +262,8 @@ void Manager::checkEvents(sf::RenderWindow& window, sf::Event& event){
         sortListBinaryVal();
         events_sorted_ = true;
     }
+
+    window.setView(*view_);
 
     for(auto& it : events_sorted_list_){
         if(!it->isActive())

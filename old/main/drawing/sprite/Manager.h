@@ -16,9 +16,9 @@
 
 #include "../texture/Manager.h"
 
-namespace Drawing::Sprite{
+namespace Draw::Sprite{
 
-using TextManager = ::Drawing::Texture::Manager;
+using TextManager = ::Draw::Texture::Manager;
 
 class Manager{
     struct Portion{

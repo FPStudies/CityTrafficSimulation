@@ -12,14 +12,16 @@
 
 #include "../Interface.h"
 #include "../../../trigger/action/ExitWindow.h"
-#include "../../../drawing/Texturing.h"
+#include "../../../draw/Texturing.h"
 
 namespace Button{
-    class Exit: public ::Button::Interface, public sf::RectangleShape, public Drawable{
-        using Texture = ::Drawing::Texture::Texture;
+    class Exit: public ::Button::Interface, public sf::RectangleShape, public Draw::Drawable{
+        using Texture = ::Draw::Texture::Texture;
         using Texture_ptr = std::shared_ptr<Texture>;
 
         Trigger::Action::ExitWindow exit_;
+        sf::Text text_;
+        std::shared_ptr<Draw::Font::Font> font_;
 
         Texture_ptr texture_;       
         sf::RenderStates states_;
@@ -30,7 +32,7 @@ namespace Button{
         virtual ~Exit();
  
         virtual void draw(sf::RenderTarget& target) const override;
-        virtual bool isButtonChoosed(const sf::Vector2i& position) override;
+        virtual bool isButtonChoosed(sf::RenderWindow& window) override;
 
         virtual void actionPressedButton() override;
         virtual void actionReleasedButton() override;
@@ -38,6 +40,12 @@ namespace Button{
         virtual sf::FloatRect getLocalBounds() const override;
         virtual sf::FloatRect getGlobalBounds() const override;
         virtual bool canBeDrawn() const override;
+
+        void setFont(const std::shared_ptr<Draw::Font::Font>& font);
+        void setPosition(const sf::Vector2f &position);
+        void setSize(const sf::Vector2f &size);
+        void setTextSize(unsigned int size);
+
     };
 }
 
