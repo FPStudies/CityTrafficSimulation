@@ -63,29 +63,23 @@ void StartScreen::setEventManager(){
 }
 
 void StartScreen::setTextureManagers(std::shared_ptr<sf::RenderWindow> & window){
-    //texture_manager_ = std::make_unique<Draw::Texture::Manager>();
     draw_manager_ = Draw::Manager::create(LAYER_NAME, window);
 
     texture_manager_.load("resource/texture/blue_light.jpg", "blue_light");
 }
 
-ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
-    setBox2D();
-    setEventManager();
-    setTextureManagers(window);
-
+void StartScreen::addExitButton(std::shared_ptr<Button::Exit>& exitButton, std::shared_ptr<sf::RenderWindow> & window){
     // how it is done
     // create button object. this object on press will do nothing
     // but when we connect it to the Trigger::Event that will tell us how to
     // interpret the event from sfml and will call the right method from button object.
     // In short trigger will call the right method based on sfml event.
-
+   
     // this must be shared, because the trigger must have the button to invoke its methods
-    std::shared_ptr<Button::Exit> exitButton = std::make_shared<Button::Exit>(*window, texture_manager_.get("blue_light"));
+    exitButton = std::make_shared<Button::Exit>(*window, texture_manager_.get("blue_light"));
     exitButton->setSize(sf::Vector2f(200, 200));
     draw_manager_->addEntity(LAYER_NAME, exitButton);
     exitButton->setTexture(&texture_manager_.get("blue_light")->getResource());
-
 
     // create action trigger that will interpret the sfml event and will call method from button object.
 
@@ -100,7 +94,7 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     // this unique_ptr is needed only at creation time. Later this pointer is useless.
     std::unique_ptr<Control::Mapping> controls = std::make_unique<Control::Mapping>();    
     // this trigger will be triggered when the mouse will be used.
-    bool ret = controls->addControl(Control::Mouse::ButtonLeft, triggerButtonEvent);
+    controls->addControl(Control::Mouse::ButtonLeft, triggerButtonEvent);
     
     // now we connect control to the event that is used only to store the controls and call it.
     // the only thing this event control is doing is spliting the keyboard and the mouse invoking.
@@ -117,6 +111,14 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     Trigger can have other objects like button. I decidet that the button object will tell what to do instead of trigger but this can be different.
     Button should know what trigger is used on him.
     */
+}
+
+ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
+    setBox2D();
+    setEventManager();
+    setTextureManagers(window);
+    std::shared_ptr<Button::Exit> exitButton;
+    addExitButton(exitButton, window);
 
     auto& coord_set = CoordinateSystemSet::getInstance();
     coord_set.addNewSystem(0.0f, 0.0f, false, true, "basic", "sfml");
@@ -125,7 +127,7 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     auto coord_to_SFML = coord_set.get("sfml");
     auto coord_from_view = coord_set.get("view");
 
-    float res_X = 1000.f, res_Y = 1000.f;
+    float res_X = 1920.f, res_Y = 1080.f;
 
     view_ = std::make_unique<sf::View>(sf::FloatRect(-(res_X / 2), -(res_Y / 2), res_X, res_Y)); // point is in bottom left
 

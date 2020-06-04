@@ -18,6 +18,7 @@ namespace Trigger::Event{
 
     class Button: public Interface, public std::enable_shared_from_this<Button>{
         std::shared_ptr<::Button::Interface> button_;
+        bool was_pressed_;
 
     private:
         Button* clone_impl() const override;

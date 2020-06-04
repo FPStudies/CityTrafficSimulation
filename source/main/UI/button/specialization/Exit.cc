@@ -14,7 +14,6 @@ Exit::Exit(sf::Window& window, const Texture_ptr& texture)
 Exit::~Exit() = default;
 
 bool Exit::isButtonChoosed(sf::RenderWindow& window){
-    auto bounds = this->getGlobalBounds();
     return isButtonChoosedDefault(window, this->getGlobalBounds());
 }
 

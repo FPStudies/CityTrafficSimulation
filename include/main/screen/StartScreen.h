@@ -36,6 +36,7 @@ class StartScreen: public ScreenInteface{
     void setBox2D();
     void setEventManager();
     void setTextureManagers(std::shared_ptr<sf::RenderWindow> & window);
+    void addExitButton(std::shared_ptr<Button::Exit>& exitButton, std::shared_ptr<sf::RenderWindow> & window);
 
 public:
     StartScreen();
