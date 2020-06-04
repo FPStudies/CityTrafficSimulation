@@ -28,6 +28,7 @@
 #include "../event/Control.h"
 #include "../drawing/DrawManager.h"
 #include "../drawing/texture/Manager.h"
+#include "../elements/StaticElement.h"
 
 class StartScreen: virtual public ScreenInteface{
     std::unique_ptr<b2World> world_;

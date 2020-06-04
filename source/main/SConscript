@@ -21,6 +21,7 @@ SFMLLibraries = [
 
 programLibraries = [
     'screenLib',
+    'elements',
 #    'graph',
     'events', 
     'drawing',

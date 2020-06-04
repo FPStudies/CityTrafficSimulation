@@ -8,7 +8,8 @@ Import('pathToUtility')
 Import('libraryPath')
 
 pathToH = '#include/main/screen/'
-pathToH2 = '#include/main/event/'
+pathToEvent = '#include/main/event/'
+pathToDrawing = '#include/main/drawing/'
 libraryName = 'screenLib'
 
 HFilesMain = [
@@ -33,7 +34,8 @@ filesHUtil = [pathToUtility + x for x in HFilesUtility]
 env.Append(
     CPPPATH = [
         pathToH, 
-        pathToH2
+        pathToEvent,
+        pathToDrawing
     ]
     )
 

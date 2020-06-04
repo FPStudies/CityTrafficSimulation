@@ -8,7 +8,7 @@ Exit::Exit(sf::Window& window, const Texture_ptr& texture)
 : exit_(window), 
     texture_(texture), 
     states_(&texture->getTexture()), 
-    can_be_drawn(true)
+    can_be_drawn_(true)
 {}
 
 Exit::~Exit() = default;
@@ -38,5 +38,5 @@ sf::FloatRect Exit::getGlobalBounds() const{
 }
 
 bool Exit::canBeDrawn() const{
-    return can_be_drawn;
+    return can_be_drawn_;
 }

@@ -61,6 +61,7 @@ void StartScreen::setTextureManagers(std::shared_ptr<sf::RenderWindow> & window)
     draw_manager_ = DrawManager::create(LAYER_NAME, window);
 
     texture_manager_->loadTexture("resource/texture/blue_light.jpg", "blue_light");
+    texture_manager_->loadTexture("resource/texture/highway_road.jpg", "highway_road");
 }
 
 ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
@@ -75,18 +76,17 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     // In short trigger will call the right method based on sfml event.
 
     // this must be shared, because the trigger must have the button to invoke its methods
-    std::shared_ptr<Button::Exit> exitButton = std::make_shared<Button::Exit>(*window, texture_manager_->getTexture("blue_light"));
-    exitButton->setSize(sf::Vector2f(200, 40));
-    draw_manager_->addEntity(LAYER_NAME, exitButton);
-    exitButton->setTexture(&texture_manager_->getTexture("blue_light")->getTexture());
-
+    std::shared_ptr<Button::Exit> exit_button = std::make_shared<Button::Exit>(*window, texture_manager_->getTexture("blue_light"));
+    exit_button->setSize(sf::Vector2f(200, 40));
+    draw_manager_->addEntity(LAYER_NAME, exit_button);
+    exit_button->setTexture(&texture_manager_->getTexture("blue_light")->getTexture());
 
     // create action trigger that will interpret the sfml event and will call method from button object.
 
     // shared_ptr, because the button could have a need to change something in his trigger
     auto triggerButtonEvent = Trigger::Event::Button::create();
     // connect them both
-    triggerButtonEvent->connect(exitButton);
+    triggerButtonEvent->connect(exit_button);
 
 
     // create control mapping
@@ -130,7 +130,7 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     window->setView(*view_);
 
     FixedFramerate framerate(60.0f);
-    exitButton->setPosition(sf::Vector2f(coord_to_basic.translateX(0.0f), coord_to_basic.translateY(200.0f)));
+    exit_button->setPosition(sf::Vector2f(coord_to_basic.translateX(0.0f), coord_to_basic.translateY(200.0f)));
 
     while(window->isOpen()){
         sf::Event event;

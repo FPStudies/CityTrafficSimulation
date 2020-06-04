@@ -226,11 +226,11 @@ SConscript(
     duplicate=0
     )   
 
-# screen
+# elements
 SConscript(
-    'source/main/screen/SConscript', 
+    'source/main/elements/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
-    variant_dir = binFolder + 'main/screen', 
+    variant_dir = binFolder + 'main/elements', 
     duplicate=0
     )
 
@@ -242,6 +242,13 @@ SConscript(
 #    duplicate=0
 #    )
 
+# screen
+SConscript(
+    'source/main/screen/SConscript', 
+    exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
+    variant_dir = binFolder + 'main/screen', 
+    duplicate=0
+    )
 
 #print(Glob(['*.cpp', '../graphic_library_facade/*.o', 'event/*.o']))
 

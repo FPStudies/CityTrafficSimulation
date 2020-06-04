@@ -1,0 +1,37 @@
+#
+#      Authors: Przybysz Filip
+#
+
+Import('env_base')
+Import('binFolder')
+Import('pathToUtility')
+Import('libraryPath')
+
+pathToH = '#include/main/elements/'
+pathToDrawing = '#include/main/drawing/'
+libraryName = 'elements'
+
+HeaderFiles = [
+    'Element.h',
+    'StaticElement.h'
+]
+
+env = env_base.Clone()
+
+filesCPP = [
+    Glob('*.cc')
+]
+
+
+filesH = [pathToH + x for x in HeaderFiles]
+
+env.Append(
+    CPPPATH = [
+        pathToH,
+        pathToDrawing
+    ]
+    )
+
+env.StaticLibrary(
+    target = libraryPath + libraryName, 
+    source = filesCPP)

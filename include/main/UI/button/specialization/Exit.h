@@ -23,7 +23,7 @@ namespace Button{
 
         Texture_ptr texture_;       
         sf::RenderStates states_;
-        bool can_be_drawn;
+        bool can_be_drawn_;
 
     public:
         Exit(sf::Window& window, const Texture_ptr& texture);
