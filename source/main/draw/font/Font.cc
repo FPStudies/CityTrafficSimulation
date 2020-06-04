@@ -24,11 +24,3 @@ Font::Font(const std::string& path)
 Font::Font(const sf::Font& font)
 : ::SharedResource::Resource<sf::Font>(font)
 {}
-
-sf::Font& Font::getFont(){
-    return object_;
-}
-
-const sf::Font& Font::getFont_const() const{
-    return object_;
-}

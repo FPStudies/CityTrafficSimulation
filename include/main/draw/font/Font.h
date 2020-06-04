@@ -23,10 +23,6 @@ class Font: public ::SharedResource::Resource<sf::Font>{
     Font(const std::string& path);
     Font(const sf::Font& font);
 
-public:
-    sf::Font& getFont();
-
-    const sf::Font& getFont_const() const;
 };
 
 }

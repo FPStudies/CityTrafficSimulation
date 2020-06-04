@@ -11,6 +11,7 @@
 #include <map>
 #include <vector>
 #include <list>
+#include <memory>
 
 #include <SFML/Graphics.hpp>
 
@@ -36,21 +37,24 @@ class Manager{
         std::string name_;
         ObjectPair container_;
         ToRender render_;
+        std::shared_ptr<sf::View> view_;
+        
 
     public:
-        DrawLayer(const std::string& name);
+        DrawLayer(const std::string& name, const std::shared_ptr<sf::View>& view);
         virtual ~DrawLayer();
         DrawLayer(const DrawLayer&) = delete;
 
         bool remove(std::shared_ptr<Drawable>& entity);
         void add(std::shared_ptr<Drawable>& entity);
 
-        const std::string& getName();
+        const std::string& getName() const;
         void setName(const std::string& name);
-        void draw(sf::RenderTarget& target);
+        void draw(sf::RenderWindow& window);
 
         void clearNulls();
 
+        std::shared_ptr<sf::View> getView() const;
     };
 
     using Layers = std::vector<std::unique_ptr<DrawLayer>>;
@@ -62,7 +66,7 @@ class Manager{
     static WindowCont windows_static_;
     
 
-    Manager(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window);
+    Manager(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window, const std::shared_ptr<sf::View>& view);
     
     Manager(const Manager& other) = delete;
 
@@ -71,7 +75,10 @@ public:
     ~Manager();
     
     // use std::move
-    static std::unique_ptr<Manager> create(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window);
+    
+    static std::unique_ptr<Manager> create(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window, const std::shared_ptr<sf::View>& view);
+
+    bool draw(const std::string& layer_name_first, const std::string& layer_name_last);
 
     void drawAll();
 
@@ -79,9 +86,9 @@ public:
 
     bool addEntity(const std::string& layer_name, std::shared_ptr<Drawable> entity);
 
-    void addFirstLayer(const std::string& layer_name);
+    bool addFirstLayer(const std::string& layer_name, const std::shared_ptr<sf::View>& view);
 
-    bool addLayer(const std::string& previous_layer_name, const std::string& layer_name);
+    bool addLayer(const std::string& previous_layer_name, const std::string& layer_name, const std::shared_ptr<sf::View>& view);
 
     bool remove(const std::string& layer_name, std::shared_ptr<Drawable> entity);
 

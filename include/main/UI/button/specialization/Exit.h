@@ -20,6 +20,8 @@ namespace Button{
         using Texture_ptr = std::shared_ptr<Texture>;
 
         Trigger::Action::ExitWindow exit_;
+        sf::Text text_;
+        std::shared_ptr<Draw::Font::Font> font_;
 
         Texture_ptr texture_;       
         sf::RenderStates states_;
@@ -38,6 +40,12 @@ namespace Button{
         virtual sf::FloatRect getLocalBounds() const override;
         virtual sf::FloatRect getGlobalBounds() const override;
         virtual bool canBeDrawn() const override;
+
+        void setFont(const std::shared_ptr<Draw::Font::Font>& font);
+        void setPosition(const sf::Vector2f &position);
+        void setSize(const sf::Vector2f &size);
+        void setTextSize(unsigned int size);
+
     };
 }
 

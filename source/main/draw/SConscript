@@ -13,7 +13,7 @@ libraryName = 'draw'
 HFilesMain = [
     'Drawable.h',
     'DrawID.h',
-    'DrawManager.h',
+    'Manager.h',
     'texture/Manager.h'
 ]
 
@@ -23,7 +23,7 @@ HFilesUtility = [
 ]
 
 filesCPP = [
-    'DrawManager.cc',
+    'Manager.cc',
     'texture/Manager.cc',
     'texture/Texture.cc',
     'font/Manager.cc',

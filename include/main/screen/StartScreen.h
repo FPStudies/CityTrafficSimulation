@@ -28,7 +28,8 @@
 class StartScreen: public ScreenInteface{
     std::unique_ptr<b2World> world_;
     std::unique_ptr<Event::Manager> event_manager_;
-    std::unique_ptr<sf::View> view_;
+    std::shared_ptr<sf::View> view_world;
+    std::shared_ptr<sf::View> view_UI;
     Draw::Texture::Manager& texture_manager_;
     Draw::Font::Manager& font_manager_;
     std::unique_ptr<Draw::Manager> draw_manager_;
@@ -37,6 +38,7 @@ class StartScreen: public ScreenInteface{
     void setEventManager();
     void setTextureManagers(std::shared_ptr<sf::RenderWindow> & window);
     void addExitButton(std::shared_ptr<Button::Exit>& exitButton, std::shared_ptr<sf::RenderWindow> & window);
+    void addTextToButton(std::shared_ptr<Button::Exit>& exitButton);
 
 public:
     StartScreen();

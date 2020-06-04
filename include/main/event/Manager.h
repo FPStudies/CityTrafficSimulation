@@ -92,6 +92,8 @@ namespace Event{
          */
         ToChange tmp_mode_;
 
+        std::shared_ptr<sf::View> view_;
+
         static const int DEFAULT_HASH_MAP_SIZE = 30;
 
         /**
@@ -109,7 +111,7 @@ namespace Event{
 
     public:
 
-        Manager();
+        Manager(const std::shared_ptr<sf::View>& view);
         ~Manager();
         Manager(const Manager&) = delete;
         Manager(Manager&&) = delete;

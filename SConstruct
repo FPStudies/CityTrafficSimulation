@@ -202,7 +202,7 @@ SConscript(
     )
 
  
-# drawing
+# draw
 SConscript(
     'source/main/draw/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
