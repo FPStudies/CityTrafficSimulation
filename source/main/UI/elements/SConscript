@@ -7,7 +7,7 @@ Import('binFolder')
 Import('pathToUtility')
 Import('libraryPath')
 
-pathToH = '#include/main/elements/'
+pathToH = '#include/main/UI/elements/'
 pathToDrawing = '#include/main/drawing/'
 libraryName = 'elements'
 

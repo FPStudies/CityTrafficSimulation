@@ -8,8 +8,8 @@
 #define TRAFFIC_SIM_ELEMENT_H
 
 #include <SFML/Graphics.hpp>
-#include "../draw/Drawable.h"
-#include "../draw/Texturing.h"
+#include "../../draw/Drawable.h"
+#include "../../draw/Texturing.h"
 
 namespace Elements {
 
