@@ -1,0 +1,55 @@
+#
+#      Authors: Kordowski Mateusz
+#
+
+Import('env_base')
+
+Import('pathTo_drawing')
+Import('pathTo_trigger')
+Import('pathTo_UI_button')
+
+Import('libraryPath')
+
+pathToH = pathTo_UI_button + 'specialization/'
+pathToH2 = pathTo_UI_button
+libraryName = 'Buttons'
+
+
+HFilesMain = [
+    'Interface.h',
+    'specialization/Exit.h'
+]
+
+HFilesDrawing = [
+    'Drawable.h'
+]
+
+HFilesTrigger = [
+    'action/ExitWindow.h'
+]
+
+filesCPP = [
+    Glob('*.cc'),
+    Glob('specialization/*.cc'),
+]
+
+
+filesHMain = [pathToH + x for x in HFilesMain]
+filesHDrawing = [pathTo_drawing + x for x in HFilesDrawing]
+filesHTrigger = [pathTo_trigger + x for x in HFilesTrigger]
+
+env = env_base.Clone()
+
+env.Append(
+    CPPPATH = [
+        pathTo_UI_button, 
+        pathTo_UI_button + '/specialization',
+        pathTo_trigger,
+        pathTo_drawing
+        ]
+    )
+
+env.StaticLibrary(
+    target = libraryPath + libraryName, 
+    source = filesCPP
+    )

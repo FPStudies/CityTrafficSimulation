@@ -12,8 +12,11 @@ env_tests = env_base.Clone();
 testLibraries = [
     'screenLib',
     'events', 
-    'drawing',
+    'draw',
     'collision',
+    'controls',
+    'Buttons',
+    'Triggers',
     'sfml-graphics',
     'sfml-window',
     'sfml-system',

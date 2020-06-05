@@ -1,0 +1,56 @@
+#
+#      Authors: Kordowski Mateusz
+#
+
+Import('env_base')
+
+Import('pathTo_drawing')
+Import('pathTo_controls')
+Import('pathTo_UI_button')
+Import('pathTo_trigger')
+
+Import('libraryPath')
+
+pathToH = pathTo_trigger
+libraryName = 'Triggers'
+
+HFilesMain = [
+    'action/ExitWindow.h',
+    'action/Interface.h',
+    'event/Button.h',
+    'event/Interface.h'
+]
+
+HFilesControls = [
+    'ControlMapping.h'
+]
+
+HFilesUI = [
+    'Interface.h'
+]
+
+env = env_base.Clone()
+
+filesCPP = [
+    Glob('*.cc'),
+    Glob('action/*.cc'),
+    Glob('event/*.cc')
+]
+
+
+filesHMain = [pathTo_trigger + x for x in HFilesMain]
+filesHControls = [pathTo_controls + x for x in HFilesControls]
+filesH_UI = [pathTo_UI_button + x for x in HFilesUI]
+
+env.Append(
+    CPPPATH = [
+        pathToH,
+        pathTo_controls,
+        pathTo_UI_button
+        ]
+    )
+
+env.StaticLibrary(
+    target = libraryPath + libraryName, 
+    source = filesCPP + filesHControls + filesH_UI
+    )

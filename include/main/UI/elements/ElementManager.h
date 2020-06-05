@@ -1,24 +1,25 @@
 /*
  * ElementManager.h
  *
- *      Author: Kordowski Mateusz
+ *      Author: Przybysz Filip
  */
 
 #ifndef TRAFFIC_SIM_ELEMENT_MANAGER_H
 #define TRAFFIC_SIM_ELEMENT_MANAGER_H
 
-#include <memory>
-#include <map>
+#include "AllElements.h"
 
-#include "ElementObserver.h"
+namespace Elements {
 
-class ElementManager{
+    class ElementManager {
 
-public:
-    // TODO:
+    public:
+        
+        ElementManager ();
+        virtual ~ElementManager();
+
+    };
 
 };
-
-
 
 #endif

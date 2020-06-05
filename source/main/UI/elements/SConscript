@@ -1,0 +1,39 @@
+#
+#      Authors: Przybysz Filip
+#
+
+Import('env_base')
+Import('binFolder')
+Import('pathToUtility')
+Import('libraryPath')
+
+pathToH = '#include/main/UI/elements/'
+pathToDrawing = '#include/main/drawing/'
+libraryName = 'elements'
+
+env = env_base.Clone()
+
+filesCPP = [
+    'dynamic/vehicle/Car.cc',
+    'dynamic/DynamicElement.cc',
+    'dynamic/Pedestrian.cc',
+    'dynamic/vehicle/Truck.cc',
+    'dynamic/vehicle/Vehicle.cc',
+    'static/Camera.cc',
+    'static/Pavement.cc',
+    'static/PedestrianCrossing.cc',
+    'static/Road.cc',
+    'static/SpawnPoint.cc',
+    'static/StaticElement.cc'
+]
+
+env.Append(
+    CPPPATH = [
+        pathToH,
+        pathToDrawing
+    ]
+    )
+
+env.StaticLibrary(
+    target = libraryPath + libraryName, 
+    source = filesCPP)

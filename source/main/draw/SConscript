@@ -1,0 +1,41 @@
+#
+#      Authors: Kordowski Mateusz, Przybysz Filip
+#
+
+Import('env_base')
+Import('binFolder')
+Import('pathToUtility')
+Import('libraryPath')
+
+pathToH = '#include/main/draw/'
+libraryName = 'draw'
+
+HFilesMain = [
+    'Drawable.h',
+    'DrawID.h',
+    'Manager.h',
+    'texture/Manager.h'
+]
+
+HFilesUtility = [
+    'ID.hpp',
+    'SetTemplate.hpp'
+]
+
+filesCPP = [
+    'Manager.cc',
+    'texture/Manager.cc',
+    'texture/Texture.cc',
+    'font/Manager.cc',
+    'font/Font.cc'
+]
+
+
+filesHMain = [pathToH + x for x in HFilesMain]
+filesHUtil = [pathToUtility + x for x in HFilesUtility]
+
+env = env_base.Clone()
+
+env.Append(CPPPATH = pathToH)
+
+env.StaticLibrary(libraryPath + libraryName, filesCPP)

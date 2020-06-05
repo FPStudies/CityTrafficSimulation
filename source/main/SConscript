@@ -20,10 +20,15 @@ SFMLLibraries = [
 ]
 
 programLibraries = [
+    'screenLib',
+    'elements',
+#    'graph',
     'events', 
-    'screenLib', 
-    'drawing',
-    'collision'
+    'draw',
+    'collision',
+    'controls',
+    'Buttons',
+    'Triggers'
 ]
 
 externalLibraries = [
@@ -69,5 +74,3 @@ env.Append(
 )
 
 programFile = env.Program(target = programPath + programName, source = filesHMain + filesCPP + objectFiles)
-
-Return('programFile')

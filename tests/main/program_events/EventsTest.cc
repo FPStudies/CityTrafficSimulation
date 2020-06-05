@@ -11,14 +11,14 @@
 
 #include <boost/test/unit_test.hpp>
 
-#include "BasicEvents.h"
-#include "EventManager.h"
-#include "EventSet.h"
-#include "UIEvents.h"
+#include "Basic.h"
+#include "Manager.h"
+#include "Set.h"
+#include "UI.h"
 
 
 BOOST_AUTO_TEST_CASE(basic_events_methods){
-    BasicEvents event;
+    Event::Basic event;
     auto copy = event.clone();
 
     BOOST_CHECK_EQUAL(event.equals(*copy), true);
@@ -29,7 +29,7 @@ BOOST_AUTO_TEST_CASE(basic_events_methods){
 }
 
 BOOST_AUTO_TEST_CASE(UI_events_methods){
-    UIEvents event;
+    Event::UI event;
     auto copy = event.clone();
 
     BOOST_CHECK_EQUAL(event.equals(*copy), true);
@@ -40,22 +40,22 @@ BOOST_AUTO_TEST_CASE(UI_events_methods){
 }
 
 BOOST_AUTO_TEST_CASE(event_manager_methods){
-    EventManager manager;
-    std::shared_ptr<BasicEvents> b_event = std::make_shared<BasicEvents>();
-    std::shared_ptr<UIEvents> ui_event = std::make_shared<UIEvents>();
+    Event::Manager manager;
+    std::shared_ptr<Event::Basic> b_event = std::make_shared<Event::Basic>();
+    std::shared_ptr<Event::UI> ui_event = std::make_shared<Event::UI>();
 
-    manager.add("test1", EventManager::State::ACTIVE, b_event);
-    manager.add("test2", EventManager::State::INACTIVE, ui_event);
-    manager.add("test3", EventManager::State::INACTIVE, b_event);
+    manager.add("test1", Event::Manager::State::ACTIVE, b_event);
+    manager.add("test2", Event::Manager::State::INACTIVE, ui_event);
+    manager.add("test3", Event::Manager::State::INACTIVE, b_event);
 
     BOOST_CHECK_EQUAL(manager.remove("test1"), false);
     BOOST_CHECK_EQUAL(manager.remove("test1"), true);
 
-    BOOST_CHECK_EQUAL(manager.addNew("test1", EventManager::State::ACTIVE, b_event), false);
+    BOOST_CHECK_EQUAL(manager.addNew("test1", Event::Manager::State::ACTIVE, b_event), false);
 
 
-    manager.add("test4", EventManager::State::INACTIVE, b_event);
-    manager.add("test4", EventManager::State::INACTIVE, ui_event);
+    manager.add("test4", Event::Manager::State::INACTIVE, b_event);
+    manager.add("test4", Event::Manager::State::INACTIVE, ui_event);
 
     BOOST_CHECK_EQUAL(manager.remove("test4"), false);
     BOOST_CHECK_EQUAL(manager.remove("test4"), true);

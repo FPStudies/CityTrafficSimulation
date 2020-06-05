@@ -1,0 +1,62 @@
+#
+#      Authors: Kordowski Mateusz, Przybysz Filip
+#
+
+Import('env_base')
+Import('binFolder')
+Import('pathToUtility')
+Import('pathToControls')
+Import('libraryPath')
+
+
+pathToH = '#include/main/event/'
+libraryName = 'events'
+
+HFilesMain = [
+    'Interface.h',
+    'ToggleInterface.h',
+    'Basic.h',
+    'Control.h',
+    'Set.h',
+    'Manager.h',
+]
+
+HFilesUtility = [
+    'SetTemplate.hpp'
+]
+
+HFilesControls = [
+    'ControlMapping.h'
+]
+
+
+
+filesCPP = [
+    'Basic.cc',
+    'Control.cc',
+    'Set.cc',
+    'Manager.cc',
+]
+
+
+
+filesHMain = [pathToH + x for x in HFilesMain]
+filesHUtil = [pathToUtility + x for x in HFilesUtility]
+filesHControl = [pathToControls + x for x in HFilesControls]
+
+env = env_base.Clone()
+
+env.Append(
+    CPPPATH = [
+        pathToH,
+        pathToUtility,
+        pathToControls
+    ]
+    )
+
+libControlsName = "%scontrols%s" % (env['LIBPREFIX'], env['LIBSUFFIX'])
+
+env.StaticLibrary(target = libraryPath + libraryName, source = [filesCPP, libraryPath + libControlsName])
+
+
+

@@ -34,9 +34,15 @@ pathToBox2DLibrary = '#libraries/box2d-master/Build/bin/'
 binFolder = '#bin/'
 testsFolder = '#tests/bin/'
 pathToUtility = '#include/main/utility/'
+pathToControls = '#include/main/controls/'
 libraryPath = binFolder + 'libs/'
 programName = 'hello'
 programPath = '#'
+
+pathTo_drawing = '#include/main/draw/'
+pathTo_trigger = "#include/main/trigger/"
+pathTo_UI_button = "#include/main/UI/button/"
+pathTo_controls = '#include/main/controls/'
 
 
 
@@ -162,6 +168,8 @@ if not env_base.GetOption('clean'):
     print('..Building Targets\n')
 
 #build in separate directories
+
+# library facade
 SConscript(
     'source/graphic_library_facade/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
@@ -169,6 +177,15 @@ SConscript(
     duplicate=0
     )
 
+# controls
+SConscript(
+    '#source/main/controls/SConscript', 
+    exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
+    variant_dir = binFolder + 'main/controls', 
+    duplicate=0
+    )
+
+# collision
 SConscript(
     'source/main/collision/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
@@ -176,21 +193,56 @@ SConscript(
     duplicate=0
     )
 
+# event
 SConscript(
-    'source/main/program_events/SConscript', 
-    exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
-    variant_dir = binFolder + 'main/program_events', 
+    'source/main/event/SConscript', 
+    exports=['env_base', 'binFolder', 'pathToUtility', 'pathToControls', 'libraryPath'], 
+    variant_dir = binFolder + 'main/event', 
     duplicate=0
     )
 
  
+# draw
 SConscript(
-    'source/main/drawing/SConscript', 
+    'source/main/draw/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
-    variant_dir = binFolder + 'main/drawing', 
+    variant_dir = binFolder + 'main/draw', 
     duplicate=0
     )   
 
+# UI / button
+SConscript(
+    'source/main/UI/button/SConscript', 
+    exports=['env_base', 'pathTo_drawing', 'pathTo_trigger', 'pathTo_UI_button', 'libraryPath'], 
+    variant_dir = binFolder + 'main/UI/button', 
+    duplicate=0
+    )   
+
+# trigger
+SConscript(
+    'source/main/trigger/SConscript', 
+    exports=['env_base', 'pathTo_drawing', 'pathTo_trigger', 'pathTo_UI_button', 'pathTo_controls', 'libraryPath'], 
+    variant_dir = binFolder + 'main/trigger', 
+    duplicate=0
+    )   
+
+# UI / elements
+SConscript(
+    'source/main/UI/elements/SConscript', 
+    exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
+    variant_dir = binFolder + 'main/elements', 
+    duplicate=0
+    )
+
+# graph
+#SConscript(
+#    'source/main/graph/SConscript', 
+#    exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
+#    variant_dir = binFolder + 'main/graph', 
+#    duplicate=0
+#    )
+
+# screen
 SConscript(
     'source/main/screen/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
@@ -198,11 +250,10 @@ SConscript(
     duplicate=0
     )
 
+#print(Glob(['*.cpp', '../graphic_library_facade/*.o', 'event/*.o']))
 
-#print(Glob(['*.cpp', '../graphic_library_facade/*.o', 'program_events/*.o']))
-
-#env.Program('hello', Glob(['*.cpp', '../graphic_library_facade/*.o', 'program_events/*.o']))
-#env.Program(target = 'hello', source = ['main.cpp', 'renderLoop.cpp', '../graphic_library_facade/graphicLibraryFacade.o', 'program_events/basicEvents.o', 'program_events/eventManager.o', 'program_events/eventInterface.h'])
+#env.Program('hello', Glob(['*.cpp', '../graphic_library_facade/*.o', 'event/*.o']))
+#env.Program(target = 'hello', source = ['main.cpp', 'renderLoop.cpp', '../graphic_library_facade/graphicLibraryFacade.o', 'event/basicEvents.o', 'event/eventManager.o', 'event/eventInterface.h'])
 #['main.cpp', 'renderLoop.cpp', '../graphic_library_facade/graphicLibraryFacade.o']
 
 #hello = env.Program(target = 'hello', source = ['source/main/main.cpp', 'source/main/renderLoop.cpp', 'build/graphic_library_facade/graphicLibraryFacade.o'])

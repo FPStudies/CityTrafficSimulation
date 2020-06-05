@@ -1,0 +1,38 @@
+#
+#      Authors: Kordowski Mateusz, Przybysz Filip
+#
+
+Import('env_base')
+Import('binFolder')
+Import('pathToUtility')
+Import('libraryPath')
+
+pathToH = '#include/main/trigger/'
+pathToH2 = '#include/main/controls/'
+libraryName = 'controls'
+
+HFilesMain = [
+    'ControlMapping.h',
+    'KeyboardMappingNormal.h',
+    'MappingTemplate.h',
+    'MouseMapping.h'
+]
+
+filesCPP = [
+    Glob('*.cc'),
+]
+
+
+filesHMain = [pathToH2 + x for x in HFilesMain]
+
+env = env_base.Clone()
+
+env.Append(
+    CPPPATH = [
+        pathToH, 
+        pathToH2
+    ]
+    )
+
+env.StaticLibrary(target = libraryPath + libraryName, source = filesCPP + filesHMain)
+

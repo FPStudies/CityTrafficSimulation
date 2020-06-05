@@ -11,8 +11,8 @@
 #include <vector>
 #include <memory>
 
-#include "main/program_events/EventManager.h"
-#include "main/program_events/BasicEvents.h"
+#include "main/event/Manager.h"
+#include "main/event/Basic.h"
 #include "../include/main/screen/ScreenManager.h"
 #include "../include/main/screen/StartScreen.h"
 

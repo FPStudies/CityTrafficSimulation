@@ -8,7 +8,8 @@ Import('pathToUtility')
 Import('libraryPath')
 
 pathToH = '#include/main/screen/'
-pathToH2 = '#include/main/program_events/'
+pathToEvent = '#include/main/event/'
+pathToDrawing = '#include/main/drawing/'
 libraryName = 'screenLib'
 
 HFilesMain = [
@@ -20,22 +21,26 @@ HFilesUtility = [
     'ID.hpp'
 ]
 
+env = env_base.Clone()
+
 filesCPP = [
-    Glob('*.cc'),
-    Glob('../program_events/*.cc') #TODO:causes SCons environment warnings, maybe compile object separately
+    Glob('*.cc')
 ]
 
 
 filesHMain = [pathToH + x for x in HFilesMain]
 filesHUtil = [pathToUtility + x for x in HFilesUtility]
 
-env = env_base.Clone()
-
 env.Append(
     CPPPATH = [
         pathToH, 
-        pathToH2
+        pathToEvent,
+        pathToDrawing
     ]
     )
 
-env.StaticLibrary(target = libraryPath + libraryName, source = filesCPP)
+libEventsName = "%sevents%s" % (env['LIBPREFIX'], env['LIBSUFFIX'])
+
+env.StaticLibrary(
+    target = libraryPath + libraryName, 
+    source = [filesCPP, libraryPath + libEventsName])
