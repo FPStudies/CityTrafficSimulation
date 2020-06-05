@@ -13,17 +13,19 @@ libraryName = 'elements'
 
 HeaderFiles = [
     'Element.h',
-    'StaticElement.h',
-    'DynamicElement.h',
-    'Camera.h',
-    'Pavement.h',
-    'PedestrianCrossing.h',
-    'Road.h'
-    'SpawnPoint.h',
-    'Pedestrian.h',
-    'Vehicle.h',
-    'Car.h',
-    'Truck.h'
+    'AllElements.h',
+    'ElementManager.h',
+    'Static/StaticElement.h',
+    'Dynamic/DynamicElement.h',
+    'Static/Camera.h',
+    'Static/Pavement.h',
+    'Static/PedestrianCrossing.h',
+    'Static/Road.h'
+    'Static/SpawnPoint.h',
+    'Dynamic/Pedestrian.h',
+    'Dynamic/Vehicle/Vehicle.h',
+    'Dynamic/Vehicle/Car.h',
+    'Dynamic/Vehicle/Truck.h'
 ]
 
 env = env_base.Clone()
