@@ -150,7 +150,6 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
 
     window->setView(*view_world_);
 
-
     FixedFramerate framerate(15.0f);
     exit_button->setPosition(sf::Vector2f(coord_to_basic.translateX(-150.0f), coord_to_basic.translateY(300.0f)));
 

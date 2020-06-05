@@ -32,6 +32,9 @@ namespace Elements {
         virtual sf::FloatRect getLocalBounds() const override;
         virtual sf::FloatRect getGlobalBounds() const override;
         virtual bool canBeDrawn() const override;
+
+        virtual void setPosition(const sf::Vector2f &position);
+        virtual void setSize(const sf::Vector2f &size);
     };
 
 }

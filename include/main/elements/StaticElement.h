@@ -4,6 +4,9 @@
  *      Author: Przybysz Filip
  */
 
+#ifndef TRAFFIC_SIM_STATIC_ELEMENT_H
+#define TRAFFIC_SIM_STATIC_ELEMENT_H
+
 #include "Element.h"
 
 namespace Elements {
@@ -19,3 +22,4 @@ namespace Elements {
 
 }
 
+#endif

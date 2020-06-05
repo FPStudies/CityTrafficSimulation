@@ -31,3 +31,18 @@ sf::FloatRect Element::getGlobalBounds() const{
 bool Element::canBeDrawn() const{
     return can_be_drawn_;
 }
+
+void Element::setPosition(const sf::Vector2f &position){
+    sf::RectangleShape::setPosition(position);
+
+    auto bounds_this = this->getGlobalBounds();
+    sf::Vector2f element_center(
+        position.x + (bounds_this.width / 2), 
+        position.y + (bounds_this.height / 2)
+        );
+    
+}
+
+void Element::setSize(const sf::Vector2f &size){
+    sf::RectangleShape::setSize(size);
+}
