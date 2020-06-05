@@ -90,8 +90,8 @@ namespace Control{
             auto it = mapping_.find(control);
             if(it == mapping_.end()) return true;
 
-            auto iEnd = (*it).second.end();
-            for(auto i = (*it).second.begin(); i != iEnd; ++i){
+            auto i_end = (*it).second.end();
+            for(auto i = (*it).second.begin(); i != i_end; ++i){
                 if((*i) == event){
                     (*it).second.erase(i);
                     return false;
@@ -110,8 +110,8 @@ namespace Control{
          */
         void removeControlFast(TemplateControls control, const std::shared_ptr<::Trigger::Event::Interface>& event){
             auto it = mapping_.find(control);
-            auto iEnd = (*it).second.end();
-            for(auto i = (*it).second.begin(); i != iEnd; ++i){
+            auto i_end = (*it).second.end();
+            for(auto i = (*it).second.begin(); i != i_end; ++i){
                 if((*i) == event){
                     (*it).second.erase(i);
                     return;
@@ -142,8 +142,8 @@ namespace Control{
             auto it = mapping_.find(copyControl);
             if(it == mapping_.end()) return;
 
-            auto iEnd = it->second.end();
-            for(auto i = it->second.begin(); i != iEnd; ++i){
+            auto i_end = it->second.end();
+            for(auto i = it->second.begin(); i != i_end; ++i){
                 
                 (*i)->trigger(window, event);
             }

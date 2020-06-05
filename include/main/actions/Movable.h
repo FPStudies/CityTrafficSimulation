@@ -10,7 +10,7 @@
 class Movable{
 
 public:
-    virtual bool move(const float& posX, const float& posY) = 0;
+    virtual bool move(const float& pos_X, const float& pos_Y) = 0;
 };
 
 #endif

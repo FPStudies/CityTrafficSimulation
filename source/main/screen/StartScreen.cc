@@ -13,7 +13,7 @@ StartScreen::StartScreen()
 : ScreenInteface(), 
 world_(),
 event_manager_(),
-view_world(),
+view_world_(),
 texture_manager_(Draw::Texture::Manager::getInstance()),
 font_manager_(Draw::Font::Manager::getInstance()),
 draw_manager_()
@@ -56,7 +56,7 @@ void StartScreen::setBox2D(){
 }
 
 void StartScreen::setEventManager(){
-    event_manager_ = std::make_unique<Event::Manager>(view_world);
+    event_manager_ = std::make_unique<Event::Manager>(view_world_);
     std::shared_ptr<Event::Basic> ev = std::make_shared<Event::Basic>();
 
     event_manager_->add("test", Event::Manager::State::ACTIVE, ev);
@@ -65,11 +65,12 @@ void StartScreen::setEventManager(){
 void StartScreen::setTextureManagers(std::shared_ptr<sf::RenderWindow> & window){
     float res_X = 1920.f, res_Y = 1080.f;
 
-    view_world = std::make_shared<sf::View>(sf::FloatRect(-(res_X / 2), -(res_Y / 2), res_X, res_Y)); // point is in bottom left
-    view_UI = std::make_shared<sf::View>(sf::FloatRect(0, 0, res_X, res_Y));
-    draw_manager_ = Draw::Manager::create(LAYER_NAME, window, view_world);
+    view_world_ = std::make_shared<sf::View>(sf::FloatRect(-(res_X / 2), -(res_Y / 2), res_X, res_Y)); // point is in bottom left
+    view_UI_ = std::make_shared<sf::View>(sf::FloatRect(0, 0, res_X, res_Y));
+    draw_manager_ = Draw::Manager::create(LAYER_NAME, window, view_world_);
 
     texture_manager_.load("resource/texture/blue_light.jpg", "blue_light");
+    texture_manager_.load("resource/texture/highway_road.jpg", "highway_road");
 
     //draw_manager_->addLayer(LAYER_NAME, "UI", view_UI);
 }
@@ -90,9 +91,9 @@ void StartScreen::addExitButton(std::shared_ptr<Button::Exit>& exit_button, std:
     // create action trigger that will interpret the sfml event and will call method from button object.
 
     // shared_ptr, because the button could have a need to change something in his trigger
-    auto triggerButtonEvent = Trigger::Event::Button::create();
+    auto trigger_button_event = Trigger::Event::Button::create();
     // connect them both
-    triggerButtonEvent->connect(exit_button);
+    trigger_button_event->connect(exit_button);
 
 
     // create control mapping
@@ -100,15 +101,15 @@ void StartScreen::addExitButton(std::shared_ptr<Button::Exit>& exit_button, std:
     // this unique_ptr is needed only at creation time. Later this pointer is useless.
     std::unique_ptr<Control::Mapping> controls = std::make_unique<Control::Mapping>();    
     // this trigger will be triggered when the mouse will be used.
-    controls->addControl(Control::Mouse::ButtonLeft, triggerButtonEvent);
+    controls->addControl(Control::Mouse::ButtonLeft, trigger_button_event);
     
     // now we connect control to the event that is used only to store the controls and call it.
     // the only thing this event control is doing is spliting the keyboard and the mouse invoking.
-    std::shared_ptr<Event::Control> eventControl = std::make_shared<Event::Control>(controls);
+    std::shared_ptr<Event::Control> event_control = std::make_shared<Event::Control>(controls);
     // this can be used to get the previous unique_ptr mapping
-    eventControl->getMapping().addControl(Control::Mouse::ButtonRight, triggerButtonEvent);
+    event_control->getMapping().addControl(Control::Mouse::ButtonRight, trigger_button_event);
     // now add event that control the controls to the event manager
-    event_manager_->addNew("test_button", Event::Manager::State::ACTIVE, eventControl);
+    event_manager_->addNew("test_button", Event::Manager::State::ACTIVE, event_control);
 
     /*
     Event manager can have multiple controls that some are inactive and some are active.
@@ -140,14 +141,14 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     auto coord_from_view = coord_set.get("view");
 
     sf::RectangleShape rectangle(sf::Vector2f(200, 40));
-    sf::RectangleShape rectUI(sf::Vector2f(60, 60));
-    window->setView(*view_UI);
-    rectUI.setPosition(0, 0);
+    sf::RectangleShape rect_UI(sf::Vector2f(60, 60));
+    window->setView(*view_UI_);
+    rect_UI.setPosition(0, 0);
 
-    window->setView(*view_world);
+    window->setView(*view_world_);
     rectangle.setPosition(sf::Vector2f(coord_to_basic.translateX(0.0f), coord_to_basic.translateY(200.0f)));
 
-    window->setView(*view_world);
+    window->setView(*view_world_);
 
 
     FixedFramerate framerate(15.0f);
@@ -161,18 +162,18 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
             event_manager_->checkEvents(*window, event);
         }
         world_->Step(framerate.getRealDiff(), 6, 2 );
-        view_world->move(0, -2);
+        view_world_->move(0, -2);
 
         rectangle.setPosition(coord_to_SFML.translateX(world_->GetBodyList()->GetPosition().x), coord_to_SFML.translateY(world_->GetBodyList()->GetPosition().y));
         //std::cout << world_->GetBodyList()->GetPosition().x << " " << world_->GetBodyList()->GetPosition().y << " " << framerate.getRealFramerate() << "\n";
         //std::cout << view_world->getCenter().x << " " << view_world->getCenter().y << "\n";
         //std::cout << sf::Mouse::getPosition(*window).x << "  " << sf::Mouse::getPosition(*window).y << "\n";
         window->clear();
-        window->setView(*view_world);
+        window->setView(*view_world_);
         window->draw(rectangle);
         draw_manager_->drawAll();
-        window->setView(*view_UI);
-        window->draw(rectUI);
+        window->setView(*view_UI_);
+        window->draw(rect_UI);
         window->display();    
     }
 

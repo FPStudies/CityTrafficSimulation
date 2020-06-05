@@ -15,7 +15,7 @@
 namespace Event{
 
     class Control: public Interface{
-        std::unique_ptr<::Control::Mapping> ctrlMapping_;
+        std::unique_ptr<::Control::Mapping> ctrl_mapping_;
 
         virtual Control* clone_impl() const override;
     public:

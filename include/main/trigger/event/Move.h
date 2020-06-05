@@ -17,7 +17,7 @@ namespace Event{
 
     class Move: public Interface{
 
-        std::shared_ptr<Movable> toDrag_;
+        std::shared_ptr<Movable> to_drag_;
 
         Move* clone_impl() const override;
 

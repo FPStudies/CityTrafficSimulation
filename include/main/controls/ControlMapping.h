@@ -18,8 +18,8 @@ namespace Control{
     public:
         class Controls;
     private:
-        Keyboard::MappingNormal keyCtrl_;
-        Mouse::Mapping mouseCtrl_;
+        Keyboard::MappingNormal key_ctrl_;
+        Mouse::Mapping mouse_ctrl_;
 
         int translateEvent(const sf::Event& event);
 

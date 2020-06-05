@@ -19,7 +19,7 @@ class Texture: public ::SharedResource::Resource<sf::Texture>{
     friend class Manager;
 
     sf::IntRect portion_;
-    bool request_for_deleting;
+    bool request_for_deleting_;
 
     Texture(const std::string& path, const sf::IntRect& area = sf::IntRect());
     Texture(const sf::Texture& texture, const sf::IntRect& area = sf::IntRect());

@@ -10,7 +10,7 @@ using namespace Elements;
 
 Element::Element(sf::Window& window, const Texture_ptr& texture)
 :   texture_(texture), 
-    states_(&texture->getTexture()), 
+    states_(&texture->getResource_const()),
     can_be_drawn_(true)
 {}
 
@@ -21,11 +21,11 @@ void Element::draw(sf::RenderTarget& target) const{
 }
 
 sf::FloatRect Element::getLocalBounds() const{
-    return this->getLocalBounds();
+    return this->sf::RectangleShape::getLocalBounds();
 }
 
 sf::FloatRect Element::getGlobalBounds() const{
-    return this->getGlobalBounds();
+    return this->sf::RectangleShape::getGlobalBounds();
 }
 
 bool Element::canBeDrawn() const{

@@ -24,14 +24,14 @@ namespace Button{
         std::vector<std::weak_ptr<Draw::Drawable>> to_draw_button_;
         std::vector<std::weak_ptr<::Trigger::Event::Button>> trigger_;
 
-        bool isButtonChoosedDefault(sf::RenderWindow& window, const sf::FloatRect& globalBounds){
-            auto pixelCoords = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+        bool isButtonChoosedDefault(sf::RenderWindow& window, const sf::FloatRect& global_bounds){
+            auto pixel_coords = window.mapPixelToCoords(sf::Mouse::getPosition(window));
             
             if(
-                globalBounds.left <= pixelCoords.x && 
-                globalBounds.top <= pixelCoords.y && 
-                globalBounds.left + globalBounds.width > pixelCoords.x &&
-                globalBounds.top + globalBounds.height > pixelCoords.y
+                global_bounds.left <= pixel_coords.x && 
+                global_bounds.top <= pixel_coords.y && 
+                global_bounds.left + global_bounds.width > pixel_coords.x &&
+                global_bounds.top + global_bounds.height > pixel_coords.y
                 ){
                 return true;
             }
@@ -46,8 +46,8 @@ namespace Button{
         
         virtual ~Interface() = default;
 
-        void addTrigger(std::shared_ptr<::Trigger::Event::Button> buttonTrigger){
-            trigger_.push_back(buttonTrigger);
+        void addTrigger(std::shared_ptr<::Trigger::Event::Button> button_trigger){
+            trigger_.push_back(button_trigger);
         }
 
         virtual bool isButtonChoosed(sf::RenderWindow& window) = 0;

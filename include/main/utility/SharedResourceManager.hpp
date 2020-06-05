@@ -29,7 +29,7 @@ template<typename StoredObject>
 class Resource{
 protected:
     StoredObject object_;
-    bool request_for_deleting;
+    bool request_for_deleting_;
 
     Resource() = default;
 
@@ -48,18 +48,18 @@ public:
     Resource& operator=(Resource&&) = delete;
 
     void requestRemove() {
-        request_for_deleting = true;
+        request_for_deleting_ = true;
     }
 
     bool shouldBeRemoved(){
-        return request_for_deleting;
+        return request_for_deleting_;
     }
     void resetRemoveRequest(){
-        request_for_deleting = false;
+        request_for_deleting_ = false;
     }
 
     State getState() const{
-        if(request_for_deleting)
+        if(request_for_deleting_)
             return State::ExpectRemove;
         return State::Remain;
     }
@@ -116,11 +116,11 @@ public:
             return State::Removed;
         }
 
-        if(it->second->request_for_deleting){
+        if(it->second->request_for_deleting_){
             return State::ExpectRemove;
         }
         else{
-            it->second->request_for_deleting = true;
+            it->second->request_for_deleting_ = true;
             return State::SetToRemove;
         }
     }

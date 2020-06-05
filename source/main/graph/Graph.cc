@@ -36,7 +36,7 @@ std::list<CityGraph::Vertex> Graph::findShortestPath (Vertex& start, Vertex& goa
 
     try {
     // call astar named parameter interface
-    astar_search_tree (city_graph_, start, distance_heuristic<CityGraphList, cost, VertexPropertyMap> (vertices_, goal),
+    astar_search_tree (city_graph_, start, distance_heuristic<CityGraphList, cost, VertexPropertyMap> (vertices_, goal), //TODO: extract positions
        predecessor_map(make_iterator_property_map(p.begin(), get(vertex_index, city_graph_))).
        distance_map(make_iterator_property_map(d.begin(), get(vertex_index, city_graph_))).
        visitor(astar_goal_visitor<Vertex>(goal)));

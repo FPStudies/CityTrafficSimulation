@@ -29,7 +29,7 @@ public:
 
     void setText(const std::string& text);
     void setColor(const sf::Color& color);
-    void setFont(const Font& font)
+    void setFont(const Font& font);
 };
 
 #endif
