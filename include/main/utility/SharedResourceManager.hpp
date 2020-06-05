@@ -87,7 +87,6 @@ protected:
     MyMap map_;
     std::mutex mutex_free_;
     std::mutex mutex_mod_map_;
-    bool is_freeing_;
 
     static std::mutex mutex_instance_;
 
