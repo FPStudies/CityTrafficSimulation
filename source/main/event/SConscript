@@ -19,7 +19,6 @@ HFilesMain = [
     'Control.h',
     'Set.h',
     'Manager.h',
-    'UI.h'
 ]
 
 HFilesUtility = [
@@ -37,7 +36,6 @@ filesCPP = [
     'Control.cc',
     'Set.cc',
     'Manager.cc',
-    'UI.cc'
 ]
 
 
