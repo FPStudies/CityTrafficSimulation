@@ -32,7 +32,7 @@ Manager::SetInner::SetInner(const std::shared_ptr<Interface>& event, Manager::St
 : event_set_(Set(event)), state_(mode)
 {}
 
-Manager::Manager(const std::shared_ptr<sf::View>& view) 
+Manager::Manager(const std::shared_ptr<Screen::View>& view) 
 : events_sorted_(false), events_map_names_(), events_sorted_list_(), tmp_mode_(), view_(view)
 {}
 
@@ -263,7 +263,7 @@ void Manager::checkEvents(sf::RenderWindow& window, sf::Event& event){
         events_sorted_ = true;
     }
 
-    window.setView(*view_);
+    window.setView(view_->getView());
 
     for(auto& it : events_sorted_list_){
         if(!it->isActive())

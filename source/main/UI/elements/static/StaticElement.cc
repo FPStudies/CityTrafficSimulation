@@ -4,7 +4,7 @@
  *      Author: Przybysz Filip, Kordowski Mateusz
  */
 
-#include "StaticElement.h"
+#include "static/StaticElement.h"
 
 using namespace Elements;
 

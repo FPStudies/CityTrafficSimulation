@@ -228,7 +228,7 @@ SConscript(
 
 # elements
 SConscript(
-    'source/main/elements/SConscript', 
+    'source/main/UI/elements/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
     variant_dir = binFolder + 'main/elements', 
     duplicate=0

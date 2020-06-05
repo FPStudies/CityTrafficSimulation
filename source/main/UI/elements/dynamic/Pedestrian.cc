@@ -4,7 +4,7 @@
  *      Author: Przybysz Filip, Kordowski Mateusz
  */
 
-#include "Pedestrian.h"
+#include "dynamic/Pedestrian.h"
 
 using namespace Elements;
 

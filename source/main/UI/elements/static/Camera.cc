@@ -4,7 +4,7 @@
  *      Author: Przybysz Filip, Kordowski Mateusz
  */
 
-#include "Camera.h"
+#include "static/Camera.h"
 
 using namespace Elements;
 

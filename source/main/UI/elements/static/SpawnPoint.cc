@@ -4,7 +4,7 @@
  *      Author: Przybysz Filip, Kordowski Mateusz
  */
 
-#include "SpawnPoint.h"
+#include "static/SpawnPoint.h"
 
 using namespace Elements;
 

@@ -4,7 +4,7 @@
  *      Author: Przybysz Filip, Kordowski Mateusz
  */
 
-#include "DynamicElement.h"
+#include "dynamic/DynamicElement.h"
 
 using namespace Elements;
 

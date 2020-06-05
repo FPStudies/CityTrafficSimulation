@@ -24,13 +24,14 @@
 #include "../controls/ControlMapping.h"
 #include "../event/Control.h"
 #include "../draw/Texturing.h"
-#include "../elements/Road.h"
+#include "../UI/elements/static/Road.h"
+#include "View.h"
 
 class StartScreen: public ScreenInteface{
     std::unique_ptr<b2World> world_;
     std::unique_ptr<Event::Manager> event_manager_;
-    std::shared_ptr<sf::View> view_world_;
-    std::shared_ptr<sf::View> view_UI_;
+    std::shared_ptr<Screen::View> view_world_;
+    std::shared_ptr<Screen::View> view_UI_;
     Draw::Texture::Manager& texture_manager_;
     Draw::Font::Manager& font_manager_;
     std::unique_ptr<Draw::Manager> draw_manager_;

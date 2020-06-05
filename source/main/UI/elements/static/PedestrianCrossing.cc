@@ -4,7 +4,7 @@
  *      Author: Przybysz Filip, Kordowski Mateusz
  */
 
-#include "PedestrianCrossing.h"
+#include "static/PedestrianCrossing.h"
 
 using namespace Elements;
 

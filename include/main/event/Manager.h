@@ -14,6 +14,7 @@
 #include <list>
 #include <unordered_map>
 #include <functional>
+#include "../screen/View.h"
 
 #include "Set.h"
 
@@ -92,7 +93,7 @@ namespace Event{
          */
         ToChange tmp_mode_;
 
-        std::shared_ptr<sf::View> view_;
+        std::shared_ptr<Screen::View> view_;
 
         static const int DEFAULT_HASH_MAP_SIZE = 30;
 
@@ -111,7 +112,7 @@ namespace Event{
 
     public:
 
-        Manager(const std::shared_ptr<sf::View>& view);
+        Manager(const std::shared_ptr<Screen::View>& view);
         ~Manager();
         Manager(const Manager&) = delete;
         Manager(Manager&&) = delete;

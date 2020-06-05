@@ -4,7 +4,7 @@
  *      Author: Przybysz Filip, Kordowski Mateusz
  */
 
-#include "Vehicle.h"
+#include "dynamic/Vehicle.h"
 
 using namespace Elements;
 

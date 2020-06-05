@@ -4,7 +4,7 @@
  *      Author: Przybysz Filip, Kordowski Mateusz
  */
 
-#include "Truck.h"
+#include "dynamic/Truck.h"
 
 using namespace Elements;
 

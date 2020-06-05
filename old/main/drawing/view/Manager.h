@@ -16,11 +16,12 @@
 
 #include "View.h"
 #include "../../utility/SharedResourceManager.hpp"
+#include "../../screen/View.h"
 
 
 namespace Draw::View{
 
-class Manager: public ::SharedResource::Manager<View, sf::View>{
+class Manager: public ::SharedResource::Manager<View, Screen::View>{
     static Manager* instance_;
 
     Manager();
@@ -39,7 +40,7 @@ public:
     virtual bool load(const std::string& path, const std::string& alias) override;
     virtual bool load(const std::string& path) override;
 
-    virtual bool save(const std::string& name, const sf::View& object) override;
+    virtual bool save(const std::string& name, const Screen::View& object) override;
 
 };
 }

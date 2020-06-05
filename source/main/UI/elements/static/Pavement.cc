@@ -4,7 +4,7 @@
  *      Author: Przybysz Filip, Kordowski Mateusz
  */
 
-#include "Pavement.h"
+#include "static/Pavement.h"
 
 using namespace Elements;
 

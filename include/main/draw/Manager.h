@@ -17,6 +17,7 @@
 
 #include "Drawable.h"
 #include "DrawID.h"
+#include "../screen/View.h"
 
 namespace Draw{
 
@@ -37,11 +38,11 @@ class Manager{
         std::string name_;
         ObjectPair container_;
         ToRender render_;
-        std::shared_ptr<sf::View> view_;
+        std::shared_ptr<::Screen::View> view_;
         
 
     public:
-        DrawLayer(const std::string& name, const std::shared_ptr<sf::View>& view);
+        DrawLayer(const std::string& name, const std::shared_ptr<::Screen::View>& view);
         virtual ~DrawLayer();
         DrawLayer(const DrawLayer&) = delete;
 
@@ -54,7 +55,7 @@ class Manager{
 
         void clearNulls();
 
-        std::shared_ptr<sf::View> getView() const;
+        std::shared_ptr<::Screen::View> getView() const;
     };
 
     using Layers = std::vector<std::unique_ptr<DrawLayer>>;
@@ -66,7 +67,7 @@ class Manager{
     static WindowCont windows_static_;
     
 
-    Manager(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window, const std::shared_ptr<sf::View>& view);
+    Manager(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window, const std::shared_ptr<::Screen::View>& view);
     
     Manager(const Manager& other) = delete;
 
@@ -76,7 +77,7 @@ public:
     
     // use std::move
     
-    static std::unique_ptr<Manager> create(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window, const std::shared_ptr<sf::View>& view);
+    static std::unique_ptr<Manager> create(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window, const std::shared_ptr<::Screen::View>& view);
 
     bool draw(const std::string& layer_name_first, const std::string& layer_name_last);
 
@@ -86,9 +87,9 @@ public:
 
     bool addEntity(const std::string& layer_name, std::shared_ptr<Drawable> entity);
 
-    bool addFirstLayer(const std::string& layer_name, const std::shared_ptr<sf::View>& view);
+    bool addFirstLayer(const std::string& layer_name, const std::shared_ptr<::Screen::View>& view);
 
-    bool addLayer(const std::string& previous_layer_name, const std::string& layer_name, const std::shared_ptr<sf::View>& view);
+    bool addLayer(const std::string& previous_layer_name, const std::string& layer_name, const std::shared_ptr<::Screen::View>& view);
 
     bool remove(const std::string& layer_name, std::shared_ptr<Drawable> entity);
 

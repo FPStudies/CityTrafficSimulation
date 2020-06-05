@@ -65,8 +65,8 @@ void StartScreen::setEventManager(){
 void StartScreen::setTextureManagers(std::shared_ptr<sf::RenderWindow> & window){
     float res_X = 1920.f, res_Y = 1080.f;
 
-    view_world_ = std::make_shared<sf::View>(sf::FloatRect(-(res_X / 2), -(res_Y / 2), res_X, res_Y)); // point is in bottom left
-    view_UI_ = std::make_shared<sf::View>(sf::FloatRect(0, 0, res_X, res_Y));
+    view_world_ = Screen::View::create("Main_view", sf::FloatRect(-(res_X / 2), -(res_Y / 2), res_X, res_Y)); // point is in bottom left
+    view_UI_ = Screen::View::create("UI", sf::FloatRect(0, 0, res_X, res_Y));
     draw_manager_ = Draw::Manager::create(LAYER_NAME, window, view_world_);
 
     texture_manager_.load("resource/texture/blue_light.jpg", "blue_light");
@@ -142,13 +142,13 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
 
     sf::RectangleShape rectangle(sf::Vector2f(200, 40));
     sf::RectangleShape rect_UI(sf::Vector2f(60, 60));
-    window->setView(*view_UI_);
+    window->setView(view_UI_->getView());
     rect_UI.setPosition(0, 0);
 
-    window->setView(*view_world_);
+    window->setView(view_world_->getView());
     rectangle.setPosition(sf::Vector2f(coord_to_basic.translateX(0.0f), coord_to_basic.translateY(200.0f)));
 
-    window->setView(*view_world_);
+    window->setView(view_world_->getView());
 
     FixedFramerate framerate(15.0f);
     exit_button->setPosition(sf::Vector2f(coord_to_basic.translateX(-150.0f), coord_to_basic.translateY(300.0f)));
@@ -161,17 +161,17 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
             event_manager_->checkEvents(*window, event);
         }
         world_->Step(framerate.getRealDiff(), 6, 2 );
-        view_world_->move(0, -2);
+        view_world_->getView().move(0, -2);
 
         rectangle.setPosition(coord_to_SFML.translateX(world_->GetBodyList()->GetPosition().x), coord_to_SFML.translateY(world_->GetBodyList()->GetPosition().y));
         //std::cout << world_->GetBodyList()->GetPosition().x << " " << world_->GetBodyList()->GetPosition().y << " " << framerate.getRealFramerate() << "\n";
         //std::cout << view_world->getCenter().x << " " << view_world->getCenter().y << "\n";
         //std::cout << sf::Mouse::getPosition(*window).x << "  " << sf::Mouse::getPosition(*window).y << "\n";
         window->clear();
-        window->setView(*view_world_);
+        window->setView(view_world_->getView());
         window->draw(rectangle);
         draw_manager_->drawAll();
-        window->setView(*view_UI_);
+        window->setView(view_UI_->getView());
         window->draw(rect_UI);
         window->display();    
     }
