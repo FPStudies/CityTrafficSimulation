@@ -9,13 +9,13 @@
 
 #include "../DynamicElement.h"
 
-namespace Elements::Vehicle {
+namespace Element::Vehicle {
 
     class Vehicle : public DynamicElement {
 
     public:
 
-        Vehicle(sf::Window& window, const Elements::Texture_ptr& texture);
+        Vehicle(sf::Window& window, const Texture_ptr& texture);
         ~Vehicle();
 
     };

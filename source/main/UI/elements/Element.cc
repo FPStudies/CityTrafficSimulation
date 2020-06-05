@@ -6,33 +6,31 @@
 
 #include "Element.h"
 
-using namespace Elements;
-
-Element::Element(sf::Window& window, const Texture_ptr& texture)
+Element::Element::Element(sf::Window& window, const Texture_ptr& texture)
 :   texture_(texture), 
     states_(&texture->getResource_const()),
     can_be_drawn_(true)
 {}
 
-Element::~Element() = default;
+Element::Element::~Element() = default;
 
-void Element::draw(sf::RenderTarget& target) const{
+void Element::Element::draw(sf::RenderTarget& target) const{
     target.draw(*this, states_);
 }
 
-sf::FloatRect Element::getLocalBounds() const{
+sf::FloatRect Element::Element::getLocalBounds() const{
     return this->sf::RectangleShape::getLocalBounds();
 }
 
-sf::FloatRect Element::getGlobalBounds() const{
+sf::FloatRect Element::Element::getGlobalBounds() const{
     return this->sf::RectangleShape::getGlobalBounds();
 }
 
-bool Element::canBeDrawn() const{
+bool Element::Element::canBeDrawn() const{
     return can_be_drawn_;
 }
 
-void Element::setPosition(const sf::Vector2f &position){
+void Element::Element::setPosition(const sf::Vector2f &position){
     sf::RectangleShape::setPosition(position);
 
     auto bounds_this = this->getGlobalBounds();
@@ -43,6 +41,6 @@ void Element::setPosition(const sf::Vector2f &position){
     
 }
 
-void Element::setSize(const sf::Vector2f &size){
+void Element::Element::setSize(const sf::Vector2f &size){
     sf::RectangleShape::setSize(size);
 }

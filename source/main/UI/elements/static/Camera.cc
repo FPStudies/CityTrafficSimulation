@@ -6,6 +6,6 @@
 
 #include "static/Camera.h"
 
-using namespace Elements;
+using namespace Element;
 
 Camera::Camera(sf::Window& window, const Texture_ptr& texture) : StaticElement(window, texture) {};

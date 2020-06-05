@@ -9,13 +9,13 @@
 
 #include "StaticElement.h"
 
-namespace Elements {
+namespace Element {
 
     class Camera : public StaticElement {
 
     public:
 
-        Camera(sf::Window& window, const Elements::Texture_ptr& texture);
+        Camera(sf::Window& window, const Texture_ptr& texture);
         ~Camera();
 
     };

@@ -6,6 +6,6 @@
 
 #include "dynamic/Pedestrian.h"
 
-using namespace Elements;
+using namespace Element;
 
 Pedestrian::Pedestrian(sf::Window& window, const Texture_ptr& texture) : DynamicElement(window, texture) {};

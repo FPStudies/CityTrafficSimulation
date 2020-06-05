@@ -6,6 +6,6 @@
 
 #include "static/SpawnPoint.h"
 
-using namespace Elements;
+using namespace Element;
 
 SpawnPoint::SpawnPoint(sf::Window& window, const Texture_ptr& texture) : StaticElement(window, texture) {};

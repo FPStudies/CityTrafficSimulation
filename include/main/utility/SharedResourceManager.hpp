@@ -93,7 +93,7 @@ protected:
 public:
 
     Manager()
-    : map_(), mutex_free_(), mutex_mod_map_(), is_freeing_(false)
+    : map_(), mutex_free_(), mutex_mod_map_()
     {}
 
     ~Manager() = default;
