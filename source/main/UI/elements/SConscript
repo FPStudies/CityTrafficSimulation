@@ -14,11 +14,11 @@ libraryName = 'elements'
 env = env_base.Clone()
 
 filesCPP = [
-    'dynamic/Car.cc',
+    'dynamic/vehicle/Car.cc',
     'dynamic/DynamicElement.cc',
     'dynamic/Pedestrian.cc',
-    'dynamic/Truck.cc',
-    'dynamic/Vehicle.cc',
+    'dynamic/vehicle/Truck.cc',
+    'dynamic/vehicle/Vehicle.cc',
     'static/Camera.cc',
     'static/Pavement.cc',
     'static/PedestrianCrossing.cc',

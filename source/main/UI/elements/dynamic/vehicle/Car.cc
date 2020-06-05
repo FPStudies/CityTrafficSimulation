@@ -4,8 +4,8 @@
  *      Author: Przybysz Filip, Kordowski Mateusz
  */
 
-#include "dynamic/Car.h"
+#include "dynamic/vehicle/Car.h"
 
-using namespace Elements;
+using namespace Elements::Vehicle;
 
 Car::Car(sf::Window& window, const Texture_ptr& texture) : Vehicle(window, texture) {};

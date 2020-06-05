@@ -226,7 +226,7 @@ SConscript(
     duplicate=0
     )   
 
-# elements
+# UI / elements
 SConscript(
     'source/main/UI/elements/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 

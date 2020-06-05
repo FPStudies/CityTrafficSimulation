@@ -7,9 +7,9 @@
 #ifndef TRAFFIC_SIM_VEHICLE_H
 #define TRAFFIC_SIM_VEHICLE_H
 
-#include "DynamicElement.h"
+#include "../DynamicElement.h"
 
-namespace Elements {
+namespace Elements::Vehicle {
 
     class Vehicle : public DynamicElement {
 
