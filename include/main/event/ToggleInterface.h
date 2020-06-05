@@ -17,6 +17,11 @@ namespace Event{
 
     class Manager;
 
+    /**
+     * @brief Used for Events, that can toggle other events to active / inactive.
+     * Event::Manager will detect which type of interface it is.
+     * 
+     */
     class ToggleInterface: public Interface{
         virtual ToggleInterface* clone_impl() const = 0;
 
