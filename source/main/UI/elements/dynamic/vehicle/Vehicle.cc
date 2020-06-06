@@ -6,6 +6,6 @@
 
 #include "dynamic/vehicle/Vehicle.h"
 
-using namespace Elements::Vehicle;
+using namespace Element::Vehicle;
 
 Vehicle::Vehicle(sf::Window& window, const Texture_ptr& texture) : DynamicElement(window, texture) {};

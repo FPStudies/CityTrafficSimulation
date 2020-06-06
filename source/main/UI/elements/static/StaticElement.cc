@@ -6,6 +6,6 @@
 
 #include "static/StaticElement.h"
 
-using namespace Elements;
+using namespace Element;
 
 StaticElement::StaticElement(sf::Window& window, const Texture_ptr& texture) : Element(window, texture) {};

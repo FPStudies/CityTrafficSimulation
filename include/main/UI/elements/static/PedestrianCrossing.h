@@ -9,13 +9,13 @@
 
 #include "StaticElement.h"
 
-namespace Elements {
+namespace Element {
 
     class PedestrianCrossing : public StaticElement {
 
     public:
 
-        PedestrianCrossing(sf::Window& window, const Elements::Texture_ptr& texture);
+        PedestrianCrossing(sf::Window& window, const Texture_ptr& texture);
         ~PedestrianCrossing();
 
     };

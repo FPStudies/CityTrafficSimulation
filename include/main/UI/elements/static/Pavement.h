@@ -9,13 +9,13 @@
 
 #include "StaticElement.h"
 
-namespace Elements {
+namespace Element {
 
     class Pavement : public StaticElement {
 
     public:
 
-        Pavement(sf::Window& window, const Elements::Texture_ptr& texture);
+        Pavement(sf::Window& window, const Texture_ptr& texture);
         ~Pavement();
 
     };

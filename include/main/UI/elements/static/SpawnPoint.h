@@ -9,13 +9,13 @@
 
 #include "StaticElement.h"
 
-namespace Elements {
+namespace Element {
 
     class SpawnPoint : public StaticElement {
 
     public:
 
-        SpawnPoint(sf::Window& window, const Elements::Texture_ptr& texture);
+        SpawnPoint(sf::Window& window, const Texture_ptr& texture);
         ~SpawnPoint();
 
     };

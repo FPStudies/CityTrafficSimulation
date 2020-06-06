@@ -6,6 +6,6 @@
 
 #include "static/Pavement.h"
 
-using namespace Elements;
+using namespace Element;
 
 Pavement::Pavement(sf::Window& window, const Texture_ptr& texture) : StaticElement(window, texture) {};

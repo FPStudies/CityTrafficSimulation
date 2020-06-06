@@ -9,13 +9,13 @@
 
 #include "../Element.h"
 
-namespace Elements {
+namespace Element {
 
     class DynamicElement : public Element {
 
     public:
 
-        DynamicElement(sf::Window& window, const Elements::Texture_ptr& texture);
+        DynamicElement(sf::Window& window, const Texture_ptr& texture);
         ~DynamicElement();
 
     };

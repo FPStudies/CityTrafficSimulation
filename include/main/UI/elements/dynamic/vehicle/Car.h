@@ -9,13 +9,13 @@
 
 #include "Vehicle.h"
 
-namespace Elements::Vehicle {
+namespace Element::Vehicle {
 
     class Car : public Vehicle {
 
     public:
 
-        Car(sf::Window& window, const Elements::Texture_ptr& texture);
+        Car(sf::Window& window, const Texture_ptr& texture);
         ~Car();
 
     };

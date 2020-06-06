@@ -1,5 +1,5 @@
 /*
- * AllElements.h
+ * AllElement.h
  *
  *      Author: Przybysz Filip
  */
