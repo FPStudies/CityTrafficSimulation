@@ -38,5 +38,4 @@ namespace Trigger::Action{
 }
 
 
-
 #endif

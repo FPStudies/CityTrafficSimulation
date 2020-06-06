@@ -4,6 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
+#ifndef TRAFFIC_SIM_MANAGER_TEMPLATE_H
+#define TRAFFIC_SIM_MANAGER_TEMPLATE_H
 
 // TODO:
 template<typename Stored, typename StoredInteface>
@@ -31,3 +33,5 @@ protected:
         virtual bool empty() const = 0;
     };
 };
+
+#endif

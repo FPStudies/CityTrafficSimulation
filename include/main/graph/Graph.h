@@ -20,25 +20,23 @@ namespace CityGraph {
 
         CityGraphList city_graph_;
 
-        VertexPropertyMap vertices_;
-
-        WeightMap weights_;
-
-        bool is_build_;
-
     public:
 
         Graph();
 
         ~Graph() = default;
 
-        void buildGraph(long number_of_vertices, const std::vector<Edge>& edges, const std::vector<double>& weights);
+        VertexDescriptor addVertex(VertexInfo vertex_info);
 
-        std::list<CityGraph::Vertex> findShortestPath (Vertex& start, Vertex& goal) const;
+        //adds edges in both directions
+        std::pair<EdgeDescriptor, EdgeDescriptor> addEdge(Edge edge, std::pair<Cost, Cost> costs);
 
-        const bool isBuild() const;
+        void buildGraph(const std::vector<VertexInfo>& vertex_info, const std::vector<Edge>& edges, const std::vector<Cost>& weights);
+
+        std::list<CityGraph::VertexDescriptor> findShortestPath (VertexDescriptor& start, VertexDescriptor& goal) const;
 
     };
 
 }
+
 #endif

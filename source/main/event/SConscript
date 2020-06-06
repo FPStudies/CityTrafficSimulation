@@ -58,5 +58,3 @@ libControlsName = "%scontrols%s" % (env['LIBPREFIX'], env['LIBSUFFIX'])
 
 env.StaticLibrary(target = libraryPath + libraryName, source = [filesCPP, libraryPath + libControlsName])
 
-
-

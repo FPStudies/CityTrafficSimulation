@@ -20,45 +20,51 @@ using namespace std;
 using namespace boost;
 
 namespace CityGraph {
-
-    struct VertexInfo {
-        std::string name;
-        double x;
-        double y;
-    };
-
+    
     //type definitions
-    typedef double cost;
-    typedef adjacency_list<listS, vecS, directedS, vertex_info,
-    property<edge_weight_t, cost> > CityGraphList;
-    typedef property_map<CityGraphList, edge_weight_t>::type WeightMap;
-    typedef property_map<CityGraphList, VertexInfo>::type VertexPropertyMap;
-    typedef CityGraphList::vertex_descriptor Vertex;
-    typedef CityGraphList::edge_descriptor EdgeDescriptor;
-    typedef std::pair<int, int> Edge;
-
     struct Location
     {
     double x, y;
     };
+    typedef int Cost;
+
+    struct VertexInfo {
+        int id;
+        std::string name;
+        Location location;
+    };
+    struct EdgeInfo {
+        Cost cost;
+    };
+ 
+    typedef adjacency_list<listS, vecS, bidirectionalS, VertexInfo,
+    EdgeInfo > CityGraphList;
+    typedef CityGraphList::vertex_descriptor VertexDescriptor;
+    typedef CityGraphList::edge_descriptor EdgeDescriptor;
+    typedef CityGraphList::vertices_size_type VertexNumber;
+    typedef std::pair<VertexNumber, VertexNumber> Edge;
+    typedef property_map<CityGraphList, edge_weight_t EdgeInfo::*>::type WeightMap;
+    typedef vec_adj_list_vertex_property_map<CityGraphList, const CityGraphList *, Location, const Location &, Location VertexInfo::*> LocationMap;
+    
+    
 
     // euclidean distance heuristic
     template <class Graph, class CostType, class LocMap>
-    class distance_heuristic : public astar_heuristic<Graph, CostType>
-    {
+    class distance_heuristic : public astar_heuristic<Graph, CostType> {
     public:
-    typedef typename graph_traits<Graph>::vertex_descriptor VertexDescriptor;
-    distance_heuristic(LocMap l, VertexDescriptor goal)
-        : m_location(l), m_goal(goal) {}
-    CostType operator()(VertexDescriptor u)
-    {
-        CostType dx = m_location_[m_goal_].x - m_location_[u].x;
-        CostType dy = m_location_[m_goal_].y - m_location_[u].y;
-        return ::sqrt(dx * dx + dy * dy);
-    }
+        typedef typename graph_traits<Graph>::vertex_descriptor VertexDescriptor;
+
+        distance_heuristic(const LocMap& l, const VertexDescriptor& goal) : m_location_(l), m_goal_(goal) {};
+
+        CostType operator()(VertexDescriptor u) {
+            CostType dx = m_location_[m_goal_].x - m_location_[u].x;
+            CostType dy = m_location_[m_goal_].y - m_location_[u].y;
+            return ::sqrt(dx * dx + dy * dy);
+        }
+
     private:
-    LocMap m_location_;
-    VertexDescriptor m_goal_;
+        LocMap m_location_;
+        VertexDescriptor m_goal_;
     };
 
 

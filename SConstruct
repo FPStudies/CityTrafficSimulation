@@ -235,12 +235,12 @@ SConscript(
     )
 
 # graph
-#SConscript(
-#    'source/main/graph/SConscript', 
-#    exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
-#    variant_dir = binFolder + 'main/graph', 
-#    duplicate=0
-#    )
+SConscript(
+    'source/main/graph/SConscript', 
+    exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
+    variant_dir = binFolder + 'main/graph', 
+    duplicate=0
+    )
 
 # screen
 SConscript(

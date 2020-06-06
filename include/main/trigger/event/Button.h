@@ -48,5 +48,4 @@ namespace Trigger::Event{
 
 
 
-
 #endif

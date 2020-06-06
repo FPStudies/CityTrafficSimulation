@@ -9,46 +9,75 @@
 
 using namespace CityGraph;
 
-Graph::Graph(): is_build_(false) {};
+Graph::Graph() {
+  city_graph_ = CityGraphList(0);
+};
 
-const bool Graph::isBuild() const {
-    return is_build_;
+
+VertexDescriptor Graph::addVertex(VertexInfo vertex_info) {
+  VertexDescriptor vertex = add_vertex(city_graph_);
+  city_graph_[vertex] = vertex_info;
+  return vertex;
 }
 
-void Graph::buildGraph(long number_of_vertices, const std::vector<Edge>& edges, const std::vector<double>& weights) {
-    city_graph_ = CityGraphList(number_of_vertices);
 
-    //TODO: add vertices properties
+std::pair<EdgeDescriptor, EdgeDescriptor> Graph::addEdge(Edge edge, std::pair<Cost, Cost> costs) {
+  EdgeDescriptor edge_1, edge_2;
+  bool inserted_1, inserted_2;
 
-    for (unsigned int i=0; i<edges.size(); ++i) {
-        EdgeDescriptor e; bool inserted;
-        boost::tie(e, inserted) = add_edge(edges[i].first, edges[i].second, city_graph_);
-        weights_[e] = weights[i];
+  boost::tie(edge_1, inserted_1) = add_edge(edge.first, edge.second, city_graph_);
+  city_graph_[edge_1].cost = costs.first;
+  boost::tie(edge_2, inserted_2) = add_edge(edge.second, edge.first, city_graph_);
+  city_graph_[edge_2].cost = costs.second;
+
+  return std::make_pair(edge_1, edge_2);
+}
+
+
+void Graph::buildGraph(const std::vector<VertexInfo>& vertex_info, const std::vector<Edge>& edges, const std::vector<Cost>& weights) {
+    city_graph_ = CityGraphList(0);
+
+    //add vertices
+    for (unsigned int i=0; i<vertex_info.size(); ++i) {
+        addVertex(vertex_info[i]);
     }
 
-    is_build_ = true;
+    //add edges
+    for (unsigned int i=0; i<edges.size(); ++i) {
+        EdgeDescriptor edge;
+        bool inserted;
+        boost::tie(edge, inserted) = add_edge(edges[i].first, edges[i].second, city_graph_);
+        city_graph_[edge].cost = weights[i];
+    }
 }
 
-std::list<CityGraph::Vertex> Graph::findShortestPath (Vertex& start, Vertex& goal) const{
 
-    vector<Vertex> p(num_vertices(city_graph_));
-    vector<cost> d(num_vertices(city_graph_));
+std::list<CityGraph::VertexDescriptor> Graph::findShortestPath (VertexDescriptor& start, VertexDescriptor& goal) const{
 
+    vector<VertexDescriptor> p(num_vertices(city_graph_));
+    vector<Cost> d(num_vertices(city_graph_));
+
+    LocationMap locations = get(&VertexInfo::location, city_graph_);
+    //TODO:
+    /*
     try {
     // call astar named parameter interface
-    astar_search_tree (city_graph_, start, distance_heuristic<CityGraphList, cost, VertexPropertyMap> (vertices_, goal), //TODO: extract positions
-       predecessor_map(make_iterator_property_map(p.begin(), get(vertex_index, city_graph_))).
-       distance_map(make_iterator_property_map(d.begin(), get(vertex_index, city_graph_))).
-       visitor(astar_goal_visitor<Vertex>(goal)));
+    astar_search (city_graph_, start, distance_heuristic<CityGraphList, Cost, LocationMap> (locations, goal),
+      vertex_index_map(get(&VertexInfo::id, city_graph_)).
+      predecessor_map(make_iterator_property_map(p.begin(), get(&VertexInfo::id, city_graph_))).
+      distance_map(make_iterator_property_map(d.begin(), get(&VertexInfo::id, city_graph_))).
+      visitor(astar_goal_visitor<VertexDescriptor>(goal))); //why? does it reference a property that does not exist?
     } 
   catch(found_goal fg) { // found a path to the goal
-    list<Vertex> shortest_path;
-    for(Vertex v = goal;; v = p[v]) {
+    list<VertexDescriptor> shortest_path;
+    for(VertexDescriptor v = goal;; v = p[v]) {
       shortest_path.push_front(v);
       if(p[v] == v)
         break;
     }
     return shortest_path;
   }
+  */
 
+  return std::list<CityGraph::VertexDescriptor>();
 }

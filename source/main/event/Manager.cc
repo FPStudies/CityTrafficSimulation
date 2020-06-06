@@ -278,4 +278,5 @@ void Manager::checkEvents(sf::RenderWindow& window, sf::Event& event){
 
         it->getEventSet().checkToggleOccurence(event, window, *this);
     }
+
 }

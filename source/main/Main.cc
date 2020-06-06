@@ -11,6 +11,8 @@
 #include "../../include/main/screen/ScreenManager.h"
 #include "../../include/main/screen/StartScreen.h"
 
+#include "../../include/main/graph/Graph.h"
+
 using namespace std;
 
 int main(int argc, char** argv, char** envp) {
