@@ -41,7 +41,7 @@ class ScreenManager{
      * @brief Container used to store a Pair stuct with 2 keys.
      * 
      */
-    using Container = boost::multi_index_container<
+    using Container = typename boost::multi_index_container<
     Pair,
     boost::multi_index::indexed_by<
     boost::multi_index::ordered_unique<
@@ -53,6 +53,9 @@ class ScreenManager{
         boost::multi_index::member<Pair, std::string, &Pair::name_>
     >>
     >;
+
+    using ViewNodeByID = typename boost::multi_index::index<Container, IndexByID>::type;
+    using ViewNodeByString = typename boost::multi_index::index<Container, IndexByString>::type;
 
     Container screens_;
 
@@ -75,6 +78,9 @@ public:
 
     ScreenID getScreenID(const std::string& name);
     std::string getScreenName(const ScreenID& ID);
+
+    bool remove(const ScreenID& ID);
+    bool remove(const std::string& name);
 
 
     /**

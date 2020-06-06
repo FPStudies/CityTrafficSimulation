@@ -90,4 +90,26 @@ void ScreenManager::mainLoop(std::shared_ptr<sf::RenderWindow>& window, const st
     }
 }
 
+bool ScreenManager::remove(const ScreenID& ID){
+    ViewNodeByID& index_by_ID = screens_.get<IndexByID>();
+    auto found = index_by_ID.find(ID);
+
+    if(found == index_by_ID.end())
+        return true;
+
+    index_by_ID.erase(found);
+    return false;
+}
+
+bool ScreenManager::remove(const std::string& name){
+    ViewNodeByString& index_by_string = screens_.get<IndexByString>();
+    auto found = index_by_string.find(name);
+    
+    if(found == index_by_string.end())
+        return true;
+
+    index_by_string.erase(found);
+    return false;
+}
+
 #endif

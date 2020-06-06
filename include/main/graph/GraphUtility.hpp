@@ -29,8 +29,7 @@ namespace CityGraph {
 
     //type definitions
     typedef double cost;
-    typedef adjacency_list<listS, vecS, directedS, vertex_info,
-    property<edge_weight_t, cost> > CityGraphList;
+    typedef adjacency_list<listS, vecS, directedS, VertexInfo, property<edge_weight_t, cost> > CityGraphList;
     typedef property_map<CityGraphList, edge_weight_t>::type WeightMap;
     typedef property_map<CityGraphList, VertexInfo>::type VertexPropertyMap;
     typedef CityGraphList::vertex_descriptor Vertex;

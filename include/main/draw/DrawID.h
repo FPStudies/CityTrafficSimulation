@@ -20,6 +20,15 @@ class DrawID: virtual public Utils::ID<DrawID>{
     {}
 
 public:
+    DrawID()// Always State::Invalid
+    : ID()
+    {}
+
+    virtual ~DrawID() = default;
+    DrawID(const DrawID& other)
+    : ID(other)
+    {}
+
 };
 
 }
