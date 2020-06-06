@@ -38,6 +38,9 @@ namespace CityGraph {
 
         void setEdgeCost(EdgeDescriptor edge, Cost cost);
 
+        //TODO: remove methods
+        //TODO: id assertion ?
+
         //adds edges in both directions
         std::pair<EdgeDescriptor, EdgeDescriptor> addEdge(Edge edge, Cost cost_A_B, Cost cost_B_A);
         std::pair<EdgeDescriptor, EdgeDescriptor> addEdge(Edge edge, Cost cost);
