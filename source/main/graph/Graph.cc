@@ -20,6 +20,14 @@ VertexDescriptor Graph::addVertex(VertexInfo vertex_info) {
   return vertex;
 }
 
+VertexInfo Graph::getVertex(VertexDescriptor vertex) {
+  return city_graph_[vertex];
+}
+
+EdgeInfo Graph::getEdge(EdgeDescriptor edge) {
+  return city_graph_[edge];
+}
+
 
 std::pair<EdgeDescriptor, EdgeDescriptor> Graph::addEdge(Edge edge, std::pair<Cost, Cost> costs) {
   EdgeDescriptor edge_1, edge_2;
@@ -58,15 +66,16 @@ std::list<CityGraph::VertexDescriptor> Graph::findShortestPath (VertexDescriptor
     vector<Cost> d(num_vertices(city_graph_));
 
     LocationMap locations = get(&VertexInfo::location, city_graph_);
-    //TODO:
-    /*
+
+    
     try {
     // call astar named parameter interface
-    astar_search (city_graph_, start, distance_heuristic<CityGraphList, Cost, LocationMap> (locations, goal),
+    astar_search_tree (city_graph_, start, distance_heuristic<CityGraphList, Cost, LocationMap> (locations, goal),
+      weight_map(get(&EdgeInfo::cost, city_graph_)).
       vertex_index_map(get(&VertexInfo::id, city_graph_)).
       predecessor_map(make_iterator_property_map(p.begin(), get(&VertexInfo::id, city_graph_))).
       distance_map(make_iterator_property_map(d.begin(), get(&VertexInfo::id, city_graph_))).
-      visitor(astar_goal_visitor<VertexDescriptor>(goal))); //why? does it reference a property that does not exist?
+      visitor(astar_goal_visitor<VertexDescriptor>(goal)));
     } 
   catch(found_goal fg) { // found a path to the goal
     list<VertexDescriptor> shortest_path;
@@ -77,7 +86,7 @@ std::list<CityGraph::VertexDescriptor> Graph::findShortestPath (VertexDescriptor
     }
     return shortest_path;
   }
-  */
+  
 
   return std::list<CityGraph::VertexDescriptor>();
 }

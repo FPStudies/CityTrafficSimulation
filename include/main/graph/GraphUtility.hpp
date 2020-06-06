@@ -49,12 +49,12 @@ namespace CityGraph {
     
 
     // euclidean distance heuristic
-    template <class Graph, class CostType, class LocMap>
+    template <class Graph, class CostType, class LocationMap>
     class distance_heuristic : public astar_heuristic<Graph, CostType> {
     public:
         typedef typename graph_traits<Graph>::vertex_descriptor VertexDescriptor;
 
-        distance_heuristic(const LocMap& l, const VertexDescriptor& goal) : m_location_(l), m_goal_(goal) {};
+        distance_heuristic(const LocationMap& l, const VertexDescriptor& goal) : m_location_(l), m_goal_(goal) {};
 
         CostType operator()(VertexDescriptor u) {
             CostType dx = m_location_[m_goal_].x - m_location_[u].x;
@@ -63,7 +63,7 @@ namespace CityGraph {
         }
 
     private:
-        LocMap m_location_;
+        LocationMap m_location_;
         VertexDescriptor m_goal_;
     };
 
