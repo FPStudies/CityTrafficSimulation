@@ -25,13 +25,13 @@ int main(int argc, char** argv, char** envp) {
 	verd1 = graph.addVertex(vertex1);
 	verd2 = graph.addVertex(vertex2);
 	verd3 = graph.addVertex(vertex3);
-	graph.addEdge(std::make_pair(0, 1), std::make_pair(2,2));
-	graph.addEdge(std::make_pair(0, 2), std::make_pair(1,1));
-	graph.addEdge(std::make_pair(3, 1), std::make_pair(2,2));
-	graph.addEdge(std::make_pair(3, 2), std::make_pair(1,1));
+	graph.addEdge(std::make_pair(verd0, verd1), 2, 2);
+	graph.addEdge(std::make_pair(verd0, verd2), 1, 1);
+	graph.addEdge(std::make_pair(verd3, verd1), 2, 2);
+	graph.addEdge(std::make_pair(verd3, verd2), 1, 1);
 	auto list = graph.findShortestPath(verd0, verd3);
 	for (auto i = list.begin(); i!= list.end(); ++i) {
-		cout<<graph.getVertex(*i).id<<" ";
+		cout<<graph.getVertex(*i).id_<<" ";
 	}
 	cout<<"\n";
 	//graph test <end>

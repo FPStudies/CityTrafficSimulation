@@ -28,16 +28,19 @@ namespace CityGraph {
 
         VertexDescriptor addVertex(VertexInfo vertex_info);
 
-        VertexInfo getVertex(VertexDescriptor vertex);
+        const VertexInfo getVertex(VertexDescriptor vertex) const;
 
-        EdgeInfo getEdge(EdgeDescriptor edge);
+        const EdgeInfo getEdge(EdgeDescriptor edge) const;
 
-        //TODO: access to elements
+        void setVertexName(VertexDescriptor vertex, std::string name);
 
-        //TODO: stop confusion between descriptors and numbers in graph
+        void setVertexLocation(VertexDescriptor vertex, double x, double y);
+
+        void setEdgeCost(EdgeDescriptor edge, Cost cost);
 
         //adds edges in both directions
-        std::pair<EdgeDescriptor, EdgeDescriptor> addEdge(Edge edge, std::pair<Cost, Cost> costs);
+        std::pair<EdgeDescriptor, EdgeDescriptor> addEdge(Edge edge, Cost cost_A_B, Cost cost_B_A);
+        std::pair<EdgeDescriptor, EdgeDescriptor> addEdge(Edge edge, Cost cost);
 
         void buildGraph(const std::vector<VertexInfo>& vertex_info, const std::vector<Edge>& edges, const std::vector<Cost>& weights);
 

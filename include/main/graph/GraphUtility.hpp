@@ -24,25 +24,24 @@ namespace CityGraph {
     //type definitions
     struct Location
     {
-    double x, y;
+    double x_, y_;
     };
     typedef int Cost;
 
     struct VertexInfo {
-        int id;
-        std::string name;
-        Location location;
+        int id_;
+        std::string name_;
+        Location location_;
     };
     struct EdgeInfo {
-        Cost cost;
+        Cost cost_;
     };
  
     typedef adjacency_list<listS, vecS, bidirectionalS, VertexInfo,
     EdgeInfo > CityGraphList;
     typedef CityGraphList::vertex_descriptor VertexDescriptor;
     typedef CityGraphList::edge_descriptor EdgeDescriptor;
-    typedef CityGraphList::vertices_size_type VertexNumber;
-    typedef std::pair<VertexNumber, VertexNumber> Edge;
+    typedef std::pair<VertexDescriptor, VertexDescriptor> Edge;
     typedef property_map<CityGraphList, edge_weight_t EdgeInfo::*>::type WeightMap;
     typedef vec_adj_list_vertex_property_map<CityGraphList, const CityGraphList *, Location, const Location &, Location VertexInfo::*> LocationMap;
     
@@ -57,8 +56,8 @@ namespace CityGraph {
         distance_heuristic(const LocationMap& l, const VertexDescriptor& goal) : m_location_(l), m_goal_(goal) {};
 
         CostType operator()(VertexDescriptor u) {
-            CostType dx = m_location_[m_goal_].x - m_location_[u].x;
-            CostType dy = m_location_[m_goal_].y - m_location_[u].y;
+            CostType dx = m_location_[m_goal_].x_ - m_location_[u].x_;
+            CostType dy = m_location_[m_goal_].y_ - m_location_[u].y_;
             return ::sqrt(dx * dx + dy * dy);
         }
 

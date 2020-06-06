@@ -20,25 +20,42 @@ VertexDescriptor Graph::addVertex(VertexInfo vertex_info) {
   return vertex;
 }
 
-VertexInfo Graph::getVertex(VertexDescriptor vertex) {
+const VertexInfo Graph::getVertex(VertexDescriptor vertex) const {
   return city_graph_[vertex];
 }
 
-EdgeInfo Graph::getEdge(EdgeDescriptor edge) {
+const EdgeInfo Graph::getEdge(EdgeDescriptor edge) const {
   return city_graph_[edge];
 }
 
+void Graph::setVertexName(VertexDescriptor vertex, std::string name) {
+  city_graph_[vertex].name_ = name;
+}
 
-std::pair<EdgeDescriptor, EdgeDescriptor> Graph::addEdge(Edge edge, std::pair<Cost, Cost> costs) {
+void Graph::setVertexLocation(VertexDescriptor vertex, double x, double y) {
+  city_graph_[vertex].location_.x_ = x;
+  city_graph_[vertex].location_.y_ = y;
+}
+
+void Graph::setEdgeCost(EdgeDescriptor edge, Cost cost) {
+  city_graph_[edge].cost_ = cost;
+}
+
+
+std::pair<EdgeDescriptor, EdgeDescriptor> Graph::addEdge(Edge edge, Cost cost_A_B, Cost cost_B_A) {
   EdgeDescriptor edge_1, edge_2;
   bool inserted_1, inserted_2;
 
   boost::tie(edge_1, inserted_1) = add_edge(edge.first, edge.second, city_graph_);
-  city_graph_[edge_1].cost = costs.first;
+  city_graph_[edge_1].cost_ = cost_A_B;
   boost::tie(edge_2, inserted_2) = add_edge(edge.second, edge.first, city_graph_);
-  city_graph_[edge_2].cost = costs.second;
+  city_graph_[edge_2].cost_ = cost_B_A;
 
   return std::make_pair(edge_1, edge_2);
+}
+
+std::pair<EdgeDescriptor, EdgeDescriptor> Graph::addEdge(Edge edge, Cost cost) {
+  return addEdge(edge, cost, cost);
 }
 
 
@@ -55,38 +72,38 @@ void Graph::buildGraph(const std::vector<VertexInfo>& vertex_info, const std::ve
         EdgeDescriptor edge;
         bool inserted;
         boost::tie(edge, inserted) = add_edge(edges[i].first, edges[i].second, city_graph_);
-        city_graph_[edge].cost = weights[i];
+        city_graph_[edge].cost_ = weights[i];
     }
 }
 
 
 std::list<CityGraph::VertexDescriptor> Graph::findShortestPath (VertexDescriptor& start, VertexDescriptor& goal) const{
 
-    vector<VertexDescriptor> p(num_vertices(city_graph_));
-    vector<Cost> d(num_vertices(city_graph_));
+    vector<VertexDescriptor> predecessor(num_vertices(city_graph_));
+    vector<Cost> distance(num_vertices(city_graph_));
 
-    LocationMap locations = get(&VertexInfo::location, city_graph_);
-
+    LocationMap locations = get(&VertexInfo::location_, city_graph_);
+    list<VertexDescriptor> shortest_path;
     
     try {
     // call astar named parameter interface
     astar_search_tree (city_graph_, start, distance_heuristic<CityGraphList, Cost, LocationMap> (locations, goal),
-      weight_map(get(&EdgeInfo::cost, city_graph_)).
-      vertex_index_map(get(&VertexInfo::id, city_graph_)).
-      predecessor_map(make_iterator_property_map(p.begin(), get(&VertexInfo::id, city_graph_))).
-      distance_map(make_iterator_property_map(d.begin(), get(&VertexInfo::id, city_graph_))).
+      weight_map(get(&EdgeInfo::cost_, city_graph_)).
+      vertex_index_map(get(&VertexInfo::id_, city_graph_)).
+      predecessor_map(make_iterator_property_map(predecessor.begin(), get(&VertexInfo::id_, city_graph_))).
+      distance_map(make_iterator_property_map(distance.begin(), get(&VertexInfo::id_, city_graph_))).
       visitor(astar_goal_visitor<VertexDescriptor>(goal)));
     } 
   catch(found_goal fg) { // found a path to the goal
-    list<VertexDescriptor> shortest_path;
-    for(VertexDescriptor v = goal;; v = p[v]) {
+    for(VertexDescriptor v = goal;; v = predecessor[v]) {
       shortest_path.push_front(v);
-      if(p[v] == v)
+      if(predecessor[v] == v)
         break;
     }
     return shortest_path;
   }
   
-
-  return std::list<CityGraph::VertexDescriptor>();
+  //TODO: throw error
+  //no path found
+  return shortest_path;
 }
