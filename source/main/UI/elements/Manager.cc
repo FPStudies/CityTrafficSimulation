@@ -26,6 +26,9 @@ bool Element::Manager::addElement(const std::shared_ptr<::Element::Element> elem
         Inher::remove(element->getID());
         return true;
     }
+
+    //TODO: add roads and pavements to graphs
+
     return false;
 }
 

@@ -13,10 +13,10 @@
 #include <boost/multi_index/ordered_index.hpp>
 #include <boost/multi_index/member.hpp>
 
-#include "Element.h"
+#include "AllElements.h"
 #include "../../utility/DoubleKeyManager.hpp"
 #include "../../draw/Manager.h"
-//#include "../../graph/Graph.h"
+#include "../../graph/Graph.h"
 
 
 namespace Element {
@@ -25,6 +25,10 @@ class Manager: protected Utils::DoubleKeyManager<Draw::DrawID, std::string, ::El
     using Inher = Utils::DoubleKeyManager<Draw::DrawID, std::string, ::Element::Element>;
 
     Draw::Manager& draw_manager_;
+
+    CityGraph::Graph roads_graph_;
+
+    CityGraph::Graph pavements_graph_;
     
 public:
     
