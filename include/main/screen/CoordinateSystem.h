@@ -12,6 +12,8 @@
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
 
+#include "../utility/Singleton.hpp"
+
 /**
  * @brief Provides a unified coordinate system.
  * Stores all provided coordinate systems.
@@ -24,7 +26,9 @@
  */
 class CoordinateSystem;
 
-class CoordinateSystemSet{
+class CoordinateSystemSet final: public Utils::Singleton<CoordinateSystemSet>{
+    friend class ::Utils::Singleton<CoordinateSystemSet>;
+    friend class ::Utils::SingletonDestroyer<CoordinateSystemSet>;
     using CoordType = float;
 
     std::map<std::string, CoordinateSystem> systems_;
@@ -32,7 +36,7 @@ class CoordinateSystemSet{
 
 public:
     
-    static CoordinateSystemSet& getInstance();
+    //static CoordinateSystemSet& getInstance();
     ~CoordinateSystemSet();
     CoordinateSystemSet(const CoordinateSystemSet& other) = delete;
     CoordinateSystemSet(CoordinateSystemSet&& other) = delete;
