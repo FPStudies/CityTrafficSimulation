@@ -226,6 +226,14 @@ SConscript(
     duplicate=0
     )   
 
+# synchronization
+SConscript(
+    'source/main/synchronization/SConscript', 
+    exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
+    variant_dir = binFolder + 'main/synchronization', 
+    duplicate=0
+    )   
+
 # UI / elements
 SConscript(
     'source/main/UI/elements/SConscript', 

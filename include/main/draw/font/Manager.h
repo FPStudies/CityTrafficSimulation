@@ -16,23 +16,23 @@
 
 #include "Font.h"
 #include "../../utility/SharedResourceManager.hpp"
+#include "../../utility/Singleton.hpp"
 
 
 namespace Draw::Font{
 
-class Manager: public ::SharedResource::Manager<Font, sf::Font>{
-    static Manager* instance_;
-
-    Manager();
+class Manager final: public ::SharedResource::Manager<Font, sf::Font>, public ::Utils::Singleton<Manager>{
+    friend class ::Utils::Singleton<Manager>;
+    friend class ::Utils::SingletonDestroyer<Manager>;
     
-public:
+    Manager();
     virtual ~Manager();
+public:
+    
     Manager(const Manager&) = delete;
     Manager& operator=(Manager&) = delete;
     Manager(Manager&&) = delete;
     Manager& operator=(Manager&&) = delete;
-
-    static Manager& getInstance();
 
     virtual bool load(const std::string& path, const std::string& alias) override;
     virtual bool load(const std::string& path) override;

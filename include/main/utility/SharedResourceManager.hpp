@@ -88,7 +88,7 @@ protected:
     std::mutex mutex_free_;
     std::mutex mutex_mod_map_;
 
-    static std::mutex mutex_instance_;
+    //static std::mutex mutex_instance_;
 
 public:
 
@@ -164,9 +164,9 @@ public:
         return it->second;
         }
 };
-
+/*
 template<typename StoredWrapper, typename StoredObject>
-std::mutex Manager<StoredWrapper, StoredObject, true>::mutex_instance_;
+std::mutex Manager<StoredWrapper, StoredObject, true>::mutex_instance_;*/
 
 }
 

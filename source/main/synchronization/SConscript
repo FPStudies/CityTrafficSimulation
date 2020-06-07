@@ -1,0 +1,31 @@
+#
+#      Authors: Kordowski Mateusz
+#
+
+Import('env_base')
+Import('binFolder')
+Import('pathToUtility')
+Import('libraryPath')
+
+pathToH = '#include/main/synchronization/'
+pathToUtils = '#include/main/utility/'
+libraryName = 'synch'
+
+
+
+env = env_base.Clone()
+
+filesCPP = [
+    Glob('*.cc')
+]
+
+env.Append(
+    CPPPATH = [
+        pathToH, 
+        pathToUtils
+    ]
+)
+
+env.StaticLibrary(
+    target = libraryPath + libraryName, 
+    source = filesCPP)

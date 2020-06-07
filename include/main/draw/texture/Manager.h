@@ -16,24 +16,24 @@
 
 #include "Texture.h"
 #include "../../utility/SharedResourceManager.hpp"
+#include "../../utility/Singleton.hpp"
 
 
 namespace Draw::Texture{
 
-class Manager: public ::SharedResource::Manager<Texture, sf::Texture>{
-    static Manager* instance_;
+class Manager final: public ::SharedResource::Manager<Texture, sf::Texture>, public ::Utils::Singleton<Manager>{
+    friend class ::Utils::Singleton<Manager>;
+    friend class ::Utils::SingletonDestroyer<Manager>;
 
     virtual bool save(const std::string& name, const sf::Texture& object) override;
     Manager();
+    virtual ~Manager();
 
 public:
-    virtual ~Manager();
     Manager(const Manager&) = delete;
     Manager& operator=(Manager&) = delete;
     Manager(Manager&&) = delete;
     Manager& operator=(Manager&& other) = delete;
-
-    static Manager& getInstance();
 
     bool load(const std::string& path, const std::string& alias, const sf::IntRect& area);
     virtual bool load(const std::string& path, const std::string& alias) override;

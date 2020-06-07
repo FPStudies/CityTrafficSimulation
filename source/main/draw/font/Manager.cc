@@ -8,20 +8,9 @@
 
 using namespace Draw::Font;
 
-Manager* Manager::instance_ = nullptr;
-
 Manager::Manager() = default;
 
 Manager::~Manager() = default;
-
-Manager& Manager::getInstance(){
-    if(!instance_){
-        const std::lock_guard<std::mutex> lock(Manager::mutex_instance_);
-        if(!instance_)
-            instance_ = new Manager;
-    }
-    return *instance_;
-}
 
 bool Manager::load(const std::string& path, const std::string& alias){
     const std::lock_guard<std::mutex> lock(mutex_mod_map_);
