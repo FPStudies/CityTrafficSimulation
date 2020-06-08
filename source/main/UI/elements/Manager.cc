@@ -27,7 +27,13 @@ bool Element::Manager::addElement(const std::shared_ptr<::Element::Element> elem
         return true;
     }
 
-    //TODO: add roads and pavements to graphs
+    //TODO: add roads and pavements to graphs and connect (are ids unique? even between element types?)
+    if (typeid(element) == typeid(::Element::Road)){
+        vehicles_graph_.addVertex({*(element->getID()), getElementName(element->getID()), element->getPosition().x, element->getPosition().y});
+    }
+    else if (typeid(element) == typeid(::Element::Pavement) || typeid(element) == typeid(::Element::PedestrianCrossing)){
+        pedestrians_graph_.addVertex({*(element->getID()), getElementName(element->getID()), element->getPosition().x, element->getPosition().y});
+    }
 
     return false;
 }
@@ -41,9 +47,11 @@ std::string Element::Manager::getElementName(const Draw::DrawID& ID) const{
 }
 
 bool Element::Manager::remove(const Draw::DrawID& ID){
+    //TODO:remove from graph
     return Inher::remove(ID);
 }
 
 bool Element::Manager::remove(const std::string& name){
+    //TODO:remove from graph
     return Inher::remove(name);
 }

@@ -12,6 +12,7 @@ libraryName = 'graph'
 
 HeaderFiles = [
     'Graph.h',
+    'Proxy.hpp',
     'GraphUtility.hpp'
 ]
 

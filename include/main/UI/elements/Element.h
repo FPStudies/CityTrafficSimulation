@@ -17,7 +17,7 @@ namespace Element {
     using Texture_ptr = std::shared_ptr<Texture>;
 
     class Element: public sf::RectangleShape, public Draw::Drawable {
-        
+
         Texture_ptr texture_;       
         sf::RenderStates states_;
         bool can_be_drawn_;

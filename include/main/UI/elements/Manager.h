@@ -16,7 +16,7 @@
 #include "AllElements.h"
 #include "../../utility/DoubleKeyManager.hpp"
 #include "../../draw/Manager.h"
-#include "../../graph/Graph.h"
+#include "../../graph/Proxy.hpp"
 
 
 namespace Element {
@@ -26,9 +26,9 @@ class Manager: protected Utils::DoubleKeyManager<Draw::DrawID, std::string, ::El
 
     Draw::Manager& draw_manager_;
 
-    CityGraph::Graph roads_graph_;
+    CityGraph::Proxy<Draw::DrawID> vehicles_graph_;
 
-    CityGraph::Graph pavements_graph_;
+    CityGraph::Proxy<Draw::DrawID> pedestrians_graph_;
     
 public:
     
@@ -46,7 +46,9 @@ public:
     bool remove(const Draw::DrawID& ID);
     bool remove(const std::string& name);
 
+    //connect
 
+    //findPath(elem_1, elem_2)
 };
 
 };

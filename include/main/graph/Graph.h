@@ -28,6 +28,8 @@ namespace CityGraph {
 
         VertexDescriptor addVertex(VertexInfo vertex_info);
 
+        void removeVertex(VertexDescriptor vertex);
+
         const VertexInfo getVertex(VertexDescriptor vertex) const;
 
         const EdgeInfo getEdge(EdgeDescriptor edge) const;
@@ -38,12 +40,13 @@ namespace CityGraph {
 
         void setEdgeCost(EdgeDescriptor edge, Cost cost);
 
-        //TODO: remove methods
         //TODO: id assertion ?
 
         //adds edges in both directions
         std::pair<EdgeDescriptor, EdgeDescriptor> addEdge(Edge edge, Cost cost_A_B, Cost cost_B_A);
         std::pair<EdgeDescriptor, EdgeDescriptor> addEdge(Edge edge, Cost cost);
+
+        void removeEdge(Edge edge);
 
         void buildGraph(const std::vector<VertexInfo>& vertex_info, const std::vector<Edge>& edges, const std::vector<Cost>& weights);
 

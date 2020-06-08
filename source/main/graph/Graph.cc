@@ -20,6 +20,11 @@ VertexDescriptor Graph::addVertex(VertexInfo vertex_info) {
   return vertex;
 }
 
+void Graph::removeVertex(VertexDescriptor vertex) {
+  clear_vertex(vertex);
+  remove_vertex(vertex);
+}
+
 const VertexInfo Graph::getVertex(VertexDescriptor vertex) const {
   return city_graph_[vertex];
 }
@@ -56,6 +61,11 @@ std::pair<EdgeDescriptor, EdgeDescriptor> Graph::addEdge(Edge edge, Cost cost_A_
 
 std::pair<EdgeDescriptor, EdgeDescriptor> Graph::addEdge(Edge edge, Cost cost) {
   return addEdge(edge, cost, cost);
+}
+
+void Graph::removeEdge(Edge edge) {
+  remove_edge(edge.first, edge.second);
+  remove_edge(edge.second, edge.first);
 }
 
 

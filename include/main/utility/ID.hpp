@@ -49,7 +49,7 @@ namespace Utils{
          * @brief Create a new ScreenID in this object. 
          * 
          * @details It will have a unique identifier.
-         * This can be performed only f this object have invalid identifier.
+         * This can be performed only if this object has an invalid identifier.
          * Valid identifiers will not be affected by this.
          * 
          * @return true If identifier was valid and operation was not performed.
@@ -94,7 +94,7 @@ namespace Utils{
         }
 
         /**
-         * @brief Return an intiget that identifies this object.
+         * @brief Return an intiger that identifies this object.
          * 
          * @return int 
          */
