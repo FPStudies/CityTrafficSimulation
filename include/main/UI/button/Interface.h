@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_GAME_BUTTON_INTERFACE_H
-#define TRAFFIC_SIM_GAME_BUTTON_INTERFACE_H
+#ifndef TRAFFIC_SIM_MAIN_UI_BUTTON_INTERFACE_H
+#define TRAFFIC_SIM_MAIN_UI_BUTTON_INTERFACE_H
 
 
 #include <SFML/Window.hpp>
@@ -20,6 +20,12 @@ namespace Trigger::Event{
 
 namespace Button{
     class Interface{
+        friend class BridgeFromTriggerToInterface;
+
+        void addTrigger(std::shared_ptr<::Trigger::Event::Button> button_trigger){
+            trigger_.push_back(button_trigger);
+        }
+
     protected:
         std::vector<std::weak_ptr<Draw::Drawable>> to_draw_button_;
         std::vector<std::weak_ptr<::Trigger::Event::Button>> trigger_;
@@ -44,11 +50,7 @@ namespace Button{
         : to_draw_button_(), trigger_()
         {}
         
-        virtual ~Interface() = default;
-
-        void addTrigger(std::shared_ptr<::Trigger::Event::Button> button_trigger){
-            trigger_.push_back(button_trigger);
-        }
+        virtual ~Interface() = default;      
 
         virtual bool isButtonChoosed(sf::RenderWindow& window) = 0;
 

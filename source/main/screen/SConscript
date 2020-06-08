@@ -11,31 +11,28 @@ pathToH = '#include/main/screen/'
 pathToEvent = '#include/main/event/'
 pathToDrawing = '#include/main/drawing/'
 libraryName = 'screenLib'
-
-HFilesMain = [
-    'ScreenInterface.h',
-    'ScreenID.h',
-]
+pathToUtils = '#include/main/utility/'
 
 HFilesUtility = [
-    'ID.hpp'
+    'ID.hpp',
+    'Singleton.hpp'
 ]
+
+filesHUtil = [pathToUtility + x for x in HFilesUtility]
 
 env = env_base.Clone()
 
 filesCPP = [
-    Glob('*.cc')
+    Glob('*.cc'),
+    Glob('specialization/*.cc')
 ]
-
-
-filesHMain = [pathToH + x for x in HFilesMain]
-filesHUtil = [pathToUtility + x for x in HFilesUtility]
 
 env.Append(
     CPPPATH = [
         pathToH, 
         pathToEvent,
-        pathToDrawing
+        pathToDrawing,
+        pathToUtils
     ]
     )
 

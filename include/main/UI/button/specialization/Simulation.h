@@ -1,11 +1,11 @@
 /*
- * Exit.h
+ * Simulation.h
  *
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_GAME_BUTTON_SPECIALIZATION_EXIT_H
-#define TRAFFIC_SIM_GAME_BUTTON_SPECIALIZATION_EXIT_H
+#ifndef TRAFFIC_SIM_GAME_BUTTON_SPECIALIZATION_SIMULATION_H
+#define TRAFFIC_SIM_GAME_BUTTON_SPECIALIZATION_SIMULATION_H
 
 #include <SFML/Graphics.hpp>
 #include <memory>
@@ -13,9 +13,11 @@
 #include "../../../trigger/action/ExitWindow.h"
 #include "../../../draw/Texturing.h"
 #include "../InterfaceDrawTrans.h"
+#include "../../../screen/ScreenID.h"
 
 namespace Button{
-    class Exit: public InterfaceDrawTrans, public sf::RectangleShape{
+    // TODO, not to use 
+    class Simulation: public InterfaceDrawTrans, public sf::RectangleShape{
         using Texture = ::Draw::Texture::Texture;
         using Texture_ptr = std::shared_ptr<Texture>;
 
@@ -27,9 +29,12 @@ namespace Button{
         sf::RenderStates states_;
         bool can_be_drawn_;
 
+        ScreenID next_screen_;
+        bool is_next_screen_;
+
     public:
-        Exit(sf::Window& window, const Texture_ptr& texture);
-        virtual ~Exit();
+        Simulation(sf::Window& window, const Texture_ptr& texture, const ScreenID& nextScreen);
+        virtual ~Simulation();
  
         virtual void draw(sf::RenderTarget& target) const override;
         virtual bool isButtonChoosed(sf::RenderWindow& window) override;
@@ -45,6 +50,8 @@ namespace Button{
         void setPosition(const sf::Vector2f &position);
         void setSize(const sf::Vector2f &size);
         void setTextSize(unsigned int size);
+
+
 
     };
 }

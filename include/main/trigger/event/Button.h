@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_TRIGGER_BUTTON_H
-#define TRAFFIC_SIM_TRIGGER_BUTTON_H
+#ifndef TRAFFIC_SIM_MAIN_TRIGGER_EVENT_BUTTON_H
+#define TRAFFIC_SIM_MAIN_TRIGGER_EVENT_BUTTON_H
 
 
 #include <memory>
@@ -13,10 +13,12 @@
 #include "Interface.h"
 #include "../../controls/ControlMapping.h"
 #include "../../UI/button/Interface.h"
+#include "../../UI/button/BridgeFromTriggerToInterface.h"
 
 namespace Trigger::Event{ 
 
     class Button: public Interface, public std::enable_shared_from_this<Button>{
+        friend class BridgeToTrigger;
         std::shared_ptr<::Button::Interface> button_;
         bool was_pressed_;
 

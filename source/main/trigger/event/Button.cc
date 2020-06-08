@@ -36,7 +36,7 @@ std::shared_ptr<Trigger::Event::Button> Trigger::Event::Button::create(){
 bool Trigger::Event::Button::connect(const std::shared_ptr<::Button::Interface>& button){
     if(button_) return true;
     button_ = button;
-    button->addTrigger(shared_from_this());
+    ::Button::BridgeFromTriggerToInterface::connectTriggerToInterface(button, shared_from_this());
     return false;
 }
 

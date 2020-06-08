@@ -15,10 +15,21 @@
 #include "main/event/Basic.h"
 #include "../include/main/screen/ScreenManager.h"
 #include "../include/main/screen/StartScreen.h"
+#include "../include/main/screen/specialization/MainMenu.h"
+#include "../include/main/screen/specialization/Simulation.h"
+
+#include "main/draw/Texturing.h"
+#include "main/synchronization/Loop.h"
 
 
 class ProgramSetup{
     std::shared_ptr<sf::RenderWindow> window_;
+
+    Draw::Texture::Manager& texture_manager_;
+    Draw::Font::Manager& font_manager_;
+    Synch::Loop& loop_synch_;
+
+    ScreenManager screen_manager_;
     
 public:
     ProgramSetup(const unsigned int& width, const unsigned int& height, const char* name, const unsigned int& mode_bits_per_pixel = 32);
@@ -30,6 +41,8 @@ public:
      * @return const int 0 if no errors. It uses a defines in SFML/Graphics.hpp started with "EXIT_"
      */
     const int render();
+    
+    void setup();
 
 
     /** 
