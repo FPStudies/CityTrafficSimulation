@@ -9,9 +9,11 @@
 
 #include <memory>
 #include <map>
+#include <vector>
 #include <deque>
 #include <list>
 #include <memory>
+#include <mutex>
 
 #include <SFML/Graphics.hpp>
 
@@ -28,7 +30,7 @@ namespace Draw{
 class Manager{
 
     // for now list but it will be better with R* algorithm.
-    using WindowCont = std::vector<std::weak_ptr<sf::RenderWindow>>;
+    using WindowCont = std::list<std::weak_ptr<sf::RenderWindow>>;
     
     class DrawLayer{
         using ObjectPair = std::map<DrawID, std::shared_ptr<Drawable>>;
@@ -39,6 +41,7 @@ class Manager{
         ObjectPair container_;
         ToRender render_;
         std::shared_ptr<::Screen::View> view_;
+        mutable std::mutex mutex_modify_;
         
 
     public:
@@ -63,8 +66,20 @@ class Manager{
 
     Layers to_draw_;
     std::shared_ptr<sf::RenderWindow> object_window_;
+    std::mutex mutex_modify_;
+    static std::mutex mutex_change_state_static_;
+    
 
-    static WindowCont windows_static_;
+    static unsigned int ref_count_;
+    const static unsigned int max_instances_;
+
+    /**
+     * @brief It stores only a place in memory and will never be dereferenced,
+     * so it doesn't bother that unique_ptr will delete it.
+     * Moreover it will be deleted while invoking destructor. 
+     * 
+     */
+    static std::list<std::pair<Manager*, int>> instances_;
     
 
     Manager(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window, const std::shared_ptr<::Screen::View>& view);
