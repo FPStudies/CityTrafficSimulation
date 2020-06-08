@@ -16,11 +16,11 @@ CoordinateSystemSet::CoordinateSystemSet()
 {
     systems_.emplace("basic", CoordinateSystem(0.0, 0.0, false, false, "NULL", "basic"));
 }
-
+/*
 CoordinateSystemSet& CoordinateSystemSet::getInstance(){
     static CoordinateSystemSet instance;
     return instance;
-}
+}*/
 
 
 CoordinateSystemSet::~CoordinateSystemSet()
