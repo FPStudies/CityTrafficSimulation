@@ -17,7 +17,7 @@
 
 namespace Trigger::Event{ 
 
-    class Button: public Interface, public std::enable_shared_from_this<Button>{
+    class Button: public Interface{
         friend class BridgeToTrigger;
         std::shared_ptr<::Button::Interface> button_;
         bool was_pressed_;
