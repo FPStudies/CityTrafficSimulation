@@ -31,7 +31,7 @@
 #include "../trigger/action/NextScreen.h"
 
 #include "../event/Basic.h"
-#include "../Loopback.h"
+#include "../UI/tiles/Background.h"
 
 namespace Screen::Spec{
 
@@ -53,10 +53,11 @@ class MainMenu: public ScreenInteface{
 
     std::shared_ptr<Button::Exit> exit_button_;
     std::shared_ptr<Button::Default> sim_button_;
-    std::shared_ptr<Draw::Drawable> background_;
+    std::shared_ptr<Tiles::Background> background_;
 
     void addButtons(std::shared_ptr<sf::RenderWindow> & window);
     void addBackground(std::shared_ptr<sf::RenderWindow> & window);
+    void addOther();
 
 public:
     MainMenu(const sf::Vector2u& viewSize, std::shared_ptr<sf::RenderWindow> & window, const ScreenManager& nextScreen);

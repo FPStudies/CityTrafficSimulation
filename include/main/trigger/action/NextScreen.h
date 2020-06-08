@@ -12,14 +12,14 @@
 #include <typeinfo>
 
 #include "Interface.h"
-#include "../../screen/Loopback.h"
+#include "../../screen/ScreenID.h"
+#include "../../screen/ScreenInterface.h"
 
 
 namespace Trigger::Action{
 
     class NextScreen: public Interface{
         ScreenID screen_ID_;
-        Screen::Loopback& loopback_;
     
         virtual NextScreen* clone_impl() const override;
 

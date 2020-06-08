@@ -58,7 +58,7 @@ void MainMenu::addButtons(std::shared_ptr<sf::RenderWindow> & window){
     sim_button_->setPosition(sf::Vector2f(width_ / 2 - (buttonSize.x / 2), height_ / 3 - ((buttonSize.y))));
 
     std::shared_ptr<Trigger::Action::NextScreen> trig_next_screen = std::make_shared<Trigger::Action::NextScreen>(screen_manager_.getScreenID("Simulation"));
-    //sim_button_->addTriggerOnReleased(trig_next_screen);
+    sim_button_->addTriggerOnReleased(trig_next_screen);
 
     auto trigger_button_event_next = Trigger::Event::Button::create();
     trigger_button_event_next->connect(sim_button_);
@@ -74,14 +74,24 @@ void MainMenu::addButtons(std::shared_ptr<sf::RenderWindow> & window){
 }
 
 void MainMenu::addBackground(std::shared_ptr<sf::RenderWindow> & window){
+    draw_manager_->addLayerBefore("First_layer", "Second_layer", view_UI_);
+    background_ = std::make_shared<Tiles::Background>(texture_manager_.get("grey"));
+    draw_manager_->addEntity("Second_layer", background_);
+    background_->setSize(sf::Vector2f(width_, height_));
+    background_->setPosition(sf::Vector2f(0, 0));
+}
+
+void MainMenu::addOther(){
     std::shared_ptr<Event::Basic> ev = std::make_shared<Event::Basic>();
 
     event_manager_->add("test", Event::Manager::State::ACTIVE, ev);
 }
 
 ScreenID MainMenu::run(std::shared_ptr<sf::RenderWindow> & window){
-    addButtons(window);
     addBackground(window);
+    addButtons(window);
+    addOther();
+
 
     ScreenID symulationID = screen_manager_.getScreenID("Simulation");
 
@@ -94,6 +104,14 @@ ScreenID MainMenu::run(std::shared_ptr<sf::RenderWindow> & window){
         while(window->pollEvent(event)){
             event_manager_->checkEvents(*window, event);
         }
+
+        if(ScreenInteface::isAnyoneWaiting()){
+            // decide what to do with these informations.
+            for(auto& it : received_data_->request_for_next_screen_){
+                return it;
+            }
+        }
+        
 
         window->clear();
         draw_manager_->drawAll();

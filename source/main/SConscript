@@ -30,7 +30,8 @@ programLibraries = [
     'controls',
     'Buttons',
     'Triggers',
-    'synch'
+    'synch',
+    'tiles'
 ]
 
 externalLibraries = [

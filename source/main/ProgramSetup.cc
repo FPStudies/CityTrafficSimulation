@@ -22,6 +22,7 @@ ProgramSetup::~ProgramSetup() = default;
 void ProgramSetup::setup(){
     texture_manager_.load("resource/texture/blue_light.jpg", "blue_light");
     texture_manager_.load("resource/texture/highway_road.jpg", "highway_road");
+    texture_manager_.load("resource/texture/grey.jpg", "grey");
     font_manager_.load("resource/fonts/open-sans/OpenSans-Italic.ttf", "Normal");
 
     std::shared_ptr<StartScreen> start_screen = std::make_shared<StartScreen>();

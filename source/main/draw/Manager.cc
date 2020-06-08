@@ -93,9 +93,19 @@ bool Manager::addFirstLayer(const std::string& layer_name, const std::shared_ptr
     return false;
 }
 
-bool Manager::addLayer(const std::string& previous_layer_name, const std::string& layer_name, const std::shared_ptr<Screen::View>& view){
+bool Manager::addLayerBefore(const std::string& previous_layer_name, const std::string& layer_name, const std::shared_ptr<Screen::View>& view){
     for(auto it = to_draw_.begin(); it != to_draw_.end(); ++it){
         if((*it)->getName() == previous_layer_name){
+            to_draw_.insert(it, std::make_unique<DrawLayer>(layer_name, view));
+            return false;
+        }
+    }
+    return true;
+}
+
+bool Manager::addLayerAfter(const std::string& next_layer_name, const std::string& layer_name, const std::shared_ptr<Screen::View>& view){
+    for(auto it = to_draw_.begin(); it != to_draw_.end(); ++it){
+        if((*it)->getName() == next_layer_name){
             ++it;
             to_draw_.insert(it, std::make_unique<DrawLayer>(layer_name, view));
             return false;

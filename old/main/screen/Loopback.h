@@ -6,29 +6,26 @@
 
 #ifndef TRAFFIC_SIM_MAIN_SCREEN_LOOPBACK_H
 #define TRAFFIC_SIM_MAIN_SCREEN_LOOPBACK_H
-
+/*
 #include <vector>
+#include <mutex>
 
 #include "../utility/Singleton.hpp"
 #include "ScreenID.h"
+#include "ScreenInterface.h"
 
 namespace Screen{
 
 
-/**
- * @brief A communication method with the calling screen.
- * Any object can request something to the screen.
- */
+
 class Loopback final: public ::Utils::Singleton<Loopback>{
     friend class ::Utils::Singleton<Loopback>;
     friend class ::Utils::SingletonDestroyer<Loopback>;
     friend class ScreenInterface;
 
-    /*
-    * There can be a plethora of things that some object could want to deliver to the screen.
-    * One of these things are next screen ID.
-    */
-    std::vector<ScreenID> request_for_next_screen_;
+    std::mutex mutex_;
+
+    std::unique_ptr<ScreenInteface::LoopbackData> data_;
 
     Loopback();
     ~Loopback();
@@ -43,6 +40,6 @@ public:
 
 };
 
-}
+}*/
 
 #endif

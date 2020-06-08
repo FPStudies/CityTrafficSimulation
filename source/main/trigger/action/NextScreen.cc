@@ -14,21 +14,21 @@ std::unique_ptr<NextScreen> NextScreen::clone() const{
 }
 
 NextScreen::NextScreen(const ScreenID& ID)
-: screen_ID_(ID), loopback_(Screen::Loopback::getInstance())
+: screen_ID_(ID)
 {}
 
 NextScreen::~NextScreen() = default;
 
 NextScreen::NextScreen(const NextScreen& other)
-: screen_ID_(other.screen_ID_), loopback_(Screen::Loopback::getInstance())
+: screen_ID_(other.screen_ID_)
 {}
 
 NextScreen::NextScreen(const NextScreen&& other)
-: screen_ID_(std::move(other.screen_ID_)), loopback_(Screen::Loopback::getInstance())
+: screen_ID_(std::move(other.screen_ID_))
 {}
 
 void NextScreen::trigger(){
-    loopback_.requestForNextScreen(screen_ID_);
+    ScreenInteface::requestForNextScreen(screen_ID_);
 }
 
 bool NextScreen::equals(const Interface& other) const{

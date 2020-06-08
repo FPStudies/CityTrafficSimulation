@@ -9,7 +9,7 @@
 
 #include <memory>
 #include <map>
-#include <vector>
+#include <deque>
 #include <list>
 #include <memory>
 
@@ -58,7 +58,7 @@ class Manager{
         std::shared_ptr<::Screen::View> getView() const;
     };
 
-    using Layers = std::vector<std::unique_ptr<DrawLayer>>;
+    using Layers = std::deque<std::unique_ptr<DrawLayer>>;
 
 
     Layers to_draw_;
@@ -89,7 +89,8 @@ public:
 
     bool addFirstLayer(const std::string& layer_name, const std::shared_ptr<::Screen::View>& view);
 
-    bool addLayer(const std::string& previous_layer_name, const std::string& layer_name, const std::shared_ptr<::Screen::View>& view);
+    bool addLayerBefore(const std::string& previous_layer_name, const std::string& layer_name, const std::shared_ptr<::Screen::View>& view);
+    bool addLayerAfter(const std::string& next_layer_name, const std::string& layer_name, const std::shared_ptr<::Screen::View>& view);
 
     bool remove(const std::string& layer_name, std::shared_ptr<Drawable> entity);
 

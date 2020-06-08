@@ -1,0 +1,27 @@
+#
+#      Author: Kordowski Mateusz
+#
+
+Import('env_base')
+Import('pathTo_UI_tiles')
+Import('libraryPath')
+
+
+libraryName = 'tiles'
+
+filesCPP = [
+    Glob('*.cc')
+]
+
+env = env_base.Clone()
+
+env.Append(
+    CPPPATH = [
+        pathTo_UI_tiles
+        ]
+    )
+
+env.StaticLibrary(
+    target = libraryPath + libraryName, 
+    source = filesCPP
+    )
