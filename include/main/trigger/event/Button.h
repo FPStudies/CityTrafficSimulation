@@ -26,6 +26,8 @@ namespace Trigger::Event{
         Button* clone_impl() const override;
         Button();
 
+        bool connectWith(const std::shared_ptr<::Button::Interface>& button);
+
     public:
         /**
          * @brief Create an Trigger::Button object.
@@ -38,7 +40,7 @@ namespace Trigger::Event{
         Button(Button&& other);
         Button& operator=(Button&& other);
 
-        bool connect(const std::shared_ptr<::Button::Interface>& button);
+        static bool connect(const std::shared_ptr<::Button::Interface>& button, const std::shared_ptr<Trigger::Event::Button>& thisTrigger);
 
         void trigger(sf::RenderWindow& window, const sf::Event& event) override;
         std::unique_ptr<Button> clone() const;

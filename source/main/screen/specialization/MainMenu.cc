@@ -37,7 +37,7 @@ void MainMenu::addButtons(std::shared_ptr<sf::RenderWindow> & window){
     exit_button_->setPosition(sf::Vector2f(width_ / 2 - (buttonSize.x / 2), height_ / 2 - ((buttonSize.y))));
 
     auto trigger_button_event = Trigger::Event::Button::create();
-    trigger_button_event->connect(exit_button_);
+    Trigger::Event::Button::connect(exit_button_, trigger_button_event);
 
     std::shared_ptr<Event::Control> event_control = std::make_shared<Event::Control>();
     event_control->getMapping().addControl(Control::Mouse::ButtonLeft, trigger_button_event);
@@ -61,7 +61,7 @@ void MainMenu::addButtons(std::shared_ptr<sf::RenderWindow> & window){
     sim_button_->addTriggerOnReleased(trig_next_screen);
 
     auto trigger_button_event_next = Trigger::Event::Button::create();
-    trigger_button_event_next->connect(sim_button_);
+    Trigger::Event::Button::connect(sim_button_, trigger_button_event_next);
 
     
 
