@@ -22,7 +22,7 @@
 
 #include "../View.h"
 
-#include "../../UI/button/InterfaceDrawTrans.h"
+#include "../../UI/button/Interface.h"
 #include "../../UI/button/Buttons.h"
 
 #include "../controls/ControlMapping.h"
@@ -30,8 +30,10 @@
 #include "../trigger/event/Button.h"
 #include "../trigger/action/NextScreen.h"
 
-#include "../event/Basic.h"
 #include "../UI/tiles/Background.h"
+
+// tmp
+#include "../event/Basic.h"
 
 namespace Screen::Spec{
 
@@ -60,11 +62,15 @@ class MainMenu: public ScreenInteface{
     void addOther();
 
 public:
-    MainMenu(const sf::Vector2u& viewSize, std::shared_ptr<sf::RenderWindow> & window, const ScreenManager& nextScreen);
-    MainMenu(unsigned int width, unsigned int height, std::shared_ptr<sf::RenderWindow> & window, const ScreenManager& nextScreen);
+    MainMenu(const sf::Vector2u& viewSize, const ScreenManager& nextScreen);
+    MainMenu(unsigned int width, unsigned int height, const ScreenManager& screenManager);
     ~MainMenu();
 
     ScreenID run(std::shared_ptr<sf::RenderWindow> & window) override;
+
+    virtual void init(std::shared_ptr<sf::RenderWindow> & window) override;
+
+    virtual void release(std::shared_ptr<sf::RenderWindow> & window) override;
 
 };
 

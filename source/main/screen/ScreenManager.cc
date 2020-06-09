@@ -33,17 +33,23 @@ bool ScreenManager::remove(const std::string& name){
     return Inher::remove(name);
 }
 
+void ScreenManager::mainLoopInner(std::shared_ptr<sf::RenderWindow>& window, ScreenID& ID, ViewNodeByOne& index_by_ID){
+    while(ID.isValid()){
+        auto tmp = index_by_ID.find(ID);
+        if(tmp == index_by_ID.end())
+            throw std::runtime_error("Cannot find screen.");
+
+        (*tmp).shared_variable_->init(window);
+        ID = (*tmp).shared_variable_->run(window);
+        (*tmp).shared_variable_->release(window);
+    }
+}
+
 void ScreenManager::mainLoop(std::shared_ptr<sf::RenderWindow>& window, const ScreenInteface& start_ID){
     ScreenID output = start_ID.getID();
     auto& index_by_ID = map_.get<IndexByKeyOne>();
 
-    while(output.isValid()){
-        auto tmp = index_by_ID.find(output);
-        if(tmp == index_by_ID.end())
-            throw std::runtime_error("Cannot find screen.");
-
-        output = (*tmp).shared_variable_->run(window);
-    }
+    mainLoopInner(window, output, index_by_ID);
 }
 
 void ScreenManager::mainLoop(std::shared_ptr<sf::RenderWindow>& window, const std::string& name){
@@ -55,13 +61,7 @@ void ScreenManager::mainLoop(std::shared_ptr<sf::RenderWindow>& window, const st
 
     ScreenID output = test->key_one_;
 
-    while(output.isValid()){
-        auto tmp = index_by_ID.find(output);
-        if(tmp == index_by_ID.end())
-            throw std::runtime_error("Cannot find screen.");
-
-        output = (*tmp).shared_variable_->run(window);
-    }
+    mainLoopInner(window, output, index_by_ID);
 }
 
 #endif

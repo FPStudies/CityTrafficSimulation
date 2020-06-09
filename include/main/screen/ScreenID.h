@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_SCREEN_ID_H
-#define TRAFFIC_SIM_SCREEN_ID_H
+#ifndef TRAFFIC_SIM_MAIN_SCREEN_SCREEN_ID_H
+#define TRAFFIC_SIM_MAIN_SCREEN_SCREEN_ID_H
 
 #include <limits.h>
 #include <memory>

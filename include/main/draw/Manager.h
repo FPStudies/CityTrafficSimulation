@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_DRAW_MANAGER_H
-#define TRAFFIC_SIM_DRAW_MANAGER_H
+#ifndef TRAFFIC_SIM_MAIN_DRAW_MANAGER_H
+#define TRAFFIC_SIM_MAIN_DRAW_MANAGER_H
 
 #include <memory>
 #include <map>

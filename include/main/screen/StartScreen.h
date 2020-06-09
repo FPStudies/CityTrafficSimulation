@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_START_SCREEN_H
-#define TRAFFIC_SIM_START_SCREEN_H
+#ifndef TRAFFIC_SIM_MAIN_SCREEN_START_SCREEN_H
+#define TRAFFIC_SIM_MAIN_SCREEN_START_SCREEN_H
 
 #include <SFML/Graphics.hpp>
 #include <Box2D/Box2D.h>
@@ -48,6 +48,10 @@ public:
     ~StartScreen();
 
     ScreenID run(std::shared_ptr<sf::RenderWindow> & window) override;
+
+    virtual void init(std::shared_ptr<sf::RenderWindow> & window) override;
+
+    virtual void release(std::shared_ptr<sf::RenderWindow> & window) override;
 };
 
 

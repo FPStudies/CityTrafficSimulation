@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_GAME_SCREEN_H
-#define TRAFFIC_SIM_GAME_SCREEN_H
+#ifndef TRAFFIC_SIM_MAIN_SCREEN_GAME_SCREEN_H
+#define TRAFFIC_SIM_MAIN_SCREEN_GAME_SCREEN_H
 
 #include "ScreenInterface.h"
 

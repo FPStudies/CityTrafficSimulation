@@ -6,27 +6,41 @@
 using namespace Screen::Spec;
 
 
-MainMenu::MainMenu(unsigned int width, unsigned int height, std::shared_ptr<sf::RenderWindow> & window, const ScreenManager& screenManager)
+MainMenu::MainMenu(unsigned int width, unsigned int height, const ScreenManager& screenManager)
 : width_(width),
 height_(height),
 screen_manager_(screenManager),
 framerate(60.0f),
 texture_manager_(Draw::Texture::Manager::getInstance()),
 font_manager_(Draw::Font::Manager::getInstance()),
-loop_synch_(Synch::Loop::create(1)),
+loop_synch_(Synch::Loop::create(1))
+/*
 view_UI_(Screen::View::create("UI", sf::FloatRect(0, 0, width_, height))),
 event_manager_(std::make_unique<Event::Manager>(view_UI_)),
 draw_manager_(Draw::Manager::create("First_layer", window, view_UI_)),
 exit_button_(nullptr),
-background_(nullptr)
+sim_button_(nullptr),
+background_(nullptr)*/
 {}
 
-MainMenu::MainMenu(const sf::Vector2u& viewSize, std::shared_ptr<sf::RenderWindow> & window, const ScreenManager& screenManager)
-: MainMenu(viewSize.x, viewSize.y, window, screenManager)
+MainMenu::MainMenu(const sf::Vector2u& viewSize, const ScreenManager& screenManager)
+: MainMenu(viewSize.x, viewSize.y, screenManager)
 {}
 
 
 MainMenu::~MainMenu() = default;
+
+void MainMenu::init(std::shared_ptr<sf::RenderWindow> & window){
+    view_UI_ = Screen::View::create("UI", sf::FloatRect(0, 0, width_, height_));
+    event_manager_ = std::make_unique<Event::Manager>(view_UI_);
+    draw_manager_ = Draw::Manager::create("First_layer", window, view_UI_);
+}
+
+void MainMenu::release(std::shared_ptr<sf::RenderWindow> & window){
+    draw_manager_.reset();
+    event_manager_.reset();
+    view_UI_.reset();
+}
 
 
 void MainMenu::addButtons(std::shared_ptr<sf::RenderWindow> & window){
@@ -110,7 +124,8 @@ ScreenID MainMenu::run(std::shared_ptr<sf::RenderWindow> & window){
             std::lock_guard<std::mutex> guard(lock_loopback_data_);
             // decide what to do with these informations.
             for(auto& it : received_data_->request_for_next_screen_){
-                return it;
+                if(it == symulationID)
+                    return it;
             }
         }
         

@@ -7,7 +7,7 @@
 #ifndef TRAFFIC_SIM_MAIN_UI_BUTTON_FACTORY_H
 #define TRAFFIC_SIM_MAIN_UI_BUTTON_FACTORY_H
 
-#include "InterfaceDrawTrans.h"
+#include "Interface.h"
 
 namespace Button{
 

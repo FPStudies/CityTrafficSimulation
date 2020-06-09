@@ -12,7 +12,7 @@
 
 #include "../trigger/action/Interface.h"
 #include "../../draw/Texturing.h"
-#include "InterfaceDrawTrans.h"
+#include "Interface.h"
 
 namespace Button{
 

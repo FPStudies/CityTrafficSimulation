@@ -10,7 +10,7 @@
 
 #include <memory>
 
-#include "InterfaceDrawTrans.h"
+#include "Interface.h"
 
 namespace Trigger::Event{
     class Button;

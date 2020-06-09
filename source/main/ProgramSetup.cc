@@ -26,8 +26,8 @@ void ProgramSetup::setup(){
     font_manager_.load("resource/fonts/open-sans/OpenSans-Italic.ttf", "Normal");
 
     std::shared_ptr<StartScreen> start_screen = std::make_shared<StartScreen>();
-    std::shared_ptr<Screen::Spec::MainMenu> main_menu = std::make_shared<Screen::Spec::MainMenu>(window_->getSize(), window_, screen_manager_);
-    std::shared_ptr<Screen::Spec::Simulation> simulation = std::make_shared<Screen::Spec::Simulation>();
+    std::shared_ptr<Screen::Spec::MainMenu> main_menu = std::make_shared<Screen::Spec::MainMenu>(window_->getSize(), screen_manager_);
+    std::shared_ptr<Screen::Spec::Simulation> simulation = std::make_shared<Screen::Spec::Simulation>(window_->getSize(), screen_manager_);
 	screen_manager_.addScreen(start_screen, "StartScreen");
     screen_manager_.addScreen(main_menu, "MainMenu");
     screen_manager_.addScreen(simulation, "Simulation");
@@ -35,9 +35,7 @@ void ProgramSetup::setup(){
 }
 
 const int ProgramSetup::render(){
-
 	screen_manager_.mainLoop(window_, "MainMenu");
-
 
     return EXIT_SUCCESS;
 }

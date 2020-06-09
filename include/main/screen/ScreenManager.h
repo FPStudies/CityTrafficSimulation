@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_SCREEN_MANAGER_H
-#define TRAFFIC_SIM_SCREEN_MANAGER_H
+#ifndef TRAFFIC_SIM_MAIN_SCREEN_SCREEN_MANAGER_H
+#define TRAFFIC_SIM_MAIN_SCREEN_SCREEN_MANAGER_H
 
 /*
 Trzeba traktować tę klasę jako środek do przejścia między różnymi 
@@ -24,6 +24,8 @@ stanami programu.
 class ScreenManager: protected Utils::DoubleKeyManager<ScreenID, std::string, ScreenInteface>{
     
     using Inher = Utils::DoubleKeyManager<ScreenID, std::string, ScreenInteface>;
+
+    void mainLoopInner(std::shared_ptr<sf::RenderWindow>& window, ScreenID& ID, ViewNodeByOne& index_by_ID);
     
 public:
     

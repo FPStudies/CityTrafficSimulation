@@ -5,7 +5,6 @@
  */
 
 #include "Manager.h"
-#include <iostream>
 
 using namespace Draw;
 
@@ -160,6 +159,7 @@ Manager::~Manager(){
         }
             
     }
+    --ref_count_;
 }
 
 Manager::Manager(Manager&& other) noexcept
