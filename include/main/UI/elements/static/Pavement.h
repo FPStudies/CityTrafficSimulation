@@ -8,10 +8,15 @@
 #define TRAFFIC_SIM_PAVEMENT_H
 
 #include "StaticElement.h"
+#include "PavementConnector.h"
 
 namespace Element {
 
+    class PavementConnector;
+
     class Pavement : public StaticElement {
+
+        std::deque<std::shared_ptr<PavementConnector>> connectors_;
 
     public:
 

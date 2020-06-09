@@ -8,10 +8,15 @@
 #define TRAFFIC_SIM_ROAD_H
 
 #include "StaticElement.h"
+#include "RoadConnector.h"
 
 namespace Element {
 
+    class RoadConnector;
+
     class Road : public StaticElement {
+
+        std::deque<std::shared_ptr<RoadConnector>> connectors_;
 
     public:
 

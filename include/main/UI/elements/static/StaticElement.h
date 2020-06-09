@@ -9,6 +9,8 @@
 
 #include "../Element.h"
 
+#include <deque>
+
 namespace Element {
 
     class StaticElement : public Element {

@@ -16,6 +16,9 @@
 #include "static/PedestrianCrossing.h"
 #include "static/Road.h"
 #include "static/SpawnPoint.h"
+#include "static/RoadConnector.h"
+#include "static/PavementConnector.h"
+#include "static/TrafficLight.h"
 
 #include "dynamic/DynamicElement.h"
 #include "dynamic/Pedestrian.h"

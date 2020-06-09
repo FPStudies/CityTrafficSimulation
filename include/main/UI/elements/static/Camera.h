@@ -7,11 +7,15 @@
 #ifndef TRAFFIC_SIM_CAMERA_H
 #define TRAFFIC_SIM_CAMERA_H
 
+#include <random>
+
 #include "StaticElement.h"
 
 namespace Element {
 
     class Camera : public StaticElement {
+
+    using Noise = std::normal_distribution<double>;
 
     public:
 

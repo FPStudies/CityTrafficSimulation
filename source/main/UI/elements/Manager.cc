@@ -16,11 +16,11 @@ draw_manager_(manager)
 Element::Manager::~Manager() = default;
 
 bool Element::Manager::isVehiclePath(const ::Element::Element& element) const {
-    return (typeid(element) == typeid(::Element::Road) || typeid(element) == typeid(::Element::PedestrianCrossing));
+    return (typeid(element) == typeid(::Element::Road) || typeid(element) == typeid(::Element::PedestrianCrossing) || typeid(element) == typeid(::Element::RoadConnector));
 }
 
 bool Element::Manager::isPedestrianPath(const ::Element::Element& element) const {
-    return (typeid(element) == typeid(::Element::Pavement) || typeid(element) == typeid(::Element::PedestrianCrossing));
+    return (typeid(element) == typeid(::Element::Pavement) || typeid(element) == typeid(::Element::PedestrianCrossing) || typeid(element) == typeid(::Element::PavementConnector));
 }
 
 bool Element::Manager::addElement(const std::shared_ptr<::Element::Element> element, const std::string& name, const std::string& layerName){

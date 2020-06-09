@@ -25,6 +25,9 @@ filesCPP = [
     'static/Road.cc',
     'static/SpawnPoint.cc',
     'static/StaticElement.cc',
+    'static/RoadConnector.cc',
+    'static/PavementConnector.cc',
+    'static/TrafficLight.cc',
     'Element.cc',
     'Manager.cc'
 ]
