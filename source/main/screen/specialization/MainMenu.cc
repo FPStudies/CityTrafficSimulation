@@ -106,6 +106,8 @@ ScreenID MainMenu::run(std::shared_ptr<sf::RenderWindow> & window){
         }
 
         if(ScreenInteface::isAnyoneWaiting()){
+            // if someone miss a call then it will be registered in the next frame
+            std::lock_guard<std::mutex> guard(lock_loopback_data_);
             // decide what to do with these informations.
             for(auto& it : received_data_->request_for_next_screen_){
                 return it;
@@ -116,6 +118,7 @@ ScreenID MainMenu::run(std::shared_ptr<sf::RenderWindow> & window){
         window->clear();
         draw_manager_->drawAll();
         window->display();    
+        loop_synch_.enter();
     }
 
     return ScreenID();

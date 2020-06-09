@@ -14,6 +14,7 @@
 #include <list>
 #include <unordered_map>
 #include <functional>
+#include <mutex>
 #include "../screen/View.h"
 
 #include "Set.h"
@@ -94,6 +95,8 @@ namespace Event{
         ToChange tmp_mode_;
 
         std::shared_ptr<Screen::View> view_;
+        std::mutex mutex_modify_;
+
 
         static const int DEFAULT_HASH_MAP_SIZE = 30;
 
@@ -109,6 +112,8 @@ namespace Event{
         bool isDifferentType(const Set& event_object_set);
 
         void runChangeMode();
+
+        bool addInner(const std::string& name, Manager::State mode, const Set& event_object_set);
 
     public:
 
