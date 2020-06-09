@@ -13,6 +13,12 @@ namespace Element {
 
     class DynamicElement : public Element {
 
+    /**
+    * @brief vehicle's default velocity
+    * 
+    */
+    double velocity_;
+
     public:
 
         DynamicElement(sf::Window& window, const Texture_ptr& texture);

@@ -27,6 +27,12 @@ namespace Element {
     using Interval = std::chrono::duration<int, std::centi>;
 
     /**
+     * @brief time point type matching interval
+     * 
+     */
+    using TimePoint = std::chrono::time_point<std::chrono::steady_clock, Interval>;
+
+    /**
      * @brief current colour
      * 
      */
@@ -37,6 +43,12 @@ namespace Element {
      * 
      */
     Interval light_change_interval_;
+
+    /**
+     * @brief next colour change moment
+     * 
+     */
+    TimePoint next_change_;
 
     public:
 

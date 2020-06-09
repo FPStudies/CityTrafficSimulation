@@ -17,6 +17,8 @@ namespace Element {
 
     using Noise = std::normal_distribution<double>;
 
+    Noise noise_generator_;
+
     public:
 
         Camera(sf::Window& window, const Texture_ptr& texture);
