@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_TRIGGER_BUTTON_H
-#define TRAFFIC_SIM_TRIGGER_BUTTON_H
+#ifndef TRAFFIC_SIM_MAIN_TRIGGER_EVENT_BUTTON_H
+#define TRAFFIC_SIM_MAIN_TRIGGER_EVENT_BUTTON_H
 
 
 #include <memory>
@@ -13,16 +13,20 @@
 #include "Interface.h"
 #include "../../controls/ControlMapping.h"
 #include "../../UI/button/Interface.h"
+#include "../../UI/button/BridgeFromTriggerToInterface.h"
 
 namespace Trigger::Event{ 
 
-    class Button: public Interface, public std::enable_shared_from_this<Button>{
+    class Button: public Interface{
+        friend class BridgeToTrigger;
         std::shared_ptr<::Button::Interface> button_;
         bool was_pressed_;
 
     private:
         Button* clone_impl() const override;
         Button();
+
+        bool connectWith(const std::shared_ptr<::Button::Interface>& button);
 
     public:
         /**
@@ -36,7 +40,7 @@ namespace Trigger::Event{
         Button(Button&& other);
         Button& operator=(Button&& other);
 
-        bool connect(const std::shared_ptr<::Button::Interface>& button);
+        static bool connect(const std::shared_ptr<::Button::Interface>& button, const std::shared_ptr<Trigger::Event::Button>& thisTrigger);
 
         void trigger(sf::RenderWindow& window, const sf::Event& event) override;
         std::unique_ptr<Button> clone() const;

@@ -85,11 +85,15 @@ protected:
     typedef std::map<std::string, std::shared_ptr<StoredWrapper> > MyMap; // used for storing textures
 
     MyMap map_;
-    static std::mutex mutex_;
+    std::mutex mutex_free_;
+    std::mutex mutex_mod_map_;
 
 public:
 
-    Manager() = default;
+    Manager()
+    : map_(), mutex_free_(), mutex_mod_map_()
+    {}
+
     ~Manager() = default;
     Manager(const Manager&) = delete;
     Manager(Manager&& other)
@@ -106,11 +110,14 @@ public:
     virtual bool load(const std::string& path) = 0;
 
     State free(const std::string& name){
+        const std::lock_guard<std::mutex> lockMap(mutex_mod_map_);
+
         auto it = map_.find(name);
         if(it == map_.end())
             return State::Unknown;
 
-        // TODO needs here synchronization
+        const std::lock_guard<std::mutex> lockFree(mutex_free_);
+
         if(it->second.use_count() <= 1){
             map_.erase(it);
             return State::Removed;
@@ -144,7 +151,10 @@ public:
      * @param name - name of the searched object
      * @return std::shared_ptr<StoredWrapper>
      */
-    std::shared_ptr<StoredWrapper> get(const std::string& name) const{
+    std::shared_ptr<StoredWrapper> get(const std::string& name){
+        const std::lock_guard<std::mutex> lockMap(mutex_mod_map_);
+        const std::lock_guard<std::mutex> lockFree(mutex_free_);
+
         auto it = map_.find(name);
         if(it == map_.end())
             return std::shared_ptr<StoredWrapper>(nullptr);
@@ -152,9 +162,9 @@ public:
         return it->second;
         }
 };
-
+/*
 template<typename StoredWrapper, typename StoredObject>
-std::mutex Manager<StoredWrapper, StoredObject, true>::mutex_;
+std::mutex Manager<StoredWrapper, StoredObject, true>::mutex_instance_;*/
 
 }
 

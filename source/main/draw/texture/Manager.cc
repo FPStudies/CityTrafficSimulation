@@ -8,22 +8,13 @@
 
 using namespace Draw::Texture;
 
-Manager* Manager::instance_ = nullptr;
-
 Manager::Manager() = default;
 
 Manager::~Manager() = default;
 
-Manager& Manager::getInstance(){
-    if(!instance_){
-        const std::lock_guard<std::mutex> lock(Manager::mutex_);
-        if(!instance_)
-            instance_ = new Manager;
-    }
-    return *instance_;
-}
-
 bool Manager::load(const std::string& path, const std::string& alias, const sf::IntRect& area){
+    const std::lock_guard<std::mutex> lock(mutex_mod_map_);
+
     auto it = map_.find(alias);
     if(it != map_.end()) 
         return true;
@@ -43,6 +34,8 @@ bool Manager::load(const std::string& path){
 }
 
 bool Manager::save(const std::string& name, const sf::Texture& object){
+    const std::lock_guard<std::mutex> lock(mutex_mod_map_);
+
     auto it = map_.find(name);
     if(it != map_.end()) 
         return true;
@@ -54,6 +47,8 @@ bool Manager::save(const std::string& name, const sf::Texture& object){
 }
 
 bool Manager::save(const std::string& name, const sf::Texture& texture, const sf::IntRect& rect){
+    const std::lock_guard<std::mutex> lock(mutex_mod_map_);
+    
     auto it = map_.find(name);
     if(it != map_.end()) 
         return true;

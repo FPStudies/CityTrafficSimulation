@@ -10,12 +10,12 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
-#include "../Interface.h"
 #include "../../../trigger/action/ExitWindow.h"
 #include "../../../draw/Texturing.h"
+#include "../InterfaceDrawTrans.h"
 
 namespace Button{
-    class Exit: public ::Button::Interface, public sf::RectangleShape, public Draw::Drawable{
+    class Exit: public InterfaceDrawTrans, public sf::RectangleShape{
         using Texture = ::Draw::Texture::Texture;
         using Texture_ptr = std::shared_ptr<Texture>;
 

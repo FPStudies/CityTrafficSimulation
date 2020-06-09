@@ -9,13 +9,13 @@
 
 #include "DynamicElement.h"
 
-namespace Elements {
+namespace Element {
 
     class Pedestrian : public DynamicElement {
 
     public:
 
-        Pedestrian(sf::Window& window, const Elements::Texture_ptr& texture);
+        Pedestrian(sf::Window& window, const Texture_ptr& texture);
         ~Pedestrian();
 
     };

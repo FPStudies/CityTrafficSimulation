@@ -33,7 +33,7 @@ Manager::SetInner::SetInner(const std::shared_ptr<Interface>& event, Manager::St
 {}
 
 Manager::Manager(const std::shared_ptr<Screen::View>& view) 
-: events_sorted_(false), events_map_names_(), events_sorted_list_(), tmp_mode_(), view_(view)
+: events_sorted_(false), events_map_names_(), events_sorted_list_(), tmp_mode_(), view_(view), mutex_modify_()
 {}
 
 Manager::~Manager() = default;
@@ -104,6 +104,7 @@ void Manager::sortListBinaryVal(){
 
 
 bool Manager::changeMode(const std::string& name, Manager::State mode){
+    std::lock_guard<std::mutex> guard(mutex_modify_);
     auto val = events_map_names_.find(name);
     if(val == events_map_names_.end()){
         // it could be stored at other map
@@ -136,7 +137,7 @@ bool Manager::isDifferentType(const Set& event_object_set){
     return false;
 }
 
-bool Manager::add(const std::string& name, Manager::State mode, const Set& event_object_set){
+bool Manager::addInner(const std::string& name, Manager::State mode, const Set& event_object_set){
     if(isDifferentType(event_object_set)) 
         return true;
 
@@ -155,12 +156,17 @@ bool Manager::add(const std::string& name, Manager::State mode, const Set& event
     return false;
 }
 
+bool Manager::add(const std::string& name, Manager::State mode, const Set& event_object_set){
+    std::lock_guard<std::mutex> guard(mutex_modify_);
+    return this->addInner(name, mode, event_object_set);
+}
+
 bool Manager::addNew(const std::string& name, Manager::State mode, const Set& event_object_set){
+    std::lock_guard<std::mutex> guard(mutex_modify_);
     if(ifElementMapExist(name))
         return true;
 
-    this->add(name, mode, event_object_set);
-    return false;
+    return this->addInner(name, mode, event_object_set);
 }
 
 void Manager::addNewEventInterface(const std::string& name, Manager::State mode, const std::shared_ptr<Interface>& event_object){
@@ -179,6 +185,7 @@ void Manager::addNewEventInterface(const std::string& name, Manager::State mode,
 }
 
 bool Manager::add(const std::string& name, Manager::State mode, const std::shared_ptr<Interface>& event_object){
+    std::lock_guard<std::mutex> guard(mutex_modify_);
     Map::iterator it;
     if(ifElementMapExist(name, it)){
         if(it->second->getEventSet().getAllConst().front()->getType() != event_object->getType())
@@ -195,6 +202,7 @@ bool Manager::add(const std::string& name, Manager::State mode, const std::share
 }
 
 bool Manager::addNew(const std::string& name, Manager::State mode, const std::shared_ptr<Interface>& event_object){
+    std::lock_guard<std::mutex> guard(mutex_modify_);
     Map::iterator it;
     if(ifElementMapExist(name, it))
         return true;
@@ -218,6 +226,7 @@ bool Manager::ifElementMapExist(const std::string& name){
 }
 
 bool Manager::remove(const std::string& name){
+    std::lock_guard<std::mutex> guard(mutex_modify_);
     Map::iterator it;
     if(!ifElementMapExist(name, it))
         return true;
@@ -234,6 +243,7 @@ bool Manager::remove(const std::string& name){
 }
 
 bool Manager::remove(const std::string& name, const std::shared_ptr<Interface>& event_object){
+    std::lock_guard<std::mutex> guard(mutex_modify_);
     Map::iterator it;
     if(!ifElementMapExist(name, it))
         return true;
@@ -255,6 +265,7 @@ bool Manager::remove(const std::string& name, const std::shared_ptr<Interface>& 
 }
 
 void Manager::checkEvents(sf::RenderWindow& window, sf::Event& event){
+    std::lock_guard<std::mutex> guard(mutex_modify_);
     if(!events_sorted_) {
         if(!tmp_mode_.empty())
             runChangeMode();

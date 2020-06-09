@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_SET_TEMPLATE_HPP
-#define TRAFFIC_SIM_SET_TEMPLATE_HPP
+#ifndef TRAFFIC_SIM_MAIN_UTILS_SET_TEMPLATE_HPP
+#define TRAFFIC_SIM_MAIN_UTILS_SET_TEMPLATE_HPP
 
 #include <list>
 #include <memory>

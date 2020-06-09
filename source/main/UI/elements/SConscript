@@ -24,7 +24,9 @@ filesCPP = [
     'static/PedestrianCrossing.cc',
     'static/Road.cc',
     'static/SpawnPoint.cc',
-    'static/StaticElement.cc'
+    'static/StaticElement.cc',
+    'Element.cc',
+    'Manager.cc'
 ]
 
 env.Append(

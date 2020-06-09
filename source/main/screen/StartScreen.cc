@@ -93,7 +93,7 @@ void StartScreen::addExitButton(std::shared_ptr<Button::Exit>& exit_button, std:
     // shared_ptr, because the button could have a need to change something in his trigger
     auto trigger_button_event = Trigger::Event::Button::create();
     // connect them both
-    trigger_button_event->connect(exit_button);
+    Trigger::Event::Button::connect(exit_button, trigger_button_event);
 
 
     // create control mapping
@@ -130,7 +130,7 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     setTextureManagers(window);
     setEventManager();
     std::shared_ptr<Button::Exit> exit_button;
-    std::shared_ptr<Elements::Road> test_road;
+    std::shared_ptr<Element::Road> test_road;
     addExitButton(exit_button, window);
     addTextToButton(exit_button);
 

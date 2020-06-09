@@ -1,6 +1,6 @@
 
 
-#include "Exit.h"
+#include "specialization/Exit.h"
 
 using namespace Button;
 
@@ -12,6 +12,7 @@ Exit::Exit(sf::Window& window, const Texture_ptr& texture)
     states_(&texture->getResource_const()), 
     can_be_drawn_(true)
 {
+    this->setTexture(&texture->getResource());
     text_.setString("Exit");
     text_.setCharacterSize(34);
     text_.setFillColor(sf::Color::Red);

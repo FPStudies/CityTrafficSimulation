@@ -6,6 +6,6 @@
 
 #include "static/Road.h"
 
-using namespace Elements;
+using namespace Element;
 
 Road::Road(sf::Window& window, const Texture_ptr& texture) : StaticElement(window, texture) {};
