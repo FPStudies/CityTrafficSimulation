@@ -12,6 +12,7 @@ Import('binFolder')
 Import('sys')
 
 pathToH = '#include/'
+pathToUtils = '#include/main/utility/'
 
 SFMLLibraries = [
     'sfml-graphics', 
@@ -28,7 +29,9 @@ programLibraries = [
     'collision',
     'controls',
     'Buttons',
-    'Triggers'
+    'Triggers',
+    'synch',
+    'tiles'
 ]
 
 externalLibraries = [
@@ -45,6 +48,7 @@ else:
     ]
 
 HFilesFolder = [
+
 ]
 
 filesCPP = [
@@ -63,7 +67,8 @@ env.Append(
         'source/BD_FACADE', 
         'source/graphic_library_facade', 
         '#source/main',
-        pathToH
+        pathToH,
+        pathToUtils
         ],
 
         LIBS = programLibraries + SFMLLibraries + externalLibraries,

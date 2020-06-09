@@ -9,22 +9,34 @@
 
 #include "ProgramSetup.h"
 
-using namespace sf;
 
 ProgramSetup::ProgramSetup(const unsigned int& width, const unsigned int& height, const char* name, const unsigned int& mode_bits_per_pixel)
-: window_(std::make_shared<sf::RenderWindow>(sf::VideoMode(width, height, mode_bits_per_pixel), name))
+: window_(std::make_shared<sf::RenderWindow>(sf::VideoMode(width, height, mode_bits_per_pixel), name)),
+texture_manager_(Draw::Texture::Manager::getInstance()),
+font_manager_(Draw::Font::Manager::getInstance()),
+loop_synch_(Synch::Loop::create(1))
 {}
 
-ProgramSetup::~ProgramSetup(){}
+ProgramSetup::~ProgramSetup() = default;
+
+void ProgramSetup::setup(){
+    texture_manager_.load("resource/texture/blue_light.jpg", "blue_light");
+    texture_manager_.load("resource/texture/highway_road.jpg", "highway_road");
+    texture_manager_.load("resource/texture/grey.jpg", "grey");
+    font_manager_.load("resource/fonts/open-sans/OpenSans-Italic.ttf", "Normal");
+
+    std::shared_ptr<StartScreen> start_screen = std::make_shared<StartScreen>();
+    std::shared_ptr<Screen::Spec::MainMenu> main_menu = std::make_shared<Screen::Spec::MainMenu>(window_->getSize(), window_, screen_manager_);
+    std::shared_ptr<Screen::Spec::Simulation> simulation = std::make_shared<Screen::Spec::Simulation>();
+	screen_manager_.addScreen(start_screen, "StartScreen");
+    screen_manager_.addScreen(main_menu, "MainMenu");
+    screen_manager_.addScreen(simulation, "Simulation");
+
+}
 
 const int ProgramSetup::render(){
 
-    ScreenManager screen_manager;
-	std::shared_ptr<StartScreen> start_screen = std::make_shared<StartScreen>();
-	screen_manager.addScreen(start_screen, "startScreen");
-    sf::Window tmp;
-
-	screen_manager.mainLoop(window_, *start_screen);
+	screen_manager_.mainLoop(window_, "MainMenu");
 
 
     return EXIT_SUCCESS;

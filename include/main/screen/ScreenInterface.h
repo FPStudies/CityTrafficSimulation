@@ -8,11 +8,32 @@
 #define TRAFFIC_SIM_SCREEN_INTERFACE_H
 
 #include <SFML/Graphics.hpp>
+#include <vector>
+#include <mutex>
 
 #include "ScreenID.h"
+#include "../utility/Singleton.hpp"
 
+
+// TODO correct name to ScreenInterface
 class ScreenInteface{
+
     ScreenID ID_;
+
+protected:
+    static std::mutex lock_loopback_data_;
+
+    struct LoopbackData{
+        std::vector<ScreenID> request_for_next_screen_;
+    };
+
+    static std::unique_ptr<LoopbackData> received_data_;
+
+    void resetLoopbackData();
+
+    bool isAnyoneWaiting();
+
+    void clearAll();
 
 public:
     /**
@@ -26,15 +47,13 @@ public:
      */
     virtual ScreenID run(std::shared_ptr<sf::RenderWindow> & window) = 0;    // it wll return the next screen that should be used
 
-    ScreenInteface()
-    : ID_(ScreenID::newID())
-    {}
+    ScreenInteface();
 
-    virtual ~ScreenInteface() {}
+    virtual ~ScreenInteface();
 
-    ScreenID getID() const{
-        return ID_;
-    }
+    ScreenID getID() const;
+
+    static void requestForNextScreen(const ScreenID& ID);
 };
 
 

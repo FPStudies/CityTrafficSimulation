@@ -43,6 +43,7 @@ pathTo_drawing = '#include/main/draw/'
 pathTo_trigger = "#include/main/trigger/"
 pathTo_UI_button = "#include/main/UI/button/"
 pathTo_controls = '#include/main/controls/'
+pathTo_UI_tiles = '#include/main/UI/tiles'
 
 
 
@@ -239,6 +240,14 @@ SConscript(
     'source/main/UI/elements/SConscript', 
     exports=['env_base', 'binFolder', 'pathToUtility', 'libraryPath'], 
     variant_dir = binFolder + 'main/elements', 
+    duplicate=0
+    )
+
+# UI / tiles
+SConscript(
+    'source/main/UI/tiles/SConscript', 
+    exports=['env_base', 'pathTo_UI_tiles', 'libraryPath'], 
+    variant_dir = binFolder + 'main/tiles', 
     duplicate=0
     )
 

@@ -14,7 +14,7 @@
 namespace Synch{
 
 class Loop final: public Utils::SingletonWithCreation<Loop, unsigned int>{
-    friend class ::Utils::Singleton<Loop>;
+    friend class ::Utils::SingletonWithCreation<Loop, unsigned int>;
     friend class ::Utils::SingletonDestroyer<Loop>;
 
     unsigned int number_of_threads_counted_;
