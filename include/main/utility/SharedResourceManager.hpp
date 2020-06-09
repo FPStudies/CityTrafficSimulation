@@ -88,8 +88,6 @@ protected:
     std::mutex mutex_free_;
     std::mutex mutex_mod_map_;
 
-    //static std::mutex mutex_instance_;
-
 public:
 
     Manager()
