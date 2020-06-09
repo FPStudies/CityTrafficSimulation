@@ -11,13 +11,14 @@
 #include "../../include/main/screen/ScreenManager.h"
 #include "../../include/main/screen/StartScreen.h"
 
-#include "../../include/main/graph/Graph.h"
+#include "../../include/main/graph/Proxy.hpp"
 
 using namespace std;
 
 int main(int argc, char** argv, char** envp) {
 
 	//graph test <begin>
+	CityGraph::Proxy<Draw::DrawID> proxy;
 	CityGraph::Graph graph;
 	CityGraph::VertexInfo vertex0 = {0, "a", 1, 1}, vertex1 = {1, "b", 2, 1}, vertex2 = {2, "c", 1, 2}, vertex3 = {3, "d", 2, 2};
 	CityGraph::VertexDescriptor verd0, verd1, verd2, verd3;

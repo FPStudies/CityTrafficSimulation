@@ -21,8 +21,8 @@ VertexDescriptor Graph::addVertex(VertexInfo vertex_info) {
 }
 
 void Graph::removeVertex(VertexDescriptor vertex) {
-  clear_vertex(vertex);
-  remove_vertex(vertex);
+  clear_vertex(vertex, city_graph_);
+  remove_vertex(vertex, city_graph_);
 }
 
 const VertexInfo Graph::getVertex(VertexDescriptor vertex) const {
@@ -64,8 +64,8 @@ std::pair<EdgeDescriptor, EdgeDescriptor> Graph::addEdge(Edge edge, Cost cost) {
 }
 
 void Graph::removeEdge(Edge edge) {
-  remove_edge(edge.first, edge.second);
-  remove_edge(edge.second, edge.first);
+  remove_edge(edge.first, edge.second, city_graph_);
+  remove_edge(edge.second, edge.first, city_graph_);
 }
 
 
@@ -97,12 +97,12 @@ std::list<CityGraph::VertexDescriptor> Graph::findShortestPath (VertexDescriptor
     
     try {
     // call astar named parameter interface
-    astar_search_tree (city_graph_, start, distance_heuristic<CityGraphList, Cost, LocationMap> (locations, goal),
+    astar_search_tree (city_graph_, start, DistanceHeuristic<CityGraphList, Cost, LocationMap> (locations, goal),
       weight_map(get(&EdgeInfo::cost_, city_graph_)).
       vertex_index_map(get(&VertexInfo::id_, city_graph_)).
       predecessor_map(make_iterator_property_map(predecessor.begin(), get(&VertexInfo::id_, city_graph_))).
       distance_map(make_iterator_property_map(distance.begin(), get(&VertexInfo::id_, city_graph_))).
-      visitor(astar_goal_visitor<VertexDescriptor>(goal)));
+      visitor(AstarGoalVisitor<VertexDescriptor>(goal)));
     } 
   catch(found_goal fg) { // found a path to the goal
     for(VertexDescriptor v = goal;; v = predecessor[v]) {
@@ -112,8 +112,6 @@ std::list<CityGraph::VertexDescriptor> Graph::findShortestPath (VertexDescriptor
     }
     return shortest_path;
   }
-  
-  //TODO: throw error
-  //no path found
+
   return shortest_path;
 }

@@ -142,6 +142,26 @@ public:
         index_by_key_two.erase(found);
         return false;
     }
+
+    const SharedVariable& getVariable(const KeyOne& one){
+        ViewNodeByOne& index_by_key_one_id = map_.template get<IndexByKeyOne>();
+        IterOne found = index_by_key_one_id.template find(one);
+
+        if(found == index_by_key_one_id.end())
+            throw std::out_of_range("Element not found.");
+        
+        return *(found->shared_variable_);
+    }
+
+    const SharedVariable& getVariable(const KeyTwo& two){
+        ViewNodeByTwo& index_by_key_two = map_.template get<IndexByKeyTwo>();
+        IterTwo found = index_by_key_two.template find(two);
+
+        if(found == index_by_key_two.end())
+            throw std::out_of_range("Element not found.");
+        
+        return *(found->shared_variable_);
+    }
 };
 
 }

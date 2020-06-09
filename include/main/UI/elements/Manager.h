@@ -1,13 +1,11 @@
 /*
  * Manager.h
  *
- *      Author: Kordowski Mateusz
+ *      Author: Kordowski Mateusz, Przybysz Filip
  */
 
 #ifndef TRAFFIC_SIM_MAIN_UI_ELEMENTS_MANAGER_H
 #define TRAFFIC_SIM_MAIN_UI_ELEMENTS_MANAGER_H
-
-#include <map>
 
 #include <boost/multi_index_container.hpp>
 #include <boost/multi_index/ordered_index.hpp>
@@ -23,12 +21,17 @@ namespace Element {
 
 class Manager: protected Utils::DoubleKeyManager<Draw::DrawID, std::string, ::Element::Element>{
     using Inher = Utils::DoubleKeyManager<Draw::DrawID, std::string, ::Element::Element>;
+    using ElementID = Draw::DrawID;
 
     Draw::Manager& draw_manager_;
 
-    CityGraph::Proxy<Draw::DrawID> vehicles_graph_;
+    CityGraph::Proxy<ElementID> vehicles_graph_;
 
-    CityGraph::Proxy<Draw::DrawID> pedestrians_graph_;
+    CityGraph::Proxy<ElementID> pedestrians_graph_;
+
+    bool isVehiclePath(const ::Element::Element& element) const;
+
+    bool isPedestrianPath(const ::Element::Element& element) const;
     
 public:
     
@@ -46,9 +49,15 @@ public:
     bool remove(const Draw::DrawID& ID);
     bool remove(const std::string& name);
 
-    //connect
+    void connect(const Draw::DrawID& ID_A, const Draw::DrawID& ID_B, CityGraph::Cost cost_A_B, CityGraph::Cost cost_B_A);
+    void connect(const Draw::DrawID& ID_A, const Draw::DrawID& ID_B, CityGraph::Cost cost);
+    void connect(const std::string& name_A, const std::string& name_B, CityGraph::Cost cost_A_B, CityGraph::Cost cost_B_A);
+    void connect(const std::string& name_A, const std::string& name_B, CityGraph::Cost cost);
 
-    //findPath(elem_1, elem_2)
+    void disconnect(const Draw::DrawID& ID_A, const Draw::DrawID& ID_B);
+    void disconnect(const std::string& name_A, const std::string& name_B);
+
+    std::list<ElementID> findPath(ElementID start, ElementID goal);
 };
 
 };

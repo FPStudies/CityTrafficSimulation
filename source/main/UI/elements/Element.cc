@@ -7,8 +7,7 @@
 #include "Element.h"
 
 Element::Element::Element(sf::Window& window, const Texture_ptr& texture)
-:   name_(""),
-    texture_(texture), 
+:   texture_(texture), 
     states_(&texture->getResource_const()),
     can_be_drawn_(true)
 {}
