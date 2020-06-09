@@ -4,16 +4,16 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_SCREEN_INTERFACE_H
-#define TRAFFIC_SIM_SCREEN_INTERFACE_H
+#ifndef TRAFFIC_SIM_MAIN_SCREEN_SCREEN_INTERFACE_H
+#define TRAFFIC_SIM_MAIN_SCREEN_SCREEN_INTERFACE_H
 
 #include <SFML/Graphics.hpp>
 #include <vector>
 #include <mutex>
+#include <memory>
 
 #include "ScreenID.h"
 #include "../utility/Singleton.hpp"
-
 
 // TODO correct name to ScreenInterface
 class ScreenInteface{
@@ -36,6 +36,8 @@ protected:
     void clearAll();
 
 public:
+
+
     /**
      * @brief It is used to implement the rendering loops or other kind of tasks. Main channel to implement the program actions.
      * @details Main program will nearly always be in the state of screen. The loop will run this method
@@ -49,12 +51,15 @@ public:
 
     ScreenInteface();
 
+    virtual void init(std::shared_ptr<sf::RenderWindow> & window) = 0;
+
+    virtual void release(std::shared_ptr<sf::RenderWindow> & window) = 0;
+
     virtual ~ScreenInteface();
 
     ScreenID getID() const;
 
     static void requestForNextScreen(const ScreenID& ID);
 };
-
 
 #endif

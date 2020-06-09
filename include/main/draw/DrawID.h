@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_DRAWING_ID_H
-#define TRAFFIC_SIM_DRAWING_ID_H
+#ifndef TRAFFIC_SIM_MAIN_DRAW_DRAW_ID_H
+#define TRAFFIC_SIM_MAIN_DRAW_DRAW_ID_H
 
 #include "../utility/ID.hpp"
 

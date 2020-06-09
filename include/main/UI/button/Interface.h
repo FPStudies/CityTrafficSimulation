@@ -57,6 +57,14 @@ namespace Button{
         virtual void actionPressedButton() = 0;
         virtual void actionReleasedButton() = 0;
     };
+
+    class InterfaceDraw: public Interface, public Draw::Drawable{
+        
+    };
+
+    class InterfaceDrawTrans: public InterfaceDraw, public sf::Transformable{
+        
+    };
 }
 
 

@@ -5,7 +5,6 @@
  */
 
 #include <iostream>
-#include "../../include/GraphicLibraryFacade.h"
 #include "../../include/ProgramSetup.h"
 
 #include "../../include/main/screen/ScreenManager.h"

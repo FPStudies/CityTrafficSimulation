@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_COORDINATE_SYSTEM_H
-#define TRAFFIC_SIM_COORDINATE_SYSTEM_H
+#ifndef TRAFFIC_SIM_MAIN_SCREEN_COORDINATE_SYSTEM_H
+#define TRAFFIC_SIM_MAIN_SCREEN_COORDINATE_SYSTEM_H
 
 #include <string>
 #include <map>

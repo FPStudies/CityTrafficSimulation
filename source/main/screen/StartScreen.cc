@@ -21,6 +21,14 @@ draw_manager_()
 
 StartScreen::~StartScreen() = default;
 
+void StartScreen::init(std::shared_ptr<sf::RenderWindow> & window){
+    return;
+}
+
+void StartScreen::release(std::shared_ptr<sf::RenderWindow> & window){
+    return;
+}
+
 static const std::string LAYER_NAME = "First_layer";
 
 void StartScreen::setBox2D(){

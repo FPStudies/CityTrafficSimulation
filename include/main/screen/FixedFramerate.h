@@ -4,8 +4,8 @@
  *      Author: Kordowski Mateusz
  */
 
-#ifndef TRAFFIC_SIM_FIXED_FRAMERATE_H
-#define TRAFFIC_SIM_FIXED_FRAMERATE_H
+#ifndef TRAFFIC_SIM_MAIN_SCREEN_FIXED_FRAMERATE_H
+#define TRAFFIC_SIM_MAIN_SCREEN_FIXED_FRAMERATE_H
 
 #include <utility>
 #include <chrono>

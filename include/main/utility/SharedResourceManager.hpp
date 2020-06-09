@@ -82,7 +82,7 @@ class Manager {};
 template<typename StoredWrapper, typename StoredObject>
 class Manager<StoredWrapper, StoredObject, true>{
 protected:
-    typedef std::map<std::string, std::shared_ptr<StoredWrapper> > MyMap; // used for storing textures
+    typedef std::map<std::string, std::shared_ptr<StoredWrapper> > MyMap;
 
     MyMap map_;
     std::mutex mutex_free_;
