@@ -21,7 +21,10 @@
 #include "main/draw/Texturing.h"
 #include "main/synchronization/Loop.h"
 
-
+/**
+ * @brief A class used to create screen and other common objects used in this project.
+ * 
+ */
 class ProgramSetup{
     std::shared_ptr<sf::RenderWindow> window_;
 
