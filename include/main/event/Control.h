@@ -14,6 +14,12 @@
 
 namespace Event{
 
+    /**
+     * @brief Event used to trigger an action that was binded to the mouse or keyboard.
+     * It stores the key mapping of the keyboard and mouse.
+     * It also works when mouse move event was generated.
+     * 
+     */
     class Control: public Interface{
         std::unique_ptr<::Control::Mapping> ctrl_mapping_;
 
