@@ -10,7 +10,7 @@
 #include "StaticElement.h"
 #include <chrono>
 
-namespace Element {
+namespace Elements {
 
     class TrafficLight : public StaticElement {
 

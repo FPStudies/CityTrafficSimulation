@@ -9,7 +9,7 @@
 
 #include "DynamicElement.h"
 
-namespace Element {
+namespace Elements {
 
     class Pedestrian : public DynamicElement {
 

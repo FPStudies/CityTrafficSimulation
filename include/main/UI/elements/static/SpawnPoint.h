@@ -9,7 +9,7 @@
 
 #include "StaticElement.h"
 
-namespace Element {
+namespace Elements {
 
     class SpawnPoint : public StaticElement {
 

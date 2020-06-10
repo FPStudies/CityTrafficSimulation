@@ -11,7 +11,7 @@
 #include "../../draw/Drawable.h"
 #include "../../draw/Texturing.h"
 
-namespace Element {
+namespace Elements {
 
     using Texture = ::Draw::Texture::Texture;
     using Texture_ptr = std::shared_ptr<Texture>;

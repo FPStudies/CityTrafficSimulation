@@ -9,7 +9,7 @@
 
 #include "../Element.h"
 
-namespace Element {
+namespace Elements {
 
     class DynamicElement : public Element {
 

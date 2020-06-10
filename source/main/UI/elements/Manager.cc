@@ -6,24 +6,24 @@
 
 #include "Manager.h"
 
-using namespace Element;
+using namespace Elements;
 
-Element::Manager::Manager(Draw::Manager& manager)
-: Utils::DoubleKeyManager<Draw::DrawID, std::string, ::Element::Element>(),
+Elements::Manager::Manager(Draw::Manager& manager)
+: Utils::DoubleKeyManager<Draw::DrawID, std::string, ::Elements::Element>(),
 draw_manager_(manager)
 {}
 
-Element::Manager::~Manager() = default;
+Elements::Manager::~Manager() = default;
 
-bool Element::Manager::isVehiclePath(const ::Element::Element& element) const {
-    return (typeid(element) == typeid(::Element::Road) || typeid(element) == typeid(::Element::PedestrianCrossing) || typeid(element) == typeid(::Element::RoadConnector));
+bool Elements::Manager::isVehiclePath(const ::Elements::Element& element) const {
+    return (typeid(element) == typeid(::Elements::Road) || typeid(element) == typeid(::Elements::PedestrianCrossing) || typeid(element) == typeid(::Elements::RoadConnector));
 }
 
-bool Element::Manager::isPedestrianPath(const ::Element::Element& element) const {
-    return (typeid(element) == typeid(::Element::Pavement) || typeid(element) == typeid(::Element::PedestrianCrossing) || typeid(element) == typeid(::Element::PavementConnector));
+bool Elements::Manager::isPedestrianPath(const ::Elements::Element& element) const {
+    return (typeid(element) == typeid(::Elements::Pavement) || typeid(element) == typeid(::Elements::PedestrianCrossing) || typeid(element) == typeid(::Elements::PavementConnector));
 }
 
-bool Element::Manager::addElement(const std::shared_ptr<::Element::Element> element, const std::string& name, const std::string& layerName){
+bool Elements::Manager::addElement(const std::shared_ptr<::Elements::Element> element, const std::string& name, const std::string& layerName){
     bool ret =  Inher::add(element, element->getID(), name);
     if(ret)
         return true;
@@ -46,15 +46,15 @@ bool Element::Manager::addElement(const std::shared_ptr<::Element::Element> elem
     return false;
 }
 
-Draw::DrawID Element::Manager::getElementID(const std::string& name) const{
+Draw::DrawID Elements::Manager::getElementID(const std::string& name) const{
     return Inher::getKeyOne(name);
 }
 
-std::string Element::Manager::getElementName(const Draw::DrawID& ID) const{
+std::string Elements::Manager::getElementName(const Draw::DrawID& ID) const{
     return Inher::getKeyTwo(ID);
 }
 
-bool Element::Manager::remove(const Draw::DrawID& ID){
+bool Elements::Manager::remove(const Draw::DrawID& ID){
     if (isVehiclePath( Inher::getVariable(ID) )) {
         vehicles_graph_.removeVertex(ID);
     }
@@ -65,7 +65,7 @@ bool Element::Manager::remove(const Draw::DrawID& ID){
     return Inher::remove(ID);
 }
 
-bool Element::Manager::remove(const std::string& name){
+bool Elements::Manager::remove(const std::string& name){
     if (isVehiclePath( Inher::getVariable(name) )) {
         vehicles_graph_.removeVertex( Inher::getKeyOne(name) );
     }
@@ -76,7 +76,7 @@ bool Element::Manager::remove(const std::string& name){
     return Inher::remove(name);
 }
 
-void Element::Manager::connect(const Draw::DrawID& ID_A, const Draw::DrawID& ID_B, CityGraph::Cost cost_A_B, CityGraph::Cost cost_B_A) {
+void Elements::Manager::connect(const Draw::DrawID& ID_A, const Draw::DrawID& ID_B, CityGraph::Cost cost_A_B, CityGraph::Cost cost_B_A) {
     if (isVehiclePath( Inher::getVariable(ID_A)) && isVehiclePath( Inher::getVariable(ID_B)) ) {
         vehicles_graph_.connect( std::make_pair(ID_A, ID_B), cost_A_B, cost_B_A);
     }
@@ -85,7 +85,7 @@ void Element::Manager::connect(const Draw::DrawID& ID_A, const Draw::DrawID& ID_
     }
 }
 
-void Element::Manager::connect(const Draw::DrawID& ID_A, const Draw::DrawID& ID_B, CityGraph::Cost cost) {
+void Elements::Manager::connect(const Draw::DrawID& ID_A, const Draw::DrawID& ID_B, CityGraph::Cost cost) {
     if (isVehiclePath( Inher::getVariable(ID_A)) && isVehiclePath( Inher::getVariable(ID_B)) ) {
         vehicles_graph_.connect( std::make_pair(ID_A, ID_B), cost);
     }
@@ -94,7 +94,7 @@ void Element::Manager::connect(const Draw::DrawID& ID_A, const Draw::DrawID& ID_
     }
 }
 
-void Element::Manager::connect(const std::string& name_A, const std::string& name_B, CityGraph::Cost cost_A_B, CityGraph::Cost cost_B_A) {
+void Elements::Manager::connect(const std::string& name_A, const std::string& name_B, CityGraph::Cost cost_A_B, CityGraph::Cost cost_B_A) {
     if (isVehiclePath( Inher::getVariable(name_A)) && isVehiclePath( Inher::getVariable(name_B)) ) {
         vehicles_graph_.connect( std::make_pair( Inher::getKeyOne(name_A), Inher::getKeyOne(name_B) ), cost_A_B, cost_B_A);
     }
@@ -103,7 +103,7 @@ void Element::Manager::connect(const std::string& name_A, const std::string& nam
     }
 }
 
-void Element::Manager::connect(const std::string& name_A, const std::string& name_B, CityGraph::Cost cost) {
+void Elements::Manager::connect(const std::string& name_A, const std::string& name_B, CityGraph::Cost cost) {
     if (isVehiclePath( Inher::getVariable(name_A)) && isVehiclePath( Inher::getVariable(name_B)) ) {
         vehicles_graph_.connect( std::make_pair( Inher::getKeyOne(name_A), Inher::getKeyOne(name_B) ), cost);
     }
@@ -112,7 +112,7 @@ void Element::Manager::connect(const std::string& name_A, const std::string& nam
     }
 }
 
-void Element::Manager::disconnect(const Draw::DrawID& ID_A, const Draw::DrawID& ID_B) {
+void Elements::Manager::disconnect(const Draw::DrawID& ID_A, const Draw::DrawID& ID_B) {
     if (isVehiclePath( Inher::getVariable(ID_A)) && isVehiclePath( Inher::getVariable(ID_B)) ) {
         vehicles_graph_.disconnect( std::make_pair(ID_A, ID_B));
     }
@@ -121,7 +121,7 @@ void Element::Manager::disconnect(const Draw::DrawID& ID_A, const Draw::DrawID& 
     }
 }
     
-void Element::Manager::disconnect(const std::string& name_A, const std::string& name_B) {
+void Elements::Manager::disconnect(const std::string& name_A, const std::string& name_B) {
     if (isVehiclePath( Inher::getVariable(name_A)) && isVehiclePath( Inher::getVariable(name_B)) ) {
         vehicles_graph_.disconnect( std::make_pair( Inher::getKeyOne(name_A), Inher::getKeyOne(name_B) ));
     }

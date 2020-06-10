@@ -17,10 +17,10 @@
 #include "../../graph/Proxy.hpp"
 
 
-namespace Element {
+namespace Elements {
 
-class Manager: protected Utils::DoubleKeyManager<Draw::DrawID, std::string, ::Element::Element>{
-    using Inher = Utils::DoubleKeyManager<Draw::DrawID, std::string, ::Element::Element>;
+class Manager: protected Utils::DoubleKeyManager<Draw::DrawID, std::string, ::Elements::Element>{
+    using Inher = Utils::DoubleKeyManager<Draw::DrawID, std::string, ::Elements::Element>;
     using ElementID = Draw::DrawID;
 
     Draw::Manager& draw_manager_;
@@ -29,9 +29,9 @@ class Manager: protected Utils::DoubleKeyManager<Draw::DrawID, std::string, ::El
 
     CityGraph::Proxy<ElementID> pedestrians_graph_;
 
-    bool isVehiclePath(const ::Element::Element& element) const;
+    bool isVehiclePath(const ::Elements::Element& element) const;
 
-    bool isPedestrianPath(const ::Element::Element& element) const;
+    bool isPedestrianPath(const ::Elements::Element& element) const;
     
 public:
     
@@ -41,7 +41,7 @@ public:
     Manager& operator=(const Manager&) = delete;
 
 
-    bool addElement(const std::shared_ptr<::Element::Element> screen, const std::string& name, const std::string& layerName);
+    bool addElement(const std::shared_ptr<::Elements::Element> screen, const std::string& name, const std::string& layerName);
 
     Draw::DrawID getElementID(const std::string& name) const;
     std::string getElementName(const Draw::DrawID& ID) const;

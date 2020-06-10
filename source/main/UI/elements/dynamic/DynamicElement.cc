@@ -6,6 +6,6 @@
 
 #include "dynamic/DynamicElement.h"
 
-using namespace Element;
+using namespace Elements;
 
 DynamicElement::DynamicElement(sf::Window& window, const Texture_ptr& texture) : Element(window, texture) {};

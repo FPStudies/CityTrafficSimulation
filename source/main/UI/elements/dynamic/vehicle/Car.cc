@@ -6,6 +6,6 @@
 
 #include "dynamic/vehicle/Car.h"
 
-using namespace Element::Vehicle;
+using namespace Elements::Vehicle;
 
 Car::Car(sf::Window& window, const Texture_ptr& texture) : Vehicle(window, texture) {};

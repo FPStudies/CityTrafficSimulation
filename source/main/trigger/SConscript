@@ -52,5 +52,5 @@ env.Append(
 
 env.StaticLibrary(
     target = libraryPath + libraryName, 
-    source = filesCPP + filesHControls + filesH_UI
+    source = filesCPP
     )

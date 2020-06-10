@@ -73,8 +73,8 @@ elif sys.platform.startswith('win'):
 
     env_base = Environment(
         CC = 'CL.exe',
-        CCFLAGS = '-O2 -EHsc -MD',
-        SCONS_CXX_STANDARD='c++11',
+        CCFLAGS = '-O2 -EHsc -MD -std:c++17',
+        SCONS_CXX_STANDARD='c++17',
         CPPPATH = [
             '#include',
             '#include/main/utility',
@@ -88,6 +88,7 @@ elif sys.platform.startswith('win'):
             pathToBox2DLibrary + 'x86_64/Release',
             pathToBoostLibraries
             ]
+        #LINK = '',
         #tools = [
         #    'msvc',
         #    'mslink',

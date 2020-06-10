@@ -11,7 +11,7 @@
 
 #include <deque>
 
-namespace Element {
+namespace Elements {
 
     class StaticElement : public Element {
 

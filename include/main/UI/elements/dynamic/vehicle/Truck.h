@@ -9,7 +9,7 @@
 
 #include "Vehicle.h"
 
-namespace Element::Vehicle {
+namespace Elements::Vehicle {
 
     class Truck : public Vehicle {
 

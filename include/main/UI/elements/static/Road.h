@@ -10,7 +10,7 @@
 #include "StaticElement.h"
 #include "RoadConnector.h"
 
-namespace Element {
+namespace Elements {
 
     class RoadConnector;
 

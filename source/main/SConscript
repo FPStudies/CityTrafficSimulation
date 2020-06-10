@@ -34,19 +34,25 @@ programLibraries = [
     'tiles'
 ]
 
-externalLibraries = [
-    'Box2D',
-    'pthread',
-    'libX11'
-]
+
 
 if sys.platform.startswith('linux'):
     objectFiles = [
         binFolder + 'graphic_library_facade/GraphicLibraryFacade.o'
     ]
+
+    externalLibraries = [
+    'Box2D',
+    'pthread',
+    'libX11'
+    ]
 else:
     objectFiles = [
         binFolder + 'graphic_library_facade/GraphicLibraryFacade.obj'
+    ]
+
+    externalLibraries = [
+    'Box2D'
     ]
 
 HFilesFolder = [

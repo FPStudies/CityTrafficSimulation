@@ -6,6 +6,6 @@
 
 #include "static/PedestrianCrossing.h"
 
-using namespace Element;
+using namespace Elements;
 
 PedestrianCrossing::PedestrianCrossing(sf::Window& window, const Texture_ptr& texture) : StaticElement(window, texture) {};

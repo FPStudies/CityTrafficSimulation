@@ -11,7 +11,7 @@
 
 #include "StaticElement.h"
 
-namespace Element {
+namespace Elements {
 
     class Camera : public StaticElement {
 

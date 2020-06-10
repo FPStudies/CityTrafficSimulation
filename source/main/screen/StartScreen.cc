@@ -138,7 +138,7 @@ ScreenID StartScreen::run(std::shared_ptr<sf::RenderWindow> & window){
     setTextureManagers(window);
     setEventManager();
     std::shared_ptr<Button::Exit> exit_button;
-    std::shared_ptr<Element::Road> test_road;
+    std::shared_ptr<Elements::Road> test_road;
     addExitButton(exit_button, window);
     addTextToButton(exit_button);
 

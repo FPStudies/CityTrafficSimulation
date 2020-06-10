@@ -1,8 +1,8 @@
 /*
- * DoubleKeyManager.h
- *
- *      Author: Kordowski Mateusz
- */
+* DoubleKeyManager.h
+*
+*      Author: Kordowski Mateusz
+*/
 
 #ifndef TRAFFIC_SIM_MAIN_UTILITY_DOUBLE_KEY_MANAGER_H
 #define TRAFFIC_SIM_MAIN_UTILITY_DOUBLE_KEY_MANAGER_H
@@ -123,7 +123,7 @@ public:
 
     bool remove(const KeyOne& one){
         ViewNodeByOne& index_by_key_one_id = map_.template get<IndexByKeyOne>();
-        IterOne found = index_by_key_one_id.template find(one);
+        IterOne found = index_by_key_one_id.find(one);
 
         if(found == index_by_key_one_id.end())
             return true;
@@ -134,7 +134,7 @@ public:
 
     bool remove(const KeyTwo& two){
         ViewNodeByTwo& index_by_key_two = map_.template get<IndexByKeyTwo>();
-        IterTwo found = index_by_key_two.template find(two);
+        IterTwo found = index_by_key_two.find(two);
 
         if(found == index_by_key_two.end())
             return true;
@@ -145,7 +145,7 @@ public:
 
     const SharedVariable& getVariable(const KeyOne& one){
         ViewNodeByOne& index_by_key_one_id = map_.template get<IndexByKeyOne>();
-        IterOne found = index_by_key_one_id.template find(one);
+        IterOne found = index_by_key_one_id.find(one);
 
         if(found == index_by_key_one_id.end())
             throw std::out_of_range("Element not found.");
@@ -155,7 +155,7 @@ public:
 
     const SharedVariable& getVariable(const KeyTwo& two){
         ViewNodeByTwo& index_by_key_two = map_.template get<IndexByKeyTwo>();
-        IterTwo found = index_by_key_two.template find(two);
+        IterTwo found = index_by_key_two.find(two);
 
         if(found == index_by_key_two.end())
             throw std::out_of_range("Element not found.");

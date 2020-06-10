@@ -9,7 +9,7 @@
 
 #include "../DynamicElement.h"
 
-namespace Element::Vehicle {
+namespace Elements::Vehicle {
 
     class Vehicle : public DynamicElement {
 

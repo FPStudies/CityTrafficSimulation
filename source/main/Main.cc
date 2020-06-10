@@ -15,13 +15,16 @@
 #include "../../include/main/graph/Proxy.hpp"
 
 // must be at the end because of conflicting names
+#ifdef __linux__
 #include <X11/Xlib.h> 
-
+#endif
 using namespace std;
 
 int main(int argc, char** argv, char** envp) {
+	#ifdef __linux__
 	XInitThreads();
-
+	#endif
+	
 	//graph test <begin>
 	CityGraph::Proxy<Draw::DrawID> proxy;
 	CityGraph::Graph graph;
