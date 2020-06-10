@@ -51,6 +51,7 @@ ScreenID Simulation::run(std::shared_ptr<sf::RenderWindow> & window){
     while(window->isOpen()){
         sf::Event event;
         framerate.checkTime();
+        loop_synch_.enter(); // does nothing because 
 
         while(window->pollEvent(event)){
             event_manager_->checkEvents(*window, event);
@@ -60,6 +61,13 @@ ScreenID Simulation::run(std::shared_ptr<sf::RenderWindow> & window){
             // if someone miss a call then it will be registered in the next frame
             std::lock_guard<std::mutex> guard(lock_loopback_data_);
             // decide what to do with these informations.
+
+            if(received_data_->close_window_){
+                window->close();
+                break;
+            }
+
+
             for(auto& it : received_data_->request_for_next_screen_){
                 if(it == MainMenuID)
                     return it;
@@ -70,7 +78,6 @@ ScreenID Simulation::run(std::shared_ptr<sf::RenderWindow> & window){
         window->clear();
         draw_manager_->drawAll();
         window->display();    
-        loop_synch_.enter();
     }
 
     return ScreenID();
