@@ -134,6 +134,9 @@ ScreenID MainMenu::run(std::shared_ptr<sf::RenderWindow> & window){
                 if(it == symulationID){
                     thread_comm_.is_active_ = false;
                     endLoopSynch(loop_synch_);
+
+                    if(drawThread.joinable())
+                    drawThread.join();
                     return it;
                 }
                     

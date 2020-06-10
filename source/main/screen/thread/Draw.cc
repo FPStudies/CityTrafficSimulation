@@ -11,15 +11,9 @@ loop_synch_(loopSynch)
 Thread::Draw::~Draw() = default;
 
 void Thread::Draw::operator()(){
-    //window_->setActive(true);
+    window_->setActive(true);
 
-
-    unsigned int a = 0;
     while(window_->isOpen() && thread_communication_.is_active_){
-        a++;
-    }
-
-    /*while(window_->isOpen() && thread_communication_.is_active_){
         loop_synch_.enter();
         
         window_->clear();
@@ -27,5 +21,5 @@ void Thread::Draw::operator()(){
         window_->display();    
     }
 
-    window_->setActive(false);*/
+    window_->setActive(false);
 }
