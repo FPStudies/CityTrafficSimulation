@@ -138,7 +138,7 @@ if not env_base.GetOption('clean'):
 
     elif sys.platform.startswith('win'):
         
-        if not conf.CheckCXXHeader('boost\shared_ptr.hpp'):
+        if not conf.CheckCXXHeader('boost/shared_ptr.hpp'):
             print('Boost not found\n')
             subprocess.call(['powershell.exe', '.\BoostWin.ps1'], shell=True, cwd = 'scripts')
         else:

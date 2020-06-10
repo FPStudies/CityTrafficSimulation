@@ -14,7 +14,6 @@
 
 #include "CoordinateSystem.h"
 #include "FixedFramerate.h"
-#include "GameScreen.h"
 #include "ScreenID.h"
 #include "ScreenInterface.h"
 #include "ScreenManager.h"
