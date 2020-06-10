@@ -18,9 +18,9 @@ Basic::Basic(const Basic& event) {};
 
 void Basic::run(sf::RenderWindow& window, const sf::Event& event){
     if(event.type == sf::Event::Closed)
-        ScreenInteface::requestCloseWindow();
+        ScreenInterface::requestCloseWindow();
     else if(event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
-        ScreenInteface::requestCloseWindow();
+        ScreenInterface::requestCloseWindow();
     
 }
 

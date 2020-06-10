@@ -20,7 +20,7 @@
 #include "../synchronization/Loop.h"
 
 // TODO correct name to ScreenInterface
-class ScreenInteface{
+class ScreenInterface{
 
     ScreenID ID_;
 
@@ -66,13 +66,13 @@ public:
      */
     virtual ScreenID run(std::shared_ptr<sf::RenderWindow> & window) = 0;    // it wll return the next screen that should be used
 
-    ScreenInteface();
+    ScreenInterface();
 
     virtual void init(std::shared_ptr<sf::RenderWindow> & window) = 0;
 
     virtual void release(std::shared_ptr<sf::RenderWindow> & window) = 0;
 
-    virtual ~ScreenInteface();
+    virtual ~ScreenInterface();
 
     ScreenID getID() const;
 

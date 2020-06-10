@@ -25,7 +25,7 @@ class Loopback final: public ::Utils::Singleton<Loopback>{
 
     std::mutex mutex_;
 
-    std::unique_ptr<ScreenInteface::LoopbackData> data_;
+    std::unique_ptr<ScreenInterface::LoopbackData> data_;
 
     Loopback();
     ~Loopback();

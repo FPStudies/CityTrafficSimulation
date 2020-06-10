@@ -28,7 +28,7 @@
 #include "View.h"
 #include "../UI/elements/AllElements.h"
 
-class StartScreen: public ScreenInteface{
+class StartScreen: public ScreenInterface{
     std::unique_ptr<b2World> world_;
     std::unique_ptr<Event::Manager> event_manager_;
     std::shared_ptr<ScreenMaster::View> view_world_;

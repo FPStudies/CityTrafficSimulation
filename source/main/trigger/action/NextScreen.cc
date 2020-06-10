@@ -28,7 +28,7 @@ NextScreen::NextScreen(const NextScreen&& other)
 {}
 
 void NextScreen::trigger(){
-    ScreenInteface::requestForNextScreen(screen_ID_);
+    ScreenInterface::requestForNextScreen(screen_ID_);
 }
 
 bool NextScreen::equals(const Interface& other) const{

@@ -9,7 +9,7 @@
 
 #include "ScreenInterface.h"
 
-class GameScreen: public ScreenInteface{
+class GameScreen: public ScreenInterface{
     // TODO:
 public:
     ScreenID run(std::shared_ptr<sf::RenderWindow>& window);

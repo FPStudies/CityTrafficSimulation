@@ -10,7 +10,7 @@
 #include "StartScreen.h"
 
 StartScreen::StartScreen() 
-: ScreenInteface(), 
+: ScreenInterface(), 
 world_(),
 event_manager_(),
 view_world_(),

@@ -28,7 +28,7 @@ ExitWindow::ExitWindow(const ExitWindow&& other)
 {}
 
 void ExitWindow::trigger(){
-    ScreenInteface::requestCloseWindow();
+    ScreenInterface::requestCloseWindow();
     //window_.close();
 }
 

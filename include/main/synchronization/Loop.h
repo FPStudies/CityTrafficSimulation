@@ -11,7 +11,7 @@
 
 #include "../utility/Singleton.hpp"
 
-class ScreenInteface;
+class ScreenInterface;
 
 namespace Synch{
 
@@ -39,7 +39,7 @@ public:
     void enter();    
 
     class Proxy{
-        friend class ::ScreenInteface;
+        friend class ::ScreenInterface;
         
         static void reset(Loop& loop, unsigned int newNumberOfThreads, bool save = true);
 

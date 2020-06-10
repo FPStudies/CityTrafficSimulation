@@ -13,7 +13,7 @@ ScreenManager::ScreenManager() = default;
 
 ScreenManager::~ScreenManager() = default;
 
-bool ScreenManager::addScreen(const std::shared_ptr<ScreenInteface> screen, const std::string& name){
+bool ScreenManager::addScreen(const std::shared_ptr<ScreenInterface> screen, const std::string& name){
     return Inher::add(screen, screen->getID(), name);
 }
 
@@ -45,7 +45,7 @@ void ScreenManager::mainLoopInner(std::shared_ptr<sf::RenderWindow>& window, Scr
     }
 }
 
-void ScreenManager::mainLoop(std::shared_ptr<sf::RenderWindow>& window, const ScreenInteface& start_ID){
+void ScreenManager::mainLoop(std::shared_ptr<sf::RenderWindow>& window, const ScreenInterface& start_ID){
     ScreenID output = start_ID.getID();
     auto& index_by_ID = map_.get<IndexByKeyOne>();
 

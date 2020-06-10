@@ -29,7 +29,7 @@ namespace ScreenMaster::Spec{
  * @brief Screen that represent the simulation.
  * 
  */
-class Simulation: public ScreenInteface{
+class Simulation: public ScreenInterface{
     unsigned int width_;
     unsigned int height_;
     const ScreenManager& screen_manager_;
