@@ -24,7 +24,8 @@ env = env_base.Clone()
 
 filesCPP = [
     Glob('*.cc'),
-    Glob('specialization/*.cc')
+    Glob('specialization/*.cc'),
+    Glob('thread/*.cc')
 ]
 
 env.Append(

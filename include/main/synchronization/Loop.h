@@ -10,12 +10,14 @@
 #include <condition_variable>
 
 #include "../utility/Singleton.hpp"
+#include "../screen/ScreenInterface.h"
 
 namespace Synch{
 
 class Loop final: public Utils::SingletonWithCreation<Loop, unsigned int>{
     friend class ::Utils::SingletonWithCreation<Loop, unsigned int>;
     friend class ::Utils::SingletonDestroyer<Loop>;
+    friend class Proxy;
 
     unsigned int number_of_threads_counted_;
     unsigned int number_of_threads_;
@@ -35,10 +37,18 @@ public:
 
     void enter();
 
-
+    
 
 };
 
+
+
 }
+
+class Proxy{
+        friend class ScreenInterface;
+        
+        static void reset(Synch::Loop& loop, unsigned int newNumberOfThreads, bool save = true);
+    };
 
 #endif

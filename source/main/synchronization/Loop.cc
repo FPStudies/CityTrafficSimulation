@@ -27,3 +27,10 @@ void Synch::Loop::enter(){
         condition_.wait(condition_lock_);
     }
 }
+
+void Synch::Loop::Proxy::reset(Loop& loop, unsigned int newNumberOfThreads, bool save){
+    std::lock_guard<std::mutex> guard(loop.lock_);
+    if(save && loop.number_of_threads_counted_ != 0) throw std::runtime_error("Some threads still did not end. Cannot reset Synch::Loop.");
+
+    loop.number_of_threads_ = newNumberOfThreads;
+}

@@ -13,15 +13,16 @@ Trigger::Event::Button::Button()
 Trigger::Event::Button::~Button() = default;
 
 Trigger::Event::Button::Button(Button&& other)
-: button_(std::move(other.button_))
+: button_(std::move(other.button_)), was_pressed_(other.was_pressed_)
 {}
 
 Trigger::Event::Button::Button(const Button& other)
-: button_(other.button_)
+: button_(other.button_), was_pressed_(other.was_pressed_)
 {}
 
 Trigger::Event::Button& Trigger::Event::Button::operator=(Button&& other){
     button_ = std::move(other.button_);
+    was_pressed_ = other.was_pressed_;
     return *this;
 }
 
@@ -68,7 +69,10 @@ std::unique_ptr<Trigger::Event::Button> Trigger::Event::Button::clone() const{
 }
 
 bool Trigger::Event::Button::equals(const Interface& other) const{
-    if(typeid(other) == typeid(Trigger::Event::Button) && button_ == dynamic_cast<const Button&>(other).button_)
-        return true;
+    if(typeid(other) == typeid(Trigger::Event::Button)){
+        const auto& it = dynamic_cast<const Button&>(other);
+        if(button_ == it.button_ && was_pressed_ == it.was_pressed_)
+            return true;
+    }
     return false;
 }

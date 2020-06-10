@@ -34,6 +34,15 @@ void ScreenInteface::clearAll(){
 }
 
 void ScreenInteface::requestForNextScreen(const ScreenID& ID){
+    received_data_->is_anyone_waiting_ = true;
     std::lock_guard<std::mutex> guard(lock_loopback_data_);
     received_data_->request_for_next_screen_.push_back(ID);
+}
+
+void ScreenInteface::setAsViewed(){
+    received_data_->is_anyone_waiting_ = false;
+}
+
+void ScreenInteface::resetLoopSynch(Synch::Loop& loopSynch, unsigned int newNumberOfThreads, bool save){
+    Proxy::reset(loopSynch, newNumberOfThreads, save);
 }

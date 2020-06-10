@@ -13,7 +13,8 @@ screen_manager_(screenManager),
 framerate(60.0f),
 texture_manager_(Draw::Texture::Manager::getInstance()),
 font_manager_(Draw::Font::Manager::getInstance()),
-loop_synch_(Synch::Loop::create(1))
+loop_synch_(Synch::Loop::create(1)),
+thread_comm_()
 /*
 view_UI_(Screen::View::create("UI", sf::FloatRect(0, 0, width_, height))),
 event_manager_(std::make_unique<Event::Manager>(view_UI_)),
@@ -106,14 +107,15 @@ ScreenID MainMenu::run(std::shared_ptr<sf::RenderWindow> & window){
     addButtons(window);
     addOther();
 
-
     ScreenID symulationID = screen_manager_.getScreenID("Simulation");
+    Thread::Draw drawThread(window, *draw_manager_, loop_synch_, thread_comm_);
 
     window->setView(view_UI_->getView());
 
     while(window->isOpen()){
         sf::Event event;
         framerate.checkTime();
+        loop_synch_.enter();
 
         while(window->pollEvent(event)){
             event_manager_->checkEvents(*window, event);
@@ -133,7 +135,6 @@ ScreenID MainMenu::run(std::shared_ptr<sf::RenderWindow> & window){
         window->clear();
         draw_manager_->drawAll();
         window->display();    
-        loop_synch_.enter();
     }
 
     return ScreenID();

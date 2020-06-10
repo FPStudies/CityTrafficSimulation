@@ -31,8 +31,8 @@
 #include "../trigger/action/NextScreen.h"
 
 #include "../UI/tiles/Background.h"
+#include "thread/Draw.h"
 
-// tmp
 #include "../event/Basic.h"
 
 namespace Screen::Spec{
@@ -46,6 +46,8 @@ class MainMenu: public ScreenInteface{
     Draw::Texture::Manager& texture_manager_;
     Draw::Font::Manager& font_manager_;
     Synch::Loop& loop_synch_;
+
+    Thread::Draw::Communication thread_comm_;
 
     std::shared_ptr<Screen::View> view_UI_;
 
