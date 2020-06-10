@@ -21,6 +21,10 @@ stanami programu.
 #include "ScreenInterface.h"
 #include "../utility/DoubleKeyManager.hpp"
 
+/**
+ * @brief A class used manage the sceens.
+ * 
+ */
 class ScreenManager: protected Utils::DoubleKeyManager<ScreenID, std::string, ScreenInterface>{
     
     using Inher = Utils::DoubleKeyManager<ScreenID, std::string, ScreenInterface>;
@@ -40,8 +44,8 @@ public:
      * 
      * @param screen 
      * @param name 
-     * @return true If operation was unsuccessful. The screen with that name already exist.
-     * @return false Otherwise.
+     * @return true - if operation was unsuccessful. The screen with that name already exist.
+     * @return false - otherwise.
      */
     bool addScreen(const std::shared_ptr<ScreenInterface> screen, const std::string& name);
 

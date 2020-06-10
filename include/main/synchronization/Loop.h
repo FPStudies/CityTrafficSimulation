@@ -15,6 +15,12 @@ class ScreenInterface;
 
 namespace Synch{
 
+/**
+ * @brief Singleton used to synchronize the threads.
+ * It must contain specified number of threads that are actually used to work properly.
+ * Changing it while more than one thread is active can be dangerous.
+ * 
+ */
 class Loop final: public Utils::SingletonWithCreation<Loop, unsigned int>{
     friend class ::Utils::SingletonWithCreation<Loop, unsigned int>;
     friend class ::Utils::SingletonDestroyer<Loop>;
@@ -36,8 +42,17 @@ public:
     Loop& operator=(const Loop&) = delete;
     Loop& operator=(Loop&&) = delete;
 
+    /**
+     * @brief Enter the synchronization section.
+     * This section will be abandoned when all other threads enter it.
+     * 
+     */
     void enter();    
 
+    /**
+     * @brief Special class that open set of method for the ScreenInterface only.
+     * 
+     */
     class Proxy{
         friend class ::ScreenInterface;
         

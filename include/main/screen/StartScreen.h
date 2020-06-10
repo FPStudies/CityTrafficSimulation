@@ -28,6 +28,10 @@
 #include "View.h"
 #include "../UI/elements/AllElements.h"
 
+/**
+ * @brief A class used to test various things.
+ * 
+ */
 class StartScreen: public ScreenInterface{
     std::unique_ptr<b2World> world_;
     std::unique_ptr<Event::Manager> event_manager_;
