@@ -7,7 +7,7 @@
 
 #include "View.h"
 
-using namespace Screen;
+using namespace ScreenMaster;
 
 View::View(const std::string& name, const sf::FloatRect& rect)
 : view_(rect), name_(name)

@@ -2,7 +2,7 @@
 /*
 #include "Loopback.h"
 
-using namespace Screen;
+using namespace ScreenMaster;
 
 Loopback::Loopback() = default;
 

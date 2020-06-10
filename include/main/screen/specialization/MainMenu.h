@@ -35,7 +35,7 @@
 
 #include "../event/Basic.h"
 
-namespace Screen::Spec{
+namespace ScreenMaster::Spec{
 
 class MainMenu: public ScreenInteface{
     unsigned int width_;
@@ -49,7 +49,7 @@ class MainMenu: public ScreenInteface{
 
     Thread::Draw::Communication thread_comm_;
 
-    std::shared_ptr<Screen::View> view_UI_;
+    std::shared_ptr<ScreenMaster::View> view_UI_;
 
     std::unique_ptr<Event::Manager> event_manager_;
 

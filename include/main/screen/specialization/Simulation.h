@@ -25,7 +25,7 @@
 // tmp
 #include "../event/Basic.h"
 
-namespace Screen::Spec{
+namespace ScreenMaster::Spec{
 
 class Simulation: public ScreenInteface{
     unsigned int width_;
@@ -37,8 +37,8 @@ class Simulation: public ScreenInteface{
     Draw::Font::Manager& font_manager_;
     Synch::Loop& loop_synch_;
 
-    std::shared_ptr<Screen::View> view_world_;
-    std::shared_ptr<Screen::View> view_UI_;
+    std::shared_ptr<ScreenMaster::View> view_world_;
+    std::shared_ptr<ScreenMaster::View> view_UI_;
 
     std::unique_ptr<b2World> world_;
     std::unique_ptr<Event::Manager> event_manager_;

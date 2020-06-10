@@ -73,8 +73,8 @@ void StartScreen::setEventManager(){
 void StartScreen::setTextureManagers(std::shared_ptr<sf::RenderWindow> & window){
     float res_X = 1920.f, res_Y = 1080.f;
 
-    view_world_ = Screen::View::create("Main_view", sf::FloatRect(-(res_X / 2), -(res_Y / 2), res_X, res_Y)); // point is in bottom left
-    view_UI_ = Screen::View::create("UI", sf::FloatRect(0, 0, res_X, res_Y));
+    view_world_ = ScreenMaster::View::create("Main_view", sf::FloatRect(-(res_X / 2), -(res_Y / 2), res_X, res_Y)); // point is in bottom left
+    view_UI_ = ScreenMaster::View::create("UI", sf::FloatRect(0, 0, res_X, res_Y));
     draw_manager_ = Draw::Manager::create(LAYER_NAME, window, view_world_);
 
     texture_manager_.load("resource/texture/blue_light.jpg", "blue_light");

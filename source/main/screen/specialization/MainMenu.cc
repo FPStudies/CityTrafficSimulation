@@ -3,7 +3,7 @@
 #include "specialization/MainMenu.h"
 
 
-using namespace Screen::Spec;
+using namespace ScreenMaster::Spec;
 
 
 MainMenu::MainMenu(unsigned int width, unsigned int height, const ScreenManager& screenManager)
@@ -32,7 +32,7 @@ MainMenu::MainMenu(const sf::Vector2u& viewSize, const ScreenManager& screenMana
 MainMenu::~MainMenu() = default;
 
 void MainMenu::init(std::shared_ptr<sf::RenderWindow> & window){
-    view_UI_ = Screen::View::create("UI", sf::FloatRect(0, 0, width_, height_));
+    view_UI_ = ScreenMaster::View::create("UI", sf::FloatRect(0, 0, width_, height_));
     event_manager_ = std::make_unique<Event::Manager>(view_UI_);
     draw_manager_ = Draw::Manager::create("First_layer", window, view_UI_);
 }
@@ -114,6 +114,7 @@ ScreenID MainMenu::run(std::shared_ptr<sf::RenderWindow> & window){
 
     prepareLoopSynch(loop_synch_);
 
+    window->setActive(false);
     std::thread drawThread(drawThreadObj);
 
     while(window->isOpen()){
@@ -141,8 +142,11 @@ ScreenID MainMenu::run(std::shared_ptr<sf::RenderWindow> & window){
 
         /*window->clear();
         draw_manager_->drawAll();
-        window->display();  */  
+        window->display(); */  
     }
+
+    thread_comm_.is_active_ = false;
+    endLoopSynch(loop_synch_);
 
     if(drawThread.joinable())
         drawThread.join();

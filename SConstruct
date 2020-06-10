@@ -52,7 +52,7 @@ if sys.platform.startswith('linux'):
 
     env_base = Environment(
         CC = 'g++',
-        CCFLAGS = '-O2 -pthread -Wall -g',
+        CCFLAGS = '-O2 -lX11 -Wall -g',
         SCONS_CXX_STANDARD='c++11',
         CPPPATH = [
             '#include',

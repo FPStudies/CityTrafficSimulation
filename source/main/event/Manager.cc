@@ -32,7 +32,7 @@ Manager::SetInner::SetInner(const std::shared_ptr<Interface>& event, Manager::St
 : event_set_(Set(event)), state_(mode)
 {}
 
-Manager::Manager(const std::shared_ptr<Screen::View>& view) 
+Manager::Manager(const std::shared_ptr<ScreenMaster::View>& view) 
 : events_sorted_(false), events_map_names_(), events_sorted_list_(), tmp_mode_(), view_(view), mutex_modify_()
 {}
 
