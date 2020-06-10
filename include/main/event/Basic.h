@@ -9,6 +9,7 @@
 
 #include <memory>
 
+#include "../../screen/ScreenInterface.h"
 #include "Interface.h"
 
 namespace Event{
