@@ -20,7 +20,7 @@ std::list<std::pair<Manager*, int>> Manager::instances_;
 
 
 
-Manager::DrawLayer::DrawLayer(const std::string& name, const std::shared_ptr<Screen::View>& view) 
+Manager::DrawLayer::DrawLayer(const std::string& name, const std::shared_ptr<ScreenMaster::View>& view) 
 : name_(name), container_(), render_(DEFAULT_LIST_SIZE), view_(view), mutex_modify_()
 {}
 
@@ -77,7 +77,7 @@ void Manager::DrawLayer::draw(sf::RenderWindow& window){
     }
 }
 
-std::shared_ptr<Screen::View> Manager::DrawLayer::getView() const{
+std::shared_ptr<ScreenMaster::View> Manager::DrawLayer::getView() const{
     return view_;
 }
 
@@ -100,7 +100,7 @@ bool Manager::addEntity(const std::string& layer_name, std::shared_ptr<Drawable>
     return true;
 }
 
-bool Manager::addFirstLayer(const std::string& layer_name, const std::shared_ptr<Screen::View>& view){
+bool Manager::addFirstLayer(const std::string& layer_name, const std::shared_ptr<ScreenMaster::View>& view){
     std::lock_guard<std::mutex> guard(mutex_modify_);
     if(to_draw_.size() != 0)
         return true;
@@ -108,7 +108,7 @@ bool Manager::addFirstLayer(const std::string& layer_name, const std::shared_ptr
     return false;
 }
 
-bool Manager::addLayerBefore(const std::string& previous_layer_name, const std::string& layer_name, const std::shared_ptr<Screen::View>& view){
+bool Manager::addLayerBefore(const std::string& previous_layer_name, const std::string& layer_name, const std::shared_ptr<ScreenMaster::View>& view){
     std::lock_guard<std::mutex> guard(mutex_modify_);
     for(auto it = to_draw_.begin(); it != to_draw_.end(); ++it){
         if((*it)->getName() == previous_layer_name){
@@ -119,7 +119,7 @@ bool Manager::addLayerBefore(const std::string& previous_layer_name, const std::
     return true;
 }
 
-bool Manager::addLayerAfter(const std::string& next_layer_name, const std::string& layer_name, const std::shared_ptr<Screen::View>& view){
+bool Manager::addLayerAfter(const std::string& next_layer_name, const std::string& layer_name, const std::shared_ptr<ScreenMaster::View>& view){
     std::lock_guard<std::mutex> guard(mutex_modify_);
     for(auto it = to_draw_.begin(); it != to_draw_.end(); ++it){
         if((*it)->getName() == next_layer_name){
@@ -142,7 +142,7 @@ bool Manager::remove(const std::string& layer_name, std::shared_ptr<Drawable> en
     return true;
 }
 
-Manager::Manager(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window, const std::shared_ptr<Screen::View>& view)
+Manager::Manager(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window, const std::shared_ptr<ScreenMaster::View>& view)
 : to_draw_(), object_window_(window), mutex_modify_()
 {
     addFirstLayer(layer_name, view);
@@ -166,7 +166,7 @@ Manager::Manager(Manager&& other) noexcept
 : to_draw_(std::move(other.to_draw_)), object_window_(std::move(other.object_window_))
 {}
 
-std::unique_ptr<Manager> Manager::create(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window, const std::shared_ptr<Screen::View>& view){
+std::unique_ptr<Manager> Manager::create(const std::string& layer_name, std::shared_ptr<sf::RenderWindow>& window, const std::shared_ptr<ScreenMaster::View>& view){
     std::lock_guard<std::mutex> guard(mutex_change_state_static_);
     if(ref_count_ >= max_instances_){
         throw std::invalid_argument("The limit of Draw::Manager instances have been reached.");

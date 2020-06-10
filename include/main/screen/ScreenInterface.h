@@ -11,9 +11,13 @@
 #include <vector>
 #include <mutex>
 #include <memory>
+#include <atomic>
+#include <thread>
 
 #include "ScreenID.h"
 #include "../utility/Singleton.hpp"
+
+#include "../synchronization/Loop.h"
 
 // TODO correct name to ScreenInterface
 class ScreenInteface{
@@ -21,9 +25,11 @@ class ScreenInteface{
     ScreenID ID_;
 
 protected:
+
     static std::mutex lock_loopback_data_;
 
     struct LoopbackData{
+        std::atomic<bool> is_anyone_waiting_;
         std::vector<ScreenID> request_for_next_screen_;
     };
 
@@ -35,8 +41,15 @@ protected:
 
     void clearAll();
 
-public:
+    void setAsViewed();
 
+    void resetLoopSynch(Synch::Loop& loopSynch, unsigned int newNumberOfThreads, bool save = true);
+
+    void prepareLoopSynch(Synch::Loop& loopSynch);
+
+    void endLoopSynch(Synch::Loop& loopSynch);
+
+public:
 
     /**
      * @brief It is used to implement the rendering loops or other kind of tasks. Main channel to implement the program actions.

@@ -2,7 +2,7 @@
 
 #include "specialization/Simulation.h"
 
-using namespace Screen::Spec;
+using namespace ScreenMaster::Spec;
 
 Simulation::Simulation(unsigned int width, unsigned int height, const ScreenManager& screenManager)
 : width_(width),
@@ -27,7 +27,7 @@ Simulation::Simulation(const sf::Vector2u& viewSize, const ScreenManager& screen
 Simulation::~Simulation() = default;
 
 void Simulation::init(std::shared_ptr<sf::RenderWindow> & window){
-    view_UI_ = Screen::View::create("UI", sf::FloatRect(0, 0, width_, height_));
+    view_UI_ = ScreenMaster::View::create("UI", sf::FloatRect(0, 0, width_, height_));
     event_manager_ = std::make_unique<Event::Manager>(view_UI_);
     draw_manager_ = Draw::Manager::create("First_layer", window, view_UI_);
 }

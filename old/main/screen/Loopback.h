@@ -14,7 +14,7 @@
 #include "ScreenID.h"
 #include "ScreenInterface.h"
 
-namespace Screen{
+namespace ScreenMaster{
 
 
 

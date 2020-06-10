@@ -11,14 +11,18 @@
 
 #include "../utility/Singleton.hpp"
 
+class ScreenInteface;
+
 namespace Synch{
 
 class Loop final: public Utils::SingletonWithCreation<Loop, unsigned int>{
     friend class ::Utils::SingletonWithCreation<Loop, unsigned int>;
     friend class ::Utils::SingletonDestroyer<Loop>;
+    friend class Proxy;
 
     unsigned int number_of_threads_counted_;
     unsigned int number_of_threads_;
+    bool active_;
     std::mutex lock_;
     std::unique_lock<std::mutex> condition_lock_;
     std::condition_variable condition_;
@@ -32,10 +36,17 @@ public:
     Loop& operator=(const Loop&) = delete;
     Loop& operator=(Loop&&) = delete;
 
+    void enter();    
 
-    void enter();
+    class Proxy{
+        friend class ::ScreenInteface;
+        
+        static void reset(Loop& loop, unsigned int newNumberOfThreads, bool save = true);
 
+        static bool prepare(Loop& loop);
 
+        static bool end(Loop& loop);
+    };
 
 };
 

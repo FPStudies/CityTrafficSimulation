@@ -31,11 +31,11 @@
 #include "../trigger/action/NextScreen.h"
 
 #include "../UI/tiles/Background.h"
+#include "../thread/Draw.h"
 
-// tmp
 #include "../event/Basic.h"
 
-namespace Screen::Spec{
+namespace ScreenMaster::Spec{
 
 class MainMenu: public ScreenInteface{
     unsigned int width_;
@@ -47,7 +47,9 @@ class MainMenu: public ScreenInteface{
     Draw::Font::Manager& font_manager_;
     Synch::Loop& loop_synch_;
 
-    std::shared_ptr<Screen::View> view_UI_;
+    Thread::Draw::Communication thread_comm_;
+
+    std::shared_ptr<ScreenMaster::View> view_UI_;
 
     std::unique_ptr<Event::Manager> event_manager_;
 

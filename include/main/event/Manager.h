@@ -94,7 +94,7 @@ namespace Event{
          */
         ToChange tmp_mode_;
 
-        std::shared_ptr<Screen::View> view_;
+        std::shared_ptr<ScreenMaster::View> view_;
         std::mutex mutex_modify_;
 
 
@@ -117,7 +117,7 @@ namespace Event{
 
     public:
 
-        Manager(const std::shared_ptr<Screen::View>& view);
+        Manager(const std::shared_ptr<ScreenMaster::View>& view);
         ~Manager();
         Manager(const Manager&) = delete;
         Manager(Manager&&) = delete;

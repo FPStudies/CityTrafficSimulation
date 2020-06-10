@@ -3,7 +3,7 @@
 #include "specialization/MainMenu.h"
 
 
-using namespace Screen::Spec;
+using namespace ScreenMaster::Spec;
 
 
 MainMenu::MainMenu(unsigned int width, unsigned int height, const ScreenManager& screenManager)
@@ -13,7 +13,8 @@ screen_manager_(screenManager),
 framerate(60.0f),
 texture_manager_(Draw::Texture::Manager::getInstance()),
 font_manager_(Draw::Font::Manager::getInstance()),
-loop_synch_(Synch::Loop::create(1))
+loop_synch_(Synch::Loop::create(2)),
+thread_comm_()
 /*
 view_UI_(Screen::View::create("UI", sf::FloatRect(0, 0, width_, height))),
 event_manager_(std::make_unique<Event::Manager>(view_UI_)),
@@ -31,7 +32,7 @@ MainMenu::MainMenu(const sf::Vector2u& viewSize, const ScreenManager& screenMana
 MainMenu::~MainMenu() = default;
 
 void MainMenu::init(std::shared_ptr<sf::RenderWindow> & window){
-    view_UI_ = Screen::View::create("UI", sf::FloatRect(0, 0, width_, height_));
+    view_UI_ = ScreenMaster::View::create("UI", sf::FloatRect(0, 0, width_, height_));
     event_manager_ = std::make_unique<Event::Manager>(view_UI_);
     draw_manager_ = Draw::Manager::create("First_layer", window, view_UI_);
 }
@@ -106,14 +107,20 @@ ScreenID MainMenu::run(std::shared_ptr<sf::RenderWindow> & window){
     addButtons(window);
     addOther();
 
-
     ScreenID symulationID = screen_manager_.getScreenID("Simulation");
+    Thread::Draw drawThreadObj(window, *draw_manager_, loop_synch_, thread_comm_);
 
     window->setView(view_UI_->getView());
+
+    prepareLoopSynch(loop_synch_);
+
+    window->setActive(false);
+    std::thread drawThread(drawThreadObj);
 
     while(window->isOpen()){
         sf::Event event;
         framerate.checkTime();
+        loop_synch_.enter();
 
         while(window->pollEvent(event)){
             event_manager_->checkEvents(*window, event);
@@ -124,17 +131,28 @@ ScreenID MainMenu::run(std::shared_ptr<sf::RenderWindow> & window){
             std::lock_guard<std::mutex> guard(lock_loopback_data_);
             // decide what to do with these informations.
             for(auto& it : received_data_->request_for_next_screen_){
-                if(it == symulationID)
+                if(it == symulationID){
+                    thread_comm_.is_active_ = false;
+                    endLoopSynch(loop_synch_);
+
+                    if(drawThread.joinable())
+                    drawThread.join();
                     return it;
+                }
+                    
             }
         }
-        
 
-        window->clear();
+        /*window->clear();
         draw_manager_->drawAll();
-        window->display();    
-        loop_synch_.enter();
+        window->display(); */  
     }
+
+    thread_comm_.is_active_ = false;
+    endLoopSynch(loop_synch_);
+
+    if(drawThread.joinable())
+        drawThread.join();
 
     return ScreenID();
 }

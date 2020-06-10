@@ -10,7 +10,7 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
-namespace Screen{
+namespace ScreenMaster{
 
 class View{
     sf::View view_;

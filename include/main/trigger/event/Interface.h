@@ -29,6 +29,22 @@ namespace Trigger::Event{
     private:
         virtual Interface* clone_impl() const = 0;
 
+    protected:
+        bool isChoosedDefault(sf::RenderWindow& window, const sf::FloatRect& global_bounds){
+            auto pixel_coords = window.mapPixelToCoords(sf::Mouse::getPosition(window));
+            
+            if(
+                global_bounds.left <= pixel_coords.x && 
+                global_bounds.top <= pixel_coords.y && 
+                global_bounds.left + global_bounds.width > pixel_coords.x &&
+                global_bounds.top + global_bounds.height > pixel_coords.y
+                ){
+                return true;
+            }
+
+            return false;
+        }
+
     public:
         Interface() = default;
         virtual ~Interface() = default;
