@@ -14,6 +14,10 @@
 
 namespace Draw{
 
+/**
+ * @brief Interface that is used by Draw::Manager to store elements, that can be drawn.
+ * 
+ */
 class Drawable{
     DrawID ID_;
 

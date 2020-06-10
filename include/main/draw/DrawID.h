@@ -11,6 +11,11 @@
 
 namespace Draw{
 
+/**
+ * @brief An ID that uniquely identifies Drawable objects.
+ * This kind of ID only can be comparable with an ID of the same time.
+ * 
+ */
 class DrawID: virtual public Utils::ID<DrawID>{
 
     friend class Drawable;

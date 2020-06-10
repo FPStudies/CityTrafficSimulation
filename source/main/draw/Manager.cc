@@ -21,13 +21,12 @@ std::list<std::pair<Manager*, int>> Manager::instances_;
 
 
 Manager::DrawLayer::DrawLayer(const std::string& name, const std::shared_ptr<ScreenMaster::View>& view) 
-: name_(name), container_(), render_(DEFAULT_LIST_SIZE), view_(view), mutex_modify_()
+: name_(name), container_(), render_(DEFAULT_LIST_SIZE), view_(view)
 {}
 
 Manager::DrawLayer::~DrawLayer() = default;
 
 bool Manager::DrawLayer::remove(std::shared_ptr<Drawable>& entity){
-    std::lock_guard<std::mutex> guard(mutex_modify_);
     ObjectPair::iterator it = container_.find(entity->getID());
 
     if(it != container_.end()){
@@ -39,7 +38,6 @@ bool Manager::DrawLayer::remove(std::shared_ptr<Drawable>& entity){
 }
 
 void Manager::DrawLayer::clearNulls(){
-    std::lock_guard<std::mutex> guard(mutex_modify_);
     for(auto it = render_.begin(); it != render_.end();){
         if(it->get() == nullptr){
             it = render_.erase(it);
@@ -51,23 +49,19 @@ void Manager::DrawLayer::clearNulls(){
 }
 
 void Manager::DrawLayer::add(std::shared_ptr<Drawable>& entity){
-    std::lock_guard<std::mutex> guard(mutex_modify_);
     container_[entity->getID()] = entity;
     render_.push_back(entity);
 }
 
 const std::string& Manager::DrawLayer::getName() const{
-    std::lock_guard<std::mutex> guard(mutex_modify_);
     return name_;
 }
 
 void Manager::DrawLayer::setName(const std::string& name){
-    std::lock_guard<std::mutex> guard(mutex_modify_);
     this->name_ = name;
 }
 
 void Manager::DrawLayer::draw(sf::RenderWindow& window){
-    std::lock_guard<std::mutex> guard(mutex_modify_);
     window.setActive();
     window.setView(view_->getView());
     for(auto it = render_.begin(); it != render_.end(); ++it){
@@ -179,6 +173,7 @@ std::unique_ptr<Manager> Manager::create(const std::string& layer_name, std::sha
 }
 
 bool Manager::draw(const std::string& layer_name_first, const std::string& layer_name_last){
+    std::lock_guard<std::mutex> guard(mutex_modify_);
     auto it = to_draw_.begin();
     bool start = false;
     
@@ -215,12 +210,14 @@ bool Manager::draw(const std::string& layer_name_first, const std::string& layer
 }
 
 void Manager::drawAll(){
+    std::lock_guard<std::mutex> guard(mutex_modify_);
     for(auto& it : to_draw_){
         it->draw(*object_window_);
     }
 }
 
 bool Manager::drawLayer(const std::string& layer_name){
+    std::lock_guard<std::mutex> guard(mutex_modify_);
     auto it = to_draw_.begin();
     while(it != to_draw_.end()){
         if((*it)->getName() == layer_name){
@@ -233,12 +230,14 @@ bool Manager::drawLayer(const std::string& layer_name){
 }
 
 void Manager::clearNulls(){
+    std::lock_guard<std::mutex> guard(mutex_modify_);
     for(auto& it : to_draw_){
         it->clearNulls();
     }
 }
 
 void Manager::clearNulls(const std::string& layer_name){
+    std::lock_guard<std::mutex> guard(mutex_modify_);
     for(auto& it : to_draw_){
         if(it->getName() == layer_name){
             it->clearNulls();

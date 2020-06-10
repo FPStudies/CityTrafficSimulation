@@ -10,7 +10,7 @@
 using namespace Draw::Texture;
 
 Texture::Texture(const std::string& path, const sf::IntRect& area)
-: ::SharedResource::Resource<sf::Texture>(), portion_(area), request_for_deleting_(false)
+: ::SharedResource::Resource<sf::Texture>(), portion_(area)
 {
     sf::Texture text;
     if(!text.loadFromFile(path)){
@@ -21,7 +21,7 @@ Texture::Texture(const std::string& path, const sf::IntRect& area)
 }
 
 Texture::Texture(const sf::Texture& texture, const sf::IntRect& area)
-: ::SharedResource::Resource<sf::Texture>(texture), portion_(area), request_for_deleting_(false)
+: ::SharedResource::Resource<sf::Texture>(texture), portion_(area)
 {}
 
 
