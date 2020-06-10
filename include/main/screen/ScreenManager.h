@@ -21,9 +21,13 @@ stanami programu.
 #include "ScreenInterface.h"
 #include "../utility/DoubleKeyManager.hpp"
 
-class ScreenManager: protected Utils::DoubleKeyManager<ScreenID, std::string, ScreenInteface>{
+/**
+ * @brief A class used manage the sceens.
+ * 
+ */
+class ScreenManager: protected Utils::DoubleKeyManager<ScreenID, std::string, ScreenInterface>{
     
-    using Inher = Utils::DoubleKeyManager<ScreenID, std::string, ScreenInteface>;
+    using Inher = Utils::DoubleKeyManager<ScreenID, std::string, ScreenInterface>;
 
     void mainLoopInner(std::shared_ptr<sf::RenderWindow>& window, ScreenID& ID, ViewNodeByOne& index_by_ID);
     
@@ -40,10 +44,10 @@ public:
      * 
      * @param screen 
      * @param name 
-     * @return true If operation was unsuccessful. The screen with that name already exist.
-     * @return false Otherwise.
+     * @return true - if operation was unsuccessful. The screen with that name already exist.
+     * @return false - otherwise.
      */
-    bool addScreen(const std::shared_ptr<ScreenInteface> screen, const std::string& name);
+    bool addScreen(const std::shared_ptr<ScreenInterface> screen, const std::string& name);
 
     ScreenID getScreenID(const std::string& name) const;
     std::string getScreenName(const ScreenID& ID) const;
@@ -58,7 +62,7 @@ public:
      * @param window An window where the screens will be run.
      * @param start_ID An ID of a starting screen.
      */
-    void mainLoop(std::shared_ptr<sf::RenderWindow>& window, const ScreenInteface& start_ID);
+    void mainLoop(std::shared_ptr<sf::RenderWindow>& window, const ScreenInterface& start_ID);
     void mainLoop(std::shared_ptr<sf::RenderWindow>& window, const std::string& name);
 
 };

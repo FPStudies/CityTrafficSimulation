@@ -12,6 +12,10 @@
 
 #include "../utility/ID.hpp"
 
+/**
+ * @brief ID used to differentiate the screens.
+ * 
+ */
 class ScreenID : public Utils::ID<ScreenID>{
 
 /**
@@ -19,7 +23,7 @@ class ScreenID : public Utils::ID<ScreenID>{
  * This class is mean only to be inherited by ScreenInterface class.
  * 
  */
-friend class ScreenInteface;
+friend class ScreenInterface;
 
 private:
     ScreenID(ID<ScreenID> id);

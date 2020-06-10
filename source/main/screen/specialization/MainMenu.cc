@@ -135,7 +135,7 @@ ScreenID MainMenu::run(std::shared_ptr<sf::RenderWindow> & window){
             event_manager_->checkEvents(*window, event);
         }
 
-        if(ScreenInteface::isAnyoneWaiting()){
+        if(ScreenInterface::isAnyoneWaiting()){
             // if someone miss a call then it will be registered in the next frame
             std::lock_guard<std::mutex> guard(lock_loopback_data_);
             // decide what to do with these informations.

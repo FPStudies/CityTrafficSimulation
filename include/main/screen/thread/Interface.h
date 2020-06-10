@@ -18,10 +18,20 @@
 
 namespace Thread{
 
-
+/**
+ * @brief Interface used by the classes that are used to create new threads.
+ * 
+ */
 class Inteface{
 public:
+    /**
+     * @brief Struct used to communicate with other threads.
+     * 
+     */
     struct Communication{
+        /**
+         * @brief Flag used to communicate when the threads should end.
+         */
         std::atomic<bool> is_active_;
 
         Communication()

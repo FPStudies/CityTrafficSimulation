@@ -12,6 +12,11 @@
 
 namespace ScreenMaster{
 
+/**
+ * @brief Store an view with a name. A sf::View can be changed but it will affect all the objects that 
+ * store this View. Because of that is is easy to change view for a group of objects.
+ * 
+ */
 class View{
     sf::View view_;
     std::string name_;
@@ -28,6 +33,11 @@ public:
     std::string& getName();
     const std::string& getName() const;
 
+    /**
+     * @brief Utwórz nowy widok z określonymi granicami.
+     * 
+     * @param rect 
+     */
     void reset(const sf::FloatRect& rect);
 
 };
