@@ -15,7 +15,7 @@
 namespace Event{
 
     /**
-     * @brief Basic functionality:
+     * @brief Basic functionality.
      * @details
      * - closing application with esc key.
      * 

@@ -17,7 +17,7 @@
 namespace Event{
 
     /**
-     * @brief Set used to group events.
+     * @brief Set used to group events. It can be passed to the Event::Manager
      * 
      */
     class Set: public Utils::SetTemplate<Interface>{
@@ -29,14 +29,23 @@ namespace Event{
         Set(const std::shared_ptr<Interface>& event);
 
         /**
-         * @brief It will iterate through all event methods that were added.
-         * This method do not iterate through all existing events in program through stack. It only
-         * runs an events in set. What and when even do is up to developer.
+         * @brief It will iterate through all event methods that were added to this set.
+         * What and when even do is up to developer.
          * 
          * @param event An event that will be proceed.
          * @param window An window where you want to perform operations.
          */
         void checkEventsOccurence(sf::Event& event, sf::RenderWindow& window);
+
+        /**
+         * @brief It will iterate through all event methods that were added to this set.
+         * What and when even do is up to developer.
+         * It is used by ToggleInterface event to toggle some events in specified manager.
+         * 
+         * @param event 
+         * @param window 
+         * @param manager - Event::Manager where the events to toggle are.
+         */
         void checkToggleOccurence(sf::Event& event, sf::RenderWindow& window, Manager& manager);
     };
 

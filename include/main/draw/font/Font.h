@@ -16,7 +16,10 @@
 
 namespace Draw::Font{
 
-
+/**
+ * @brief A wrapper to the sf::Font. It inherit from SharedResource::Resource template.
+ * 
+ */
 class Font: public ::SharedResource::Resource<sf::Font>{
     friend class Manager;
 

@@ -14,6 +14,10 @@ namespace Event{
 
     class Interface{
     public:
+        /**
+         * @brief Enum used only to differentiate between Normal event and Toggle event that can also change states of sets of events in Event::Manager.
+         * Event manager stores objects that inherited from this interface in separate containers based on returned value of getType().
+         */
         enum class Type: uint8_t{
             Normal,
             Toggle
@@ -26,6 +30,11 @@ namespace Event{
         Interface() = default;
         virtual ~Interface() = default;        
 
+        /**
+         * @brief Get the Type of the event object.
+         * 
+         * @return Type 
+         */
         virtual Type getType() const{
             return Type::Normal;
         }
@@ -52,8 +61,8 @@ namespace Event{
          * @brief Method to check if the two events are the same.
          * 
          * @param other 
-         * @return true 
-         * @return false 
+         * @return true - if object are equal
+         * @return false - if objects are not equal
          */
         virtual bool equals(const Interface& other) const = 0;
 

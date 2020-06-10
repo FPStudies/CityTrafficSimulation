@@ -20,6 +20,13 @@
 #endif
 using namespace std;
 
+/**
+ * Note
+ * To exit from the application press exit button or an esc key.
+ * The first screen use 2 threads. One for event managements and one for drawing.
+ * The second screen works on 1 thread and does nothing because is not yet implemented. Can be exit by esc key.
+ */
+
 int main(int argc, char** argv, char** envp) {
 	#ifdef __linux__
 	XInitThreads();
