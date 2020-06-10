@@ -13,9 +13,17 @@
 namespace Elements {
 
     class PavementConnector;
-
+    
+    /**
+     * @brief basic pedestrian route
+     * 
+     */
     class Pavement : public StaticElement {
 
+        /**
+         * @brief crossroads connections
+         * 
+         */
         std::deque<std::shared_ptr<PavementConnector>> connectors_;
 
     public:

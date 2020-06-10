@@ -11,6 +11,10 @@
 
 namespace Elements::Vehicle {
 
+    /**
+     * @brief bigger, slower vehicle
+     * 
+     */
     class Truck : public Vehicle {
 
     public:

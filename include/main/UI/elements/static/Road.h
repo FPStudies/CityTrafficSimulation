@@ -14,8 +14,16 @@ namespace Elements {
 
     class RoadConnector;
 
+    /**
+     * @brief basic vehicle route
+     * 
+     */
     class Road : public StaticElement {
 
+        /**
+         * @brief crossroads connections
+         * 
+         */
         std::deque<std::shared_ptr<RoadConnector>> connectors_;
 
     public:

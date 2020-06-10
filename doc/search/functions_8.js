@@ -1,0 +1,4 @@
+var searchData=
+[
+  ['load_362',['load',['../class_draw_1_1_font_1_1_manager.html#a22f1a9f6c59db25e0b54c4ce1020570f',1,'Draw::Font::Manager::load(const std::string &amp;path, const std::string &amp;alias) override'],['../class_draw_1_1_font_1_1_manager.html#ae0746aba450f264ef4109ad3aa478735',1,'Draw::Font::Manager::load(const std::string &amp;path) override'],['../class_draw_1_1_texture_1_1_manager.html#a0ca539c3088b331b15eb73f16ee44e76',1,'Draw::Texture::Manager::load(const std::string &amp;path, const std::string &amp;alias, const sf::IntRect &amp;area)'],['../class_draw_1_1_texture_1_1_manager.html#a22f1a9f6c59db25e0b54c4ce1020570f',1,'Draw::Texture::Manager::load(const std::string &amp;path, const std::string &amp;alias) override'],['../class_draw_1_1_texture_1_1_manager.html#ae0746aba450f264ef4109ad3aa478735',1,'Draw::Texture::Manager::load(const std::string &amp;path) override']]]
+];

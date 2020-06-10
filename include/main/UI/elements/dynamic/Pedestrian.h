@@ -11,6 +11,10 @@
 
 namespace Elements {
 
+    /**
+     * @brief dynamic element using pedestrian routes to move
+     * 
+     */
     class Pedestrian : public DynamicElement {
 
     public:

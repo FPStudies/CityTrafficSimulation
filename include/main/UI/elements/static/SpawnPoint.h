@@ -11,6 +11,10 @@
 
 namespace Elements {
 
+    /**
+     * @brief element generating and deleting dynamic elements and providing start and goal points for their routes
+     * 
+     */
     class SpawnPoint : public StaticElement {
 
     public:

@@ -12,6 +12,11 @@
 
 namespace Elements {
 
+    /**
+     * @brief traffic light class
+     * @details helps with realistic moving logic for dynamic elements
+     * 
+     */
     class TrafficLight : public StaticElement {
 
     /**

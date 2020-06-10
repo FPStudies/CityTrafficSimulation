@@ -11,6 +11,11 @@
 
 namespace Elements {
 
+    /**
+     * @brief pedestrian crossing
+     * @details a route for both vehicles and pedestrians; has traffic lights
+     * 
+     */
     class PedestrianCrossing : public StaticElement {
 
     public:

@@ -11,6 +11,10 @@
 
 namespace Elements::Vehicle {
 
+    /**
+     * @brief base class for elements using vehicle routes
+     * 
+     */
     class Vehicle : public DynamicElement {
 
     public:

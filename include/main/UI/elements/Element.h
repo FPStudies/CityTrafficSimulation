@@ -16,6 +16,11 @@ namespace Elements {
     using Texture = ::Draw::Texture::Texture;
     using Texture_ptr = std::shared_ptr<Texture>;
 
+    /**
+     * @brief base element class
+     * @details provides variables and virtual methods that should be the same for all elements 
+     * 
+     */
     class Element: public sf::RectangleShape, public Draw::Drawable {
 
         Texture_ptr texture_;       

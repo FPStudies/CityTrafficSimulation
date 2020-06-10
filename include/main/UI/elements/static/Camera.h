@@ -13,8 +13,16 @@
 
 namespace Elements {
 
+    /**
+     * @brief camera object for registering positions of observed dynamic elements
+     * 
+     */
     class Camera : public StaticElement {
 
+    /**
+     * @brief type of noise error added to registered positions
+     * 
+     */
     using Noise = std::normal_distribution<double>;
 
     public:

@@ -33,7 +33,7 @@ namespace Event{
          * What and when even do is up to developer.
          * 
          * @param event An event that will be proceed.
-         * @param window An window where you want to perform operations.
+         * @param window The window where you want to perform operations.
          */
         void checkEventsOccurence(sf::Event& event, sf::RenderWindow& window);
 

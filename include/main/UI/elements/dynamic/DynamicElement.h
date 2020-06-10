@@ -11,6 +11,11 @@
 
 namespace Elements {
 
+    /**
+     * @brief base class for simulation elements
+     * @details those objects are generated during sumilation and move around based on their logic
+     * 
+     */
     class DynamicElement : public Element {
 
     public:
