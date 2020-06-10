@@ -13,6 +13,8 @@
 #include "../../include/main/screen/StartScreen.h"
 
 #include "../../include/main/graph/Proxy.hpp"
+
+// must be at the end because of conflicting names
 #include <X11/Xlib.h> 
 
 using namespace std;

@@ -28,7 +28,8 @@ ExitWindow::ExitWindow(const ExitWindow&& other)
 {}
 
 void ExitWindow::trigger(){
-    window_.close();
+    ScreenInteface::requestCloseWindow();
+    //window_.close();
 }
 
 bool ExitWindow::equals(const Interface& other) const{

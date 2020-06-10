@@ -102,6 +102,15 @@ void MainMenu::addOther(){
     event_manager_->add("test", Event::Manager::State::ACTIVE, ev);
 }
 
+void MainMenu::endThreads(std::thread& thread){
+    thread_comm_.is_active_ = false;
+    endLoopSynch(loop_synch_);
+
+    if(thread.joinable())
+        thread.join();
+
+}
+
 ScreenID MainMenu::run(std::shared_ptr<sf::RenderWindow> & window){
     addBackground(window);
     addButtons(window);
@@ -130,17 +139,21 @@ ScreenID MainMenu::run(std::shared_ptr<sf::RenderWindow> & window){
             // if someone miss a call then it will be registered in the next frame
             std::lock_guard<std::mutex> guard(lock_loopback_data_);
             // decide what to do with these informations.
+
+            if(received_data_->close_window_){
+                endThreads(drawThread);
+
+                window->setActive(true);
+                window->close();
+            }
+
             for(auto& it : received_data_->request_for_next_screen_){
                 if(it == symulationID){
-                    thread_comm_.is_active_ = false;
-                    endLoopSynch(loop_synch_);
-
-                    if(drawThread.joinable())
-                    drawThread.join();
+                    endThreads(drawThread);
                     return it;
-                }
-                    
+                } 
             }
+            
         }
 
         /*window->clear();

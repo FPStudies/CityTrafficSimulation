@@ -11,6 +11,7 @@
 #include <memory>
 #include <typeinfo>
 
+#include "../../screen/ScreenInterface.h"
 #include "Interface.h"
 
 

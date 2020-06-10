@@ -63,6 +63,8 @@ class MainMenu: public ScreenInteface{
     void addBackground(std::shared_ptr<sf::RenderWindow> & window);
     void addOther();
 
+    void endThreads(std::thread& thread);
+
 public:
     MainMenu(const sf::Vector2u& viewSize, const ScreenManager& nextScreen);
     MainMenu(unsigned int width, unsigned int height, const ScreenManager& screenManager);

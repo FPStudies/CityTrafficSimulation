@@ -11,6 +11,14 @@ ScreenInteface::ScreenInteface()
 
 ScreenInteface::~ScreenInteface() = default;
 
+ScreenInteface::LoopbackData::LoopbackData()
+: is_anyone_waiting_(false),
+close_window_(false),
+request_for_next_screen_()
+{}
+
+ScreenInteface::LoopbackData::~LoopbackData() = default;
+
 ScreenID ScreenInteface::getID() const{
     return ID_;
 }
@@ -23,9 +31,7 @@ void ScreenInteface::resetLoopbackData(){
 
 bool ScreenInteface::isAnyoneWaiting(){
     std::lock_guard<std::mutex> guard(lock_loopback_data_);
-    if(received_data_->request_for_next_screen_.empty()) return false;
-
-    return true;
+    return received_data_->is_anyone_waiting_;
 }
 
 void ScreenInteface::clearAll(){
@@ -53,4 +59,9 @@ void ScreenInteface::prepareLoopSynch(Synch::Loop& loopSynch){
 
 void ScreenInteface::endLoopSynch(Synch::Loop& loopSynch){
     Synch::Loop::Proxy::end(loopSynch);
+}
+
+void ScreenInteface::requestCloseWindow(){
+    received_data_->is_anyone_waiting_ = true;
+    received_data_->close_window_ = true;
 }

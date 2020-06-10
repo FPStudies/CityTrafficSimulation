@@ -30,7 +30,11 @@ protected:
 
     struct LoopbackData{
         std::atomic<bool> is_anyone_waiting_;
+        std::atomic<bool> close_window_;
         std::vector<ScreenID> request_for_next_screen_;
+
+        LoopbackData();
+        ~LoopbackData();
     };
 
     static std::unique_ptr<LoopbackData> received_data_;
@@ -73,6 +77,8 @@ public:
     ScreenID getID() const;
 
     static void requestForNextScreen(const ScreenID& ID);
+
+    static void requestCloseWindow();
 };
 
 #endif
