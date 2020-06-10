@@ -21,12 +21,14 @@
 
 #include "../../synchronization/Loop.h"
 
-
-// tmp
 #include "../event/Basic.h"
 
 namespace ScreenMaster::Spec{
 
+/**
+ * @brief Screen that represent the simulation.
+ * 
+ */
 class Simulation: public ScreenInteface{
     unsigned int width_;
     unsigned int height_;

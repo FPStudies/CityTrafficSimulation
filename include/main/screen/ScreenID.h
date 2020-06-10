@@ -12,6 +12,10 @@
 
 #include "../utility/ID.hpp"
 
+/**
+ * @brief ID used to differentiate the screens.
+ * 
+ */
 class ScreenID : public Utils::ID<ScreenID>{
 
 /**

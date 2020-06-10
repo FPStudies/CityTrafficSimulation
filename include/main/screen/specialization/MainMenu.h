@@ -37,6 +37,10 @@
 
 namespace ScreenMaster::Spec{
 
+/**
+ * @brief Screen that represent the menu.
+ * 
+ */
 class MainMenu: public ScreenInteface{
     unsigned int width_;
     unsigned int height_;
