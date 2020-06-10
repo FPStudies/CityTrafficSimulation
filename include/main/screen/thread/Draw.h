@@ -9,7 +9,7 @@
 
 #include <SFML/Graphics.hpp>
 
-#include "FixedFramerate.h"
+#include "../FixedFramerate.h"
 
 #include "../draw/Texturing.h"
 

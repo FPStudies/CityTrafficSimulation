@@ -31,7 +31,7 @@
 #include "../trigger/action/NextScreen.h"
 
 #include "../UI/tiles/Background.h"
-#include "thread/Draw.h"
+#include "../thread/Draw.h"
 
 #include "../event/Basic.h"
 

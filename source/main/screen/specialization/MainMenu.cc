@@ -13,7 +13,7 @@ screen_manager_(screenManager),
 framerate(60.0f),
 texture_manager_(Draw::Texture::Manager::getInstance()),
 font_manager_(Draw::Font::Manager::getInstance()),
-loop_synch_(Synch::Loop::create(1)),
+loop_synch_(Synch::Loop::create(2)),
 thread_comm_()
 /*
 view_UI_(Screen::View::create("UI", sf::FloatRect(0, 0, width_, height))),
@@ -108,9 +108,13 @@ ScreenID MainMenu::run(std::shared_ptr<sf::RenderWindow> & window){
     addOther();
 
     ScreenID symulationID = screen_manager_.getScreenID("Simulation");
-    Thread::Draw drawThread(window, *draw_manager_, loop_synch_, thread_comm_);
+    Thread::Draw drawThreadObj(window, *draw_manager_, loop_synch_, thread_comm_);
 
     window->setView(view_UI_->getView());
+
+    prepareLoopSynch(loop_synch_);
+
+    std::thread drawThread(drawThreadObj);
 
     while(window->isOpen()){
         sf::Event event;
@@ -126,16 +130,22 @@ ScreenID MainMenu::run(std::shared_ptr<sf::RenderWindow> & window){
             std::lock_guard<std::mutex> guard(lock_loopback_data_);
             // decide what to do with these informations.
             for(auto& it : received_data_->request_for_next_screen_){
-                if(it == symulationID)
+                if(it == symulationID){
+                    thread_comm_.is_active_ = false;
+                    endLoopSynch(loop_synch_);
                     return it;
+                }
+                    
             }
         }
-        
 
-        window->clear();
+        /*window->clear();
         draw_manager_->drawAll();
-        window->display();    
+        window->display();  */  
     }
+
+    if(drawThread.joinable())
+        drawThread.join();
 
     return ScreenID();
 }

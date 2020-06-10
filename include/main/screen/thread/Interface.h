@@ -13,8 +13,8 @@
 #include <memory>
 #include <atomic>
 
-#include "ScreenID.h"
-#include "../utility/Singleton.hpp"
+#include "../ScreenID.h"
+#include "../../utility/Singleton.hpp"
 
 namespace Thread{
 
@@ -23,6 +23,12 @@ class Inteface{
 public:
     struct Communication{
         std::atomic<bool> is_active_;
+
+        Communication()
+        : is_active_(true)
+        {}
+
+        ~Communication() = default;
     };
 
 protected:

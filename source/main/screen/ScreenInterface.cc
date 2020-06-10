@@ -44,5 +44,13 @@ void ScreenInteface::setAsViewed(){
 }
 
 void ScreenInteface::resetLoopSynch(Synch::Loop& loopSynch, unsigned int newNumberOfThreads, bool save){
-    Proxy::reset(loopSynch, newNumberOfThreads, save);
+    Synch::Loop::Proxy::reset(loopSynch, newNumberOfThreads, save);
+}
+
+void ScreenInteface::prepareLoopSynch(Synch::Loop& loopSynch){
+    Synch::Loop::Proxy::prepare(loopSynch);
+}
+
+void ScreenInteface::endLoopSynch(Synch::Loop& loopSynch){
+    Synch::Loop::Proxy::end(loopSynch);
 }

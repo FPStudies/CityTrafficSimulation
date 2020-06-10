@@ -12,6 +12,7 @@
 #include <mutex>
 #include <memory>
 #include <atomic>
+#include <thread>
 
 #include "ScreenID.h"
 #include "../utility/Singleton.hpp"
@@ -43,6 +44,10 @@ protected:
     void setAsViewed();
 
     void resetLoopSynch(Synch::Loop& loopSynch, unsigned int newNumberOfThreads, bool save = true);
+
+    void prepareLoopSynch(Synch::Loop& loopSynch);
+
+    void endLoopSynch(Synch::Loop& loopSynch);
 
 public:
 
