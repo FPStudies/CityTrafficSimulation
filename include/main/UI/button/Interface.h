@@ -19,6 +19,11 @@ namespace Trigger::Event{
 
 
 namespace Button{
+
+    /**
+     * @brief Interface of a button.
+     * 
+     */
     class Interface{
         friend class BridgeFromTriggerToInterface;
 
@@ -58,10 +63,18 @@ namespace Button{
         virtual void actionReleasedButton() = 0;
     };
 
+    /**
+     * @brief Interface of a button with inherited Drawable.
+     * 
+     */
     class InterfaceDraw: public Interface, public Draw::Drawable{
         
     };
 
+    /**
+     * @brief Interface of a button with inherited Drawable and Transformable.
+     * 
+     */
     class InterfaceDrawTrans: public InterfaceDraw, public sf::Transformable{
         
     };

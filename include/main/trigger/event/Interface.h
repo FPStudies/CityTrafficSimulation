@@ -21,9 +21,9 @@ namespace Control{
 
 namespace Trigger::Event{
     /**
-     * @brief Events that are triggered by other means.
-     * They are not present in the main loop but the main loop can trigger them.
-     * 
+     * @brief Events that are triggered by event manager.
+     * They are the first line that decides what exactly to do with an event.
+     * They should be created in mind of specific events with specific controls.
      */
     class Interface{
     private:

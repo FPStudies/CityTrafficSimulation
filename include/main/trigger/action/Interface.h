@@ -15,6 +15,9 @@ namespace Trigger::Action{
     /**
      * @brief Events that are triggered by other means.
      * They are not present in the main loop but the main loop can trigger them.
+     * They can be triggered by any objects if they have instance of them.
+     * 
+     * @details If trigger needs some objects to perform the action then these objects should be in the inside trigger.
      * 
      */
     class Interface{

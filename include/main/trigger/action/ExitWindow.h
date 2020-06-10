@@ -17,24 +17,29 @@
 
 namespace Trigger::Action{
 
-    class ExitWindow: public Interface{
-        sf::Window& window_;
-    
-        virtual ExitWindow* clone_impl() const override;
+/**
+ * @brief Trigger for exiting the window.
+ * It will notify to close the window but it will not close it personally to avoid problems with multithreading.
+ * 
+ */
+class ExitWindow: public Interface{
+    sf::Window& window_;
 
-    public:
-        ExitWindow(sf::Window& window);
-        virtual ~ExitWindow();
-        ExitWindow(const ExitWindow& other);
-        ExitWindow(const ExitWindow&& other);
-        ExitWindow& operator=(ExitWindow&&) = delete;
+    virtual ExitWindow* clone_impl() const override;
 
-        virtual void trigger() override;
+public:
+    ExitWindow(sf::Window& window);
+    virtual ~ExitWindow();
+    ExitWindow(const ExitWindow& other);
+    ExitWindow(const ExitWindow&& other);
+    ExitWindow& operator=(ExitWindow&&) = delete;
 
-        std::unique_ptr<ExitWindow> clone() const;
+    virtual void trigger() override;
 
-        virtual bool equals(const Interface& other) const override;
-    };    
+    std::unique_ptr<ExitWindow> clone() const;
+
+    virtual bool equals(const Interface& other) const override;
+};    
 }
 
 

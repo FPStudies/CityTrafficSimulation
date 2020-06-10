@@ -13,6 +13,10 @@
 
 namespace Tiles {
 
+/**
+ * @brief Class used in mind of creating backgrounds with some texture.
+ * 
+ */
 class Background: public Draw::Drawable, public sf::RectangleShape {
     using Texture = ::Draw::Texture::Texture;
     using Texture_ptr = std::shared_ptr<Texture>;

@@ -16,7 +16,11 @@
 
 namespace Trigger::Action{
 
-
+    // TODO
+    /**
+     * @brief Class used to move the object to the specified place.
+     * 
+     */
     class MoveAbsolute: public Interface{
     public:
 

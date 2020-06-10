@@ -15,6 +15,11 @@
 
 namespace Trigger::Event{ 
 
+    // TODO
+    /**
+     * @brief Trigger used to drag the object by mouse.
+     * 
+     */
     class Drag: public Interface{
         std::shared_ptr<::Interface::Movable> to_move_;
         bool was_pressed_;

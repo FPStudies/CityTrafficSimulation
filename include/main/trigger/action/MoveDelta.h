@@ -15,6 +15,12 @@
 #include "../../interface/Movable.h"
 
 namespace Trigger::Action{
+
+    // TODO
+    /**
+     * @brief Class used to move the object by dome value.
+     * 
+     */
     class MoveDelta: public Interface{
     public:
 
