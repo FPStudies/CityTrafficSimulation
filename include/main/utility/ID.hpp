@@ -12,6 +12,11 @@
 
 namespace Utils{
 
+    /**
+     * @brief Template of the ID class. Every other ID use this.
+     * 
+     * @tparam T 
+     */
     template<typename T>
     class ID{
 

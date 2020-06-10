@@ -12,6 +12,7 @@
 
 namespace World::Shape::Ground{
 
+// UNUSED
 class Connect{
 
 public:

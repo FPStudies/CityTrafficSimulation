@@ -17,6 +17,11 @@
 
 namespace Trigger::Event{ 
 
+    /**
+     * @brief Trigger that is used to trigger the appropriate action of the button.
+     * It separates the press action from releasing the button.
+     * 
+     */
     class Button: public Interface{
         friend class BridgeToTrigger;
         std::shared_ptr<::Button::Interface> button_;
@@ -40,6 +45,17 @@ namespace Trigger::Event{
         Button(Button&& other);
         Button& operator=(Button&& other);
 
+        /**
+         * @brief Connect the button with the event trigger.
+         * Trigger can only have one button bu the button can have multiple triggers.
+         * 
+         * Button have a weak pointer to the trigger because it will rarely need it. The trigger uses button all the time.
+         * 
+         * @param button 
+         * @param thisTrigger 
+         * @return true - if connection was not successful.
+         * @return false - if connection was successful.
+         */
         static bool connect(const std::shared_ptr<::Button::Interface>& button, const std::shared_ptr<Trigger::Event::Button>& thisTrigger);
 
         void trigger(sf::RenderWindow& window, const sf::Event& event) override;

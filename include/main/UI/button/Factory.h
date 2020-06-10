@@ -23,6 +23,7 @@ enum class Properties{
 };
 
 
+// TODO, do not use
 class Factory{
     
 

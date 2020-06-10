@@ -15,6 +15,12 @@
 #include "../Interface.h"
 
 namespace Button{
+
+    /**
+     * @brief Class used to create a exit button. 
+     * It contains a exit action trigger.
+     * 
+     */
     class Exit: public InterfaceDrawTrans, public sf::RectangleShape{
         using Texture = ::Draw::Texture::Texture;
         using Texture_ptr = std::shared_ptr<Texture>;

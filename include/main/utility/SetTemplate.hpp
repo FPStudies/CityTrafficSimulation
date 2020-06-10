@@ -13,11 +13,15 @@
 
 namespace Utils{
 
+    /**
+     * @brief Template that is used to create sets of some objects.
+     * 
+     * @tparam Interface 
+     */
     template<typename Interface>
     class SetTemplate{
 
     protected:
-    //typedef typename std::list<std::shared_ptr<Interface>> Container;
         using Container = std::list<std::shared_ptr<Interface>>;
 
         Container objects_;

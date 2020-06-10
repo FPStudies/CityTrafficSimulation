@@ -16,7 +16,10 @@
 
 namespace Button{
 
-
+/**
+ * @brief Default button with unspecified actions that can be added by its methods.
+ * 
+ */
 class Default: public InterfaceDrawTrans, public sf::RectangleShape{
     using Texture = ::Draw::Texture::Texture;
     using Texture_ptr = std::shared_ptr<Texture>;

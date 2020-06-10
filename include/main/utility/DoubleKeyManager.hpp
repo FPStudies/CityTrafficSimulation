@@ -17,19 +17,26 @@
 
 namespace Utils{
 
+/**
+ * @brief Template class that stores an object with two keys.
+ * 
+ * @tparam KeyOne 
+ * @tparam KeyTwo 
+ * @tparam SharedObject - object type that will be stored in shared pointer
+ */
 template<
     typename KeyOne, 
     typename KeyTwo, 
-    typename SharedVariable>
+    typename SharedObject>
 class DoubleKeyManager{
 protected:
     
     struct Pair{
         KeyOne key_one_;
         KeyTwo key_two_;
-        std::shared_ptr<SharedVariable> shared_variable_;
+        std::shared_ptr<SharedObject> shared_variable_;
 
-        Pair(const KeyOne& one, const KeyTwo& two, const std::shared_ptr<SharedVariable>& var)
+        Pair(const KeyOne& one, const KeyTwo& two, const std::shared_ptr<SharedObject>& var)
         : key_one_(one), key_two_(two), shared_variable_(var)
         {}
 
@@ -92,7 +99,7 @@ public:
     DoubleKeyManager& operator=(const DoubleKeyManager&) = delete;
 
 
-    bool add(const std::shared_ptr<SharedVariable>& var, const KeyOne& one, const KeyTwo& two){
+    bool add(const std::shared_ptr<SharedObject>& var, const KeyOne& one, const KeyTwo& two){
         if(keyOneExist(one))
             return true;
 
@@ -143,7 +150,7 @@ public:
         return false;
     }
 
-    const SharedVariable& getVariable(const KeyOne& one){
+    const SharedObject& getVariable(const KeyOne& one){
         ViewNodeByOne& index_by_key_one_id = map_.template get<IndexByKeyOne>();
         IterOne found = index_by_key_one_id.find(one);
 
@@ -153,7 +160,7 @@ public:
         return *(found->shared_variable_);
     }
 
-    const SharedVariable& getVariable(const KeyTwo& two){
+    const SharedObject& getVariable(const KeyTwo& two){
         ViewNodeByTwo& index_by_key_two = map_.template get<IndexByKeyTwo>();
         IterTwo found = index_by_key_two.find(two);
 

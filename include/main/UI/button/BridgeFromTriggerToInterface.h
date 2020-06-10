@@ -18,6 +18,11 @@ namespace Trigger::Event{
 
 namespace Button{
 
+    // TODO it sneeds to be transfered.
+    /**
+     * @brief bridge used to perform some operation that should be accessed only by Trigger::Event::Button class.
+     * 
+     */
     class BridgeFromTriggerToInterface{
         friend class ::Trigger::Event::Button;
         

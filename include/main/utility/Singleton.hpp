@@ -11,6 +11,12 @@
 
 namespace Utils{
 
+/**
+ * @brief Template of the singleton destroyer.
+ * It is used to properly destroy singleton.
+ * 
+ * @tparam Singleton 
+ */
 template<typename Singleton>
 class SingletonDestroyer{
     Singleton* instance_;
@@ -29,6 +35,13 @@ public:
     }
 };
 
+/**
+ * @brief Template of the singleton.
+ * The derived class should be final and also have a friend of the base Singletone and to the SingletonDestroyer to work properly.
+ * 
+ * @tparam OtherClass - class used as singleton
+ * @tparam DataStruct - struct used to create a singleton
+ */
 template<typename OtherClass, typename DataStruct>
 class SingletonWithCreation{
     friend class Utils::SingletonDestroyer<OtherClass>;
@@ -46,6 +59,12 @@ public:
     SingletonWithCreation() = default;
     ~SingletonWithCreation() = default;
 
+    /**
+     * @brief Create an instance or return existing instance.
+     * 
+     * @param data - data used to create a singleton.
+     * @return OtherClass& 
+     */
     static OtherClass& create(const DataStruct& data){
         if(!instance_){
             const std::lock_guard<std::mutex> lock(mutex_instance_);
@@ -57,6 +76,11 @@ public:
         return *instance_;
     }
 
+    /**
+     * @brief Return an instance or throw an runtime error if the instance is not created yet.
+     * 
+     * @return OtherClass& 
+     */
     static OtherClass& getInstance(){
         if(!instance_){
             throw std::runtime_error("Singleton is not created. Cannot get instance.");
@@ -80,7 +104,12 @@ std::mutex SingletonWithCreation<OtherClass, DataStruct>::mutex_instance_;
 
 
 
-
+/**
+ * @brief Template of the singleton.
+ * The derived class should be final and also have a friend of the base Singletone and to the SingletonDestroyer to work properly.
+ * 
+ * @tparam OtherClass 
+ */
 template<typename OtherClass>
 class Singleton{
     friend class Utils::SingletonDestroyer<OtherClass>;
@@ -100,6 +129,11 @@ public:
     Singleton() = default;
     ~Singleton() = default;
 
+    /**
+     * @brief Create an instance or return existing instance.
+     * 
+     * @return OtherClass& 
+     */
     static OtherClass& getInstance(){
         if(!instance_){
             const std::lock_guard<std::mutex> lock(mutex_instance_);

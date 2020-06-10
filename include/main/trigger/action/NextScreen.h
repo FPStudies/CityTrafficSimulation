@@ -18,6 +18,10 @@
 
 namespace Trigger::Action{
 
+    /**
+     * @brief Trigger that inform the main screen to go to the specified new screen.
+     * 
+     */
     class NextScreen: public Interface{
         ScreenID screen_ID_;
     

@@ -12,6 +12,7 @@
 
 namespace World::Shape::Ground{
 
+// UNUSED
 class Road: public sf::RectangleShape, public Draw::Drawable{
 
 public:

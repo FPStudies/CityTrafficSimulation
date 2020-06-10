@@ -17,6 +17,10 @@
 
 namespace SharedResource{
 
+/**
+ * @brief State of the shared resource.
+ * 
+ */
 enum class State{
     Removed,
     ExpectRemove,
@@ -25,6 +29,11 @@ enum class State{
     Unknown
 };
 
+/**
+ * @brief Resource that can be shared. Every other class that is stored in appropriate Manager should also inherited from this template.
+ * 
+ * @tparam StoredObject 
+ */
 template<typename StoredObject>
 class Resource{
 protected:
@@ -75,10 +84,26 @@ public:
 
 
 // if false, class have no functionality
-
+/**
+ * @brief Dummy template class.
+ * Created if the Resource<StoredObject> is not a base class of StoredWrapper.
+ * 
+ * @tparam StoredWrapper 
+ * @tparam StoredObject 
+ * @tparam std::is_base_of<Resource<StoredObject>, StoredWrapper>::value 
+ */
 template<typename StoredWrapper, typename StoredObject, bool = std::is_base_of<Resource<StoredObject>, StoredWrapper>::value>
 class Manager {};
 
+
+/**
+ * @brief Manager that manage the shared resource.
+ * The shared resource have this property that it will not be deleted if some other object retains ownership of the resource.
+ * Resource can be deleted only if no other objects does not share ownership on it.
+ * 
+ * @tparam StoredWrapper 
+ * @tparam StoredObject 
+ */
 template<typename StoredWrapper, typename StoredObject>
 class Manager<StoredWrapper, StoredObject, true>{
 protected:
@@ -162,9 +187,6 @@ public:
         return it->second;
         }
 };
-/*
-template<typename StoredWrapper, typename StoredObject>
-std::mutex Manager<StoredWrapper, StoredObject, true>::mutex_instance_;*/
 
 }
 
